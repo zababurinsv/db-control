@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Control Center</title>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+<script type="module">
+    import pSeries from '/p-series/index.js'
+    import pMapSeries from '/p-map-series/index.js'
+    import path from '/path/index.js'
+    import pEachSeries from '/p-each-series/index.js'
+    import PQueue from '/p-queue/dist/index.js'
+    import eventemitter3 from '/eventemitter3/index.js'
+    import store from '/orbit-db-store/src/Store.js'
+    import pTimeout from '/p-timeout/index.js'
+    import {EventEmitter} from '/events/index.js'
+    import jsonStringifyDeterministic from '/json-stringify-deterministic/index.js'
+    import indentString from '/indent-string/index.js'
+    import os from '/os/index.js';
+    import escapeStringRegexp from '/escape-string-regexp/index.js'
+    import cleanStack from '/clean-stack/index.js'
+    import aggregateError from '/aggregate-error/index.js'
+    import pMap from '/p-map/index.js'
+    import pDoWhilst from '/p-do-whilst/index.js'
+    import dagPb from '/ipld-dag-pb/index.js'
+    import orbitDbIo from '/orbit-db-io/index.js'
+    import ipfsLogs from '/ipfs-log/src/log.js'
+    import getIntrinsic from '/get-intrinsic/index.js'
+    import bind from '/function-bind/index.js'
+    import callBind from '/call-bind/index.js'
+    import isArguments from '/is-arguments/index.js'
+    import HasTostringtag from '/has-tostringtag/index.js'
+    let hasTostringtag = HasTostringtag()
+    import isGeneratorFunction from '/is-generator-function/index.js'
+    import isCallable from '/is-callable/index.js'
+    import forEach from '/for-each/index.js'
+    import types from '/util/support/types.js'
+    import whichTypedArray from '/which-typed-array/index.js'
+    import availableTypedArrays from '/available-typed-arrays/index.js'
+    import getOwnPropertyDescriptor from '/es-abstract/helpers/getOwnPropertyDescriptor.js'
+    import isTypedArray from '/is-typed-array/index.js'
+    import util from '/util/util.js'
+    import process from '/process/index.js'
+    import logplease from '/logplease/index.js'
+    import orbitDbKvstore from '/orbit-db-kvstore/src/KeyValueStore.js'
+    import queueMicrotask from '/queue-microtask/index.js'
+    import nextTickBrowser from '/levelup/next-tick-browser.js'
+    import levelErrors from '/level-errors/errors.js'
+    import deferredChainedBatch from '/deferred-leveldown/deferred-chained-batch.js'
+    import levelup from '/levelup/levelup.js'
+    import levelSupports from '/level-supports/index.js'
+    import nextTick from '/next-tick/index.js'
+    import catering from '/catering/index.js'
+    import batch from '/levelup/batch.js'
+    import isBuffer from '/is-buffer/index.js'
+    import deferredLeveldown from '/deferred-leveldown/deferred-iterator.js'
+    import emitter from '/emitter/emitter.js'
+    import primordials from  '/readable-stream/lib/ours/primordials.js'
+    import streamsUtils from '/readable-stream/lib/internal/streams/utils.js'
+    import eventTargetShim from '/event-target-shim/index.js'
+    import base64Js from '/base64-js/index.js'
+    import ieee754 from '/ieee754/index.js'
+    import buffer from '/buffer/index.js'
+    import abortController from '/abort-controller/index.js'
+    import utilOurs from '/readable-stream/lib/ours/util.js'
+    import validators from '/readable-stream/lib/internal/validators.js'
+    import oursBrowser from '/readable-stream/lib/ours/browser.js'
+    import endOfStream from '/readable-stream/lib/internal/streams/end-of-stream.js'
+    import operators from '/readable-stream/lib/internal/streams/operators.js'
+    import ipfsPubsubPeerMonitor from '/ipfs-pubsub-peer-monitor/src/ipfs-pubsub-peer-monitor.js'
+    const {
+        promisify: { custom: customPromisify }
+    } = utilOurs
+    import pipeline from '/readable-stream/lib/internal/streams/pipeline.js'
+    import writable from '/readable-stream/lib/internal/streams/writable.js'
+    import readbleStream from '/readable-stream/src/browser.js'
+    import orbitDbStorageAdapter from '/orbit-db-storage-adapter/src/index.js'
+    import orbitDbPubsub from '/orbit-db-pubsub/index.js'
+    import libp2pCrypto from '/libp2p-crypto/index.js'
+    import level from '/level/index.js'
+    import levelTranscoder from '/level-transcoder/index.js'
+    import runParallelLimit from '/run-parallel-limit/index.js'
+    import inheritsEx from '/inherits-ex/index.js'
+    import abstractLevel from '/abstract-level/index.js'
+    import reachdown from '/reachdown/index.js'
+    const {
+        unmarshalSecp256k1PrivateKey: unmarshal
+    } = libp2pCrypto.keys.supportedKeys.secp256k1
+    import nodeGypBuild from '/node-gyp-build/index_module.js'
+    import bnJs from '/bn.js/index.js'
+    import brorand from '/brorand/index.js'
+    import hashJs from '/hash.js/index.js'
+    import hmacDrbg from '/hmac-drbg/index.js'
+    import elliptic from '/elliptic/index.js'
+    let EC = elliptic.ec
+    import orbitDbKeystore from '/orbit-db-keystore/src/keystore.js'
+    import orbitDbIdentityProvider from '/orbit-db-identity-provider/index.js'
+    import * as ethers from '/ethers/ethers.esm.js'
+    import orbitDbFeedstore from '/orbit-db-feedstore/src/FeedStore.js'
+    import orbitDbEventstore from '/orbit-db-eventstore/src/EventStore.js'
+    import orbitDbDocstore from '/orbit-db-docstore/src/DocumentStore.js'
+    import orbitDbCounterstore from '/orbit-db-counterstore/src/CounterStore.js'
+    import orbitDbCache from '/orbit-db-cache/src/Cache.js'
+    import orbitDbAccessControllers from '/orbit-db-access-controllers/index.js'
+    import orbitDb from '/orbit-db/src/OrbitDB.js'
+    import ipfsPubsub1on1 from '/ipfs-pubsub-1on1/src/direct-channel.js'
+    console.log('-----------------', {
+        pSeries: pSeries,
+        pMapSeries: pMapSeries,
+        path: path,
+        pEachSeries: pEachSeries,
+        eventemitter3: eventemitter3,
+        store: store,
+        pTimeout: pTimeout,
+        PQueue: PQueue,
+        EventEmitter: EventEmitter,
+        jsonStringifyDeterministic: jsonStringifyDeterministic,
+        indentString: indentString,
+        os: os,
+        escapeStringRegexp: escapeStringRegexp,
+        cleanStack: cleanStack,
+        aggregateError: aggregateError,
+        pMap: pMap,
+        pDoWhilst: pDoWhilst,
+        dagPb: dagPb,
+        orbitDbIo: orbitDbIo,
+        ipfsLogs: ipfsLogs,
+        bind: bind,
+        getIntrinsic: getIntrinsic,
+        callBind: callBind,
+        isArguments: isArguments,
+        hasTostringtag: hasTostringtag,
+        isGeneratorFunction: isGeneratorFunction,
+        isCallable: isCallable,
+        forEach: forEach,
+        types: types,
+        whichTypedArray: whichTypedArray,
+        availableTypedArrays: availableTypedArrays,
+        getOwnPropertyDescriptor: getOwnPropertyDescriptor,
+        isTypedArray: isTypedArray,
+        util: util,
+        process: process,
+        logplease: logplease,
+        orbitDbKvstore: orbitDbKvstore,
+        queueMicrotask: queueMicrotask,
+        nextTickBrowser: nextTickBrowser,
+        levelErrors: levelErrors,
+        deferredChainedBatch: deferredChainedBatch,
+        levelSupports: levelSupports,
+        nextTick: nextTick,
+        catering: catering,
+        batch: batch,
+        isBuffer: isBuffer,
+        deferredLeveldown: deferredLeveldown,
+        emitter: emitter,
+        primordials: primordials,
+        streamsUtils: streamsUtils,
+        eventTargetShim: eventTargetShim,
+        base64Js: base64Js,
+        ieee754: ieee754,
+        buffer: buffer,
+        abortController: abortController,
+        utilOurs: utilOurs,
+        oursBrowser: oursBrowser,
+        customPromisify: customPromisify,
+        validators: validators,
+        endOfStream: endOfStream,
+        operators: operators,
+        ipfsPubsubPeerMonitor: ipfsPubsubPeerMonitor,
+        pipeline: pipeline,
+        writable: writable,
+        readbleStream: readbleStream,
+        levelup: levelup,
+        orbitDbStorageAdapter: orbitDbStorageAdapter,
+        orbitDbPubsub: orbitDbPubsub,
+        libp2pCrypto: libp2pCrypto,
+        level: level,
+        levelTranscoder: levelTranscoder,
+        runParallelLimit: runParallelLimit,
+        inheritsEx: inheritsEx,
+        abstractLevel: abstractLevel,
+        reachdown: reachdown,
+        unmarshal: unmarshal,
+        nodeGypBuild: nodeGypBuild,
+        bnJs: bnJs,
+        brorand: brorand,
+        hashJs: hashJs,
+        hmacDrbg: hmacDrbg,
+        elliptic: elliptic,
+        EC: EC,
+        orbitDbKeystore: orbitDbKeystore,
+        orbitDbIdentityProvider: orbitDbIdentityProvider,
+        ethers: ethers,
+        orbitDbFeedstore: orbitDbFeedstore,
+        orbitDbEventstore: orbitDbEventstore,
+        orbitDbDocstore: orbitDbDocstore,
+        orbitDbCounterstore: orbitDbCounterstore,
+        orbitDbCache: orbitDbCache,
+        orbitDbAccessControllers: orbitDbAccessControllers,
+        orbitDb: orbitDb,
+        ipfsPubsub1on1: ipfsPubsub1on1
+    })
+    // import IPFS from './ipfs/index.mjs'
+    // import index from '/modules/index.mjs'
+    // index(IPFS)
+</script>
+</body>
+</html>
