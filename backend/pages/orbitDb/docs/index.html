@@ -14,16 +14,16 @@
     import IPFS from './ipfs/index.mjs'
     import orbitDb from '/index.js'
 
-    orbitDb.initIPFS(IPFS)
+    orbitDb.initIPFS({IPFS})
         .then(ipfs => {
             orbitDb.initOrbitDB({ipfs: ipfs, OrbitDB: OrbitDB}).then((databases) => {
                 console.log('=== orbit db ===', databases)
             })
         })
-    //   dispatch({ type: actions.SYSTEMS.SET_ORBITDB, orbitdbStatus: 'Started' })
-    //   const programs = await getAllDatabases()
-    //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
-    //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })
+    // dispatch({ type: actions.SYSTEMS.SET_ORBITDB, orbitdbStatus: 'Started' })
+    // const programs = await getAllDatabases()
+    // dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
+    // dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })
     // import index from '/modules/index.mjs'
     // index(IPFS)
 </script>
