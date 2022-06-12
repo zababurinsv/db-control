@@ -38332,10 +38332,10 @@ let concept = {
 }
 */
 
-var _templateObject$1, _templateObject2$1, _templateObject3$1, _templateObject4$1, _templateObject5$1, _templateObject6$1, _templateObject7$1, _templateObject8$1, _templateObject9$1, _templateObject10$1, _templateObject11$1, _templateObject12$1, _templateObject13$1, _templateObject14$1, _templateObject15$1;
-var stack$1 = {};
-var totalCount$1 = -1;
-var props$1 = {
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
+var stack = {};
+var totalCount = -1;
+var props = {
   isAssert: true,
   isConsole: true,
   init: true,
@@ -38343,7 +38343,7 @@ var props$1 = {
   maxCount: 0
 };
 
-var PrependZeros$1 = function PrependZeros(str, len, seperator) {
+var PrependZeros = function PrependZeros(str, len, seperator) {
   if (typeof str === 'number' || Number(str)) {
     str = str.toString();
     return len - str.length > 0 ? new Array(len + 1 - str.length).join('0') + str : str;
@@ -38370,10 +38370,10 @@ var PrependZeros$1 = function PrependZeros(str, len, seperator) {
 // };
 
 
-var preset$1 = function preset(type, pathToFile, id) {
+var preset = function preset(type, pathToFile, id) {
   if (type < 0) {
-    stack$1["".concat(pathToFile)]["".concat(id)].maxCount = 1000;
-    stack$1["".concat(pathToFile)]["".concat(id)].isAssert = false;
+    stack["".concat(pathToFile)]["".concat(id)].maxCount = 1000;
+    stack["".concat(pathToFile)]["".concat(id)].isAssert = false;
   } // switch (type) {
   //   case -5:
   //     stack[`${pathToFile}`][`${id}`].maxCount = 100
@@ -38403,8 +38403,8 @@ var preset$1 = function preset(type, pathToFile, id) {
   return true;
 };
 
-var print$1 = function print(type, count, pathToFile, id, payload, data, args) {
-  totalCount$1 = totalCount$1 + 1;
+var print = function print(type, count, pathToFile, id, payload, data, args) {
+  totalCount = totalCount + 1;
   var object1 = isEmpty$1(payload) ? '' : payload;
   var object2 = isEmpty$1(data) ? '' : data;
   var object3 = isEmpty$1(args) ? '' : args;
@@ -38415,70 +38415,70 @@ var print$1 = function print(type, count, pathToFile, id, payload, data, args) {
 
   switch (type) {
     case -14:
-      console.log(colors$7(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA4 ", ".idColorA4"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject || (_templateObject = _taggedTemplateLiteral(["", "-", " ", ".pathColorA4 ", ".idColorA4"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -13:
-      console.log(colors$7(_templateObject2$1 || (_templateObject2$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA3 ", ".idColorA3"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA3 ", ".idColorA3"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -12:
-      console.log(colors$7(_templateObject3$1 || (_templateObject3$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA2 ", ".idColorA2"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA2 ", ".idColorA2"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -11:
-      console.log(colors$7(_templateObject4$1 || (_templateObject4$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA1 ", ".idColorA1"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA1 ", ".idColorA1"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -10:
-      console.log(colors$7(_templateObject5$1 || (_templateObject5$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA0 ", ".idColorA0"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA0 ", ".idColorA0"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -9:
-      console.log(colors$7(_templateObject6$1 || (_templateObject6$1 = _taggedTemplateLiteral(["", "=", " ", ".pathColor9 ", ".idColor9"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["", "=", " ", ".pathColor9 ", ".idColor9"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -8:
-      console.log(colors$7(_templateObject7$1 || (_templateObject7$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor8 ", ".idColor8"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["", "-", " ", ".pathColor8 ", ".idColor8"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -7:
-      console.log(colors$7(_templateObject8$1 || (_templateObject8$1 = _taggedTemplateLiteral(["", "=", " ", ".pathColor7 ", ".idColor7"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["", "=", " ", ".pathColor7 ", ".idColor7"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -6:
-      console.log(colors$7(_templateObject9$1 || (_templateObject9$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor6 ", ".idColor6"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["", "-", " ", ".pathColor6 ", ".idColor6"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -5:
-      console.log(colors$7(_templateObject10$1 || (_templateObject10$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor5 ", ".idColor5"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["", "-", " ", ".pathColor5 ", ".idColor5"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -4:
-      console.log(colors$7(_templateObject11$1 || (_templateObject11$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor4 ", ".idColor4"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["", "-", " ", ".pathColor4 ", ".idColor4"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -3:
-      console.log(colors$7(_templateObject12$1 || (_templateObject12$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor3 ", ".idColor3"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["", "-", " ", ".pathColor3 ", ".idColor3"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -2:
-      console.log(colors$7(_templateObject13$1 || (_templateObject13$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor2 ", ".idColor2"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["", "-", " ", ".pathColor2 ", ".idColor2"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     case -1:
-      console.log(colors$7(_templateObject14$1 || (_templateObject14$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor1 ", ".idColor1"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["", "-", " ", ".pathColor1 ", ".idColor1"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
 
     default:
-      console.log(colors$7(_templateObject15$1 || (_templateObject15$1 = _taggedTemplateLiteral(["", "-", " ", ".pathColor0 ", ".idColor0"])), PrependZeros$1(totalCount$1, 2), PrependZeros$1(count, 2), pathToFile, id), object1, object2, object3);
+      console.log(colors$7(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["", "-", " ", ".pathColor0 ", ".idColor0"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
       break;
   }
 
   return true;
 };
 
-var proxyCount$1 = 0;
+var proxyCount = 0;
 /**
  * @param path {string}
  * @param id {string}
@@ -38490,35 +38490,35 @@ var proxyCount$1 = 0;
  * @returns {boolean}
  */
 
-var proxy$1 = function proxy(path, id) {
+var proxy = function proxy(path, id) {
   var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
   var object = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   var props = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
   var value = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
   var threshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
 
-  if (_assert$1.current.trim() === "".concat(path, " ").concat(id)) {
-    if (!isEmpty$1(stack$1[path]) && !isEmpty$1(stack$1[path][id])) {
+  if (_assert.current.trim() === "".concat(path, " ").concat(id)) {
+    if (!isEmpty$1(stack[path]) && !isEmpty$1(stack[path][id])) {
       if (typeof count !== "number") {
         for (var i = 0; i < count.length; i++) {
           if (count[i] < 0) {
-            if (stack$1[path][id].count >= Math.abs(count[i]) && stack$1[path][id].count < Math.abs(count[i]) + threshold) {
-              proxyCount$1 = proxyCount$1 >= 1000 ? 0 : proxyCount$1 + 1;
+            if (stack[path][id].count >= Math.abs(count[i]) && stack[path][id].count < Math.abs(count[i]) + threshold) {
+              proxyCount = proxyCount >= 1000 ? 0 : proxyCount + 1;
 
               if (isEmpty$1(value)) {
-                console.log("".concat(proxyCount$1, " \u26F8 [(get)"), props, "]", typeof object === 'function' ? 'function' : object);
+                console.log("".concat(proxyCount, " \u26F8 [(get)"), props, "]", typeof object === 'function' ? 'function' : object);
               } else {
-                console.log("".concat(proxyCount$1, " \u26F8 [(set)"), props, "]", value);
+                console.log("".concat(proxyCount, " \u26F8 [(set)"), props, "]", value);
               }
             }
           } else {
-            if (stack$1[path][id].count === count[i]) {
-              proxyCount$1 = proxyCount$1 >= 1000 ? 0 : proxyCount$1 + 1;
+            if (stack[path][id].count === count[i]) {
+              proxyCount = proxyCount >= 1000 ? 0 : proxyCount + 1;
 
               if (isEmpty$1(value)) {
-                console.log("".concat(proxyCount$1, " \u26F8 [(get)"), props, "]", typeof object === 'function' ? 'function' : object);
+                console.log("".concat(proxyCount, " \u26F8 [(get)"), props, "]", typeof object === 'function' ? 'function' : object);
               } else {
-                console.log("".concat(proxyCount$1, " \u26F8 [(set)"), props, "]", value);
+                console.log("".concat(proxyCount, " \u26F8 [(set)"), props, "]", value);
               }
             }
           }
@@ -38542,82 +38542,82 @@ var proxy$1 = function proxy(path, id) {
  */
 
 
-var list$2 = function list() {
+var list$1 = function list() {
   var stop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
   if (stop) {
-    console.assert(false, stack$1);
+    console.assert(false, stack);
   }
 
-  return stack$1;
+  return stack;
 };
 
-var _assert$1 = {
+var _assert = {
   current: '',
-  list: list$2,
-  proxy: proxy$1,
+  list: list$1,
+  proxy: proxy,
   assert: function assert(maxCount) {
     var pathToFile = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
     var id = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "default";
     var payload = arguments.length > 3 ? arguments[3] : undefined;
     var data = arguments.length > 4 ? arguments[4] : undefined;
 
-    if (isEmpty$1(stack$1["".concat(pathToFile)])) {
-      stack$1["".concat(pathToFile)] = {};
+    if (isEmpty$1(stack["".concat(pathToFile)])) {
+      stack["".concat(pathToFile)] = {};
 
-      if (isEmpty$1(stack$1[pathToFile][id])) {
-        stack$1[pathToFile][id] = Object.assign({}, props$1);
+      if (isEmpty$1(stack[pathToFile][id])) {
+        stack[pathToFile][id] = Object.assign({}, props);
       }
     } else {
-      if (isEmpty$1(stack$1[pathToFile][id])) {
-        stack$1[pathToFile][id] = Object.assign({}, props$1);
+      if (isEmpty$1(stack[pathToFile][id])) {
+        stack[pathToFile][id] = Object.assign({}, props);
       }
     }
 
-    _assert$1.current = "".concat(pathToFile, " ").concat(id);
+    _assert.current = "".concat(pathToFile, " ").concat(id);
 
     for (var _len = arguments.length, args = new Array(_len > 5 ? _len - 5 : 0), _key = 5; _key < _len; _key++) {
       args[_key - 5] = arguments[_key];
     }
 
-    if (stack$1[pathToFile][id].init) {
-      stack$1[pathToFile][id].maxCount = maxCount;
-      stack$1[pathToFile][id].count = 1;
-      stack$1[pathToFile][id].init = false;
-      preset$1(maxCount, pathToFile, id);
+    if (stack[pathToFile][id].init) {
+      stack[pathToFile][id].maxCount = maxCount;
+      stack[pathToFile][id].count = 1;
+      stack[pathToFile][id].init = false;
+      preset(maxCount, pathToFile, id);
 
-      if (stack$1[pathToFile][id].maxCount === 0 || stack$1[pathToFile][id].maxCount === 1) {
-        if (stack$1[pathToFile][id].isConsole) {
-          print$1(maxCount, stack$1[pathToFile][id].count, pathToFile, id, payload, data, args);
+      if (stack[pathToFile][id].maxCount === 0 || stack[pathToFile][id].maxCount === 1) {
+        if (stack[pathToFile][id].isConsole) {
+          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
         }
 
-        if (stack$1[pathToFile][id].isAssert) {
-          console.assert(false, pathToFile, id, stack$1);
+        if (stack[pathToFile][id].isAssert) {
+          console.assert(false, pathToFile, id, stack);
         }
 
-        stack$1[pathToFile][id].init = true;
+        stack[pathToFile][id].init = true;
       } else {
-        if (stack$1[pathToFile][id].isConsole) {
-          print$1(maxCount, stack$1[pathToFile][id].count, pathToFile, id, payload, data, args);
+        if (stack[pathToFile][id].isConsole) {
+          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
         }
 
-        stack$1[pathToFile][id].init = false;
+        stack[pathToFile][id].init = false;
       }
     } else {
-      stack$1[pathToFile][id].count = stack$1[pathToFile][id].count + 1;
+      stack[pathToFile][id].count = stack[pathToFile][id].count + 1;
 
-      if (stack$1[pathToFile][id].count === stack$1[pathToFile][id].maxCount) {
-        if (stack$1[pathToFile][id].isConsole) {
-          print$1(maxCount, stack$1[pathToFile][id].count, pathToFile, id, payload, data, args);
+      if (stack[pathToFile][id].count === stack[pathToFile][id].maxCount) {
+        if (stack[pathToFile][id].isConsole) {
+          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
         }
 
-        if (stack$1[pathToFile][id].isAssert && stack$1[pathToFile][id].maxCount > 0) {
-          console.assert(false, pathToFile, id, stack$1);
+        if (stack[pathToFile][id].isAssert && stack[pathToFile][id].maxCount > 0) {
+          console.assert(false, pathToFile, id, stack);
         } // stack[pathToFile][id].init = true
 
       } else {
-        if (stack$1[pathToFile][id].isConsole) {
-          print$1(maxCount, stack$1[pathToFile][id].count, pathToFile, id, payload, data, args);
+        if (stack[pathToFile][id].isConsole) {
+          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
         }
       }
     }
@@ -44175,22 +44175,22 @@ layout$1.propEnhancers = {
     zIndex: (value) => get_css_1$9.default(zIndex, value)
 };
 
-var list$1 = {};
+var list = {};
 
 var __importDefault$b = (commonjsGlobal && commonjsGlobal.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-Object.defineProperty(list$1, "__esModule", { value: true });
+Object.defineProperty(list, "__esModule", { value: true });
 const prop_types_1$9 = __importDefault$b(propTypes$2.exports);
 const get_css_1$8 = __importDefault$b(getCss$1);
-list$1.propTypes = {
+list.propTypes = {
     listStyle: prop_types_1$9.default.string,
     listStyleType: prop_types_1$9.default.string,
     listStyleImage: prop_types_1$9.default.string,
     listStylePosition: prop_types_1$9.default.string
 };
-list$1.propAliases = {};
-list$1.propValidators = {};
+list.propAliases = {};
+list.propValidators = {};
 const listStyle = {
     className: 'ls',
     cssName: 'list-style',
@@ -44214,7 +44214,7 @@ const listStylePosition = {
     jsName: 'listStylePosition',
     safeValue: true
 };
-list$1.propEnhancers = {
+list.propEnhancers = {
     listStyle: (value) => get_css_1$8.default(listStyle, value),
     listStyleType: (value) => get_css_1$8.default(listStyleType, value),
     listStyleImage: (value) => get_css_1$8.default(listStyleImage, value),
@@ -44768,8 +44768,8 @@ transition$1.propEnhancers = {
 	exports.interaction = interaction$1;
 	const layout = __importStar(layout$1);
 	exports.layout = layout;
-	const list = __importStar(list$1);
-	exports.list = list;
+	const list$1 = __importStar(list);
+	exports.list = list$1;
 	const opacity = __importStar(opacity$1);
 	exports.opacity = opacity;
 	const outline = __importStar(outline$1);
@@ -44788,11 +44788,11 @@ transition$1.propEnhancers = {
 	exports.transform = transform;
 	const transition = __importStar(transition$1);
 	exports.transition = transition;
-	exports.propTypes = Object.assign({}, background.propTypes, borderRadius$1.propTypes, borders$1.propTypes, boxShadow.propTypes, dimensions.propTypes, flex.propTypes, grid.propTypes, interaction$1.propTypes, layout.propTypes, list.propTypes, opacity.propTypes, outline.propTypes, overflow$1.propTypes, position.propTypes, resize.propTypes, spacing.propTypes, text.propTypes, transform.propTypes, transition.propTypes);
+	exports.propTypes = Object.assign({}, background.propTypes, borderRadius$1.propTypes, borders$1.propTypes, boxShadow.propTypes, dimensions.propTypes, flex.propTypes, grid.propTypes, interaction$1.propTypes, layout.propTypes, list$1.propTypes, opacity.propTypes, outline.propTypes, overflow$1.propTypes, position.propTypes, resize.propTypes, spacing.propTypes, text.propTypes, transform.propTypes, transition.propTypes);
 	exports.propNames = Object.keys(exports.propTypes);
-	exports.propAliases = Object.assign({}, background.propAliases, borderRadius$1.propAliases, borders$1.propAliases, boxShadow.propAliases, dimensions.propAliases, flex.propAliases, grid.propAliases, interaction$1.propAliases, layout.propAliases, list.propAliases, opacity.propAliases, outline.propAliases, overflow$1.propAliases, position.propAliases, resize.propAliases, spacing.propAliases, text.propAliases, transform.propAliases, transition.propAliases);
-	exports.propValidators = Object.assign({}, background.propValidators, borderRadius$1.propValidators, borders$1.propValidators, boxShadow.propValidators, dimensions.propValidators, flex.propValidators, grid.propValidators, interaction$1.propValidators, layout.propValidators, list.propValidators, opacity.propValidators, outline.propValidators, overflow$1.propValidators, position.propValidators, resize.propValidators, spacing.propValidators, text.propValidators, transform.propValidators, transition.propValidators);
-	exports.propEnhancers = Object.assign({}, background.propEnhancers, borderRadius$1.propEnhancers, borders$1.propEnhancers, boxShadow.propEnhancers, dimensions.propEnhancers, flex.propEnhancers, grid.propEnhancers, interaction$1.propEnhancers, layout.propEnhancers, list.propEnhancers, opacity.propEnhancers, outline.propEnhancers, overflow$1.propEnhancers, position.propEnhancers, resize.propEnhancers, spacing.propEnhancers, text.propEnhancers, transform.propEnhancers, transition.propEnhancers);
+	exports.propAliases = Object.assign({}, background.propAliases, borderRadius$1.propAliases, borders$1.propAliases, boxShadow.propAliases, dimensions.propAliases, flex.propAliases, grid.propAliases, interaction$1.propAliases, layout.propAliases, list$1.propAliases, opacity.propAliases, outline.propAliases, overflow$1.propAliases, position.propAliases, resize.propAliases, spacing.propAliases, text.propAliases, transform.propAliases, transition.propAliases);
+	exports.propValidators = Object.assign({}, background.propValidators, borderRadius$1.propValidators, borders$1.propValidators, boxShadow.propValidators, dimensions.propValidators, flex.propValidators, grid.propValidators, interaction$1.propValidators, layout.propValidators, list$1.propValidators, opacity.propValidators, outline.propValidators, overflow$1.propValidators, position.propValidators, resize.propValidators, spacing.propValidators, text.propValidators, transform.propValidators, transition.propValidators);
+	exports.propEnhancers = Object.assign({}, background.propEnhancers, borderRadius$1.propEnhancers, borders$1.propEnhancers, boxShadow.propEnhancers, dimensions.propEnhancers, flex.propEnhancers, grid.propEnhancers, interaction$1.propEnhancers, layout.propEnhancers, list$1.propEnhancers, opacity.propEnhancers, outline.propEnhancers, overflow$1.propEnhancers, position.propEnhancers, resize.propEnhancers, spacing.propEnhancers, text.propEnhancers, transform.propEnhancers, transition.propEnhancers);
 } (enhancers));
 
 var enhanceProps$1 = {};
@@ -78817,299 +78817,8 @@ var config = {
   }
 };
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
-var stack = {};
-var totalCount = -1;
-var props = {
-  isAssert: true,
-  isConsole: true,
-  init: true,
-  count: 0,
-  maxCount: 0
-};
-
-var PrependZeros = function PrependZeros(str, len, seperator) {
-  if (typeof str === 'number' || Number(str)) {
-    str = str.toString();
-    return len - str.length > 0 ? new Array(len + 1 - str.length).join('0') + str : str;
-  } else {
-    var spl = str.split(seperator || ' ');
-
-    for (var i = 0; i < spl.length; i++) {
-      if (Number(spl[i]) && spl[i].length < len) {
-        spl[i] = PrependZeros(spl[i], len);
-      }
-    }
-
-    return spl.join(seperator || ' ');
-  }
-}; // let PrependZeros = function (str, len, seperator) {
-//   if(typeof str === 'number' || Number(str)){
-//     str = str.toString();
-//     return (len - str.length > 0) ? new Array(len + 1 - str.length).join('0') + str: str;
-//   }
-//   else{
-//     for(var i = 0,spl = str.split(seperator || ' '); i < spl.length; spl[i] = (Number(spl[i])&& spl[i].length < len)?PrependZeros(spl[i],len):spl[i],str = (i === spl.length -1)?spl.join(seperator || ' '):str,i++);
-//     return str;
-//   }
-// };
-
-
-var preset = function preset(type, pathToFile, id) {
-  if (type < 0) {
-    stack["".concat(pathToFile)]["".concat(id)].maxCount = 1000;
-    stack["".concat(pathToFile)]["".concat(id)].isAssert = false;
-  } // switch (type) {
-  //   case -5:
-  //     stack[`${pathToFile}`][`${id}`].maxCount = 100
-  //     stack[`${pathToFile}`][`${id}`].isAssert = false
-  //     break
-  //   case -4:
-  //     stack[`${pathToFile}`][`${id}`].maxCount = 100
-  //     stack[`${pathToFile}`][`${id}`].isAssert = false
-  //     break
-  //   case -3:
-  //     stack[`${pathToFile}`][`${id}`].maxCount = 100
-  //     stack[`${pathToFile}`][`${id}`].isAssert = false
-  //     break
-  //   case -2:
-  //     stack[`${pathToFile}`][`${id}`].maxCount = 100
-  //     stack[`${pathToFile}`][`${id}`].isAssert = false
-  //     break
-  //   case -1:
-  //     stack[`${pathToFile}`][`${id}`].maxCount = 100
-  //     stack[`${pathToFile}`][`${id}`].isAssert = false
-  //     break
-  //   default:
-  //     break
-  // }
-
-
-  return true;
-};
-
-var print = function print(type, count, pathToFile, id, payload, data, args) {
-  totalCount = totalCount + 1;
-  var object1 = isEmpty$1(payload) ? '' : payload;
-  var object2 = isEmpty$1(data) ? '' : data;
-  var object3 = isEmpty$1(args) ? '' : args;
-
-  if (type <= -14 || isNaN(type)) {
-    type = -14;
-  }
-
-  switch (type) {
-    case -14:
-      console.log(colors$7(_templateObject || (_templateObject = _taggedTemplateLiteral(["", "-", " ", ".pathColorA4 ", ".idColorA4"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -13:
-      console.log(colors$7(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA3 ", ".idColorA3"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -12:
-      console.log(colors$7(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA2 ", ".idColorA2"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -11:
-      console.log(colors$7(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA1 ", ".idColorA1"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -10:
-      console.log(colors$7(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["", "-", " ", ".pathColorA0 ", ".idColorA0"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -9:
-      console.log(colors$7(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["", "=", " ", ".pathColor9 ", ".idColor9"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -8:
-      console.log(colors$7(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["", "-", " ", ".pathColor8 ", ".idColor8"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -7:
-      console.log(colors$7(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["", "=", " ", ".pathColor7 ", ".idColor7"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -6:
-      console.log(colors$7(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["", "-", " ", ".pathColor6 ", ".idColor6"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -5:
-      console.log(colors$7(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["", "-", " ", ".pathColor5 ", ".idColor5"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -4:
-      console.log(colors$7(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["", "-", " ", ".pathColor4 ", ".idColor4"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -3:
-      console.log(colors$7(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["", "-", " ", ".pathColor3 ", ".idColor3"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -2:
-      console.log(colors$7(_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["", "-", " ", ".pathColor2 ", ".idColor2"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    case -1:
-      console.log(colors$7(_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["", "-", " ", ".pathColor1 ", ".idColor1"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-
-    default:
-      console.log(colors$7(_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["", "-", " ", ".pathColor0 ", ".idColor0"])), PrependZeros(totalCount, 2), PrependZeros(count, 2), pathToFile, id), object1, object2, object3);
-      break;
-  }
-
-  return true;
-};
-
-var proxyCount = 0;
-/**
- * @param path {string}
- * @param id {string}
- * @param {(number|Array.<number>)} count
- * @param object {object|null}
- * @param props {string|null}
- * @param value {any}
- * @param threshold {number}
- * @returns {boolean}
- */
-
-var proxy = function proxy(path, id) {
-  var count = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-  var object = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var props = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-  var value = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-  var threshold = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 5;
-
-  if (_assert.current.trim() === "".concat(path, " ").concat(id)) {
-    if (!isEmpty$1(stack[path]) && !isEmpty$1(stack[path][id])) {
-      if (typeof count !== "number") {
-        for (var i = 0; i < count.length; i++) {
-          if (count[i] < 0) {
-            if (stack[path][id].count >= Math.abs(count[i]) && stack[path][id].count < Math.abs(count[i]) + threshold) {
-              proxyCount = proxyCount >= 1000 ? 0 : proxyCount + 1;
-
-              if (isEmpty$1(value)) {
-                console.log("".concat(proxyCount, " \u26F8 [(get)"), props, "]", typeof object === 'function' ? 'function' : object);
-              } else {
-                console.log("".concat(proxyCount, " \u26F8 [(set)"), props, "]", value);
-              }
-            }
-          } else {
-            if (stack[path][id].count === count[i]) {
-              proxyCount = proxyCount >= 1000 ? 0 : proxyCount + 1;
-
-              if (isEmpty$1(value)) {
-                console.log("".concat(proxyCount, " \u26F8 [(get)"), props, "]", typeof object === 'function' ? 'function' : object);
-              } else {
-                console.log("".concat(proxyCount, " \u26F8 [(set)"), props, "]", value);
-              }
-            }
-          }
-        }
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-
-  return true;
-};
-/**
- *
- * @param stop
- * @returns {{}}
- */
-
-
-var list = function list() {
-  var stop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-  if (stop) {
-    console.assert(false, stack);
-  }
-
-  return stack;
-};
-
-var _assert = {
-  current: '',
-  list: list,
-  proxy: proxy,
-  assert: function assert(maxCount) {
-    var pathToFile = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-    var id = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "default";
-    var payload = arguments.length > 3 ? arguments[3] : undefined;
-    var data = arguments.length > 4 ? arguments[4] : undefined;
-
-    if (isEmpty$1(stack["".concat(pathToFile)])) {
-      stack["".concat(pathToFile)] = {};
-
-      if (isEmpty$1(stack[pathToFile][id])) {
-        stack[pathToFile][id] = Object.assign({}, props);
-      }
-    } else {
-      if (isEmpty$1(stack[pathToFile][id])) {
-        stack[pathToFile][id] = Object.assign({}, props);
-      }
-    }
-
-    _assert.current = "".concat(pathToFile, " ").concat(id);
-
-    for (var _len = arguments.length, args = new Array(_len > 5 ? _len - 5 : 0), _key = 5; _key < _len; _key++) {
-      args[_key - 5] = arguments[_key];
-    }
-
-    if (stack[pathToFile][id].init) {
-      stack[pathToFile][id].maxCount = maxCount;
-      stack[pathToFile][id].count = 1;
-      stack[pathToFile][id].init = false;
-      preset(maxCount, pathToFile, id);
-
-      if (stack[pathToFile][id].maxCount === 0 || stack[pathToFile][id].maxCount === 1) {
-        if (stack[pathToFile][id].isConsole) {
-          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
-        }
-
-        if (stack[pathToFile][id].isAssert) {
-          console.assert(false, pathToFile, id, stack);
-        }
-
-        stack[pathToFile][id].init = true;
-      } else {
-        if (stack[pathToFile][id].isConsole) {
-          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
-        }
-
-        stack[pathToFile][id].init = false;
-      }
-    } else {
-      stack[pathToFile][id].count = stack[pathToFile][id].count + 1;
-
-      if (stack[pathToFile][id].count === stack[pathToFile][id].maxCount) {
-        if (stack[pathToFile][id].isConsole) {
-          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
-        }
-
-        if (stack[pathToFile][id].isAssert && stack[pathToFile][id].maxCount > 0) {
-          console.assert(false, pathToFile, id, stack);
-        } // stack[pathToFile][id].init = true
-
-      } else {
-        if (stack[pathToFile][id].isConsole) {
-          print(maxCount, stack[pathToFile][id].count, pathToFile, id, payload, data, args);
-        }
-      }
-    }
-
-    return true;
-  }
-};
+var orbitdb = undefined;
+var programs = undefined;
 
 var debug$1 = function debug(maxCount, id) {
   var path = 'palette/src/github.com/zababurinsv/newkind-db/frontend/src/components/newkind-control/src/database/index.js';
@@ -79125,17 +78834,21 @@ var debug$1 = function debug(maxCount, id) {
 };
 
 var initIPFS = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(ipfs) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(props) {
+    var IPFS;
     return regenerator.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            debug$1(-4, '👀[(database)initIPFS]', {
-              ipfs: ipfs,
-              Config: config
-            }); // return await IPFS.create(Config.ipfs)
+            IPFS = props.IPFS;
+            debug$1(-4, '👀[(database)initIPFS]');
+            _context.next = 4;
+            return IPFS.create(config.ipfs);
 
-          case 1:
+          case 4:
+            return _context.abrupt("return", _context.sent);
+
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -79145,6 +78858,78 @@ var initIPFS = /*#__PURE__*/function () {
 
   return function initIPFS(_x) {
     return _ref.apply(this, arguments);
+  };
+}();
+var initOrbitDB = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(props) {
+    var ipfs, OrbitDB;
+    return regenerator.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            ipfs = props.ipfs, OrbitDB = props.OrbitDB;
+            debug$1(-4, '👀[(database)initOrbitDB]');
+            _context2.next = 4;
+            return OrbitDB.createInstance(ipfs);
+
+          case 4:
+            orbitdb = _context2.sent;
+            return _context2.abrupt("return", orbitdb);
+
+          case 6:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function initOrbitDB(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var getAllDatabases = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee3() {
+    return regenerator.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            if (!(!programs && orbitdb)) {
+              _context3.next = 7;
+              break;
+            }
+
+            // Load programs database
+            debug$1(-4, '👀[(database)Load programs database orbitdb.feed]');
+            _context3.next = 4;
+            return orbitdb.feed('network.programs', {
+              accessController: {
+                write: [orbitdb.identity.id]
+              },
+              create: true
+            });
+
+          case 4:
+            programs = _context3.sent;
+            _context3.next = 7;
+            return programs.load();
+
+          case 7:
+            debug$1(-4, '👀[(database)getAllDatabases]', programs);
+            return _context3.abrupt("return", programs ? programs.iterator({
+              limit: -1
+            }).collect() : []);
+
+          case 9:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function getAllDatabases() {
+    return _ref3.apply(this, arguments);
   };
 }();
 
@@ -79240,7 +79025,7 @@ function Systems(props) {
       args[_key - 1] = arguments[_key];
     }
 
-    _assert$1.assert(-4, url, id, args);
+    _assert.assert(-4, url, id, args);
   };
 
   React.useEffect(function () {
@@ -79249,17 +79034,66 @@ function Systems(props) {
       loading: true
     });
     debug('o!o[(useEffect)appState]', appState);
-    initIPFS(appState.IPFS).then( /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(ipfs) {
-        return regenerator.wrap(function _callee$(_context) {
+    initIPFS({
+      IPFS: appState.IPFS
+    }).then( /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee2(ipfs) {
+        return regenerator.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
+                dispatch({
+                  type: actions.SYSTEMS.SET_IPFS,
+                  ipfsStatus: 'Started'
+                }); // @ts-ignore
+
+                initOrbitDB({
+                  ipfs: ipfs,
+                  OrbitDB: appState.OrbitDB
+                }).then( /*#__PURE__*/function () {
+                  var _ref2 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee(databases) {
+                    var programs;
+                    return regenerator.wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            dispatch({
+                              type: actions.SYSTEMS.SET_ORBITDB,
+                              orbitdbStatus: 'Started'
+                            });
+                            _context.next = 3;
+                            return getAllDatabases();
+
+                          case 3:
+                            programs = _context.sent;
+                            dispatch({
+                              type: actions.PROGRAMS.SET_PROGRAMS,
+                              programs: programs.reverse()
+                            });
+                            dispatch({
+                              type: actions.PROGRAMS.SET_PROGRAMS_LOADING,
+                              loading: false
+                            });
+
+                          case 6:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee);
+                  }));
+
+                  return function (_x2) {
+                    return _ref2.apply(this, arguments);
+                  };
+                }());
+
+              case 2:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }));
 
       return function (_x) {
@@ -81673,11 +81507,12 @@ var debug = function debug(maxCount, id) {
     args[_key - 2] = arguments[_key];
   }
 
-  _assert$1.assert(maxCount, url, id, args);
+  _assert.assert(maxCount, url, id, args);
 };
 
-function App(_ref) {
-  var IPFS = _ref.IPFS;
+function App(props) {
+  var IPFS = props.IPFS,
+      OrbitDB = props.OrbitDB;
   var initialState = {
     user: null,
     loginDialogOpen: false,
@@ -81692,7 +81527,8 @@ function App(_ref) {
     loading: {
       programs: false
     },
-    IPFS: IPFS
+    IPFS: IPFS,
+    OrbitDB: OrbitDB
   };
 
   var reducer = function reducer(state, action) {
@@ -81775,28 +81611,33 @@ function App(_ref) {
     path: "/orbitdb/:programName/:dbName",
     element: /*#__PURE__*/React.createElement(ProgramView, null)
   }), /*#__PURE__*/React.createElement(Route, {
-    path: "/db",
+    path: "/",
     element: /*#__PURE__*/React.createElement(DatabasesView, null)
   }))));
 }
 
 var container = document.querySelector('#root');
 
-function AppWithCallbackAfterRender(_ref) {
-  var IPFS = _ref.IPFS;
+function AppWithCallbackAfterRender(props) {
+  var IPFS = props.IPFS,
+      OrbitDB = props.OrbitDB;
   react.exports.useEffect(function () {
     console.log('rendered');
   });
   return /*#__PURE__*/React.createElement(App, {
     tab: "home",
-    IPFS: IPFS
+    IPFS: IPFS,
+    OrbitDB: OrbitDB
   });
 }
 
-var index = (function (IPFS) {
+var index = (function (props) {
+  var IPFS = props.IPFS,
+      OrbitDB = props.OrbitDB;
   var root = createRoot(container);
   root.render( /*#__PURE__*/React.createElement(BrowserRouter, null, /*#__PURE__*/React.createElement(AppWithCallbackAfterRender, {
-    IPFS: IPFS
+    IPFS: IPFS,
+    OrbitDB: OrbitDB
   })));
 });
 

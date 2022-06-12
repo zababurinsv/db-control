@@ -7,7 +7,7 @@ import {
   StatusIndicator
 } from 'evergreen-ui'
 
-import { initIPFS, initOrbitDB, getAllDatabases } from '../database'
+import { initIPFS, initOrbitDB, getAllDatabases } from '../database/index.js'
 import { actions, useStateValue } from '../state'
 import ConnectToWalletButton from './ConnectToWalletButton'
 import logs from '../utils/debug/index.js'
@@ -25,17 +25,22 @@ function Systems (props) {
   React.useEffect(() => {
     dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: true })
     debug('o!o[(useEffect)appState]',appState)
-    initIPFS(appState.IPFS).then(async (ipfs) => {
-    //   dispatch({ type: actions.SYSTEMS.SET_IPFS, ipfsStatus: 'Started' })
-    //
+    initIPFS({
+      IPFS: appState.IPFS
+    }).then(async (ipfs) => {
+      dispatch({ type: actions.SYSTEMS.SET_IPFS, ipfsStatus: 'Started' })
+
       // @ts-ignore
-      // initOrbitDB(ipfs).then(async (databases) => {
-      //   dispatch({ type: actions.SYSTEMS.SET_ORBITDB, orbitdbStatus: 'Started' })
-      //
-      //   const programs = await getAllDatabases()
-      //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
-      //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })
-      // })
+      initOrbitDB({
+        ipfs: ipfs,
+        OrbitDB: appState.OrbitDB
+      }).then(async (databases) => {
+        dispatch({ type: actions.SYSTEMS.SET_ORBITDB, orbitdbStatus: 'Started' })
+
+        const programs = await getAllDatabases()
+        dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
+        dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })
+      })
     })
   }, [dispatch])
 

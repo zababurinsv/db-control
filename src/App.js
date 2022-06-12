@@ -20,7 +20,9 @@ const debug = (maxCount, id, ...args) => {
     logs.assert(maxCount,url, id, args)
 }
 
-function App({ IPFS }) {
+function App(props) {
+    const {IPFS, OrbitDB} = props
+
     const initialState = {
         user: null,
         loginDialogOpen: false,
@@ -35,7 +37,8 @@ function App({ IPFS }) {
         loading: {
             programs: false
         },
-        IPFS: IPFS
+        IPFS: IPFS,
+        OrbitDB: OrbitDB
     }
 
     const reducer = (state, action) => {
@@ -103,20 +106,20 @@ function App({ IPFS }) {
     }
 
     return (
-    <StateProvider
-        initialState={initialState}
-        reducer={reducer}
-    >
-        <Pane background='tint1' height='100%'>
-            <Header />
-            <Systems/>
-            <Routes>
-                <Route path='/search' element={<SearchResultsView/>} />
-                <Route path='/orbitdb/:programName/:dbName' element={<DatabaseView/>}/>
-                <Route path='/db' element={<DatabasesView/>}/>
-            </Routes>
-        </Pane>
-    </StateProvider>
+        <StateProvider
+            initialState={initialState}
+            reducer={reducer}
+        >
+            <Pane background='tint1' height='100%'>
+                <Header />
+                <Systems/>
+                <Routes>
+                    <Route path='/search' element={<SearchResultsView/>} />
+                    <Route path='/orbitdb/:programName/:dbName' element={<DatabaseView/>}/>
+                    <Route path='/' element={<DatabasesView/>}/>
+                </Routes>
+            </Pane>
+        </StateProvider>
   );
 }
 

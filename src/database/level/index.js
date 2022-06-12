@@ -2,9 +2,7 @@ import require$$0 from '../abstract-level/index.js';
 import require$$1 from '../module-error/index.js';
 import require$$2 from '../run-parallel-limit/index.js';
 import require$$3 from '../catering/index.js';
-
 var browserLevel = {};
-
 var iterator = {};
 
 /* global IDBKeyRange */

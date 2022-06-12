@@ -11,7 +11,8 @@ import Pubsub from "../../orbit-db-pubsub/index.js";
 import Cache from "../../orbit-db-cache/src/Cache.js";
 import Keystore from "../../orbit-db-keystore/src/keystore.js";
 import Identities from "../../orbit-db-identity-provider/index.js";
-import AccessControllers from "../../orbit-db-access-controllers/index.js";
+import AccessControllersDefault from "../../orbit-db-access-controllers/index.js";
+let AccessControllers = {}
 import OrbitDBAddress from "./orbit-db-address.js";
 import createDBManifest from "./db-manifest.js";
 import exchangeHeads from "./exchange-heads.js";
@@ -64,10 +65,10 @@ class OrbitDB {
     this.caches[this.directory] = { cache: options.cache, handlers: new Set() }
     this.keystore = options.keystore
     this.stores = {}
-
+    console.log()
     // AccessControllers module can be passed in to enable
     // testing with orbit-db-access-controller
-    AccessControllers = options.AccessControllers || AccessControllers
+    AccessControllers = options.AccessControllers || AccessControllersDefault
   }
 
   static get Pubsub () { return Pubsub }
@@ -88,7 +89,6 @@ class OrbitDB {
 
   static async createInstance (ipfs, options = {}) {
     if (!isDefined(ipfs)) { throw new Error('IPFS is a required argument. See https://github.com/orbitdb/orbit-db/blob/master/API.md#createinstance') }
-
     if (options.offline === undefined) {
       options.offline = false
     }
@@ -113,7 +113,11 @@ class OrbitDB {
     }
 
     if (!options.keystore) {
-      const keystorePath = path.join(options.directory, id, '/keystore')
+      console.log('@@@@@@@@@@@@@', {
+        options: options.directory,
+        id: id.string
+      })
+      const keystorePath = path.join(options.directory, id.string, '/keystore')
       const keyStorage = await options.storage.createStore(keystorePath)
       options.keystore = new Keystore(keyStorage)
     }
@@ -126,12 +130,12 @@ class OrbitDB {
     }
 
     if (!options.cache) {
-      const cachePath = path.join(options.directory, id, '/cache')
+      const cachePath = path.join(options.directory, id.string, '/cache')
       const cacheStorage = await options.storage.createStore(cachePath)
       options.cache = new Cache(cacheStorage)
     }
 
-    const finalOptions = Object.assign({}, options, { peerId: id })
+    const finalOptions = Object.assign({}, options, { peerId: id.string })
     return new OrbitDB(ipfs, options.identity, finalOptions)
   }
 

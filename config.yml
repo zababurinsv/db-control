@@ -1,2 +1,4 @@
 dir:
+  - io
   - db
+  - orbitDb

@@ -13,6 +13,7 @@
   "watch": [
     "backend/",
     "./server.mjs",
+    "./config.yml",
     "frontend/src/modules/blockchain/"
   ],
   "ext": "mjs json",

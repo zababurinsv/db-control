@@ -1411,7 +1411,7 @@ class AbstractLevel$1 extends EventEmitter {
     this[kDeferOpen] = true;
     this[kOptions] = forward;
     this[kStatus] = 'opening';
-
+    console.log('+++++++ AbstractLevel$1 +++++++', require$$0$1)
     this.supports = supports(manifest, {
       status: true,
       promises: true,

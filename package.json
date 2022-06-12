@@ -37,7 +37,8 @@
     }
   },
   "scripts": {
-    "nodemon:start": "nodemon ./backend/index.mjs",
+    "rollup:build": "rollup -c rollup-esm.config.js --watch",
+    "nodemon:start": "nodemon ./backend/server.mjs",
     "gulp:scss": "gulp",
     "gulp:ipfs": "gulp ipfs",
     "gulp:libp2p-crypto": "gulp libp2p-crypto",
@@ -54,8 +55,6 @@
     "gulp:bn.js": "gulp bn.js",
     "gulp:hash.js": "gulp hash.js",
     "gulp:ethers": "gulp ethers",
-    "rollup:build": "rollup -c rollup-esm.config.js --watch",
-    "rollup:test:build": "rollup -c rollup.config.js --watch",
     "parcel:module": "rimraf ./modules/* && parcel build --no-autoinstall --target module"
   },
   "dependencies": {

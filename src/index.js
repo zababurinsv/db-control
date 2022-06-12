@@ -4,7 +4,9 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 const container = document.querySelector('#root');
 
-function AppWithCallbackAfterRender({ IPFS }) {
+function AppWithCallbackAfterRender(props) {
+    const {IPFS, OrbitDB} = props
+
     useEffect(() => {
         console.log('rendered');
     });
@@ -12,15 +14,18 @@ function AppWithCallbackAfterRender({ IPFS }) {
     return <App
         tab="home"
         IPFS={ IPFS }
+        OrbitDB={ OrbitDB }
     />
 }
 
-export default (IPFS) => {
+export default (props) => {
+    const {IPFS, OrbitDB} = props
     const root = createRoot(container);
     root.render(
         <BrowserRouter>
             <AppWithCallbackAfterRender
                 IPFS={IPFS}
+                OrbitDB={OrbitDB}
             />
         </BrowserRouter>,
     );
