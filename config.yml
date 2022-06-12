@@ -2,3 +2,4 @@ dir:
   - io
   - db
   - orbitDb
+  - soundcheckbox
