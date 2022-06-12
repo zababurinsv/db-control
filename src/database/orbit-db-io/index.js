@@ -41,7 +41,7 @@ let debug = (id, ...args) => {
   let from = path.search('dba');
   let to = path.length;
   let url = path.substring(from,to);
-  logs.default.assert(-4,url, id, args)
+  logs.assert(-4,url, id, args)
 }
 
 // function storeWithProgress(files) {
