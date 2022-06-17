@@ -1,7 +1,8 @@
 'use strict'
-import Channel from "../../ipfs-pubsub-1on1/src/direct-channel.js";
-import Logger from "../../logplease/index.js";
 
+const Channel = require('ipfs-pubsub-1on1')
+
+const Logger = require('logplease')
 const logger = Logger.create('exchange-heads', { color: Logger.Colors.Yellow })
 Logger.setLogLevel('ERROR')
 
@@ -46,4 +47,4 @@ const exchangeHeads = async (ipfs, address, peer, getStore, getDirectConnection,
   return channel
 }
 
-export default  exchangeHeads
+module.exports = exchangeHeads

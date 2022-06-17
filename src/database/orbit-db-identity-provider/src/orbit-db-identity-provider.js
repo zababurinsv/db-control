@@ -1,7 +1,6 @@
 'use strict'
-import IdentityProvider from "./identity-provider-interface.js";
-import Keystore from "../../orbit-db-keystore/src/keystore.js";
-
+const IdentityProvider = require('./identity-provider-interface')
+const Keystore = require('orbit-db-keystore')
 const type = 'orbitdb'
 
 class OrbitDBIdentityProvider extends IdentityProvider {
@@ -51,4 +50,4 @@ class OrbitDBIdentityProvider extends IdentityProvider {
   }
 }
 
-export default  OrbitDBIdentityProvider
+module.exports = OrbitDBIdentityProvider

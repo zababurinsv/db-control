@@ -308,7 +308,7 @@ class KeyValueStore extends Store {
   }
 }
 
-export default  KeyValueStore;
+module.exports = KeyValueStore;
 ```
 
 ## Contributing

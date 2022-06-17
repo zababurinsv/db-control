@@ -1,6 +1,6 @@
 'use strict'
 
-import Store from "../../orbit-db-store/src/Store.js";
+import Store from "../../orbit-db-store/dist/Store.js";
 import EventIndex from "./EventIndex.js";
 
 // TODO: generalize the Iterator functions and spin to its own module

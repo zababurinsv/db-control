@@ -25,4 +25,4 @@ class IdentityProvider {
   }
 }
 
-export default  IdentityProvider
+module.exports = IdentityProvider

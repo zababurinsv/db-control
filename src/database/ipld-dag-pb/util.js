@@ -1,5 +1,5 @@
-import { CID } from '../multiformats/esm/src/cid.js'
-
+// import { CID } from '../multiformats/esm/src/cid.js'
+import CID from '../cids/dist/index.js'
 /**
  * @typedef {import('./interface').PBLink} PBLink
  * @typedef {import('./interface').PBNode} PBNode

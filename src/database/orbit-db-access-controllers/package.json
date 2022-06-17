@@ -1,6 +1,6 @@
 {
   "name": "orbit-db-access-controllers",
-  "version": "0.3.2",
+  "version": "0.3.0",
   "description": "Access Controllers for OrbitDB",
   "keywords": [
     "orbit",
@@ -8,6 +8,7 @@
   ],
   "main": "index.js",
   "scripts": {
+    "test": "TEST=all mocha",
     "lint": "standard"
   },
   "repository": {
@@ -27,23 +28,23 @@
   },
   "homepage": "https://github.com/orbitdb/orbit-db-access-controllers#readme",
   "dependencies": {
+    "orbit-db-io": "^0.3.0",
     "p-map-series": "^1.0.0"
   },
   "devDependencies": {
     "@colony/purser-software": "^1.1.2",
-    "eslint": "^7.32.0",
-    "ganache-cli": "^6.12.2",
-    "go-ipfs": "^0.10.0-rc1",
-    "ipfs": "^0.58.3",
-    "ipfsd-ctl": "^10.0.3",
+    "datastore-level": "~0.12.0",
+    "ganache-cli": "^6.3.0",
+    "go-ipfs-dep": "0.4.19",
+    "ipfs": "~0.39.0",
+    "ipfs-repo": "~0.26.6",
+    "ipfsd-ctl": "~0.42.4",
     "mocha": "^5.2.0",
-    "node-pre-gyp": "^0.13.0",
-    "orbit-db-identity-provider": "^0.4.0",
-    "orbit-db-io": "^1.0.1",
-    "orbit-db-keystore": "^1.0.0",
-    "orbit-db-test-utils": "^1.3.0",
+    "orbit-db": "~0.21.4",
+    "orbit-db-identity-provider": "~0.1.0",
+    "orbit-db-keystore": "~0.2.1",
     "standard": "^14.1.0",
-    "web3": "^1.5.2"
+    "web3": "1.0.0-beta.37"
   },
   "standard": {
     "env": [

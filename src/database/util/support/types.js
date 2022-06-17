@@ -3,13 +3,10 @@
 
 'use strict';
 
-import isArgumentsObject from "../../is-arguments/index.js";
-import isGeneratorFunction from "../../is-generator-function/index.js";
-import whichTypedArray from "../../which-typed-array/index.js";
-
-import isTypedArray from "../../is-typed-array/index.js";
-
-let exports = {}
+var isArgumentsObject = require('is-arguments');
+var isGeneratorFunction = require('is-generator-function');
+var whichTypedArray = require('which-typed-array');
+var isTypedArray = require('is-typed-array');
 
 function uncurryThis(f) {
   return f.call.bind(f);
@@ -327,4 +324,11 @@ function isAnyArrayBuffer(value) {
 }
 exports.isAnyArrayBuffer = isAnyArrayBuffer;
 
-export default exports
+['isProxy', 'isExternal', 'isModuleNamespaceObject'].forEach(function(method) {
+  Object.defineProperty(exports, method, {
+    enumerable: false,
+    value: function() {
+      throw new Error(method + ' is not supported in userland');
+    }
+  });
+});

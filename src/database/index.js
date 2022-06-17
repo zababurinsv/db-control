@@ -13,21 +13,28 @@ let debug = (maxCount, id, ...args) => {
 
 export const initIPFS = async (props) => {
   const {IPFS} = props
-  debug( -4,'👀[(database)initIPFS]');
+  debug( -4,'----------------------👀[(database)initIPFS]');
   return await IPFS.create(Config.ipfs)
 }
 
 export const initOrbitDB = async (props) => {
-  const {ipfs, OrbitDB} = props
-  debug( -4,'👀[(database)initOrbitDB]')
-  orbitdb = await OrbitDB.createInstance(ipfs)
-  return orbitdb
+  const {ipfs, OrbitDB} = props;
+  debug( -4,'----------------------👀[(database)initOrbitDB]')
+  return await OrbitDB.createInstance(ipfs)
 }
 
 export const getAllDatabases = async () => {
+    console.log('@@@@@@@@@@@@@ getAllDatabases @@@@@@@@@@@@@@@@@', {
+      orbitdb: orbitdb,
+      programs: programs
+    })
   if (!programs && orbitdb) {
     // Load programs database
     debug( -4,'👀[(database)Load programs database orbitdb.feed]')
+    console.log('< @@@@@@@@ getAllDatabases @@@@@@@@@@ >', {
+      orbitdb: orbitdb,
+      accessController: { write: [orbitdb.identity.id] }
+    })
     programs = await orbitdb.feed('network.programs', {
       accessController: { write: [orbitdb.identity.id] },
       create: true

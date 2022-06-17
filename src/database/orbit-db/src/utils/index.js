@@ -1,9 +1,9 @@
 'use strict'
 
-import isDefined from "./is-defined.js";
-import io from "../../../orbit-db-io/index.js";
-export {isDefined, io}
-export default  {
+const isDefined = require('./is-defined')
+const io = require('orbit-db-io')
+
+module.exports = {
   isDefined,
   io
 }

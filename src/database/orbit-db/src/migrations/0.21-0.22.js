@@ -1,8 +1,9 @@
-import path from "../../../path/index.js";
-import fs from "../fs-shim.js";
-import Cache from "../../../orbit-db-cache/src/Cache.js";
-import Logger from "../../../logplease/index.js";
+const path = require('path')
+const fs = require('../fs-shim')
 
+const Cache = require('orbit-db-cache')
+
+const Logger = require('logplease')
 const logger = Logger.create('orbit-db')
 Logger.setLogLevel('ERROR')
 
@@ -29,7 +30,7 @@ async function migrate (OrbitDB, options, dbAddress) {
   ]
 
   for (const i in migrationKeys) {
-    try {// @ts-ignore
+    try {
       const key = path.join(keyRoot, migrationKeys[i])
       const val = await oldCache.get(migrationKeys[i])
       if (val) await options.cache.set(key, val)
@@ -41,4 +42,4 @@ async function migrate (OrbitDB, options, dbAddress) {
   if (oldStore) await oldStore.close()
 }
 
-export default  migrate
+module.exports = migrate

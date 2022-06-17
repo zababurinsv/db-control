@@ -19,48 +19,15 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-import isBuffer from './support/isBufferBrowser.js'
-import process from '../process/index.js'
-import Types from './support/types.js'
-let types = Types
-import inherits from '../inherits/index.js'
-let exports = {}
-exports.types = types;
-exports.inherits = inherits;
-
-exports.isBuffer = isBuffer;
-
-export {isBuffer, inherits}
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors ||
-    function getOwnPropertyDescriptors(obj) {
-      var keys = Object.keys(obj);
-      var descriptors = {};
-      for (var i = 0; i < keys.length; i++) {
-        descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
-      }
-      return descriptors;
-    };
+  function getOwnPropertyDescriptors(obj) {
+    var keys = Object.keys(obj);
+    var descriptors = {};
+    for (var i = 0; i < keys.length; i++) {
+      descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
+    }
+    return descriptors;
+  };
 
 var formatRegExp = /%[sdj%]/g;
 exports.format = function(f) {
@@ -142,9 +109,9 @@ var debugEnvRegex = /^$/;
 if (process.env.NODE_DEBUG) {
   var debugEnv = process.env.NODE_DEBUG;
   debugEnv = debugEnv.replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
-      .replace(/\*/g, '.*')
-      .replace(/,/g, '$|^')
-      .toUpperCase();
+    .replace(/\*/g, '.*')
+    .replace(/,/g, '$|^')
+    .toUpperCase();
   debugEnvRegex = new RegExp('^' + debugEnv + '$', 'i');
 }
 exports.debuglog = function(set) {
@@ -235,7 +202,7 @@ function stylizeWithColor(str, styleType) {
 
   if (style) {
     return '\u001b[' + inspect.colors[style][0] + 'm' + str +
-        '\u001b[' + inspect.colors[style][1] + 'm';
+           '\u001b[' + inspect.colors[style][1] + 'm';
   } else {
     return str;
   }
@@ -376,8 +343,8 @@ function formatPrimitive(ctx, value) {
     return ctx.stylize('undefined', 'undefined');
   if (isString(value)) {
     var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-        .replace(/'/g, "\\'")
-        .replace(/\\"/g, '"') + '\'';
+                                             .replace(/'/g, "\\'")
+                                             .replace(/\\"/g, '"') + '\'';
     return ctx.stylize(simple, 'string');
   }
   if (isNumber(value))
@@ -443,7 +410,7 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
         if (array) {
           str = str.split('\n').map(function(line) {
             return '  ' + line;
-          }).join('\n').slice(2);
+          }).join('\n').substr(2);
         } else {
           str = '\n' + str.split('\n').map(function(line) {
             return '   ' + line;
@@ -460,12 +427,12 @@ function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
     }
     name = JSON.stringify('' + key);
     if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-      name = name.slice(1, -1);
+      name = name.substr(1, name.length - 2);
       name = ctx.stylize(name, 'name');
     } else {
       name = name.replace(/'/g, "\\'")
-          .replace(/\\"/g, '"')
-          .replace(/(^"|"$)/g, "'");
+                 .replace(/\\"/g, '"')
+                 .replace(/(^"|"$)/g, "'");
       name = ctx.stylize(name, 'string');
     }
   }
@@ -484,11 +451,11 @@ function reduceToSingleString(output, base, braces) {
 
   if (length > 60) {
     return braces[0] +
-        (base === '' ? '' : base + '\n ') +
-        ' ' +
-        output.join(',\n  ') +
-        ' ' +
-        braces[1];
+           (base === '' ? '' : base + '\n ') +
+           ' ' +
+           output.join(',\n  ') +
+           ' ' +
+           braces[1];
   }
 
   return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
@@ -497,7 +464,7 @@ function reduceToSingleString(output, base, braces) {
 
 // NOTE: These type checking functions intentionally don't use `instanceof`
 // because it is fragile and can be easily faked with `Object.create()`.
-
+exports.types = require('./support/types');
 
 function isArray(ar) {
   return Array.isArray(ar);
@@ -570,13 +537,15 @@ exports.isFunction = isFunction;
 
 function isPrimitive(arg) {
   return arg === null ||
-      typeof arg === 'boolean' ||
-      typeof arg === 'number' ||
-      typeof arg === 'string' ||
-      typeof arg === 'symbol' ||  // ES6 symbol
-      typeof arg === 'undefined';
+         typeof arg === 'boolean' ||
+         typeof arg === 'number' ||
+         typeof arg === 'string' ||
+         typeof arg === 'symbol' ||  // ES6 symbol
+         typeof arg === 'undefined';
 }
 exports.isPrimitive = isPrimitive;
+
+exports.isBuffer = require('./support/isBuffer');
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -589,14 +558,14 @@ function pad(n) {
 
 
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-  'Oct', 'Nov', 'Dec'];
+              'Oct', 'Nov', 'Dec'];
 
 // 26 Feb 16:19:34
 function timestamp() {
   var d = new Date();
   var time = [pad(d.getHours()),
-    pad(d.getMinutes()),
-    pad(d.getSeconds())].join(':');
+              pad(d.getMinutes()),
+              pad(d.getSeconds())].join(':');
   return [d.getDate(), months[d.getMonth()], time].join(' ');
 }
 
@@ -620,6 +589,8 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
+exports.inherits = require('inherits');
+
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
   if (!add || !isObject(add)) return origin;
@@ -687,8 +658,8 @@ exports.promisify = function promisify(original) {
     value: fn, enumerable: false, writable: false, configurable: true
   });
   return Object.defineProperties(
-      fn,
-      getOwnPropertyDescriptors(original)
+    fn,
+    getOwnPropertyDescriptors(original)
   );
 }
 
@@ -732,16 +703,13 @@ function callbackify(original) {
     // In true node style we process the callback on `nextTick` with all the
     // implications (stack, `uncaughtException`, `async_hooks`)
     original.apply(this, args)
-        .then(function(ret) { process.nextTick(cb.bind(null, null, ret)) },
+      .then(function(ret) { process.nextTick(cb.bind(null, null, ret)) },
             function(rej) { process.nextTick(callbackifyOnRejected.bind(null, rej, cb)) });
   }
 
   Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original));
   Object.defineProperties(callbackified,
-      getOwnPropertyDescriptors(original));
+                          getOwnPropertyDescriptors(original));
   return callbackified;
 }
-
 exports.callbackify = callbackify;
-
-export default exports

@@ -1,27 +1,24 @@
-// @ts-nocheck
 'use strict'
 
-import path from "../../path/index.js";
-import EventStore from "../../orbit-db-eventstore/src/EventStore.js";
-import FeedStore from "../../orbit-db-feedstore/src/FeedStore.js";
-import KeyValueStore from "../../orbit-db-kvstore/src/KeyValueStore.js";
-import CounterStore from "../../orbit-db-counterstore/src/CounterStore.js";
-import DocumentStore from "../../orbit-db-docstore/src/DocumentStore.js";
-import Pubsub from "../../orbit-db-pubsub/index.js";
-import Cache from "../../orbit-db-cache/src/Cache.js";
-import Keystore from "../../orbit-db-keystore/src/keystore.js";
-import Identities from "../../orbit-db-identity-provider/index.js";
-import AccessControllersDefault from "../../orbit-db-access-controllers/index.js";
-let AccessControllers = {}
-import OrbitDBAddress from "./orbit-db-address.js";
-import createDBManifest from "./db-manifest.js";
-import exchangeHeads from "./exchange-heads.js";
-import {io, isDefined} from "./utils/index.js";
-import Storage from "../../orbit-db-storage-adapter/src/index.js";
-import migrations from "./migrations/index.js";
-import Logger from "../../logplease/index.js";
-import logs from "../../../utils/debug/index.js";
+const path = require('path')
+const EventStore = require('orbit-db-eventstore')
+const FeedStore = require('orbit-db-feedstore')
+const KeyValueStore = require('orbit-db-kvstore')
+const CounterStore = require('orbit-db-counterstore')
+const DocumentStore = require('orbit-db-docstore')
+const Pubsub = require('orbit-db-pubsub')
+const Cache = require('orbit-db-cache')
+const Keystore = require('orbit-db-keystore')
+const Identities = require('orbit-db-identity-provider')
+let AccessControllers = require('orbit-db-access-controllers')
+const OrbitDBAddress = require('./orbit-db-address')
+const createDBManifest = require('./db-manifest')
+const exchangeHeads = require('./exchange-heads')
+const { isDefined, io } = require('./utils')
+const Storage = require('orbit-db-storage-adapter')
+const migrations = require('./migrations')
 
+const Logger = require('logplease')
 const logger = Logger.create('orbit-db')
 Logger.setLogLevel('ERROR')
 
@@ -33,15 +30,6 @@ const databaseTypes = {
   docstore: DocumentStore,
   keyvalue: KeyValueStore
 }
-
-let debug = (id, ...args) => {
-  let path = '/db/src/OrbitDB.js'
-  let from = path.search('/db');
-  let to = path.length;
-  let url = path.substring(from,to);
-  logs.assert(-4,url, id, args)
-}
-
 
 class OrbitDB {
   constructor (ipfs, identity, options = {}) {
@@ -65,10 +53,10 @@ class OrbitDB {
     this.caches[this.directory] = { cache: options.cache, handlers: new Set() }
     this.keystore = options.keystore
     this.stores = {}
-    console.log()
+
     // AccessControllers module can be passed in to enable
     // testing with orbit-db-access-controller
-    AccessControllers = options.AccessControllers || AccessControllersDefault
+    AccessControllers = options.AccessControllers || AccessControllers
   }
 
   static get Pubsub () { return Pubsub }
@@ -89,6 +77,7 @@ class OrbitDB {
 
   static async createInstance (ipfs, options = {}) {
     if (!isDefined(ipfs)) { throw new Error('IPFS is a required argument. See https://github.com/orbitdb/orbit-db/blob/master/API.md#createinstance') }
+
     if (options.offline === undefined) {
       options.offline = false
     }
@@ -113,11 +102,7 @@ class OrbitDB {
     }
 
     if (!options.keystore) {
-      console.log('@@@@@@@@@@@@@', {
-        options: options.directory,
-        id: id.string
-      })
-      const keystorePath = path.join(options.directory, id.string, '/keystore')
+      const keystorePath = path.join(options.directory, id, '/keystore')
       const keyStorage = await options.storage.createStore(keystorePath)
       options.keystore = new Keystore(keyStorage)
     }
@@ -130,12 +115,12 @@ class OrbitDB {
     }
 
     if (!options.cache) {
-      const cachePath = path.join(options.directory, id.string, '/cache')
+      const cachePath = path.join(options.directory, id, '/cache')
       const cacheStorage = await options.storage.createStore(cachePath)
       options.cache = new Cache(cacheStorage)
     }
 
-    const finalOptions = Object.assign({}, options, { peerId: id.string })
+    const finalOptions = Object.assign({}, options, { peerId: id })
     return new OrbitDB(ipfs, options.identity, finalOptions)
   }
 
@@ -260,10 +245,6 @@ class OrbitDB {
 
   // Callback for local writes to the database. We the update to pubsub.
   _onWrite (address, entry, heads) {
-    debug('(👿[(OrbitDB)_onWrite])[publish] ',{
-      address: address,
-      heads: heads
-    })
     if (!heads) throw new Error("'heads' not defined")
     if (this._pubsub) this._pubsub.publish(address, heads)
   }
@@ -423,11 +404,6 @@ class OrbitDB {
       }
    */
   async open (address, options = {}) {
-    debug('👿[(OrbitDB)open]🚻[(this.create)a] ',{
-      address: address,
-      "options.type": options.type,
-      "options": options
-    })
     logger.debug('open()')
 
     options = Object.assign({ localOnly: false, create: false }, options)
@@ -465,10 +441,6 @@ class OrbitDB {
 
     logger.debug(`Loading Manifest for '${dbAddress}'`)
 
-    debug('👿[(OrbitDB)open]🚻[(io.read)dbAddress.root] ',{
-      message: 'orbitdb Get the database manifest from IPFS',
-      "dbAddress.root": dbAddress.root,
-    })
     // Get the database manifest from IPFS
     const manifest = await io.read(this._ipfs, dbAddress.root)
     logger.debug(`Manifest for '${dbAddress}':\n${JSON.stringify(manifest, null, 2)}`)
@@ -551,5 +523,4 @@ OrbitDB.prototype.AccessControllers = AccessControllers
 OrbitDB.prototype.Identities = Identities
 OrbitDB.prototype.Keystore = Keystore
 
-// export default  OrbitDB
-export default OrbitDB
+module.exports = OrbitDB

@@ -35,8 +35,8 @@ function Systems (props) {
         ipfs: ipfs,
         OrbitDB: appState.OrbitDB
       }).then(async (databases) => {
+        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
         dispatch({ type: actions.SYSTEMS.SET_ORBITDB, orbitdbStatus: 'Started' })
-
         const programs = await getAllDatabases()
         dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
         dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })

@@ -1,14 +1,10 @@
 'use strict'
 
-import AccessController from "./access-controller-interface.js";
-
-import AccessControllerManifest from "./access-controller-manifest.js";
-
-import LegacyIPFSAccessController from "./legacy-ipfs-access-controller.js";
-
-import IPFSAccessController from "./ipfs-access-controller.js";
-
-import OrbitDBAccessController from "./orbitdb-access-controller.js";
+const AccessController = require('./access-controller-interface')
+const AccessControllerManifest = require('./access-controller-manifest')
+const LegacyIPFSAccessController = require('./legacy-ipfs-access-controller')
+const IPFSAccessController = require('./ipfs-access-controller')
+const OrbitDBAccessController = require('./orbitdb-access-controller')
 
 const supportedTypes = {
   'legacy-ipfs': LegacyIPFSAccessController,
@@ -75,4 +71,4 @@ class AccessControllers {
   }
 }
 
-export default  AccessControllers
+module.exports = AccessControllers

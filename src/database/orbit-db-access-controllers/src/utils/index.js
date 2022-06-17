@@ -1,9 +1,9 @@
 'use strict'
 
-import io from "./io.js";
-import isValidEthAddress from "./is-valid-eth-address.js";
-export {io, isValidEthAddress}
-export default  {
+const isValidEthAddress = require('./is-valid-eth-address')
+const io = require('./io.js')
+
+module.exports = {
   io,
   isValidEthAddress
 }

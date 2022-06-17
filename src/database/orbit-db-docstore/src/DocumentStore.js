@@ -1,6 +1,6 @@
 'use strict'
 
-import Store from "../../orbit-db-store/src/Store.js";
+import Store from "../../orbit-db-store/dist/Store.js";
 import DocumentIndex from "./DocumentIndex.js";
 import pMap from "../../p-map/index.js";
 

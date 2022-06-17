@@ -1,20 +1,21 @@
 'use strict'
 
-import path from "../../path/index.js";
-import {EventEmitter} from "../../events/index.js";
-import mapSeries from ".././../p-map-series/index.js";
-import PQueue from "../../p-queue/dist/index.js";
-import Log from "../../ipfs-log/src/log.js";
-import Index from "./Index.js";
-import Replicator from "./Replicator.js";
-import ReplicationInfo from "./replication-info.js";
-import io from "../../orbit-db-io/index.js";
-import Logger from "../../logplease/index.js";
-
+const path = require('path')
+const EventEmitter = require('events').EventEmitter
+const mapSeries = require('p-each-series')
+const { default: PQueue } = require('p-queue')
+const Log = require('ipfs-log')
 const Entry = Log.Entry
+const Index = require('./Index')
+const Replicator = require('./Replicator')
+const ReplicationInfo = require('./replication-info')
+
+const Logger = require('logplease')
 const logger = Logger.create('orbit-db.store', { color: Logger.Colors.Blue })
 Logger.setLogLevel('ERROR')
-export const DefaultOptions = {
+const io = require('orbit-db-io')
+
+const DefaultOptions = {
   Index: Index,
   maxHistory: -1,
   fetchEntryTimeout: null,
@@ -29,7 +30,7 @@ class Store {
     if (!identity) {
       throw new Error('Identity required')
     }
-    console.log('👕 Store', identity, address, options)
+
     // Set the options
     const opts = Object.assign({}, DefaultOptions)
     Object.assign(opts, options)
@@ -67,7 +68,6 @@ class Store {
     // _addOperation queue
     this._opqueue = new PQueue({ concurrency: 1 })
 
-    console.log('👕 Create the index from', this.address.root)
     // Create the index
     this._index = new this.options.Index(this.address.root)
 
@@ -165,13 +165,11 @@ class Store {
   }
 
   setIdentity (identity) {
-    console.log('👕 setIdentity', identity)
     this.identity = identity
     this._oplog.setIdentity(identity)
   }
 
   async close () {
-    console.log('👕 close')
     if (this.options.onClose) {
       await this.options.onClose(this)
     }
@@ -209,7 +207,6 @@ class Store {
    * @return {[None]}
    */
   async drop () {
-    console.log('👕 drop')
     if (this.options.onDrop) {
       await this.options.onDrop(this)
     }
@@ -229,12 +226,10 @@ class Store {
   }
 
   async load (amount, opts = {}) {
-    console.log('👕 load')
     if (typeof amount === 'object') {
       opts = amount
       amount = undefined
     }
-
     amount = amount || this.options.maxHistory
     const fetchEntryTimeout = opts.fetchEntryTimeout || this.options.fetchEntryTimeout
 
@@ -275,7 +270,6 @@ class Store {
   }
 
   async sync (heads) {
-    console.log('👕 sync', heads)
     this._stats.syncRequestsReceieved += 1
     logger.debug(`Sync request #${this._stats.syncRequestsReceieved} ${heads.length}`)
     if (heads.length === 0) {
@@ -290,7 +284,6 @@ class Store {
     // return this._replicator.load(heads)
 
     const saveToIpfs = async (head) => {
-      console.log('👕 saveToIpfs', head)
       if (!head) {
         console.warn("Warning: Given input entry was 'null'.")
         return Promise.resolve(null)
@@ -306,7 +299,7 @@ class Store {
       }
 
       const logEntry = Entry.toEntry(head)
-      const hash = await io.write(this._ipfs, Entry.getWriteFormat(logEntry), logEntry, { links: Entry.IPLD_LINKS, onlyHash: true, pin: true })
+      const hash = await io.write(this._ipfs, Entry.getWriteFormat(logEntry), logEntry, { links: Entry.IPLD_LINKS, onlyHash: true })
 
       if (hash !== head.hash) {
         console.warn('"WARNING! Head hash didn\'t match the contents')
@@ -332,7 +325,6 @@ class Store {
   }
 
   loadMoreFrom (amount, entries) {
-    console.log('👕 loadMoreFrom', amount)
     this._replicator.load(entries)
   }
 
@@ -340,7 +332,6 @@ class Store {
     const unfinished = this._replicator.getQueue()
 
     const snapshotData = this._oplog.toSnapshot()
-    console.log('👕 saveSnapshot', snapshotData)
     const buf = Buffer.from(JSON.stringify({
       id: snapshotData.id,
       heads: snapshotData.heads,
@@ -348,7 +339,7 @@ class Store {
       values: snapshotData.values,
       type: this.type
     }))
-    console.log('👕 this._ipfs.add(', buf)
+
     const snapshot = await this._ipfs.add(buf)
 
     snapshot.hash = snapshot.cid.toString() // js-ipfs >= 0.41, ipfs.add results contain a cid property (a CID instance) instead of a string hash property
@@ -361,7 +352,6 @@ class Store {
   }
 
   async loadFromSnapshot (onProgressCallback) {
-    console.log('👕 loadFromSnapshot')
     if (this.options.onLoad) {
       await this.options.onLoad(this)
     }
@@ -406,14 +396,12 @@ class Store {
   }
 
   async _updateIndex () {
-    console.log('👕 _updateIndex')
     this._recalculateReplicationMax()
     await this._index.updateIndex(this._oplog)
     this._recalculateReplicationProgress()
   }
 
   async syncLocal () {
-    console.log('👕 syncLocal')
     const localHeads = await this._cache.get(this.localHeadsPath) || []
     const remoteHeads = await this._cache.get(this.remoteHeadsPath) || []
     const heads = localHeads.concat(remoteHeads)
@@ -428,10 +416,6 @@ class Store {
 
   async _addOperation (data, { onProgressCallback, pin = false } = {}) {
     async function addOperation () {
-      console.log('👕_addOperation {entry.hash} :<T>', {
-        pin: pin,
-        data: data
-      })
       if (this._oplog) {
         // check local cache?
         if (this.options.syncLocal) {
@@ -439,16 +423,11 @@ class Store {
         }
 
         const entry = await this._oplog.append(data, this.options.referenceCount, pin)
-        entry.clock.time = 13
-        console.log('👕[(append)entry]', entry)
         this._recalculateReplicationStatus(this.replicationStatus.progress + 1, entry.clock.time)
         await this._cache.set(this.localHeadsPath, [entry])
         await this._updateIndex()
-        console.log('[[ 👕 ]] write', this.address.toString(), entry)
         this.events.emit('write', this.address.toString(), entry, this._oplog.heads)
         if (onProgressCallback) onProgressCallback(entry)
-
-        console.log('👕 _addOperation 👕', entry.hash)
         return entry.hash
       }
     }
@@ -460,7 +439,6 @@ class Store {
   }
 
   _procEntry (entry) {
-    console.log('👕_procEntry', entry)
     var { payload, hash } = entry
     var { op } = payload
     if (op) {
@@ -501,5 +479,5 @@ class Store {
   }
 }
 
-export default  Store
-
+module.exports = Store
+module.exports.DefaultOptions = DefaultOptions

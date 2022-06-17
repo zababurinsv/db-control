@@ -24,4 +24,4 @@ export const supports = function supports (...manifests) {
     })
 }
 
-export default {supports}
+export default supports

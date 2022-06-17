@@ -1,7 +1,8 @@
-import {EventEmitter} from "../../events/index.js";
-import pMap from "../../p-map/index.js";
-import Log from "../../ipfs-log/src/log.js";
-import Logger from "../../logplease/index.js";
+const EventEmitter = require('events').EventEmitter
+const pMap = require('p-map')
+const Log = require('ipfs-log')
+
+const Logger = require('logplease')
 const logger = Logger.create('replicator', { color: Logger.Colors.Cyan })
 Logger.setLogLevel('ERROR')
 
@@ -183,4 +184,4 @@ class Replicator extends EventEmitter {
   }
 }
 
-export default  Replicator
+module.exports = Replicator

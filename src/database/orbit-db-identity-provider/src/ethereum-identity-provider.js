@@ -1,7 +1,6 @@
 'use strict'
-import IdentityProvider from "./identity-provider-interface.js";
-import {utils, Wallet} from "../../ethers/ethers.esm.js";
-
+const IdentityProvider = require('./identity-provider-interface')
+const { Wallet, utils } = require('ethers')
 const type = 'ethereum'
 
 class EthIdentityProvider extends IdentityProvider {
@@ -55,4 +54,4 @@ class EthIdentityProvider extends IdentityProvider {
   }
 }
 
-export default  EthIdentityProvider
+module.exports = EthIdentityProvider

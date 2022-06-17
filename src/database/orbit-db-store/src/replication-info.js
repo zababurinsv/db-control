@@ -11,4 +11,4 @@ class ReplicationInfo {
   }
 }
 
-export default  ReplicationInfo
+module.exports = ReplicationInfo

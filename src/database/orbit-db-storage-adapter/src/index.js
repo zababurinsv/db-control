@@ -1,9 +1,10 @@
 'use strict'
-import level from "../../level/index.js";
-import levelup from "../../levelup/levelup.js";
 
-// const fs = (typeof window === 'object' || typeof self === 'object') ?  : eval('require("fs")') // eslint-disable-line
+import levelup from "../../levelup/dist/levelup.js";
+import level from "../../level/dist/browser.js";
+
 const fs = null
+
 // Should work for all abstract-leveldown compliant stores
 
 /*
@@ -33,11 +34,12 @@ class Storage {
     this.options = { down: leveldownOptions }
   }
 
-  createStore(directory = './orbitdb', options = {}) {
+  createStore (directory = './orbitdb', options = {}) {
     return new Promise(async (resolve, reject) => {
       this.options.up = options
       await this.preCreate(directory, this.options)
       let store, db
+
       if (this.storage) {
         db = this.storage(directory, this.options.down)
 
@@ -56,11 +58,9 @@ class Storage {
           resolve(store)
         })
       } else {
-        // console.log('===================== DB =====================')
         // Default leveldown or level-js store with directory creation
         if (fs && fs.mkdirSync) fs.mkdirSync(directory, { recursive: true })
-        const db = new level.BrowserLevel(directory, options)
-        console.log('===================== DB =====================', db)
+        const db = level(directory, options)
         await db.open()
         resolve(db)
       }
@@ -84,4 +84,4 @@ class Storage {
   async preCreate (directory, options) {} // to be overridden
 }
 
-export default  (storage, options) => new Storage(storage, options)
+module.exports = (storage, options) => new Storage(storage, options)

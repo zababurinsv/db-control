@@ -1,4 +1,5 @@
-import { CID } from '../multiformats/esm/src/cid.js'
+// import { CID } from '../multiformats/esm/src/cid.js'
+import CID from '../cids/dist/index.js'
 import { decodeNode } from './pb-decode.js'
 import { encodeNode } from './pb-encode.js'
 import { prepare, validate, createNode, createLink } from './util.js'

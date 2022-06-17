@@ -1,5 +1,6 @@
 'use strict'
-import { EventEmitter } from "../../events/index.js";
+
+const EventEmitter = require('events').EventEmitter
 
 /**
  * Interface for OrbitDB Access Controllers
@@ -50,4 +51,4 @@ class AccessController extends EventEmitter {
   async close () {}
 }
 
-export default  AccessController
+module.exports = AccessController

@@ -1,7 +1,7 @@
 'use strict'
 
 import inherits from "../inherits/index.js";
-import readableStream from "../readable-stream/src/browser.js";
+import readableStream from "../readable-stream/dist/index.js";
 const {Readable} = readableStream
 let module = {}
 module.exports = {}

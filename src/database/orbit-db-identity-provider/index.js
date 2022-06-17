@@ -1,4 +1,4 @@
 'use strict'
-import IdentityProvider from "./src/identities.js";
+const IdentityProvider = require('./src/identities')
 
-export default  IdentityProvider
+module.exports = IdentityProvider

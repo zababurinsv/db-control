@@ -1,6 +1,6 @@
 'use strict'
 
-import Store from "../../orbit-db-store/src/Store.js";
+import Store from "../../orbit-db-store/dist/Store.js";
 import KeyValueIndex from "./KeyValueIndex.js";
 
 class KeyValueStore extends Store {

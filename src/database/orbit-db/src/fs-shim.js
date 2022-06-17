@@ -4,7 +4,7 @@ const isElectron = () => {
   if (typeof window !== 'undefined' && typeof window.process === 'object') {
     return true
   }
-// @ts-ignore
+
   if (typeof process !== 'undefined' && typeof process.versions === 'object' && !!process.versions.electron) {
     return true
   }
@@ -12,6 +12,6 @@ const isElectron = () => {
   return false
 }
 
-const fs = null
+const fs = (!isElectron() && (typeof window === 'object' || typeof self === 'object')) ? null : eval('require("fs")')
 
-export default  fs
+module.exports = fs

@@ -1,6 +1,6 @@
 'use strict'
-import path from "../../path/index.js";
-import { CID } from '../../multiformats/esm/src/cid.js'
+const path = require('path')
+const CID = require('cids')
 
 const notEmpty = e => e !== '' && e !== ' '
 
@@ -49,7 +49,7 @@ class OrbitDBAddress {
 
   static parse (address) {
     if (!address) { throw new Error(`Not a valid OrbitDB address: ${address}`) }
-
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!! address !!!!!!!!!!!!!!!!!!!!!!!!!!!!', address)
     if (!OrbitDBAddress.isValid(address)) { throw new Error(`Not a valid OrbitDB address: ${address}`) }
 
     address = address.toString().replace(/\\/g, '/')
@@ -67,4 +67,4 @@ class OrbitDBAddress {
   }
 }
 
-export default  OrbitDBAddress
+module.exports = OrbitDBAddress

@@ -1,14 +1,12 @@
 'use strict'
-import io from "../../orbit-db-io/index.js";
-import { Buffer } from '../../safe-buffer/index.js';
-import AccessController from "./access-controller-interface.js";
-
+const io = require('orbit-db-io')
+const Buffer = require('safe-buffer/').Buffer
+const AccessController = require('./access-controller-interface')
 const type = 'legacy-ipfs'
 
 class LegacyIPFSAccessController extends AccessController {
   constructor (ipfs, options) {
     super()
-    console.log('LegacyIPFSAccessController', options)
     this._ipfs = ipfs
     this._write = Array.from(options.write || [])
   }
@@ -45,11 +43,10 @@ class LegacyIPFSAccessController extends AccessController {
   }
 
   async save (options) {
-    console.log('######### save ipfs ##########Buffer###', JSON.stringify(access, null, 2))
     let cid
     const access = { admin: [], write: this.write, read: [] }
     try {
-      cid = await io.write(this._ipfs, 'raw', Buffer.from(JSON.stringify(access, null, 2)), { format: 'dag-pb' , pin: true})
+      cid = await io.write(this._ipfs, 'raw', Buffer.from(JSON.stringify(access, null, 2)), { format: 'dag-pb' })
     } catch (e) {
       console.log('LegacyIPFSAccessController.save ERROR:', e)
     }
@@ -63,4 +60,4 @@ class LegacyIPFSAccessController extends AccessController {
   }
 }
 
-export default  LegacyIPFSAccessController
+module.exports = LegacyIPFSAccessController

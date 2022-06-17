@@ -1,15 +1,12 @@
 'use strict'
-// @ts-ignore
-import pMapSeries from "../../p-map-series/index.js";
 
-import AccessController from "./access-controller-interface.js";
-
-import ensureAddress from "./utils/ensure-ac-address.js";
+const pMapSeries = require('p-map-series')
+const AccessController = require('./access-controller-interface')
+const ensureAddress = require('./utils/ensure-ac-address')
 
 const type = 'orbitdb'
 
 class OrbitDBAccessController extends AccessController {
-  // @ts-ignore
   constructor (orbitdb, options) {
     super()
     this._orbitdb = orbitdb
@@ -24,7 +21,7 @@ class OrbitDBAccessController extends AccessController {
   get address () {
     return this._db.address
   }
-  // @ts-ignore
+
   // Return true if entry is allowed to be added to the database
   async canAppend (entry, identityProvider) {
     // Write keys and admins keys are allowed
@@ -40,10 +37,9 @@ class OrbitDBAccessController extends AccessController {
   }
 
   get capabilities () {
-    console.log('~~~~~~~~~~~ capabilities ~~~~~~~~~~~~')
     if (this._db) {
       const capabilities = this._db.index
-      // @ts-ignore
+
       const toSet = (e) => {
         const key = e[0]
         capabilities[key] = new Set([...(capabilities[key] || []), ...e[1]])
@@ -62,7 +58,7 @@ class OrbitDBAccessController extends AccessController {
     }
     return {}
   }
-  // @ts-ignore
+
   get (capability) {
     return this.capabilities[capability] || new Set([])
   }
@@ -70,7 +66,7 @@ class OrbitDBAccessController extends AccessController {
   async close () {
     await this._db.close()
   }
-  // @ts-ignore
+
   async load (address) {
     if (this._db) { await this._db.close() }
 
@@ -90,20 +86,20 @@ class OrbitDBAccessController extends AccessController {
 
     await this._db.load()
   }
-  // @ts-ignore
+
   async save () {
     // return the manifest data
     return {
       address: this._db.address.toString()
     }
   }
-  // @ts-ignore
+
   async grant (capability, key) {
     // Merge current keys with the new key
     const capabilities = new Set([...(this._db.get(capability) || []), ...[key]])
     await this._db.put(capability, Array.from(capabilities.values()))
   }
-  // @ts-ignore
+
   async revoke (capability, key) {
     const capabilities = new Set(this._db.get(capability) || [])
     capabilities.delete(key)
@@ -116,20 +112,16 @@ class OrbitDBAccessController extends AccessController {
 
   /* Private methods */
   _onUpdate () {
-    console.log('~~~~~~~~~~~~~~~_onUpdate~~~~~~~~')
     this.emit('updated')
   }
 
   /* Factory */
-  // @ts-ignore
   static async create (orbitdb, options = {}) {
     const ac = new OrbitDBAccessController(orbitdb, options)
-    // @ts-ignore
     await ac.load(options.address || options.name || 'default-access-controller')
-    // @ts-ignore
+
     // Add write access from options
     if (options.write && !options.address) {
-      // @ts-ignore
       await pMapSeries(options.write, async (e) => ac.grant('write', e))
     }
 
@@ -137,4 +129,4 @@ class OrbitDBAccessController extends AccessController {
   }
 }
 
-export default  OrbitDBAccessController
+module.exports = OrbitDBAccessController

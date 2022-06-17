@@ -1,10 +1,11 @@
 'use strict'
-import Identity from "./identity.js";
-import IdentityProvider from "./identity-provider-interface.js";
-import OrbitDBIdentityProvider from "./orbit-db-identity-provider.js";
-import Keystore from "../../orbit-db-keystore/src/keystore.js";
-import LRU from "../../lru/index.js";
-import path from "../../path/index.js";
+const Identity = require('./identity')
+const IdentityProvider = require('./identity-provider-interface.js')
+const OrbitDBIdentityProvider = require('./orbit-db-identity-provider')
+const Keystore = require('orbit-db-keystore')
+
+const LRU = require('lru')
+const path = require('path')
 
 const defaultType = 'orbitdb'
 const identityKeysPath = path.join('./orbitdb', 'identity', 'identitykeys')
@@ -152,4 +153,4 @@ class Identities {
   }
 }
 
-export default  Identities
+module.exports = Identities

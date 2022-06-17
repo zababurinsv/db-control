@@ -1,3 +1,2 @@
-import AccessControllers from "./src/access-controllers.js";
-
-export default AccessControllers
+const AccessControllers = require('./src/access-controllers')
+module.exports = AccessControllers

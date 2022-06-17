@@ -26,19 +26,20 @@
     <meta name="msapplication-TileColor" content="#FFFFFF">
 </head>
 <noscript>You need to enable JavaScript to run this app.</noscript>
-<body>
-<div id="root"></div>
-</body>
+<body><div id="root"></div></body>
 <template id="main__data_files_fs">
     <option class="main__data_files_fs"></option>
 </template>
 <script type="module">
-    import IPFS from './ipfs/index.mjs'
-    import OrbitDB from '/orbit-db/src/OrbitDB.js'
-    import index from '/modules/index.mjs'
-    index({
-        IPFS: IPFS,
-        OrbitDB: OrbitDB
-    })
+    import forge from '/node-forge/dist/forge.all.esm.js'
+    console.log('ddddddddddd', forge)
+    // import IPFS from '/ipfs/index.mjs'
+    // import OrbitDB from '/orbit-db/src/OrbitDB.js'
+    // import index from '/modules/index.mjs'
+    // console.log('================', IPFS)
+    // index({
+    //     IPFS: IPFS,
+    //     OrbitDB: OrbitDB
+    // })
 </script>
 </html>

@@ -1,11 +1,11 @@
 'use strict';
 
 import { EventEmitter } from "../events/index.js";
-import util from '../util/util.js'
+import util from '../util/dist/index.js'
 import process from '../process/index.js'
 // const fs = require('fs');
 const format = util.format;
-let isNodejs = process.version ? true : false;
+let isNodejs = false;
 
 const LogLevels = {
     'DEBUG': 'DEBUG',
