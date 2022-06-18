@@ -1,0 +1,275 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 2;
+}
+
+header {
+    position: fixed;
+}
+
+section.white {
+    background-color: white;
+    color: black;
+    position: relative;
+    z-index: 3;
+}
+
+section.white .container {
+    padding-top: 4rem;
+    padding-bottom: 3rem;
+}
+
+section.grey {
+    background-color: #efefef;
+    color: black;
+    position: relative;
+    z-index: 3;
+}
+
+section.grey .container {
+    padding-top: 9rem;
+    padding-bottom: 8rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+section.color {
+    color: white;
+    position: relative;
+    z-index: 2;
+}
+
+section.color .container {
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+section .wave {
+    overflow: hidden;
+    position: relative;
+    z-index: 4;
+    left: 0;
+    width: 100vw;
+    line-height: 0;
+    direction: ltr;
+    margin-bottom: -50px;
+}
+
+section .wave-bottom {
+    transform: rotate(180deg);
+    margin-bottom: -1px;
+}
+
+section .wave svg {
+    height: 50px;
+    display: block;
+    width: -webkit-calc(100% + 1.3px);
+    width: calc(100% + 1.3px);
+    position: relative;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+section .wave .wave-fill {
+    fill: white;
+}
+
+.title {
+    font-weight: 200;
+    color: inherit;
+}
+
+.subtitle {
+    font-weight: 400;
+    color: inherit;
+}
+
+.subtitle strong {
+    color: inherit;
+}
+
+strong {
+    font-weight: 500;
+}
+
+.button {
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.16);
+    background-color: #1569ae;
+    color: white;
+    transition: 0.5s all;
+    font-weight: 500;
+    border: none;
+}
+
+.button:hover {
+    color: white;
+    background-color: #154d80;
+    box-shadow: 0px 20px 30px -8px rgba(0, 0, 0, 0.2);
+}
+
+.button.is-inverted {
+    box-shadow: 0px 10px 30px -8px rgba(0, 0, 0, 0.16);
+    background-color: white;
+    color: #154d80;
+    transition: 0.5s all;
+    font-weight: 500;
+    border: 2px solid white;
+}
+
+.button.is-inverted:hover {
+    box-shadow: 0px 20px 30px -8px rgba(0, 0, 0, 0.2);
+    background-color: transparent;
+    color: white;
+}
+
+section .button {
+    margin-top: 2rem;
+}
+
+figure.image .is-overlay .button {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgba(0, 0, 0, .3);
+    border-radius: 0;
+    border: none;
+    color: white;
+}
+
+figure.image .is-overlay .button:hover {
+    background-color: rgba(0, 0, 0, .15);
+}
+
+figure.image .is-overlay .button .icon {
+    width: auto;
+    height: auto;
+}
+
+.background-overlay {
+    background-color: transparent;
+    background-image: linear-gradient(260deg, #1569ae 0%, #fdd247 100%);
+    opacity: 0.4;
+    transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+#menu {
+    background-color: rgba(255, 255, 255, .5);
+}
+
+#menu .navbar-item img {
+    max-height: 100%;
+    max-width: 60vw;
+}
+
+#top .container {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+#top h1.title {
+    font-size: 3.5rem;
+}
+
+#top h2.subtitle {
+    font-size: 2rem;
+}
+
+#try {
+    background-image: url("../img/top_video.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#how figure {
+    max-width: 800px;
+}
+
+#how .background-overlay {
+    opacity: 0.8;
+}
+
+#contact{
+    padding-bottom: 0;
+}
+
+#contact .social.buttons .button {
+    border-radius: 1000px;
+}
+
+#contact .social.buttons {
+    width: 100%;
+    justify-content: center;
+    border-top: 1px solid #d2d2d2;
+    margin-top: 2rem;
+}
+
+#contact .columns {
+    margin-top: 3rem;
+}
+
+.modal-content{
+    max-width: 80vw;
+    width: 900px;
+}
+
+.modal-content iframe{
+    width: 100% !important;
+    height: 600px;
+    max-height: 50vw;
+}
+
+@media screen and (max-width: 769px) {
+    #top .image img{
+        max-width: 500px;
+    }
+
+    section.white .columns {
+        flex-direction: column-reverse;
+        display: flex;
+    }
+
+    section .wave svg{
+        height: 25px;
+    }
+
+    #contact .columns{
+        align-items: stretch;
+    }
+
+    #contact .column.has-text-left > div{
+        border-top: 1px solid #d2d2d2;
+        padding-top: 2rem;
+        padding-bottom: 1rem;
+        margin-top: 1rem;
+    }
+    #contact .column.has-text-left > div.social.buttons{
+        padding-top: 1rem;
+    }
+}
+
+
+@media screen and (max-width: 426px) {
+    section .wave svg{
+        height: 15px;
+    }
+
+    #top h1.title{
+        font-size: 2.5rem;
+    }
+
+    .title.is-size-1{
+        font-size: 2.5rem !important;
+    }
+}

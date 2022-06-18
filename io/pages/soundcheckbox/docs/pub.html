@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<!--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125695573-1"></script>-->
+<!--    <script>-->
+<!--        window.dataLayer = window.dataLayer || [];-->
+<!--        function gtag() { dataLayer.push(arguments); }-->
+<!--        gtag('js', new Date());-->
+<!---->
+<!--        gtag('config', 'UA-125695573-1');-->
+<!--    </script>-->
+    <title>SoundCheckBox.com - Set Up Your Show</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<!--    <link href="../interface/apple-touch-icon.png" rel="apple-touch-icon">-->
+<!--    <link href="../interface/favicon-32x32.png" rel="icon" type="image/png">-->
+<!--    <link href="../interface/favicon-16x16.png" rel="icon" type="image/png">-->
+    <link rel="stylesheet" href="./assets/css/pub/my_project.css" type="text/css">
+    <link href="./assets/css/pub/media.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli|Quicksand" rel="stylesheet">
+<!--    <script type="text/javascript" src="../../dist/b4w.js"></script>-->
+</head>
+
+<body>
+    <div id="title-page" class="hidden">
+        <div id="title-page-bandname-div"><h1 id="title-page-bandname"></h1></div>
+        <img id="title-page-logo" src="" width="200px" height="200px" />
+        <div id="title-page-rider-title-div"><h2 id="title-page-title"></h2></div>
+        <div id="title-page-rider-link"></div>
+        <div id="title-page-contacts"><span id="title-page-contact"></span><br /><span id="title-page-phone"></span><br /><span id="title-page-email"></span></div>
+        <div id="title-page-created">Created using SounCheckBox.com at <span id="title-page-date"></span></div>
+    </div>
+    <div id="main_canvas_container"></div>
+    <div id="head">
+        <a href="http://lp.soundcheckbox.com"><img class="logo" src="./assets/interface/SCB-gray.png"></a>
+        <div id="toggle_controls"></div>
+        <div id="controls-container"></div>
+        <div id="lists">
+            <img src="./assets/interface/showannot.png" width="14px"><span id="rider-text-list-header" class="active">Rider</span>
+            <img src="./assets/interface/input-10.png"><span id="input-list-header">Input list</span>
+            <img src="./assets/interface/output-10.png"><span id="output-list-header">Output list</span>
+            <img src="./assets/interface/gear-10.png"><span id="gear-list-header">Gear list</span>
+        </div>
+    </div>
+
+    <div class="hidden" id="rider-text"></div>
+    <div class="hidden" id="input-list-container">
+        <h2>Input List</h2>
+    </div>
+    <div class="hidden" id="output-list-container">
+        <h2>Output List</h2>
+    </div>
+    <div class="hidden" id="gear-list-container">
+        <h2>Gear List</h2>
+    </div>
+    <div class="" id="rider-text-list-container">
+        <h2></h2>
+    </div>
+    <div class="footer"></div>
+    <div id="waiticon"></div>
+</body>
+<script type="module">
+        import pub from './pub.mjs';
+        console.log('======== pub ========', pub)
+</script>
+</html>

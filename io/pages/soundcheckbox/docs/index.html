@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>SoundCheckBox | Set Up Your Show</title>
+    <link rel="shortcut icon" href="data:image/png;base64, AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbbv+DGW3/mRlt/5kZbf+ZGq6/hIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGa3/ohkt/7/Zbj//2S3/v9lt/6WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGm5/iRlt/74Zbj//2W4//9luP//Zbf++mi4/i4gIPciGhr24hsb9uwbG/bsGhr24CEh9xoAAAAAAAAAAAAAAABnuP5mZLf+/2W4//9luP//Zbj//2S3/v9muP5yGBj2rhMT9v8TE/b/ExP2/xMT9f8YGPWkAAAAAAAAAAAAAAAAb7z/BGW3/tZluP//Zbj//2W4//9lt/7gJzH3ShMT9f8TE/b/ExP2/xMT9v8TE/b/ExP1/CAg9joAAAAAAAAAAAAAAABmuP5GZLf+6GS3/uhkt/7oZbf+UhgY9YQSEvX/ExP2/xMT9v8TE/b/ExP2/xIS9f8aGvZ8AAAAAD4++gQgIPZ6IiL2hiIi9oYgIPZ8KCj5BAAAAAAtLfgUFBT17BMT9v8TE/b/ExP2/xMT9v8VFfXoLCz4DgAAAAAaGvZqEhL1/xMT9v8TE/b/EhL1/xsb9nIAAAAAAAAAABwc9m4SEvX/ExP2/xMT9v8SEvX/HR32ZAAAAAAnJ/gSFRX16hMT9v8TE/b/ExP2/xMT9v8UFPXuJyf4Fp2xlAKNnqUYLC/mfhYW83ATE/VuFxf1aDc3+gIAAAAAGBj1fhIS9f8TE/b/ExP2/xMT9v8TE/b/ExP1/xkZ9YaGn3yIhZ57/4Wee/+Gn3yKAAAAAAAAAAAAAAAAAAAAACMj9zYTE/X8ExP2/xMT9v8TE/b/ExP2/xMT9f9JUshihZ57+IaffP+Gn3z/hZ579oigfiYAAAAAAAAAAAAAAAAAAAAAGBj1oBIS9f8TE/b/ExP2/xMT9f8YGPWmiKB+PIWee/+Gn3z/hp98/4Wee/+HoH06AAAAAAAAAAAAAAAAAAAAACUl9xgVFfXOExP11BMT9dQUFPXQJib3HgAAAACGn3ymhp98/4affP+Gn3ymAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiKB+EIihf0CIoX9AiKB+EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AADg/wAA4MMAAOCBAADggQAA8QEAAOeBAADDwwAAgf8AAIAPAACBDwAAgQ8AAMMPAAD//wAA//8AAA==" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no">
+    <style type="text/css">svg:not(:root).svg-inline--fa{overflow:visible}.svg-inline--fa{display:inline-block;font-size:inherit;height:1em;overflow:visible;vertical-align:-.125em}.svg-inline--fa.fa-lg{vertical-align:-.225em}.svg-inline--fa.fa-w-1{width:.0625em}.svg-inline--fa.fa-w-2{width:.125em}.svg-inline--fa.fa-w-3{width:.1875em}.svg-inline--fa.fa-w-4{width:.25em}.svg-inline--fa.fa-w-5{width:.3125em}.svg-inline--fa.fa-w-6{width:.375em}.svg-inline--fa.fa-w-7{width:.4375em}.svg-inline--fa.fa-w-8{width:.5em}.svg-inline--fa.fa-w-9{width:.5625em}.svg-inline--fa.fa-w-10{width:.625em}.svg-inline--fa.fa-w-11{width:.6875em}.svg-inline--fa.fa-w-12{width:.75em}.svg-inline--fa.fa-w-13{width:.8125em}.svg-inline--fa.fa-w-14{width:.875em}.svg-inline--fa.fa-w-15{width:.9375em}.svg-inline--fa.fa-w-16{width:1em}.svg-inline--fa.fa-w-17{width:1.0625em}.svg-inline--fa.fa-w-18{width:1.125em}.svg-inline--fa.fa-w-19{width:1.1875em}.svg-inline--fa.fa-w-20{width:1.25em}.svg-inline--fa.fa-pull-left{margin-right:.3em;width:auto}.svg-inline--fa.fa-pull-right{margin-left:.3em;width:auto}.svg-inline--fa.fa-border{height:1.5em}.svg-inline--fa.fa-li{width:2em}.svg-inline--fa.fa-fw{width:1.25em}.fa-layers svg.svg-inline--fa{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.fa-layers{display:inline-block;height:1em;position:relative;text-align:center;vertical-align:-.125em;width:1em}.fa-layers svg.svg-inline--fa{-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter,.fa-layers-text{display:inline-block;position:absolute;text-align:center}.fa-layers-text{left:50%;top:50%;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%);-webkit-transform-origin:center center;transform-origin:center center}.fa-layers-counter{background-color:#ff253a;border-radius:1em;-webkit-box-sizing:border-box;box-sizing:border-box;color:#fff;height:1.5em;line-height:1;max-width:5em;min-width:1.5em;overflow:hidden;padding:.25em;right:0;text-overflow:ellipsis;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-bottom-right{bottom:0;right:0;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom right;transform-origin:bottom right}.fa-layers-bottom-left{bottom:0;left:0;right:auto;top:auto;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:bottom left;transform-origin:bottom left}.fa-layers-top-right{right:0;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top right;transform-origin:top right}.fa-layers-top-left{left:0;right:auto;top:0;-webkit-transform:scale(.25);transform:scale(.25);-webkit-transform-origin:top left;transform-origin:top left}.fa-lg{font-size:1.33333em;line-height:.75em;vertical-align:-.0667em}.fa-xs{font-size:.75em}.fa-sm{font-size:.875em}.fa-1x{font-size:1em}.fa-2x{font-size:2em}.fa-3x{font-size:3em}.fa-4x{font-size:4em}.fa-5x{font-size:5em}.fa-6x{font-size:6em}.fa-7x{font-size:7em}.fa-8x{font-size:8em}.fa-9x{font-size:9em}.fa-10x{font-size:10em}.fa-fw{text-align:center;width:1.25em}.fa-ul{list-style-type:none;margin-left:2.5em;padding-left:0}.fa-ul>li{position:relative}.fa-li{left:-2em;position:absolute;text-align:center;width:2em;line-height:inherit}.fa-border{border:solid .08em #eee;border-radius:.1em;padding:.2em .25em .15em}.fa-pull-left{float:left}.fa-pull-right{float:right}.fa.fa-pull-left,.fab.fa-pull-left,.fal.fa-pull-left,.far.fa-pull-left,.fas.fa-pull-left{margin-right:.3em}.fa.fa-pull-right,.fab.fa-pull-right,.fal.fa-pull-right,.far.fa-pull-right,.fas.fa-pull-right{margin-left:.3em}.fa-spin{-webkit-animation:fa-spin 2s infinite linear;animation:fa-spin 2s infinite linear}.fa-pulse{-webkit-animation:fa-spin 1s infinite steps(8);animation:fa-spin 1s infinite steps(8)}@-webkit-keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes fa-spin{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}.fa-rotate-90{-webkit-transform:rotate(90deg);transform:rotate(90deg)}.fa-rotate-180{-webkit-transform:rotate(180deg);transform:rotate(180deg)}.fa-rotate-270{-webkit-transform:rotate(270deg);transform:rotate(270deg)}.fa-flip-horizontal{-webkit-transform:scale(-1,1);transform:scale(-1,1)}.fa-flip-vertical{-webkit-transform:scale(1,-1);transform:scale(1,-1)}.fa-flip-horizontal.fa-flip-vertical{-webkit-transform:scale(-1,-1);transform:scale(-1,-1)}:root .fa-flip-horizontal,:root .fa-flip-vertical,:root .fa-rotate-180,:root .fa-rotate-270,:root .fa-rotate-90{-webkit-filter:none;filter:none}.fa-stack{display:inline-block;height:2em;position:relative;width:2em}.fa-stack-1x,.fa-stack-2x{bottom:0;left:0;margin:auto;position:absolute;right:0;top:0}.svg-inline--fa.fa-stack-1x{height:1em;width:1em}.svg-inline--fa.fa-stack-2x{height:2em;width:2em}.fa-inverse{color:#fff}.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}</style><link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/main/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/main/main.css">
+    <link rel="stylesheet" href="./css/main/animate.min.css">
+    <!--    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">-->
+    <!--    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">-->
+    <!--    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/android-chrome-192x192.png">-->
+    <!--    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">-->
+    <!--    <link rel="manifest" href="/favicon/site.webmanifest">-->
+    <!--    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#1569ae">-->
+    <!--    <link rel="shortcut icon" href="/favicon/favicon.ico">-->
+    <!--    <meta name="msapplication-TileColor" content="#1569ae">-->
+    <!--    <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png">-->
+    <!--    <meta name="msapplication-config" content="/favicon/browserconfig.xml">-->
+    <!--    <meta name="theme-color" content="#1569ae">-->
+    <!--    <script type="text/javascript" async="" src="https://www.gstatic.com/recaptcha/releases/4rwLQsl5N_ccppoTAwwwMrEN/recaptcha__en.js" crossorigin="anonymous" integrity="sha384-o1nfdUm9cV7Sx6HxXDsnady1EGmCBTwza/JTA6OSowyOK+wq0YF0+F9jejHVacaR"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script defer="" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>-->
+    <script src="./js/main/smooth-scroll.polyfills.min.js"></script>
+    <script src="./js/main/smooth-parallax.min.js"></script>
+    <script src="./js/main/index.js"></script>
+
+    <!--    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-125695573-1"></script>-->
+    <!--    <script>-->
+    <!--        window.dataLayer = window.dataLayer || [];-->
+    <!--        function gtag(){dataLayer.push(arguments);}-->
+    <!--        gtag('js', new Date());-->
+    <!---->
+    <!--        gtag('config', 'UA-125695573-1');-->
+    <!--    </script>-->
+</head>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<body>
+<nav id="menu" class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a data-scroll="" class="navbar-item" href="#top">
+                <img src="./img/main/logo.png" width="220">
+            </a>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a data-scroll="" href="#try" class="navbar-item">
+                    Try
+                </a>
+                <a data-scroll="" href="#event_manager" class="navbar-item">
+                    For Event Manager
+                </a>
+                <a data-scroll="" href="#rent_company" class="navbar-item">
+                    For Rent Company
+                </a>
+                <a data-scroll="" href="#soundman" class="navbar-item">
+                    For Soundman
+                </a>
+                <a data-scroll="" href="#how" class="navbar-item">
+                    How it works
+                </a>
+                <a data-scroll="" href="#contact" class="navbar-item">
+                    Contacts
+                </a>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-medium is-rounded" href="/login.php">
+                            <strong>Login</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section id="top" class="white section">
+    <div class="container">
+        <div class="columns is-8 is-variable is-vcentered">
+            <div class="column is-two-fifths has-text-centered-mobile	">
+                <h1 class="title is-spaced">Set Up Your Show</h1>
+                <h3>Online service to get any gear you need for the show. <br>Create riders and find rent companies in one click</h3>
+                <a class="button is-medium is-rounded is-size-5" href="/login.php">
+                    Sign up for free
+                </a>
+            </div>
+            <div class="column is-three-fifths">
+                <figure class="image">
+                    <img src="./img/main/main.png">
+                </figure>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="try" class="section color is-paddingless">
+    <div class="background-overlay"></div>
+    <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="wave-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+            <path class="wave-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+            <path class="wave-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+        </svg>
+    </div>
+    <div class="container is-8 is-variable has-text-white has-text-centered">
+        <h2 class="title is-spaced is-size-1">Try It In Test Mode</h2>
+        <h3 class="subtitle">
+            For testing use
+            <br>login: <strong>test</strong> password: <strong>testtest</strong>
+        </h3>
+        <a class="button is-inverted is-medium is-rounded" href="/login.php">
+            Check demo&nbsp;&nbsp;
+            <span class="icon is-small">
+<svg class="svg-inline--fa fa-chevron-right fa-w-10" aria-hidden="true" data-prefix="fa" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"></path></svg><!-- <i class="fa fa-chevron-right"></i> -->
+</span>
+        </a>
+    </div>
+    <div class="wave-bottom wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="wave-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+            <path class="wave-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+            <path class="wave-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+        </svg>
+    </div>
+</section>
+<section id="event_manager" class="white section">
+    <div class="container">
+        <div class="columns is-8 is-variable is-vcentered">
+            <div class="column">
+                <figure class="image">
+                    <img src="./img/main/event_mng.png">
+                </figure>
+            </div>
+            <div class="column has-text-centered-mobile	">
+                <h2 class="title is-size-1 is-spaced">For Event Manager</h2>
+                <p>SoundCheckBOX is your new assistant.
+                    It shows what the guys of the band and the rentmen have agreed on, offers rent variants, displays credibility of a rental company and reviews its work at an event.
+                    <br><strong>• Managing a festival, a new celebrity’s tour, a corporate or a private happening?</strong>
+                    <br>SCB will provide you with all necessary equipment.
+                    Choose the best fits, watch the process of agreement, pay the cheque, deliver the show! SoundCheckBOX is to help you earn as much as possible!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="rent_company" class="grey is-paddingless section">
+    <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="wave-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+            <path class="wave-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+            <path class="wave-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+        </svg>
+    </div>
+    <div class="container">
+        <div class="columns is-8 is-variable is-vcentered">
+            <div class="column has-text-centered-mobile	">
+                <h2 class="title is-size-1 is-spaced">For Rent Company</h2>
+                <p>SoundCheckBOX is your new teetotal manager working through the holidays.
+                    Getting the rider you immediately see if your gear fits the band’s demand. You don’t have to compare charts and try to look up what you need in an endless novel surprisingly called «a rider».
+                    An incoming rider is immediately calculated according to your prices. The offer is created automatically — you only need to confirm the availability schedule of the storage you work with.
+                    <br><strong>• Short of any gear?</strong>
+                    <br>SoundCheckBOX will direct you where to rent!
+                    <br><strong>• A big storage? a large company? Your own software?</strong>
+                    We bring your soft together with our system.</p>
+            </div>
+            <div class="column">
+                <figure class="image">
+                    <img src="./img/main/rent_company.png">
+                </figure>
+            </div>
+        </div>
+    </div>
+    <div class="wave-bottom wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="wave-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+            <path class="wave-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+            <path class="wave-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+        </svg>
+    </div>
+</section>
+<section id="soundman" class="white section">
+    <div class="container">
+        <div class="columns is-8 is-variable is-vcentered">
+            <div class="column">
+                <figure class="image">
+                    <img src="./img/main/soundman.png">
+                </figure>
+            </div>
+            <div class="column has-text-centered-mobile	">
+                <h2 class="title is-size-1 is-spaced">For Soundman</h2>
+                <p>We came up with SoundCheckBOX to make a life easier: create a rider using a proven set-up.
+                    <br><strong>• Very specific musicians?</strong>
+                    <br>No problem, save the gear you need into your own presets to use them later.
+                    <br><strong>• Too many bands or shake-ups within them?</strong>
+                    <br>SoundCheckBOX will help you book what YOU need for every show.
+                    <br><strong>• Tired of doping out all those stumbling-blocks in gear replacement lists?</strong>
+                    <br>SCB offers you best fits out of the most suitable packages by rent companies!
+                    <br>We help you not to bother with charts and word processors — you’d better spend time with family and friends!
+                    <br>Placing and adjusting a rider with SoundCheckBOX is simple and easy!</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="how" class="section color is-paddingless">
+    <div class="background-overlay"></div>
+    <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="wave-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+            <path class="wave-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+            <path class="wave-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+        </svg>
+    </div>
+    <div class="container is-8 is-variable has-text-white has-text-centered">
+        <h2 class="title is-spaced is-size-1">About Sound Check And Box</h2>
+        <h3 class="subtitle">
+            HOW IT WORKS
+        </h3>
+        <figure id="video" class="image is-inline-block">
+            <img src="./img/main/top_video.jpg">
+            <div class="is-overlay">
+                <a class="button is-inverted">
+<span class="icon is-inline-block">
+<svg class="svg-inline--fa fa-play-circle fa-w-16 fa-10x" aria-hidden="true" data-prefix="far" data-icon="play-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M371.7 238l-176-107c-15.8-8.8-35.7 2.5-35.7 21v208c0 18.4 19.8 29.8 35.7 21l176-101c16.4-9.1 16.4-32.8 0-42zM504 256C504 119 393 8 256 8S8 119 8 256s111 248 248 248 248-111 248-248zm-448 0c0-110.5 89.5-200 200-200s200 89.5 200 200-89.5 200-200 200S56 366.5 56 256z"></path></svg><!-- <i class="far fa-play-circle fa-10x"></i> -->
+</span>
+                </a>
+            </div>
+        </figure>
+    </div>
+    <div class="wave-bottom wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none">
+            <path class="wave-fill" opacity="0.33" d="M473,67.3c-203.9,88.3-263.1-34-320.3,0C66,119.1,0,59.7,0,59.7V0h1000v59.7 c0,0-62.1,26.1-94.9,29.3c-32.8,3.3-62.8-12.3-75.8-22.1C806,49.6,745.3,8.7,694.9,4.7S492.4,59,473,67.3z"></path>
+            <path class="wave-fill" opacity="0.66" d="M734,67.3c-45.5,0-77.2-23.2-129.1-39.1c-28.6-8.7-150.3-10.1-254,39.1 s-91.7-34.4-149.2,0C115.7,118.3,0,39.8,0,39.8V0h1000v36.5c0,0-28.2-18.5-92.1-18.5C810.2,18.1,775.7,67.3,734,67.3z"></path>
+            <path class="wave-fill" d="M766.1,28.9c-200-57.5-266,65.5-395.1,19.5C242,1.8,242,5.4,184.8,20.6C128,35.8,132.3,44.9,89.9,52.5C28.6,63.7,0,0,0,0 h1000c0,0-9.9,40.9-83.6,48.1S829.6,47,766.1,28.9z"></path>
+        </svg>
+    </div>
+</section>
+<section id="contact" class="white section">
+    <div class="container has-text-centered">
+        <h2 class="title is-size-1 is-spaced">Сontacts us</h2>
+        <h3 class="subtitle is-size-5 is-spaced">Feel free to write and call us. We really love to communicate with our users.
+        </h3>
+        <div class="columns is-8 is-variable is-vcentered">
+            <div class="column has-text-left has-text-centered-mobile	">
+                <div>
+                    <p>+1 929 999 5778
+                        <br>info@soundcheckbox.com
+                        <br>
+                        <br>7 LEWIS CIR STE 152420
+                        <br>WILMINGTON, DE 19804
+                    </p>
+                </div>
+                <div class="social buttons">
+                    <a class="button is-medium" href="https://www.facebook.com/soundcheckbox">
+<span class="icon">
+<svg class="svg-inline--fa fa-facebook-f fa-w-9" aria-hidden="true" data-prefix="fab" data-icon="facebook-f" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" data-fa-i2svg=""><path fill="currentColor" d="M76.7 512V283H0v-91h76.7v-71.7C76.7 42.4 124.3 0 193.8 0c33.3 0 61.9 2.5 70.2 3.6V85h-48.2c-37.8 0-45.1 18-45.1 44.3V192H256l-11.7 91h-73.6v229"></path></svg><!-- <i class="fab fa-facebook-f"></i> -->
+</span>
+                    </a>
+                    <a class="button is-medium" href="https://twitter.com/soundcheckbox">
+<span class="icon">
+<svg class="svg-inline--fa fa-twitter fa-w-16" aria-hidden="true" data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path></svg><!-- <i class="fab fa-twitter"></i> -->
+</span>
+                    </a>
+                    <a class="button is-medium" href="https://www.youtube.com/channel/UC2lt1AgTDKS1LOlA3poSUrA">
+<span class="icon">
+<svg class="svg-inline--fa fa-youtube fa-w-18" aria-hidden="true" data-prefix="fab" data-icon="youtube" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path></svg><!-- <i class="fab fa-youtube"></i> -->
+</span>
+                    </a>
+                </div>
+            </div>
+            <div class="column">
+                <form id="form" action="contact_form.php" method="post">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" required="" name="name" type="text" placeholder="Your name*">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" required="" name="email" type="text" placeholder="Your email*">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <textarea class="textarea" required="" name="message" placeholder="Your message*" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="control">
+                            <div><div class="grecaptcha-badge" data-style="bottomright" style="width: 256px; height: 60px; display: block; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px; border-radius: 2px; overflow: hidden;"><div class="grecaptcha-logo"><iframe title="reCAPTCHA" src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LePYZ8UAAAAAOyRKdNzK-xMWkelpt-eGTpf88i7&amp;co=aHR0cHM6Ly9zb3VuZGNoZWNrYm94LmNvbTo0NDM.&amp;hl=en&amp;v=4rwLQsl5N_ccppoTAwwwMrEN&amp;size=invisible&amp;cb=c2dpemqweey4" width="256" height="60" role="presentation" name="a-xuacaqjec8eb" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><div class="grecaptcha-error"></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div><iframe style="display: none;"></iframe></div><button class="button is-rounded g-recaptcha" data-callback="onSubmit" data-sitekey="6LePYZ8UAAAAAOyRKdNzK-xMWkelpt-eGTpf88i7">
+                            Send message
+                        </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal" id="modal">
+    <div class="modal-background" id="modal-background"></div>
+    <div class="modal-content">
+        <iframe width="800" height="400" src="https://www.youtube.com/embed/Wn8-INwf-w0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+    </div>
+    <button id="modal-close" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<style>
+    .background-overlay {
+        background-color: transparent;
+        background-image: linear-gradient(260deg, #1569ae 0%, #00BCD4 100%);
+        opacity: 0.4;
+        transition: background 0.3s, border-radius 0.3s, opacity 0.3s;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        position: absolute;
+    }
+
+    .button {
+        background-color: #00BCD4;
+    }
+</style>
+<!--<script src="https://www.google.com/recaptcha/api.js?hl=en" async="" defer=""></script>-->
+<script>
+    // function onSubmit(token) {
+    //     if (document.getElementById("form").checkValidity()) {
+    //         alert('Thanks for your message!');
+    //         document.getElementById("form").submit();
+    //     } else {
+    //         alert('Please fill out all required fields.');
+    //         grecaptcha.reset();
+    //     }
+    // }
+</script>
+
+
+</body>
+<script type="module">
+    import asengine from './asengine.js'
+    import rider from './riders.mjs'
+    console.log('========== rider ==========', rider, asengine, b4w)
+</script>
+</html>

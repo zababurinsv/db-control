@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NewKind Soundcheckbox</title>
+    <link rel="shortcut icon" href="data:image/png;base64, AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbbv+DGW3/mRlt/5kZbf+ZGq6/hIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGa3/ohkt/7/Zbj//2S3/v9lt/6WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGm5/iRlt/74Zbj//2W4//9luP//Zbf++mi4/i4gIPciGhr24hsb9uwbG/bsGhr24CEh9xoAAAAAAAAAAAAAAABnuP5mZLf+/2W4//9luP//Zbj//2S3/v9muP5yGBj2rhMT9v8TE/b/ExP2/xMT9f8YGPWkAAAAAAAAAAAAAAAAb7z/BGW3/tZluP//Zbj//2W4//9lt/7gJzH3ShMT9f8TE/b/ExP2/xMT9v8TE/b/ExP1/CAg9joAAAAAAAAAAAAAAABmuP5GZLf+6GS3/uhkt/7oZbf+UhgY9YQSEvX/ExP2/xMT9v8TE/b/ExP2/xIS9f8aGvZ8AAAAAD4++gQgIPZ6IiL2hiIi9oYgIPZ8KCj5BAAAAAAtLfgUFBT17BMT9v8TE/b/ExP2/xMT9v8VFfXoLCz4DgAAAAAaGvZqEhL1/xMT9v8TE/b/EhL1/xsb9nIAAAAAAAAAABwc9m4SEvX/ExP2/xMT9v8SEvX/HR32ZAAAAAAnJ/gSFRX16hMT9v8TE/b/ExP2/xMT9v8UFPXuJyf4Fp2xlAKNnqUYLC/mfhYW83ATE/VuFxf1aDc3+gIAAAAAGBj1fhIS9f8TE/b/ExP2/xMT9v8TE/b/ExP1/xkZ9YaGn3yIhZ57/4Wee/+Gn3yKAAAAAAAAAAAAAAAAAAAAACMj9zYTE/X8ExP2/xMT9v8TE/b/ExP2/xMT9f9JUshihZ57+IaffP+Gn3z/hZ579oigfiYAAAAAAAAAAAAAAAAAAAAAGBj1oBIS9f8TE/b/ExP2/xMT9f8YGPWmiKB+PIWee/+Gn3z/hp98/4Wee/+HoH06AAAAAAAAAAAAAAAAAAAAACUl9xgVFfXOExP11BMT9dQUFPXQJib3HgAAAACGn3ymhp98/4affP+Gn3ymAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiKB+EIihf0CIoX9AiKB+EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AADg/wAA4MMAAOCBAADggQAA8QEAAOeBAADDwwAAgf8AAIAPAACBDwAAgQ8AAMMPAAD//wAA//8AAA==" type="image/png">
+    <link rel="manifest" crossorigin="use-credentials" href="./manifest.json"/>
+    <link rel="icon" type="image/png" href="./manifest/newkind-icon-128-any.png" sizes="128x128" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./favicon.ico" type="image/png">
+    <meta name="description" content="Put your description here.">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta property="og:site_name" content="Elite"/>
+    <meta property="og:locale" content="ru_RU"/>
+    <meta property="og:type" content="contract"/>
+    <meta property="og:title" content="Elite"/>
+    <meta property="og:description" content="markdown"/>
+    <meta property="og:url" content="https://zababurinsv.github.io/newkind-service/"/>
+    <meta property="og:image" content="https://i.imgur.com/SfrC1my.png"/>
+    <meta property="og:image:width" content="537"/>
+    <meta property="og:image:height" content="240"/>
+    <meta name="theme-color" content="white"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="New Kind">
+    <meta name="msapplication-TileImage" content="data:image/png;base64, AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbbv+DGW3/mRlt/5kZbf+ZGq6/hIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGa3/ohkt/7/Zbj//2S3/v9lt/6WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGm5/iRlt/74Zbj//2W4//9luP//Zbf++mi4/i4gIPciGhr24hsb9uwbG/bsGhr24CEh9xoAAAAAAAAAAAAAAABnuP5mZLf+/2W4//9luP//Zbj//2S3/v9muP5yGBj2rhMT9v8TE/b/ExP2/xMT9f8YGPWkAAAAAAAAAAAAAAAAb7z/BGW3/tZluP//Zbj//2W4//9lt/7gJzH3ShMT9f8TE/b/ExP2/xMT9v8TE/b/ExP1/CAg9joAAAAAAAAAAAAAAABmuP5GZLf+6GS3/uhkt/7oZbf+UhgY9YQSEvX/ExP2/xMT9v8TE/b/ExP2/xIS9f8aGvZ8AAAAAD4++gQgIPZ6IiL2hiIi9oYgIPZ8KCj5BAAAAAAtLfgUFBT17BMT9v8TE/b/ExP2/xMT9v8VFfXoLCz4DgAAAAAaGvZqEhL1/xMT9v8TE/b/EhL1/xsb9nIAAAAAAAAAABwc9m4SEvX/ExP2/xMT9v8SEvX/HR32ZAAAAAAnJ/gSFRX16hMT9v8TE/b/ExP2/xMT9v8UFPXuJyf4Fp2xlAKNnqUYLC/mfhYW83ATE/VuFxf1aDc3+gIAAAAAGBj1fhIS9f8TE/b/ExP2/xMT9v8TE/b/ExP1/xkZ9YaGn3yIhZ57/4Wee/+Gn3yKAAAAAAAAAAAAAAAAAAAAACMj9zYTE/X8ExP2/xMT9v8TE/b/ExP2/xMT9f9JUshihZ57+IaffP+Gn3z/hZ579oigfiYAAAAAAAAAAAAAAAAAAAAAGBj1oBIS9f8TE/b/ExP2/xMT9f8YGPWmiKB+PIWee/+Gn3z/hp98/4Wee/+HoH06AAAAAAAAAAAAAAAAAAAAACUl9xgVFfXOExP11BMT9dQUFPXQJib3HgAAAACGn3ymhp98/4affP+Gn3ymAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiKB+EIihf0CIoX9AiKB+EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AADg/wAA4MMAAOCBAADggQAA8QEAAOeBAADDwwAAgf8AAIAPAACBDwAAgQ8AAMMPAAD//wAA//8AAA==">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+<!--    <script src="./assets/js/bootstrap.min.js"></script>-->
+<!--    <script src="ASLibrary/js/js-bootstrap.php"></script>-->
+<!--    <script src="./asengine.js"></script>-->
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
+</head>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<body>
+
+
+<div class="modal fade" id="modal-publish-link" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="modal-name">
+                </h4>
+            </div>
+            <div class="modal-body" id="details-body">
+                <dl class="dl-horizontal">
+                    <dt title="URL">URL</dt>
+                    <dd id="modal-url"></dd>
+                </dl>
+            </div>
+            <div align="center" id="ajax-loading">
+                <i class="fa fa-2x fa-circle-o-notch fa-spin"></i>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                    Ok </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-new-rider" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal no-submit" id="form-details" action="/build/my_project.php" method="GET">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body" id="details-body-new">
+                    <fieldset>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="rider_name">
+                                Name of rider
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="rider_name" name="rider_name" type="text" value="New Rider" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="rider_title">
+                                Public title of rider
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="rider_title" name="rider_title" type="text" value="New Official Rider" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="address">
+                                Band name
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="band_name" name="band_name" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="address">
+                                Band logo URL
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="band_logo" name="band_logo" type="text" value="&#039;/img/ridertext/Bel_KIRP.jpg&#039;" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="phone">
+                                Phone
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="phone" name="phone" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="phone">
+                                Contact
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="contact" name="contact" type="text" value=" " class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="controls col-sm-4">
+                                <button id="update_details" name="update_details" class="btn btn-primary">Create New Rider</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-publish-rider" style="display: flex;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal no-submit" id="form-publish">
+                <input type="hidden" name="rider_id" id="publish_rider_id" />
+                <input type="hidden" name="rider_name" id="publish_rider_name" />
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body" id="publish-rider-body">
+                    <fieldset>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_title">
+                                Title
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_title" name="publish_title" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_name">
+                                Contact name
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_name" name="publish_name" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_phone">
+                                Contact phone
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_phone" name="publish_phone" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_email">
+                                Contact email
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_email" name="publish_email" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="controls col-sm-4">
+                                <button id="publish" name="publish" class="btn btn-primary" type="button" onclick="riders.publish(this);">Publish Rider</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="wrap">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <a class="brand navbar-brand" href="https://soundcheckbox.com"><img class="logo" src="./assets/interface/SCB-gray.png"></a>
+                </ul>
+                <div class="pull-right">
+                    <div class="header-flags-wrapper"></div>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Welcome, Zababurin_Sergei <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="profile.php">
+                                        <i class="fa fa-user"></i>
+                                        My Profile </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="logout.php" id="logout">
+                                        <i class="fa fa-sign-out"></i>
+                                        Logout </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 bs-docs-sidebar">
+                <ul class="nav nav-list bs-docs-sidenav">
+                    <li class="">
+                        <a href="index.php">
+                            <i class="fa fa-home"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Home </a>
+                    </li>
+                    <li class="active">
+                        <a href="riders.php">
+                            <i class="fa fa-headphones"></i>
+                            Soundman
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="riders.php" class="sub">
+                            <i class="fa fa-file-text"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            My Riders
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="sub">
+                            <i class="fa fa-download"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Inbox
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="sub">
+                            <i class="fa fa-upload"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Outbox
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="events.php">
+                            <i class="fa fa-star-o"></i>
+                            Event manager
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-truck"></i>
+                            Warehouse
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Show Calendar
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="profile.php">
+                            <i class="fa fa-user"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            My Profile </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 content">
+                <div id="new_rider_btn">
+                    <a class="btn btn-success" href="javascript:void(0);" onclick="riders.new();">
+                        <i class="fa fa-plus"></i>
+                        New Rider
+                    </a>
+                </div>
+                <div id="errormsg"></div>
+                <div class="riders">
+                    <table class="table table-striped riders-table" id="rider-list">
+                        <tr>
+                            <th colspan="5">Projects</th>
+                        </tr>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Created</th>
+                            <th>Changed</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <th colspan="5">Published riders</th>
+                        </tr>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Version name</th>
+                            <th>Last version number</th>
+                            <th>Published</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="push"></div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p>Copyright by &copy; <a href="http://lp.soundcheckbox.com">SoundCheckBox.com - Set Up Your Show</a> 2022</p>
+    </div>
+</footer>
+
+</body>
+<script type="module">
+    import asengine from './asengine.js'
+    import rider from './riders.mjs'
+    console.log('========== rider ==========', rider, asengine, b4w)
+</script>
+</html>

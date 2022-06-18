@@ -1,0 +1,332 @@
+<html lang="en"><head>
+
+<!--    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-125695573-1"></script>-->
+<!--    <script>-->
+<!--        window.dataLayer = window.dataLayer || [];-->
+<!--        function gtag(){dataLayer.push(arguments);}-->
+<!--        gtag('js', new Date());-->
+<!---->
+<!--        gtag('config', 'UA-125695573-1');-->
+<!--    </script>-->
+    <meta charset="utf-8">
+    <title>SoundCheckBox.com - Set Up Your Show</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./interface/riders/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="./interface/riders/favicon-32x32.png" rel="icon" type="image/png">
+    <link href="./interface/riders/favicon-16x16.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="./css/riders/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/riders/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/riders/style3.css" type="text/css" media="all">
+
+    <!--[if lt IE 9]>
+    <script src="./js/riders/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrap">
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <a class="brand navbar-brand" href="https://soundcheckbox.com"><img class="logo" src="./interface/riders/SCB-gray.png"></a>
+                </ul>
+                <div class="pull-right">
+                    <div class="header-flags-wrapper">
+                    </div>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Welcome, Zababurin_Sergei <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fa fa-user"></i>
+                                        My Profile </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="logout.html" id="logout">
+                                        <i class="fa fa-sign-out"></i>
+                                        Logout </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 bs-docs-sidebar">
+                <ul class="nav nav-list bs-docs-sidenav">
+                    <li class="">
+                        <a href="index.html">
+                            <i class="fa fa-home"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Home </a>
+                    </li>
+                    <li class="active">
+                        <a href="riders.html">
+                            <i class="fa fa-headphones"></i>
+                            Soundman
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="riders.html" class="sub">
+                            <i class="fa fa-file-text"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            My Riders
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="sub">
+                            <i class="fa fa-download"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Inbox
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#" class="sub">
+                            <i class="fa fa-upload"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Outbox
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="events.html">
+                            <i class="fa fa-star-o"></i>
+                            Event manager
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-truck"></i>
+                            Warehouse
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Show Calendar
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="profile.html">
+                            <i class="fa fa-user"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            My Profile </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 content">
+                <div id="new_rider_btn">
+                    <a class="btn btn-success" href="javascript:void(0);" onclick="riders.new();">
+                        <i class="fa fa-plus"></i>
+                        New Rider
+                    </a>
+                </div>
+                <div id="errormsg"></div>
+                <div class="riders">
+                    <table class="table table-striped riders-table" id="rider-list">
+                        <tbody><tr>
+                            <th colspan="5">Projects</th>
+                        </tr>
+                        </tbody><thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Created</th>
+                        <th>Changed</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                        <tbody><tr>
+                            <th colspan="5">Published riders</th>
+                        </tr>
+                        </tbody><thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Version name</th>
+                        <th>Last version number</th>
+                        <th>Published</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="push"></div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p>Copyright by © <a href="http://lp.soundcheckbox.com">SoundCheckBox.com - Set Up Your Show</a> 2022</p>
+    </div>
+</footer>
+<script src="./js/riders/jquery.min.js"></script>
+<script src="./js/riders/bootstrap.min.js"></script>
+<script src="./js/riders/js-bootstrap.php"></script>
+<script src="./js/riders/asengine.js"></script>
+<div class="modal fade" id="modal-publish-link" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="modal-name">
+                </h4>
+            </div>
+            <div class="modal-body" id="details-body">
+                <dl class="dl-horizontal">
+                    <dt title="URL">URL</dt>
+                    <dd id="modal-url"></dd>
+                </dl>
+            </div>
+            <div align="center" id="ajax-loading">
+                <i class="fa fa-2x fa-circle-o-notch fa-spin"></i>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0);" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+                    Ok </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-new-rider" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal no-submit" id="form-details" action="/build/my_project.php" method="GET">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body" id="details-body-new">
+                    <fieldset>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="rider_name">
+                                Name of rider
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="rider_name" name="rider_name" type="text" value="New Rider" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="rider_title">
+                                Public title of rider
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="rider_title" name="rider_title" type="text" value="New Official Rider" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="address">
+                                Band name
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="band_name" name="band_name" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="address">
+                                Band logo URL
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="band_logo" name="band_logo" type="text" value="'/img/ridertext/Bel_KIRP.jpg'" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="phone">
+                                Phone
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="phone" name="phone" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="phone">
+                                Contact
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="contact" name="contact" type="text" value=" " class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="controls col-sm-4">
+                                <button id="update_details" name="update_details" class="btn btn-primary">Create New Rider</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal-publish-rider" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal no-submit" id="form-publish">
+                <input type="hidden" name="rider_id" id="publish_rider_id">
+                <input type="hidden" name="rider_name" id="publish_rider_name">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body" id="publish-rider-body">
+                    <fieldset>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_title">
+                                Title
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_title" name="publish_title" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_name">
+                                Contact name
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_name" name="publish_name" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_phone">
+                                Contact phone
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_phone" name="publish_phone" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-sm-4" for="publish_email">
+                                Contact email
+                            </label>
+                            <div class="controls col-sm-4">
+                                <input id="publish_email" name="publish_email" type="text" value="" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <div class="controls col-sm-4">
+                                <button id="publish" name="publish" class="btn btn-primary" type="button" onclick="riders.publish(this);">Publish Rider</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="./js/riders/riders.js"></script>
+
+</body></html>

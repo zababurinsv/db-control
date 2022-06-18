@@ -38,7 +38,8 @@
   },
   "scripts": {
     "rollup:build": "rollup -c rollup-esm.config.js --watch",
-    "nodemon:start": "nodemon ./backend/server.mjs",
+    "nodemon:pages:io:start": "nodemon ./io/server.mjs",
+    "nodemon:nodes:io:start": "nodemon ./node/soundcheckbox/server.mjs",
     "gulp:scss": "gulp",
     "gulp:ipfs": "gulp ipfs",
     "gulp:level-transcoder": "gulp level-transcoder",
@@ -98,6 +99,7 @@
     "abstract-error": "^1.0.2",
     "abstract-iterator": "^3.0.1",
     "abstract-leveldown": "^7.2.0",
+    "blend4web": "^18.5.0",
     "bn.js": "^5.2.1",
     "browser-level": "^1.0.1",
     "clean-stack": "^4.2.0",

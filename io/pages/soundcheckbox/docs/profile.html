@@ -1,0 +1,251 @@
+<html lang="en"><head>
+
+    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-125695573-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-125695573-1');
+    </script>
+    <meta charset="utf-8">
+    <title>SoundCheckBox.com - Set Up Your Show</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link href="./interface/profile/apple-touch-icon.png" rel="apple-touch-icon">-->
+<!--    <link href="./interface/profile/favicon-32x32.png" rel="icon" type="image/png">-->
+<!--    <link href="./interface/profile/favicon-16x16.png" rel="icon" type="image/png">-->
+    <link rel="stylesheet" href="./css/profile/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/profile/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/profile/style3.css" type="text/css" media="all">
+
+    <!--[if lt IE 9]>
+    <script src="./js/profile/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="wrap">
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <a class="brand navbar-brand" href="https://soundcheckbox.com"><img class="logo" src="./interface/profile/SCB-gray.png"></a>
+                </ul>
+                <div class="pull-right">
+                    <div class="header-flags-wrapper">
+                    </div>
+                    <ul class="nav pull-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                Welcome, Zababurin_Sergei <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="profile.html">
+                                        <i class="fa fa-user"></i>
+                                        My Profile </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="logout.html" id="logout">
+                                        <i class="fa fa-sign-out"></i>
+                                        Logout </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 bs-docs-sidebar">
+                <ul class="nav nav-list bs-docs-sidenav">
+                    <li class="">
+                        <a href="/">
+                            <i class="fa fa-home"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Home </a>
+                    </li>
+                    <li id="menu_my_riders" class="">
+                        <a href="riders.html">
+                            <i class="fa fa-file-text"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            My Riders
+                        </a>
+                    </li>
+                    <li id="menu_show_inbox" class="">
+                        <a href="#">
+                            <i class="fa fa-star"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Show Inbox
+                        </a>
+                    </li>
+                    <li id="menu_show_outbox" class="">
+                        <a href="#">
+                            <i class="fa fa-star-o"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Show Outbox
+                        </a>
+                    </li>
+                    <li id="menu_show_calendar" class="">
+                        <a href="#">
+                            <i class="fa fa-calendar"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            Show Calendar
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="profile.html">
+                            <i class="fa fa-user"></i>
+                            <i class="glyphicon glyphicon-chevron-right"></i>
+                            My Profile </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 profile-details-wrapper content">
+                <div class="alert alert-warning" style="margin-top: 30px;">
+                    <strong>Note! </strong>
+                    If you want to change your username, email or you have registred via social network and you want to change your password now, please contact administrator. </div>
+                <form class="form-horizontal no-submit" id="form-changepassword">
+                    <fieldset>
+
+                        <legend>Change Password</legend>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="old_password">
+                                Old Password </label>
+                            <div class="controls col-lg-8">
+                                <input id="old_password" name="old_password" type="password" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="new_password">
+                                New Password </label>
+                            <div class="controls col-lg-8">
+                                <input id="new_password" name="new_password" type="password" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="new_password_confirm">
+                                Confirm New Password </label>
+                            <div class="controls col-lg-8">
+                                <input id="new_password_confirm" name="new_password_confirm" type="password" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="change_password"></label>
+                            <div class="controls col-lg-8">
+                                <button id="change_password" name="change_password" class="btn btn-primary">
+                                    Update </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form class="form-horizontal no-submit" id="form-details">
+                    <fieldset>
+
+                        <legend>Personal Details</legend>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="first_name">
+                                First Name </label>
+                            <div class="controls col-lg-8">
+                                <input id="first_name" name="first_name" type="text" value="" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="last_name">
+                                Last Name </label>
+                            <div class="controls col-lg-8">
+                                <input id="last_name" name="last_name" type="text" value="" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="address">
+                                Address </label>
+                            <div class="controls col-lg-8">
+                                <input id="address" name="address" type="text" value="" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="phone">
+                                Phone </label>
+                            <div class="controls col-lg-8">
+                                <input id="phone" name="phone" type="text" value="" class="input-xlarge form-control">
+                            </div>
+                        </div>
+                        <legend>Soundman Details</legend>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="band_name">
+                                Band name
+                            </label>
+                            <div class="controls col-lg-8">
+                                <input id="band_name" name="band_name" type="text" value="" class="input-xlarge form-control">
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="band_logo">
+                                Band logo URL
+                            </label>
+                            <div class="controls col-lg-8">
+                                <input id="band_logo" name="band_logo" type="text" value="'/img/ridertext/Bel_KIRP.jpg'" class="input-xlarge form-control">
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="public_details">
+                                Public details
+                            </label>
+                            <div class="controls col-lg-8">
+                                <textarea id="public_details" name="public_details" class="input-xlarge form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="private_details">
+                                Private details
+                            </label>
+                            <div class="controls col-lg-8">
+                                <textarea id="private_details" name="private_details" class="input-xlarge form-control"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="control-group form-group">
+                            <label class="control-label col-lg-4" for="update_details"></label>
+                            <div class="controls col-lg-8">
+                                <button id="update_details" name="update_details" class="btn btn-primary">
+                                    Update </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="push"></div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p>Copyright by © <a href="http://lp.soundcheckbox.com">SoundCheckBox.com - Set Up Your Show</a> 2022</p>
+    </div>
+</footer>
+<script src="./js/profile/jquery.min.js"></script>
+<script src="./js/profile/bootstrap.min.js"></script>
+<script src="./js/profile/js-bootstrap.php"></script>
+<script src="./js/profile/asengine.js"></script>
+<script src="./js/profile/sha512.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/profile/asengine.js" type="text/javascript" charset="utf-8"></script>
+<script src="./js/profile/profile.js" type="text/javascript" charset="utf-8"></script>
+
+
+</body></html>
