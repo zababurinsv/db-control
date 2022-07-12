@@ -1,0 +1,97 @@
+{
+  "name": "IEM",
+  "model_src": "IEM.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "IEM",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [
+    {
+      "Source": "mix",
+      "Type": "stereoL",
+      "ChName": "IEM_L",
+      "Comment": ""
+    },
+    {
+      "Source": "mix",
+      "Type": "stereoR",
+      "ChName": "IEM_R",
+      "Comment": ""
+    }
+  ],
+  "gear_list": [
+    {
+      "Name": "Shure P9RA In-ear recevier",
+      "Category": "Monitoring",
+      "Comment": "The low-profile stereo bodypack wireless receiver for the Shure PSM900 wireless in-ear personal monitoring system",
+      "Image": "ShureP9RA.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure P9T In-ear transmitter",
+      "Category": "Monitoring",
+      "Comment": "The rack-mount wireless transmitter for the Shure PSM900 wireless in-ear personal monitoring system",
+      "Image": "ShureP9T_Transmitter.jpg",
+      "Weight": 1,
+      "Count": 0.5,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure SE425 Earphones",
+      "Category": "Monitoring",
+      "Comment": "Shure SE425 Earphone",
+      "Image": "ShureSE425CL.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "AC Power Adapter",
+      "Category": "Monitoring",
+      "Comment": "AC Power Adapter for In-ear PSM900",
+      "Image": "",
+      "Weight": 3,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Audio cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR for In-ear monitor",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Image": "Schuko.jpg",
+      "Weight": 0.4,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "AA",
+      "Category": "Power distribution",
+      "Comment": "Accumulator batteries of the pencil (AA) cells",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 2,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

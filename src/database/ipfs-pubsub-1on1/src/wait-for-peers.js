@@ -1,6 +1,6 @@
 'use strict'
 
-export const waitForPeers = async (ipfs, peersToWait, topic, isClosed) => {
+const waitForPeers = async (ipfs, peersToWait, topic) => {
   const checkPeers = async () => {
     const peers = await ipfs.pubsub.peers(topic)
     const hasAllPeers = peersToWait.map((e) => peers.includes(e)).filter((e) => e === false).length === 0
@@ -14,9 +14,7 @@ export const waitForPeers = async (ipfs, peersToWait, topic, isClosed) => {
   return new Promise(async (resolve, reject) => {
     const interval = setInterval(async () => {
       try {
-        if (isClosed()) {
-          clearInterval(interval)
-        } else if (await checkPeers()) {
+        if (await checkPeers()) {
           clearInterval(interval)
           resolve()
         }
@@ -27,4 +25,4 @@ export const waitForPeers = async (ipfs, peersToWait, topic, isClosed) => {
   })
 }
 
-export default waitForPeers
+module.exports = waitForPeers

@@ -5,8 +5,9 @@
  * @memberof util
  * @namespace
  */
-var base64 = {};
-export default base64
+var base64 = {}
+
+
 /**
  * Calculates the byte length of a base64 encoded string.
  * @param {string} string Base64 encoded string
@@ -137,3 +138,5 @@ base64.decode = function decode(string, buffer, offset) {
 base64.test = function test(string) {
     return /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(string);
 };
+
+export default base64

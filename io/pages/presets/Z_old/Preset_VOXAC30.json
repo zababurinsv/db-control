@@ -1,0 +1,92 @@
+{
+  "name": "VOX_AC30",
+  "model_src": "VOX_AC30.json",
+  "X": 0,
+  "Y": 0,
+  "Z": 0,
+  "turn": 0,
+  "Title": "VOX AC 30 combo amplifier",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "VOX AC-30",
+      "Category": "Backline",
+      "Comment": "All-Tube Combo Amplifier for Electric Guitar",
+      "Image": "",
+      "Weight": 32.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 320
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for the VOX AC-30. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent"
+    }
+  ],
+  "children": [
+    {
+      "name": "INSTR MIC sm57",
+      "model_src": "INSTR_MIC_sm57.json",
+      "X": 0.5,
+      "Y": -0.3,
+      "turn": 0,
+      "Title": "Shure sm57",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "VOX AC-30",
+          "Type": "mic",
+          "ChName": "sm57",
+          "Comment": "",
+          "Phantom_power": "Off"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM57",
+          "Category": "Microphones and DI",
+          "Comment": "dynamic cardioid instrumental microphone",
+          "Image": "Shure57.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Short microphone stand",
+          "Category": "Stands",
+          "Comment": "The short microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 1.5,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        }
+      ]
+    },
+    {
+      "src": "Preset_Electric.json",
+      "X": 0.5,
+      "Y": 0.5,
+      "turn": 90
+    }
+  ]
+}

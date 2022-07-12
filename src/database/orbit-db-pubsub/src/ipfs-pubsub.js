@@ -1,8 +1,9 @@
 'use strict'
-import pSeries from "../../p-series/index.js";
-import Logger from "../../logplease/index.js";
-import PeerMonitor from "../../ipfs-pubsub-peer-monitor/src/ipfs-pubsub-peer-monitor.js";
 
+const pSeries = require('p-series')
+const PeerMonitor = require('ipfs-pubsub-peer-monitor')
+
+const Logger = require('logplease')
 const logger = Logger.create("pubsub", { color: Logger.Colors.Yellow })
 Logger.setLogLevel('ERROR')
 
@@ -110,4 +111,4 @@ class IPFSPubsub {
   }
 }
 
-export default  IPFSPubsub
+module.exports = IPFSPubsub

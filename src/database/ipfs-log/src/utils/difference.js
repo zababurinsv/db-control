@@ -23,4 +23,4 @@ function difference (a, b, key) {
   return b.reduce(reducer, [])
 }
 
-export default difference
+module.exports = difference

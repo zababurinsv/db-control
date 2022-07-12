@@ -1,8 +1,9 @@
 'use strict'
 
-import Store from "../../orbit-db-store/dist/Store.js";
-import DocumentIndex from "./DocumentIndex.js";
-import pMap from "../../p-map/index.js";
+const Store = require('orbit-db-store')
+const DocumentIndex = require('./DocumentIndex')
+const pMap = require('p-map')
+const Readable = require('readable-stream')
 
 const replaceAll = (str, search, replacement) => str.toString().split(search).join(replacement)
 
@@ -11,17 +12,11 @@ class DocumentStore extends Store {
     if (!options) options = {}
     if (!options.indexBy) Object.assign(options, { indexBy: '_id' })
     if (!options.Index) Object.assign(options, { Index: DocumentIndex })
-    console.log('👿 docStore constructor', {
-      id: id,
-      dbname: dbname,
-      options: options
-    })
     super(ipfs, id, dbname, options)
     this._type = 'docstore'
   }
 
   get (key, caseSensitive = false) {
-    console.log('👿 docStore get', key,caseSensitive )
     key = key.toString()
     const terms = key.split(' ')
     key = terms.length > 1 ? replaceAll(key, '.', ' ').toLowerCase() : key.toLowerCase()
@@ -45,14 +40,13 @@ class DocumentStore extends Store {
   query (mapper, options = {}) {
     // Whether we return the full operation data or just the db value
     const fullOp = options.fullOp || false
-    console.log('👿 docStore query fullOp', fullOp)
+
     return Object.keys(this._index._index)
       .map((e) => this._index.get(e, fullOp))
       .filter(mapper)
   }
 
   batchPut (docs, onProgressCallback) {
-    console.log('👿 docStore batchPut', docs, onProgressCallback)
     const mapper = (doc, idx) => {
       return this._addOperationBatch(
         {
@@ -71,10 +65,6 @@ class DocumentStore extends Store {
   }
 
   put (doc, options = {}) {
-    console.log('👿 docStore put', {
-      doc: doc,
-      options: options
-    })
     if (!doc[this.options.indexBy]) { throw new Error(`The provided document doesn't contain field '${this.options.indexBy}'`) }
 
     return this._addOperation({
@@ -85,7 +75,6 @@ class DocumentStore extends Store {
   }
 
   putAll (docs, options = {}) {
-    console.log('👿 docStore putAll', docs, options)
     if (!(Array.isArray(docs))) {
       docs = [docs]
     }
@@ -100,7 +89,6 @@ class DocumentStore extends Store {
   }
 
   del (key, options = {}) {
-    console.log('👿 docStore del', key, options)
     if (!this._index.get(key)) { throw new Error(`No entry with key '${key}' in the database`) }
 
     return this._addOperation({
@@ -111,4 +99,4 @@ class DocumentStore extends Store {
   }
 }
 
-export default  DocumentStore
+module.exports = DocumentStore

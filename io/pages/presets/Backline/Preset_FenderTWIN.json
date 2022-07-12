@@ -1,0 +1,92 @@
+{
+  "name": "FenderTWIN",
+  "model_src": "FenderTWIN.json",
+  "X": 0,
+  "Y": 0,
+  "Z": 0,
+  "turn": 0,
+  "Title": "Fender Twin Reverb Combo Amplifier",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Fender TWIN Reverb",
+      "Category": "Backline",
+      "Comment": "The guitar combo, RMS power 85W",
+      "Image": "FenderTWIN.jpg",
+      "Weight": 20,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 260
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for Fender Twin. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent"
+    }
+  ],
+  "children": [
+    {
+      "name": "INSTR MIC sm57",
+      "model_src": "INSTR_MIC_sm57.json",
+      "X": 0.6,
+      "Y": -0.3,
+      "Z": 0,
+      "turn": 0,
+      "Title": "Shure sm57",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "TWIN",
+          "Type": "mic",
+          "ChName": "sm57",
+          "Phantom_power": "Off",
+          "Comment": ""
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM57",
+          "Category": "Microphones and DI",
+          "Comment": "dynamic cardioid instrumental microphone",
+          "Image": "Shure57.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Short microphone stand",
+          "Category": "Stands",
+          "Comment": "The short microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 1.5,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "children": []
+    },
+    {
+      "src": "/Other/Preset_Electric.json",
+      "X": 0.2,
+      "Y": 0.6,
+      "Z": 0,
+      "turn": 90
+    }
+  ]
+}

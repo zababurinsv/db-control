@@ -17,4 +17,4 @@ class GSet {
   get length () {}
 }
 
-export default GSet
+module.exports = GSet

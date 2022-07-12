@@ -1,0 +1,162 @@
+{
+  "name": "MonWEDGE115",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [
+    {
+      "Source": "mix",
+      "Type": "mono",
+      "ChName": "wedge",
+      "Comment": ""
+    }
+  ],
+  "gear_list": [
+    {
+      "Name": "L-Acoustics 115XT HiQ",
+      "Category": "Monitoring",
+      "Image": "L-Acoustics115XTHIQ.jpg",
+      "Comment": "The 2-way bi-amp coaxial wedge monitor enclosure : 15'LF + 3'HF, RMS power LF 450W, HF 150W",
+      "Weight": 28,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Speaker cable",
+      "Category": "Wire",
+      "Image": "",
+      "Comment": "Speakon-speakon, SP25, 4 x 4mm2 NL4 25m length",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "L-Acoustics LA4X",
+      "Category": "Monitoring",
+      "Image": "LA4X.jpg",
+      "Comment": "Cutting edge loudspeaker amplification, DSP, network; High-grade 24 bit A/D converters, 130 dB dynamic range; 32 bit floating point SHARC DSP, 96 kHz sampling rate; 4 channel high efficiency amplifier section fed by 2 inputs; 4 X 1000W/4 Ohms",
+      "Weight": 5.6,
+      "Count": 0.5,
+      "Count_round": 1,
+      "Weight_round": 11.3,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Audio cable",
+      "Category": "Wire",
+      "Image": "",
+      "Comment": "XLR-XLR",
+      "Weight": 0.5,
+      "Count": 0.5,
+      "Count_round": 1,
+      "Weight_round": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Image": "",
+      "Comment": "The electrical cable for LA4X. C13 - 7/7 Schuco",
+      "Weight": 0.1,
+      "Count": 0.5,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Image": "Schuko.jpg",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Weight": 0.1,
+      "Count": 0.5,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    }
+  ],
+  "Title": "Wedge 115XT",
+  "model_src": "MonWEDGE115.json",
+  "X": 4,
+  "Y": -0.75,
+  "Z": 0,
+  "turn": -10,
+  "children": [
+    {
+      "name": "MonWEDGE115",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "L-Acoustics 115XT HiQ",
+          "Category": "Monitoring",
+          "Image": "L-Acoustics115XTHIQ.jpg",
+          "Comment": "The 2-way bi-amp coaxial wedge monitor enclosure : 15'LF + 3'HF, RMS power LF 450W, HF 150W",
+          "Weight": 28,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Speaker cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "Speakon-speakon, SP25, 4 x 4mm2 NL4 25m length",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "L-Acoustics LA4X",
+          "Category": "Monitoring",
+          "Image": "LA4X.jpg",
+          "Comment": "Cutting edge loudspeaker amplification, DSP, network; High-grade 24 bit A/D converters, 130 dB dynamic range; 32 bit floating point SHARC DSP, 96 kHz sampling rate; 4 channel high efficiency amplifier section fed by 2 inputs; 4 X 1000W/4 Ohms",
+          "Weight": 5.6,
+          "Count": 0.5,
+          "Count_round": 1,
+          "Weight_round": 11.3,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Audio cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 0.5,
+          "Count": 0.5,
+          "Count_round": 1,
+          "Weight_round": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Power cord",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "The electrical cable for LA4X. C13 - 7/7 Schuco",
+          "Weight": 0.1,
+          "Count": 0.5,
+          "Count_round": 1,
+          "Weight_round": 0.2,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Power socket",
+          "Category": "Power distribution",
+          "Image": "Schuko.jpg",
+          "Comment": "The single protective contact sockets 7/7 Schuco",
+          "Weight": 0.1,
+          "Count": 0.5,
+          "Count_round": 1,
+          "Weight_round": 0.2,
+          "Owner": "Rent"
+        }
+      ],
+      "Title": "Wedge 115XT",
+      "model_src": "MonWEDGE115.json",
+      "X": 0,
+      "Y": 1.25,
+	  "Z": 0,
+      "turn": 20,
+      "children": []
+    }
+  ]
+}

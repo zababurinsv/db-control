@@ -1,8 +1,7 @@
 'use strict'
 
-import {difference} from "./utils.js";
-
-import {EventEmitter} from "../../events/index.js";
+const { difference} = require('./utils')
+const EventEmitter = require('events')
 
 const DEFAULT_OPTIONS = {
   start: true,
@@ -72,4 +71,4 @@ class IpfsPubsubPeerMonitor extends EventEmitter {
   }
 }
 
-export default IpfsPubsubPeerMonitor
+module.exports = IpfsPubsubPeerMonitor

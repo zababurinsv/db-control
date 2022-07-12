@@ -1,0 +1,14 @@
+{
+  "name": "Cube_ST",
+  "model_src": "Cube_ST.json",
+  "X": 0,
+  "Y": 0,
+  "Z": 0.5,
+  "turn": 0,
+  "Title": "Cajon",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

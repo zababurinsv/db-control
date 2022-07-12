@@ -1,0 +1,84 @@
+{
+  "name": "db_J-SUB",
+  "model_src": "",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Stage SUB",
+  "Is_Structure": true,
+  "Height": 0.55,
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "d&b audiotechnik",
+      "Category": "Monitoring",
+      "Comment": "The J-SUB is an actively driven 2-way bass-reflex design housing three long excursion neodymium 18' drivers, two drivers face to the front and one driver to the rear. 32 - 100 Hz, 4 Ω (front) / 8 Ω (rear), 800/3200 W, ",
+      "Image": "db_J-SUB.jpg",
+      "Weight": 106,
+      "Count": 1,
+      "Count_round": 1,
+      "Weight_round": 106,
+      "Owner": "Rent",
+      "Power_consumption": 0
+    },
+    {
+      "Name": "Speaker cable",
+      "Category": "Wire",
+      "Comment": "Speakon-speakon, SP25, 4 x 4mm2 NL4 25m length",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "db audiotechnik. D80",
+      "Category": "Monitoring",
+      "Comment": "The 2 RU four channel D80 amplifier is a high power density amplifier, ideally suited for use in both mobile and installation environments. It contains configurations for all d&b loudspeakers and a linear mode",
+      "Image": "db_D80.jpg",
+      "Weight": 0,
+      "Count": 0.5,
+      "Count_round": 1,
+      "Weight_round": 0,
+      "Owner": "Rent",
+      "Power_consumption": 0
+    },
+    {
+      "Name": "Audio cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for LA4X. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.05,
+      "Count": 0.25,
+      "Weight_round": 0.2,
+      "Count_round": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Image": "Schuko.jpg",
+      "Weight": 0.05,
+      "Count": 0.25,
+      "Weight_round": 0.2,
+      "Count_round": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

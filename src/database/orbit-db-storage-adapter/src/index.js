@@ -1,9 +1,8 @@
 'use strict'
 
-import levelup from "../../levelup/dist/levelup.js";
-import level from "../../level/dist/browser.js";
-
-const fs = null
+const levelup = require('levelup')
+const level = require('level')
+const fs = (typeof window === 'object' || typeof self === 'object') ? null : eval('require("fs")') // eslint-disable-line
 
 // Should work for all abstract-leveldown compliant stores
 

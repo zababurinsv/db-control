@@ -26,21 +26,22 @@ app.use((req, res, next) => {
     next();
 });
 
-config.dir.forEach(folder => {
-    console.log(`${folder} :`, {
-        'index': path.join(__page, `${folder}/docs`),
-        'assets': path.join(__page, `${folder}/docs/assets`),
-        'manifest': path.join(__page, `${folder}/docs/manifest`),
-        'path': `/${folder !== 'io'? folder: ''}`
+config.forEach(item => {
+    console.log(`${item.page} :`, {
+        'index': path.join(__page, `${item.page}${item.dir}`),
+        'assets': path.join(__page, `${item.page}${item.dir}/assets`),
+        'manifest': path.join(__page, `${item.page}${item.dir}/manifest`),
+        'path': `/${item.page !== 'io'? item.page: ''}`
     });
-    app.use(`/${folder !== 'io'? folder: ''}`, express.static(path.join(__page, `${folder}/docs`)));
-    app.use(`/${folder !== 'io'? folder: ''}`, express.static(path.join(__page, `${folder}/docs/assets`)));
-    app.use(`/${folder !== 'io'? folder: ''}`, express.static(path.join(__page, `${folder}/docs/manifest`)));
+    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}`)));
+    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/assets`)));
+    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/manifest`)));
 })
 
 app.use(express.static(__dirname + 'src/assets/'));
 app.use(express.static(__dirname + 'src/database/'));
 app.use('/config',express.static(__dirname + 'src/config/'));
+app.use('/utils',express.static(__dirname + 'src/utils/'));
 app.use('/modules', express.static(__dirname + 'modules'));
 
 app.options(`/*`, await cors(corsOptions))

@@ -1,0 +1,26 @@
+{
+  "name": "RIZER_3x2",
+  "model_src": "RIZER_3x2.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Rizer",
+  "Comment": "",
+  "Is_Structure": true,
+  "Height": 0.55,
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "RIZER 3x2",
+      "Category": "Stage construction",
+      "Comment": "",
+      "Image": "",
+      "Weight": 180,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

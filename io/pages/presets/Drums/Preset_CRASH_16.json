@@ -1,0 +1,31 @@
+{
+  "name": "CRASH_16",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Crash",
+      "Category": "Instruments and access",
+      "Image": "",
+      "Comment": "Zildjian Crash 16",
+      "Weight": 5,
+      "Power_consumption": 0,
+      "Weight_round": 5,
+      "Count_round": 1,
+      "Count": 1,
+      "Owner": "Band"
+    }
+  ],
+  "Title": "Crash",
+  "model_src": "CRASH_16.json",
+  "X": -3.4,
+  "Y": 0.6,
+  "Z": 0,
+  "is_structure": false,
+  "Height": 0,
+  "turn": 45,
+  "Title_to_Source": false,
+  "children": [],
+  "is_jump": false
+}

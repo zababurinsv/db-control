@@ -27,4 +27,4 @@ class KeyValueIndex {
   }
 }
 
-export default  KeyValueIndex
+module.exports = KeyValueIndex

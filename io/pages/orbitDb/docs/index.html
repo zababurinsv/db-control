@@ -10,98 +10,19 @@
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
 <script type="module">
-    import OrbitDB from '/orbit-db/src/OrbitDB.js'
-    import IPFS from '/ipfs/dist/esm/index.min.js'
+    import OrbitDB from '/orbit-db/dist/index.js'
+    import IPFS from '/ipfs/dist/index.js'
     import { initIPFS, initOrbitDB, getAllDatabases } from '/index.js'
-    // import Identities from '/orbit-db-identity-provider/dist/index.js'
-    // import Storage from "/orbit-db-storage-adapter/src/index.js";
-    // import Cache from '/orbit-db-cache/src/Cache.js'
-
-    // console.log({ initIPFS, initOrbitDB, getAllDatabases });
-
-    // const createInstance = async (ipfs, options = {}) => {
-    //     console.log('=== createInstance ===',{
-    //         options: options
-    //     })
-        // if (!isDefined(ipfs)) { throw new Error('IPFS is a required argument. See https://github.com/orbitdb/orbit-db/blob/master/API.md#createinstance') }
-
-        // if (options.offline === undefined) {
-        //     options.offline = false
-        // }
-
-        // if (options.offline && !options.id) {
-        //     throw new Error('Offline mode requires passing an `id` in the options')
-        // }
-
-        // const { id } = await ipfs.id()
-
-        // if (!options.directory) { options.directory = './orbitdb' }
-
-        // if (!options.storage) {
-        //     const storageOptions = {}
-
-            // Create default `level` store
-            // options.storage = Storage(null, storageOptions)
-        // }
-
-        // if (options.identity && options.identity.provider.keystore) {
-        //     options.keystore = options.identity.provider.keystore
-        // }
-
-        // if (!options.keystore) {
-        //     const keystorePath = path.join(options.directory, id, '/keystore')
-        //     const keyStorage = await options.storage.createStore(keystorePath)
-        //     options.keystore = new Keystore(keyStorage)
-        // }
-
-        // console.log('@@@@@@@@@@@ options.keystore @@@@@@@@@@@@@@@@', {
-        //     id0: id,
-        //     id: options.id || id,
-        //     keystore: options.keystore,
-        // })
-        // if (!options.identity) {
-        //     options.identity = await Identities.createIdentity({
-        //         id: options.id || id,
-        //         keystore: options.keystore
-        //     })
-        // }
-        //
-        // if (!options.cache) {
-        //     const cachePath = path.join(options.directory, id, '/cache')
-        //     const cacheStorage = await options.storage.createStore(cachePath)
-        //     options.cache = new Cache(cacheStorage)
-        // }
-        //
-        // const finalOptions = Object.assign({}, options, { peerId: id })
-        // console.log('!!!!!!!!!!!!!!!! createInstance !!!!!!!!!!!!!!!!', {
-        //     finalOptions: finalOptions,
-        //     identity: options.identity,
-        //     ipfs: ipfs
-        // })
-        // return new OrbitDB(ipfs, options.identity, finalOptions)
-        // return []
-    // }
-
-    (async () => {
-        // console.log('@@@@@@@@@@@ options.keystore @@@@@@@@@@@@@@@@', {
-        //     id: "QmRjA1sg4RbibSkXqcqd5pktAt4eXsc4RSv1kN67Lg2uxr",
-        //     keystore: options.keystore,
-        // })
-        // console.log('======== identity ========', Identities)
-
-        // const keystorePath = path.join(options.directory, id, '/keystore')
-        // const keyStorage = await options.storage.createStore(keystorePath)
-        // options.keystore = new Keystore(keyStorage)
-
-        // options.identity = await Identities.createIdentity({
-        //     id: "QmRjA1sg4RbibSkXqcqd5pktAt4eXsc4RSv1kN67Lg2uxr",
-        //     keystore: options.keystore
-        // })
-        const ipfs = await initIPFS({IPFS})
-        console.log('xxxxxxxxx ipfs xxxxxxxxxxxx', ipfs)
-        const db = await initOrbitDB({ipfs: ipfs, OrbitDB: OrbitDB})
-        // const allDb = await getAllDatabases()
-    })()
+    initIPFS({IPFS}).then(ipfs => {
+        console.log('========= ipfs ===========', ipfs)
+        console.assert(false)
+        initOrbitDB({ipfs, OrbitDB}).then(db => {
+            console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ========= orbitdb =========== !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', db)
+            // getAllDatabases().then(dbs => {
+            //     console.log('==== dbs ====', dbs)
+            // })
+        })
+    })
 </script>
 </body>
 </html>

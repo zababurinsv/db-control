@@ -6,4 +6,4 @@ class AccessController {
   }
 }
 
-export default AccessController
+module.exports = AccessController

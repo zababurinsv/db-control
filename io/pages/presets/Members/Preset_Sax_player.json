@@ -1,0 +1,110 @@
+{
+  "name": "Sax_player",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "Title": "Sax player",
+  "model_src": "Sax_player.json",
+  "X": 2.5157971382141113,
+  "Y": 2.1463773250579834,
+  "Z": 0,
+  "is_structure": false,
+  "Height": 0,
+  "turn": 0,
+  "Locked": false,
+  "Title_to_Source": false,
+  "children": [
+    {
+      "name": "Sax_Alto",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [],
+      "parent": "1",
+      "Title": "Sax Alto",
+      "model_src": "Sax_Alto.json",
+      "X": 2.5005264282226562,
+      "Y": 2.125138759613037,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": [
+        {
+          "name": "SM81_on_STAND",
+          "Comment": "",
+          "input_list": [
+            {
+              "Source": "Sax Alto",
+              "Type": "mic",
+              "ChName": "SM81",
+              "Comment": "",
+              "Phantom_power": "On",
+              "Channel": 1,
+              "Locked": false
+            }
+          ],
+          "output_list": [],
+          "gear_list": [
+            {
+              "Name": "Shure SM81",
+              "Category": "Microphones and DI",
+              "Image": "Shure81.jpg",
+              "Comment": "Condenser cardioid instrumental microphone",
+              "Weight": 0.2,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            },
+            {
+              "Name": "Long microphone stand",
+              "Category": "Stands",
+              "Image": "",
+              "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+              "Weight": 2,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            },
+            {
+              "Name": "Microphone cable",
+              "Category": "Wire",
+              "Image": "",
+              "Comment": "XLR-XLR",
+              "Weight": 1,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            }
+          ],
+          "Title": "Shure sm81",
+          "model_src": "SM81_on_STAND.json",
+          "X": 3.4079411029815674,
+          "Y": 2.232198715209961,
+          "Z": 0,
+          "is_structure": false,
+          "Height": 0,
+          "turn": 360,
+          "Locked": false,
+          "Title_to_Source": false,
+          "children": [],
+          "relative_coord": false,
+          "is_jump": false
+        }
+      ],
+      "relative_coord": false,
+      "is_jump": false
+    }
+  ],
+  "relative_coord": false,
+  "is_jump": false
+}

@@ -1,4 +1,4 @@
-# p-queue
+# p-queue [![Build Status](https://travis-ci.com/sindresorhus/p-queue.svg?branch=master)](https://travis-ci.com/github/sindresorhus/p-queue) [![codecov](https://codecov.io/gh/sindresorhus/p-queue/branch/master/graph/badge.svg)](https://codecov.io/gh/sindresorhus/p-queue)
 
 > Promise queue with concurrency control
 
@@ -6,8 +6,8 @@ Useful for rate-limiting async (or sync) operations. For example, when interacti
 
 ## Install
 
-```sh
-npm install p-queue
+```
+$ npm install p-queue
 ```
 
 ## Usage
@@ -15,8 +15,8 @@ npm install p-queue
 Here we run only one promise at the time. For example, set `concurrency` to 4 to run four promises at the same time.
 
 ```js
-import PQueue from 'p-queue';
-import got from 'got';
+const {default: PQueue} = require('p-queue');
+const got = require('got');
 
 const queue = new PQueue({concurrency: 1});
 
@@ -112,13 +112,11 @@ If `true`, specifies that any [pending](https://developer.mozilla.org/en-US/docs
 
 Adds a sync or async task to the queue. Always returns a promise.
 
-Note: If your items can potentially throw an exception, you must handle those errors from the returned Promise or they may be reported as an unhandled Promise rejection and potentially cause your process to exit immediately.
-
 ##### fn
 
 Type: `Function`
 
-Promise-returning/async function. When executed, it will receive `{signal}` as the first argument.
+Promise-returning/async function.
 
 #### options
 
@@ -130,43 +128,6 @@ Type: `number`\
 Default: `0`
 
 Priority of operation. Operations with greater priority will be scheduled first.
-
-##### signal
-
-*Requires Node.js 16 or later.*
-
-[`AbortSignal`](https://developer.mozilla.org/en-US/docs/Web/API/AbortSignal) for cancellation of the operation. When aborted, it will be removed from the queue and the `queue.add()` call will reject with an `AbortError`. If the operation is already running, the signal will need to be handled by the operation itself.
-
-```js
-import PQueue, {AbortError} from 'p-queue';
-import got, {CancelError} from 'got';
-
-const queue = new PQueue();
-
-const controller = new AbortController();
-
-try {
-	await queue.add(({signal}) => {
-		const request = got('https://sindresorhus.com');
-
-		signal.addEventListener('abort', () => {
-			request.cancel();
-		});
-
-		try {
-			return await request;
-		} catch (error) {
-			if (!(error instanceof CancelError)) {
-				throw error;
-			}
-		}
-	}, {signal: controller.signal});
-} catch (error) {
-	if (!(error instanceof AbortError)) {
-		throw error;
-	}
-}
-```
 
 #### .addAll(fns, options?)
 
@@ -194,21 +155,13 @@ Returns a promise that settles when the queue becomes empty, and all promises ha
 
 The difference with `.onEmpty` is that `.onIdle` guarantees that all work from the queue has finished. `.onEmpty` merely signals that the queue is empty, but it could mean that some promises haven't completed yet.
 
-#### .onSizeLessThan(limit)
-
-Returns a promise that settles when the queue size is less than the given limit: `queue.size < limit`.
-
-If you want to avoid having the queue grow beyond a certain size you can `await queue.onSizeLessThan()` before adding a new item.
-
-Note that this only limits the number of items waiting to start. There could still be up to `concurrency` jobs already running that this call does not include in its calculation.
-
 #### .clear()
 
 Clear the queue.
 
 #### .size
 
-Size of the queue, the number of queued items waiting to run.
+Size of the queue.
 
 #### .sizeBy(options)
 
@@ -217,8 +170,6 @@ Size of the queue, filtered by the given options.
 For example, this can be used to find the number of items remaining in the queue with a specific priority level.
 
 ```js
-import PQueue from 'p-queue';
-
 const queue = new PQueue();
 
 queue.add(async () => '🦄', {priority: 1});
@@ -234,7 +185,7 @@ console.log(queue.sizeBy({priority: 0}));
 
 #### .pending
 
-Number of running items (no longer in the queue).
+Number of pending promises.
 
 #### [.timeout](#timeout)
 
@@ -251,8 +202,8 @@ Whether the queue is currently paused.
 Emitted as each item is processed in the queue for the purpose of tracking progress.
 
 ```js
-import delay from 'delay';
-import PQueue from 'p-queue';
+const delay = require('delay');
+const {default: PQueue} = require('p-queue');
 
 const queue = new PQueue({concurrency: 2});
 
@@ -267,48 +218,13 @@ queue.add(() => Promise.resolve());
 queue.add(() => Promise.resolve());
 queue.add(() => delay(500));
 ```
-
-#### completed
-
-Emitted when an item completes without error.
-
-```js
-import delay from 'delay';
-import PQueue from 'p-queue';
-
-const queue = new PQueue({concurrency: 2});
-
-queue.on('completed', result => {
-	console.log(result);
-});
-
-queue.add(() => Promise.resolve('hello, world!'));
-```
-
-#### error
-
-Emitted if an item throws an error.
-
-```js
-import delay from 'delay';
-import PQueue from 'p-queue';
-
-const queue = new PQueue({concurrency: 2});
-
-queue.on('error', error => {
-	console.error(error);
-});
-
-queue.add(() => Promise.reject(new Error('error')));
-```
-
 #### idle
 
 Emitted every time the queue becomes empty and all promises have completed; `queue.size === 0 && queue.pending === 0`.
 
 ```js
-import delay from 'delay';
-import PQueue from 'p-queue';
+const delay = require('delay');
+const {default: PQueue} = require('p-queue');
 
 const queue = new PQueue();
 
@@ -335,18 +251,17 @@ Emitted every time the add method is called and the number of pending or queued 
 
 #### next
 
-Emitted every time a task is completed and the number of pending or queued tasks is decreased. This is emitted regardless of whether the task completed normally or with an error.
+Emitted every time a task is completed and the number of pending or queued tasks is decreased.
 
 ```js
-import delay from 'delay';
-import PQueue from 'p-queue';
+const delay = require('delay');
+const {default: PQueue} = require('p-queue');
 
 const queue = new PQueue();
 
 queue.on('add', () => {
 	console.log(`Task is added.  Size: ${queue.size}  Pending: ${queue.pending}`);
 });
-
 queue.on('next', () => {
 	console.log(`Task is completed.  Size: ${queue.size}  Pending: ${queue.pending}`);
 });
@@ -364,17 +279,13 @@ await queue.add(() => delay(600));
 //=> 'Task is completed.  Size: 0  Pending: 0'
 ```
 
-### AbortError
-
-The error thrown by `queue.add()` when a job is aborted before it is run. See [`signal`](#signal).
-
 ## Advanced example
 
 A more advanced example to help you understand the flow.
 
 ```js
-import delay from 'delay';
-import PQueue from 'p-queue';
+const delay = require('delay');
+const {default: PQueue} = require('p-queue');
 
 const queue = new PQueue({concurrency: 1});
 
@@ -443,8 +354,6 @@ $ node example.js
 For implementing more complex scheduling policies, you can provide a QueueClass in the options:
 
 ```js
-import PQueue from 'p-queue';
-
 class QueueClass {
 	constructor() {
 		this._queue = [];
@@ -466,22 +375,9 @@ class QueueClass {
 		return this._queue;
 	}
 }
-
-const queue = new PQueue({queueClass: QueueClass});
 ```
 
 `p-queue` will call corresponding methods to put and get operations from this queue.
-
-## FAQ
-
-#### How do the `concurrency` and `intervalCap` options affect each other?
-
-They are just different constraints. The `concurrency` option limits how many things run at the same time. The `intervalCap` option limits how many things run in total during the interval (over time).
-
-## Maintainers
-
-- [Sindre Sorhus](https://github.com/sindresorhus)
-- [Richie Bendall](https://github.com/Richienb)
 
 ## Related
 

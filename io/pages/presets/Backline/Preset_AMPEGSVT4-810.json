@@ -1,0 +1,32 @@
+{
+  "name": "AMPEGSVT4pro810",
+  "model_src": "AMPEGSVT4pro810.json",
+  "X": -2,
+  "Y": 2,
+  "turn": 0,
+  "Title": "Ampeg SVT pro810",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Ampeg 810 Classic",
+      "Category": "Backline",
+      "Comment": "Bass cabinet 8x10'. RMS power 800W",
+      "Image": "Ampeg810.jpg",
+      "Weight": 62.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+    {
+      "src": "/Backline/Preset_AMPEG_SVT-4_pro_AMP.json",
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "turn": 0
+    }
+  ]
+}

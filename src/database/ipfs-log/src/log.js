@@ -1,17 +1,16 @@
 'use strict'
 
-import pMap from "../../p-map/index.js";
-import GSet from "./g-set.js";
-import Entry from "./entry.js";
-import LogIO from "./log-io.js";
-import LogError from "./log-errors.js";
-import Clock from "./lamport-clock.js";
-import Sorting from "./log-sorting.js";
-import AccessController from "./default-access-controller.js";
-import {findUniques, isDefined} from "./utils/index.js";
-import EntryIndex from "./entry-index.js";
-
+const pMap = require('p-map')
+const GSet = require('./g-set')
+const Entry = require('./entry')
+const LogIO = require('./log-io')
+const LogError = require('./log-errors')
+const Clock = require('./lamport-clock')
+const Sorting = require('./log-sorting')
 const { LastWriteWins, NoZeroes } = Sorting
+const AccessController = require('./default-access-controller')
+const { isDefined, findUniques } = require('./utils')
+const EntryIndex = require('./entry-index')
 const randomId = () => new Date().getTime().toString()
 const getHash = e => e.hash
 const flatMap = (res, acc) => res.concat(acc)
@@ -47,7 +46,6 @@ class Log extends GSet {
    * @return {Log} The log instance
    */
   constructor (ipfs, identity, { logId, access, entries, heads, clock, sortFn, concurrency } = {}) {
-    console.log('👖 constructor')
     if (!isDefined(ipfs)) {
       throw LogError.IPFSNotDefinedError()
     }
@@ -261,7 +259,6 @@ class Log extends GSet {
    * @return {Log} New Log containing the appended value
    */
   async append (data, pointerCount = 1, pin = false) {
-    console.log('👖 append')
     // Update the clock (find the latest clock)
     const newTime = Math.max(this.clock.time, this.heads.reduce(maxClockTimeReducer, 0)) + 1
     this._clock = new Clock(this.clock.id, newTime)
@@ -310,8 +307,8 @@ class Log extends GSet {
     if (!canAppend) {
       throw new Error(`Could not append entry, key "${this._identity.id}" is not allowed to write to the log`)
     }
-    console.log(entry.hash, entry)
-    // this._entryIndex.set(entry.hash, entry)
+
+    this._entryIndex.set(entry.hash, entry)
     nexts.forEach(e => (this._nextsIndex[e] = entry.hash))
     this._headsIndex = {}
     this._headsIndex[entry.hash] = entry
@@ -737,9 +734,8 @@ class Log extends GSet {
     return res
   }
 }
-export default {
-  Log,
-  Sorting,
-  Entry,
-  AccessController,
-}
+
+module.exports = Log
+module.exports.Sorting = Sorting
+module.exports.Entry = Entry
+module.exports.AccessController = AccessController

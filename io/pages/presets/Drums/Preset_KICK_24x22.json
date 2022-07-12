@@ -1,0 +1,69 @@
+{
+  "name": "KICK_24x22",
+  "model_src": "KICK_24x22.json",
+  "X": -4,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Kick",
+  "Comment": "",
+  "input_list": [
+    {
+      "Source": "kick mic",
+      "Type": "in",
+      "ChName": "beta91",
+      "Comment": "",
+      "Phantom_power": "On"
+    },
+    {
+      "Source": "kick mic",
+      "Type": "out",
+      "ChName": "beta52",
+      "Comment": "",
+      "Phantom_power": "Off"
+    }
+  ],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Bass drum",
+      "Category": "Instruments and access",
+      "Comment": "Bass drum 24x22",
+      "Image": "",
+      "Weight": 7,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure beta91",
+      "Category": "Microphones and DI",
+      "Comment": "Condenser cardioid bass drum microphone",
+      "Image": "Shure91.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure beta52A",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid bass drum microphone",
+      "Image": "Shure52.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Microphone cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 2,
+      "Count": 2,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

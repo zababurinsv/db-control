@@ -1,5 +1,15 @@
 'use strict';
-export default function nextTick(fn, arg1, arg2, arg3) {
+
+if (typeof process === 'undefined' ||
+    !process.version ||
+    process.version.indexOf('v0.') === 0 ||
+    process.version.indexOf('v1.') === 0 && process.version.indexOf('v1.8.') !== 0) {
+  module.exports = { nextTick: nextTick };
+} else {
+  module.exports = process
+}
+
+function nextTick(fn, arg1, arg2, arg3) {
   if (typeof fn !== 'function') {
     throw new TypeError('"callback" argument must be a function');
   }

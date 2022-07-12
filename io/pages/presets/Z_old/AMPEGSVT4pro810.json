@@ -1,0 +1,42 @@
+{
+  "name": "AMPEGSVT4pro810",
+  "model_src": "AMPEGSVT4pro810.json",
+  "X": -2,
+  "Y": 2,
+  "turn": 0,
+  "Title": "Ampeg SVT4 pro810",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Ampeg 810 Classic",
+      "Category": "Backline",
+      "Comment": "Bass cabinet 8x10''. RMS power 800W",
+      "Image": "AmpegSVT4.jpg",
+      "Weight": 74.8,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Amplifier cable speakon",
+      "Category": "Wire",
+      "Comment": "Audio cable speakon-speakon for Ampeg SVT-4 PRO 810",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+    {
+      "src": "Preset_AMPEG_SVT-4_pro_AMP.json",
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "turn": 0
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "model_src": "HH.json",
+  "X": -4.3,
+  "Y": 0.5,
+  "turn": 0,
+  "Title": "Hi-hat",
+  "Comment": "",
+  "name": "HH",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Hi-Hat",
+      "Category": "Instruments and access",
+      "Image": "",
+      "Comment": "Zildjian Hi-Hat",
+      "Weight": 5,
+      "Power_consumption": 0,
+      "Weight_round": 5,
+      "Count_round": 1,
+      "Count": 1,
+      "Owner": "Band"
+    }
+  ],
+  "children": []
+}

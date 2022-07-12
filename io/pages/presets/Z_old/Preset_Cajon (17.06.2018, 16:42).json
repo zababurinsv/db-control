@@ -1,0 +1,13 @@
+{
+  "name": "Cajon",
+  "model_src": "Cajon.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Cajon",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

@@ -1,0 +1,31 @@
+{
+  "name": "CHAIR",
+  "model_src": "STUL.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Chair",
+      "Category": "Instruments and access",
+      "Comment": "",
+      "Image": "",
+      "Weight": 2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+    {
+      "src": "/Mic/Preset_SM81_on_STAND.json",
+      "X": 1,
+      "Y": 0,
+      "turn": 0
+    }
+  ]
+}

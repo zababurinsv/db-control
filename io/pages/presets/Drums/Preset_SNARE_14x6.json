@@ -1,0 +1,74 @@
+{
+  "name": "SNARE_14x6",
+  "model_src": "SNARE_14x6.json",
+  "X": -4.2,
+  "Y": 0.16,
+  "turn": 270,
+  "Title": "Snare",
+  "Comment": "",
+  "input_list": [
+    {
+      "Source": "Snare mic",
+      "Type": "top",
+      "ChName": "sm57",
+      "Comment": "",
+      "Channel": 3,
+      "Locked": false
+    },
+    {
+      "Source": "Snare mic",
+      "Type": "bottom",
+      "ChName": "TG57c",
+      "Phantom_power": "On",
+      "Comment": "",
+      "Channel": 4,
+      "Locked": false
+    }
+  ],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Snare Drum",
+      "Category": "Instruments and access",
+      "Image": "",
+      "Comment": "Yamaha Maple Custom, Snare Drum 14x6",
+      "Weight": 5,
+      "Power_consumption": 0,
+      "Weight_round": 5,
+      "Count_round": 1,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Shure SM57",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid instrumental microphone",
+      "Image": "Shure57.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Beyerdynamic TG-D57C",
+      "Category": "Microphones and DI",
+      "Comment": "Condenser cardioid microphone with flexible gooseneck",
+      "Image": "Beyer57.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Microphone cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 2,
+      "Count": 2,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

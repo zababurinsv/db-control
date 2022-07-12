@@ -5,7 +5,7 @@
     <meta name="description" content="SoundCheckBox.com - Set Up Your Show">
     <meta name="author" content="">
     <title>Login to SoundCheckBox</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./css/login/bootstrap.min.css" type="text/css" media="all">
     <link rel="stylesheet" href="./css/login/style3.css" type="text/css" media="all">
     <script type="text/javascript" src="./js/login/jquery.min.js"></script>
 <!--    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script type="text/javascript" src="assets/js/jquery.min.js"></script>-->
@@ -48,10 +48,10 @@
                                         </div>
 
                                         <div class="control-group form-group">
-                                            <label class="control-label col-lg-4" for="login-username">
-                                                Username </label>
+                                            <label class="control-label col-lg-4" for="login-email">
+                                                Email </label>
                                             <div class="controls col-lg-8">
-                                                <input type="text" id="login-username" name="username" class="input-xlarge form-control"> <br>
+                                                <input type="text" id="login-email" name="email" class="input-xlarge form-control"> <br>
                                             </div>
                                         </div>
 
@@ -60,7 +60,7 @@
                                             <label class="control-label col-lg-4" for="login-password">
                                                 Password </label>
                                             <div class="controls col-lg-8">
-                                                <input type="password" id="login-password" name="password" class="input-xlarge form-control">
+                                                <input type="password" id="login-password" name="password" autocomplete="on" class="input-xlarge form-control">
                                             </div>
                                         </div>
 
@@ -102,7 +102,7 @@
                                                 Password <span class="required">*</span>
                                             </label>
                                             <div class="controls col-lg-8">
-                                                <input type="password" id="reg-password" class="input-xlarge form-control">
+                                                <input type="password" id="reg-password" autocomplete="on" class="input-xlarge form-control">
                                             </div>
                                         </div>
                                         <div class="control-group  form-group">
@@ -110,7 +110,7 @@
                                                 Repeat Password <span class="required">*</span>
                                             </label>
                                             <div class="controls col-lg-8">
-                                                <input type="password" id="reg-repeat-password" class="input-xlarge form-control">
+                                                <input type="password" id="reg-repeat-password" autocomplete="on" class="input-xlarge form-control">
                                             </div>
                                         </div>
                                         <div class="control-group  form-group">
@@ -143,7 +143,7 @@
                                             <label class="control-label col-lg-4" for="forgot-password-email">
                                                 Your Email </label>
                                             <div class="controls col-lg-8">
-                                                <input type="email" id="forgot-password-email" class="input-xlarge form-control">
+                                                <input type="email" id="forgot-password-email" class="input-xlarge form-control" >
                                             </div>
                                         </div>
                                         <div class="control-group form-group">
@@ -167,10 +167,15 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="./js/login/sha512.js"></script>
-<script type="text/javascript" src="./js/login/asengine.js"></script>
-<script type="text/javascript" src="./js/login/register.js"></script>
-<script type="text/javascript" src="./js/login/login.js"></script>
-<script type="text/javascript" src="./js/login/passwordreset.js"></script>
-
-</body></html>
+<script type="module">
+    import login from './modules/login/index.mjs'
+    login()
+</script>
+<!--<script type="text/javascript" src="./js/login/sha512.js"></script>-->
+<!--<script type="text/javascript" src="./js/login/asengine.js"></script>-->
+<!--<script type="text/javascript" src="./js/login/register.js"></script>-->
+<!--<script type="text/javascript" src="./js/login/login.js"></script>-->
+<!--<script type="text/javascript" src="./js/login/passwordreset.js"></script>-->
+<!---->
+</body>
+</html>

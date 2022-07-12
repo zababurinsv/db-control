@@ -1,7 +1,6 @@
 'use strict'
 
-import multibase  from "../multibase/dist/index.js";
-const getCodec = multibase.encoding
+const { encoding: getCodec } = require('multibase')
 const utf8Encoder = new TextEncoder()
 
 /**
@@ -47,4 +46,4 @@ function fromString (string, encoding = 'utf8') {
   return getCodec(encoding).decode(string)
 }
 
-export default fromString
+module.exports = fromString

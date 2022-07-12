@@ -31,15 +31,79 @@
     <option class="main__data_files_fs"></option>
 </template>
 <script type="module">
-    import forge from '/node-forge/dist/forge.all.esm.js'
-    console.log('ddddddddddd', forge)
-    // import IPFS from '/ipfs/index.mjs'
-    // import OrbitDB from '/orbit-db/src/OrbitDB.js'
-    // import index from '/modules/index.mjs'
-    // console.log('================', IPFS)
-    // index({
-    //     IPFS: IPFS,
-    //     OrbitDB: OrbitDB
-    // })
+    import crypto from './libp2p-crypto/dist/index.js';
+    import require$$1 from './safe-buffer/dist/index.js';
+    import require$$2 from './secp256k1/dist/index.js';
+    import cryptoBrowserify from './crypto-browserify/dist/index.js'
+    import randomBytes from '../../iso-random-stream/dist/randomBytes.js';
+    const Buffer = require$$1.Buffer;
+    const secp256k1 = require$$2;
+
+    (async () => {
+        const genKeyPair = () => new Promise((resolve, reject) => {
+            console.assert(false)
+            crypto.keys.generateKeyPair('secp256k1', 256, (err, key) => {
+                console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4')
+                console.assert(false)
+                if (!err) {
+                    resolve(key)
+                }
+                reject(err)
+            })
+        })
+
+        function assert (cond, msg) {
+            if (!cond) throw new Error(msg)
+        }
+
+        function isUint8Array (name, value, length) {
+            console.log(value, value instanceof Uint8Array, typeof value)
+            assert(value instanceof Uint8Array, `Expected ${name} to be an Uint8Array`);
+
+            if (length !== undefined) {
+                if (Array.isArray(length)) {
+                    const numbers = length.join(', ');
+                    const msg = `Expected ${name} to be an Uint8Array with length [${numbers}]`;
+                    assert(length.includes(value.length), msg);
+                } else {
+                    const msg = `Expected ${name} to be an Uint8Array with length ${length}`;
+                    assert(value.length === length, msg);
+                }
+            }
+        }
+
+        // console.log(secp256k1L(32), secp256k1)
+        // const secp = secp256k1L(256, (error, key) => {
+        //     console.log('dddddddddddd', key, error)
+        // })
+        // console.log('secp', cryptoBrowserify.randomBytes(32))
+        // console.assert(false)
+        // secp.generateKeyPair(cryptoBrowserify.randomBytes)
+        // console.assert(false)
+        // const mars = keys.public.marshal()
+        // const decompressedKey = Buffer.from(secp256k1.publicKeyConvert(mars, false))
+        // console.log('==============================', decompressedKey)
+
+        const keys = await genKeyPair()
+        console.log('@@@@@@@@@@ keys @@@@@@@@@@', keys)
+        console.assert(false)
+        const marshal = keys.marshal()
+        const priv = marshal.toString('hex')
+
+        // let test = {"type":"Buffer","data":[251,129,226,232,244,90,202,122,173,191,153,189,205,221,241,210,122,47,60,220,250,115,220,15,114,179,100,22,51,233,161,183]}
+        // let test4 = Buffer.from(test.data)
+        // console.assert(false)
+        // isUint8Array('test', randomBytes(32), 32)
+
+        // console.log('sssssssssssss createKey keys.marshal() priv sssssssssssssssssss',  test4.toString('hex'))
+        console.log('sssssssssssss createKey keys.marshal() priv sssssssssssssssssss', priv)
+        // const key = {
+        //     publicKey: decompressedKey.toString('hex'),
+        //     privateKey: keys.marshal().toString('hex')
+        // };
+        // console.log('%%%%%%%%%%%% keys %%%%%%%%%%%%', key)
+        // const decompressedKey = Buffer.from(secp256k1.publicKeyConvert(keys.public.marshal(), false));
+        // console.log('=========', keyPair, decompressedKey)
+    })()
 </script>
 </html>

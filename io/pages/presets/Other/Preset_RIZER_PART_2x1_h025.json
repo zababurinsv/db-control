@@ -1,0 +1,26 @@
+{
+  "name": "RIZER_PART_2x1_h025",
+  "model_src": "RIZER_PART_2x1_h025.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Rizer",
+  "Comment": "",
+  "Is_Structure": true,
+  "Height": 0.3,
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Rizer part 2x1x0.25",
+      "Category": "Stage construction",
+      "Comment": "",
+      "Image": "",
+      "Weight": 20,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

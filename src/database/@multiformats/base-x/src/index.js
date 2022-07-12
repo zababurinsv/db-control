@@ -122,4 +122,4 @@ function base (ALPHABET) {
     decode: decode
   }
 }
-export default base
+module.exports = base

@@ -102,7 +102,7 @@ div#head {
 }
 div#head img {margin:5px; float:left;}
 
-div#toggle_controls  {background:url(../../interface/toolbar_controls.png); width:31px; height:15px; margin:20px 20px 0 0;cursor: pointer;
+div#toggle_controls  {background:url(../../../interface/editor/toolbar_controls.png); width:31px; height:15px; margin:20px 20px 0 0;cursor: pointer;
 	pointer-events: auto; float:left;}
 
 div#main_canvas_container {
@@ -330,9 +330,9 @@ div#gear-list-container {
         font-size: 1.1em;
         display: block;
     }
-div#input-list-container h2 {padding: 0 0 0 30px; background:url(../interface/input.png) left no-repeat; height:17px;}
-div#output-list-container h2 {padding: 0 0 0 30px; background:url(../interface/output.png) left no-repeat; height:17px;}
-div#gear-list-container h2 {display:block;padding: 0 0 0 25px; background:url(../interface/gear.png) left no-repeat; height:17px; }
+div#input-list-container h2 {padding: 0 0 0 30px; background:url(../../../interface/editor/input.png) left no-repeat; height:17px;}
+div#output-list-container h2 {padding: 0 0 0 30px; background:url(../../../interface/editor/output.png) left no-repeat; height:17px;}
+div#gear-list-container h2 {display:block;padding: 0 0 0 25px; background:url(../../../interface/editor/gear.png) left no-repeat; height:17px; }
 div#input-list-container h2:first-letter, div#output-list-container h2:first-letter, div#gear-list-container h2:first-letter {text-transform:uppercase;}
 div#gear-list-container img {
     max-width: 50px;

@@ -1,0 +1,87 @@
+{
+  "name": "Marshall1960",
+  "model_src": "Marshall1960.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Marshall 1960",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Marshall 1960",
+      "Category": "Backline",
+      "Comment": "The Guitar Amplifier Cabinets like the Marshall 1960 300W 4x12",
+      "Image": "Marshall1960B.jpg",
+      "Weight": 36.4,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for the Ampeg SVT-4 PRO. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+    {
+      "name": "INSTR MIC sm57",
+      "model_src": "INSTR_MIC_sm57.json",
+      "X": 0.5,
+      "Y": -0.3,
+      "turn": 0,
+      "Title": "Shure sm57",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "Marshall",
+          "Type": "mic",
+          "ChName": "sm57",
+          "Comment": "",
+          "Phantom_power": "Off"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM57",
+          "Category": "Microphones and DI",
+          "Comment": "dynamic cardioid instrument microphone",
+          "Image": "Shure57.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Short microphone stand",
+          "Category": "Stands",
+          "Comment": "The short microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 1.5,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}

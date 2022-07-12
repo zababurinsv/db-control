@@ -1,14 +1,8 @@
 # Changelog
 
-## [3.0.1] - 2021-09-24
-
-### Fixed
-
-- Don't wrap existing errors ([#37](https://github.com/Level/errors/issues/37)) ([`189f2b1`](https://github.com/Level/errors/commit/189f2b1)) (Vincent Weevers)
+_**If you are upgrading:** please see [`UPGRADING.md`](UPGRADING.md)._
 
 ## [3.0.0] - 2021-04-09
-
-_If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 
 ### Changed
 
@@ -38,8 +32,6 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 - Remove copyright headers from code ([`f5e5e40`](https://github.com/Level/errors/commit/f5e5e40)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
 
 ## [2.0.0] - 2018-05-13
-
-_If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 
 ### Changed
 
@@ -117,11 +109,9 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 
 - Add travis ([`5f6d1cd`](https://github.com/Level/errors/commit/5f6d1cd), [`58690fa`](https://github.com/Level/errors/commit/58690fa), [`36c3199`](https://github.com/Level/errors/commit/36c3199)) ([**@ralphtheninja**](https://github.com/ralphtheninja))
 
-## [1.0.1] - 2015-03-20
+## 1.0.1 - 2015-03-20
 
 :seedling: Initial release.
-
-[3.0.1]: https://github.com/Level/errors/compare/v3.0.0...v3.0.1
 
 [3.0.0]: https://github.com/Level/errors/compare/v2.0.1...v3.0.0
 
@@ -142,5 +132,3 @@ _If you are upgrading: please see [`UPGRADING.md`](UPGRADING.md)._
 [1.0.3]: https://github.com/Level/errors/compare/v1.0.2...v1.0.3
 
 [1.0.2]: https://github.com/Level/errors/compare/v1.0.1...v1.0.2
-
-[1.0.1]: https://github.com/Level/errors/releases/tag/v1.0.1

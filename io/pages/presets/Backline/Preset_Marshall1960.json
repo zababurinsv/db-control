@@ -1,0 +1,83 @@
+{
+  "name": "Marshall1960",
+  "model_src": "Marshall1960.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Marshall 1960a cab",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Marshall 1960a",
+      "Category": "Backline",
+      "Comment": "Marshall 1960a 300W 4X12 Mono/Stereo Angled Cabinet",
+      "Image": "Marshall1960a.jpg",
+      "Weight": 36.4,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 0
+    }
+  ],
+  "children": [
+    {
+      "src": "/Backline/Preset_MarshallJCM900.json",
+      "X": 0,
+      "Y": 0,
+      "turn": 0,
+      "Locked": true
+    },
+    {
+      "name": "INSTR MIC sm57",
+      "model_src": "INSTR_MIC_sm57.json",
+      "X": 0.45,
+      "Y": -0.3,
+      "turn": 0,
+      "Title": "Shure sm57",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "Marshall",
+          "Type": "mic",
+          "ChName": "sm57",
+          "Comment": "",
+          "Phantom_power": "Off"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM57",
+          "Category": "Microphones and DI",
+          "Comment": "dynamic cardioid instrument microphone",
+          "Image": "Shure57.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Short microphone stand",
+          "Category": "Stands",
+          "Comment": "The short microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 1.5,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        }
+      ]
+    }
+  ]
+}

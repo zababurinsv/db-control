@@ -1,0 +1,188 @@
+{
+  "name": "man1",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "Title": "Cntrabassist",
+  "model_src": "man1.json",
+  "X": 2,
+  "Y": -3.95,
+  "Z": 0,
+  "is_structure": false,
+  "Height": 0,
+  "turn": 0,
+  "Title_to_Source": false,
+  "children": [
+    {
+      "name": "MicSTAND",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "VOC CBass",
+          "Type": "mic",
+          "ChName": "sm58",
+          "Comment": "",
+          "Channel": 1,
+          "Locked": false
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure sm58",
+          "Category": "Microphones and DI",
+          "Image": "ShureSM58.jpg",
+          "Comment": "dynamic cardioid voice microphone",
+          "Weight": 0.2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 1,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Long microphone stand",
+          "Category": "Stands",
+          "Image": "",
+          "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "Title": "MicSTAND",
+      "model_src": "MicSTAND.json",
+      "X": 0.7,
+      "Y": -0.1,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "Contrabass",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "C-bass",
+          "Type": "mic",
+          "ChName": "dpa4060",
+          "Comment": "",
+          "Phantom_power": "On"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "dpa 4060",
+          "Category": "Microphones and DI",
+          "Image": "Mic_dpa4060.jpg",
+          "Comment": "Condenser omni directional  microphone with special clip for C.-bass",
+          "Weight": 0.2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 1,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "1",
+      "Title": "Contrabass",
+      "model_src": "Contrabass.json",
+      "X": 0.5,
+      "Y": 0.03,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": false,
+      "Title_to_Source": false,
+      "children": [
+        {
+          "name": "DI 48v",
+          "Comment": "",
+          "input_list": [
+            {
+              "Source": "C-bass",
+              "Type": "DI",
+              "ChName": "Bass DI",
+              "Comment": "",
+              "Phantom_power": "On",
+              "Channel": 2,
+              "Locked": false
+            }
+          ],
+          "output_list": [],
+          "gear_list": [
+            {
+              "Name": "Di-box",
+              "Category": "Microphones and DI",
+              "Image": "DI.jpg",
+              "Comment": "The active di-box, TS to XLR",
+              "Weight": 0.4,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            },
+            {
+              "Name": "Microphone cable",
+              "Category": "Wire",
+              "Image": "",
+              "Comment": "XLR-XLR",
+              "Weight": 1,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            }
+          ],
+          "parent": "3",
+          "Title": "DI",
+          "model_src": "DI_48VNORM.json",
+          "X": 0.3,
+          "Y": 0.44,
+          "Z": 0,
+          "is_structure": false,
+          "Height": 0,
+          "turn": 0,
+          "Locked": false,
+          "Title_to_Source": false,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "name": "TOM_FLOOR_16x18",
+  "model_src": "TOM_FLOOR_16x18.json",
+  "X": -4,
+  "Y": -0.6,
+  "turn": 0,
+  "Title": "Floor",
+  "Comment": "",
+  "input_list": [
+    {
+      "Source": "floor tom mic",
+      "Type": "close",
+      "ChName": "e604",
+      "Comment": "",
+      "Phantom_power": "Off"
+    }
+  ],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Floor tom",
+      "Category": "Instruments and access",
+      "Comment": "Yamaha Maple Custom Floor tom 16x18",
+      "Image": "",
+      "Weight": 5,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Sennheiser e904",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid instrumental microphone for drums or percussion",
+      "Image": "Sennh904.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Microphone cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

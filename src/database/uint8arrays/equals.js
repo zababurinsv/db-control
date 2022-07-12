@@ -24,4 +24,4 @@ function equals (a, b) {
   return true
 }
 
-export default equals
+module.exports = equals

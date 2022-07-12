@@ -1,4 +1,5 @@
 "use strict";
+export default pool;
 
 /**
  * An allocator as used by {@link util.pool}.
@@ -45,4 +46,3 @@ function pool(alloc, slice, size) {
         return buf;
     };
 }
-export default pool;

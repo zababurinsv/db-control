@@ -1,6 +1,6 @@
 'use strict'
 
-import Counter from "../../crdts/src/G-Counter.js";
+const Counter = require('crdts/src/G-Counter')
 
 class CounterIndex {
   constructor (id) {
@@ -13,13 +13,13 @@ class CounterIndex {
 
   updateIndex (oplog) {
     if (this._index) {
-      const getCounter = e => e.payload.value.counters
-      const mergeToIndex = _counters => this._index.merge({ _counters })
+      const createCounter = e => Counter.from(e.payload.value)
+      const mergeToIndex = e => this._index.merge(e)
       oplog.values.filter(e => e && e.payload.op === 'COUNTER')
-        .map(getCounter)
+        .map(createCounter)
         .forEach(mergeToIndex)
     }
   }
 }
 
-export default  CounterIndex
+module.exports = CounterIndex

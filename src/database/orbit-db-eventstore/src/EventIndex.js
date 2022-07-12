@@ -14,4 +14,4 @@ class EventIndex {
   }
 }
 
-export default  EventIndex
+module.exports = EventIndex

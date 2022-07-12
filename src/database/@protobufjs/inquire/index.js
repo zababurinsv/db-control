@@ -1,4 +1,6 @@
 "use strict";
+export default inquire;
+
 /**
  * Requires a module only if available.
  * @memberof util
@@ -13,4 +15,3 @@ function inquire(moduleName) {
     } catch (e) {} // eslint-disable-line no-empty
     return null;
 }
-export default inquire

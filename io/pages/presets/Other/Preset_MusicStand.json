@@ -1,0 +1,13 @@
+{
+  "name": "MusicStand",
+  "model_src": "MusicStand.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Music Stand",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

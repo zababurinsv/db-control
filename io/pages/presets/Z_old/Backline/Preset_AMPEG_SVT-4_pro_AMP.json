@@ -1,0 +1,53 @@
+{
+  "name": "AMPEG_SVT-4_pro_AMP",
+  "model_src": "AMPEG_SVT-4_pro_AMP.json",
+  "X": -2,
+  "Y": 2,
+  "turn": 0,
+  "Title": "Ampeg SVT4 pro amplifier",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Ampeg SVT-4 PRO Amplifler",
+      "Category": "Backline",
+      "Comment": "Bass Amplifier",
+      "Image": "AmpegSVT4.jpg",
+      "Weight": 18,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 1400,
+      "Parameters": {}
+    },
+    {
+      "Name": "Amplifier cable speakon",
+      "Category": "Wire",
+      "Comment": "Audio cable speakon-speakon for Ampeg SVT-4 PRO 810",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for the Ampeg SVT-4 PRO, C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+
+    {
+      "src": "Preset_Electric.json",
+      "X": 0.4,
+      "Y": 0.8,
+      "turn": 90
+    }
+  ]
+}

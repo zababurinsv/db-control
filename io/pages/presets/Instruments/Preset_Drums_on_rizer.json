@@ -1,0 +1,208 @@
+{
+  "name": "DRUMS on RIZER",
+  "model_src": "Drums_on_rizer.json",
+  "X": -4,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Drums on rizer",
+  "Comment": "",
+  "Locked": true,
+  "Is_Structure": true,
+  "Height": 0.5,
+  "input_list": [
+    {
+      "Source": "kick mic",
+      "Type": "in",
+      "ChName": "beta91",
+      "Comment": "",
+      "Phantom_power": "On"
+    },
+    {
+      "Source": "kick mic",
+      "Type": "out",
+      "ChName": "beta52",
+      "Comment": "",
+      "Phantom_power": "Off"
+    },
+    {
+      "Source": "snare mic",
+      "Type": "top",
+      "ChName": "sm57",
+      "Comment": "",
+      "Phantom_power": "Off"
+    },
+    {
+      "Source": "snare mic",
+      "Type": "bottom",
+      "ChName": "TG57c",
+      "Comment": "",
+      "Phantom_power": "On"
+    },
+    {
+      "Source": "tom 10 mic",
+      "Type": "close",
+      "ChName": "e904",
+      "Comment": "",
+      "Phantom_power": "Off"
+    },
+    {
+      "Source": "tom 12 mic",
+      "Type": "close",
+      "ChName": "e904",
+      "Comment": "",
+      "Phantom_power": "Off"
+    },
+    {
+      "Source": "floor tom mic",
+      "Type": "close",
+      "ChName": "e604",
+      "Comment": "",
+      "Phantom_power": "Off"
+    },
+    {
+      "Source": "Hi-Hat",
+      "Type": "close",
+      "ChName": "sm81",
+      "Comment": "",
+      "Phantom_power": "On"
+    },
+    {
+      "Source": "Overhead mic",
+      "Type": "left",
+      "ChName": "sm81",
+      "Comment": "",
+      "Phantom_power": "On"
+    },
+    {
+      "Source": "Overhead mic",
+      "Type": "right",
+      "ChName": "sm81",
+      "Comment": "",
+      "Phantom_power": "On"
+    }
+  ],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Shure beta91",
+      "Category": "Microphones and DI",
+      "Comment": "Condenser cardioid bass drum microphone",
+      "Image": "Shure91.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure beta52A",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid bass drum microphone",
+      "Image": "Shure52.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure SM57",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid instrumental microphone",
+      "Image": "Shure57.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Beyerdynamic TG-D57C",
+      "Category": "Microphones and DI",
+      "Comment": "Condenser cardioid microphone with flexible gooseneck",
+      "Image": "Beyer57.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Sennheiser e904",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid instrumental microphone for drums or percussion",
+      "Image": "Sennh904.jpg",
+      "Weight": 0.4,
+      "Count": 2,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Sennheiser e604",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid instrumental microphone for drums or percussion",
+      "Image": "Sennh_e604.jpeg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Shure SM81",
+      "Category": "Microphones and DI",
+      "Comment": "condenser cardioid instrumental microphone",
+      "Image": "Shure81.jpg",
+      "Weight": 0.6,
+      "Count": 3,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Microphone cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 10,
+      "Count": 10,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Long microphone stand",
+      "Category": "Stands",
+      "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+      "Image": "Long_stand.jpg",
+      "Weight": 8,
+      "Count": 4,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Short microphone stand",
+      "Category": "Stands",
+      "Comment": "The short microphone stand with folding tripod base, boom arm, and shock mount",
+      "Image": "Short_Stand.jpg",
+      "Weight": 1.5,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Tama Starclassic",
+      "Category": "Instruments and access",
+      "Comment": "Drum set with kick 22, tom 10, tom 12, floor 16",
+      "Image": "Starclassic.jpg",
+      "Weight": 30,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Drummer throne",
+      "Category": "Instruments and access",
+      "Comment": "Chair ergo-rider",
+      "Image": "",
+      "Weight": 5,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

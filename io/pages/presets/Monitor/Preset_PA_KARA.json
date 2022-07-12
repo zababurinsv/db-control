@@ -1,0 +1,98 @@
+{
+  "name": "L-acoustics KARA",
+  "model_src": "",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "L-acoustics KARA",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "L-acoustics KARA",
+      "Category": "PA",
+      "Comment": "Main system. Line source element has an operating frequency bandwidth from 55 Hz to 20 kHz",
+      "Image": "KARA.jpg",
+      "Weight": 312,
+      "Count": 12,
+      "Owner": "Rent",
+      "Power_consumption": 0
+    },
+    {
+      "Name": "L-acoustics KIWA II",
+      "Category": "PA",
+      "Comment": "Additional system - front field. Operates from 70 Hz to 20 kHz. 100° symmetric horizontal directivity",
+      "Image": "KARA.jpg",
+      "Weight": 56,
+      "Count": 4,
+      "Owner": "Rent",
+      "Power_consumption": 0
+    },
+    {
+      "Name": "L-acoustics SB18",
+      "Category": "PA",
+      "Comment": "8 subwoofers SB18 in cardioid configuration",
+      "Image": "",
+      "Weight": 416,
+      "Count": 8,
+      "Owner": "Rent",
+      "Power_consumption": 0
+    },
+    {
+      "Name": "L-acoustics LA8",
+      "Category": "PA",
+      "Comment": "4-channel amplifier. Universal switched mode power supply, 120 / 230 V (or 100 / 200 V for Japan) 4x1100W/8Ωat1%THD,allchannelsdriven (4 x 1300 W peak); 4 x 1800 W/4 or 2.7 Ω at 1% THD, all channels driven (4 x 2500 W peak)",
+      "Image": "LA8.jpg",
+      "Weight": 48.8,
+      "Count": 4,
+      "Owner": "Rent",
+      "Power_consumption": 6000
+    },
+    {
+      "Name": "L-Acoustics LA4X",
+      "Category": "Backline",
+      "Comment": "Cutting edge loudspeaker amplification, DSP, network; High-grade 24 bit A/D converters, 130 dB dynamic range; 32 bit floating point SHARC DSP, 96 kHz sampling rate; 4 channel high efficiency amplifier section fed by 2 inputs; 4 X 1000W/4 Ohms",
+      "Image": "LA4X.jpg",
+      "Weight": 5.65,
+      "Count": 0.5,
+      "Count_round": 1,
+      "Weight_round": 11.3,
+      "Owner": "Rent",
+      "Power_consumption": 4100,
+      "Parameters": {}
+    },
+    {
+      "Name": "Speacon",
+      "Category": "Wire",
+      "Comment": "Switching kit for KARA and KIWA II",
+      "Image": "",
+      "Weight": 10,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for LA8",
+      "Image": "",
+      "Weight": 0.8,
+      "Count": 5,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Image": "Schuko.jpg",
+      "Weight": 0.8,
+      "Count": 5,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    }
+  ],
+  "children": []
+}

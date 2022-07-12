@@ -2,19 +2,16 @@
 
 class DocumentIndex {
   constructor () {
-    console.log('👿 DocumentIndex constructor')
     this._index = {}
   }
 
   get (key, fullOp = false) {
-    console.log('👿 DocumentIndex get', fullOp, key)
     return fullOp
       ? this._index[key]
       : this._index[key] ? this._index[key].payload.value : null
   }
 
   updateIndex (oplog, onProgressCallback) {
-    console.log('👿 DocumentIndex updateIndex', oplog)
     const reducer = (handled, item, idx) => {
       if (item.payload.op === 'PUTALL' && item.payload.docs[Symbol.iterator]) {
         for (const doc of item.payload.docs) {
@@ -48,4 +45,4 @@ class DocumentIndex {
   }
 }
 
-export default  DocumentIndex
+module.exports = DocumentIndex

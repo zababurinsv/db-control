@@ -9,7 +9,7 @@ var N7 = Math.pow(2, 49)
 var N8 = Math.pow(2, 56)
 var N9 = Math.pow(2, 63)
 
-export default function (value) {
+module.exports = function (value) {
   return (
     value < N1 ? 1
   : value < N2 ? 2

@@ -7,7 +7,7 @@ var slice = Array.prototype.slice;
 var toStr = Object.prototype.toString;
 var funcType = '[object Function]';
 
-export function bind(that) {
+module.exports = function bind(that) {
     var target = this;
     if (typeof target !== 'function' || toStr.call(target) !== funcType) {
         throw new TypeError(ERROR_MESSAGE + target);
@@ -50,5 +50,3 @@ export function bind(that) {
 
     return bound;
 };
-
-export default bind

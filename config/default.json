@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://Sergey:fds744502fds@xart-qd8fc.mongodb.net/authorization?retryWrites=true&w=majority",
+  "jwtSecret": "sdfwee34fervsdshddg",
+  "githubToken": "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"
+}

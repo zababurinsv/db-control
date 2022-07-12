@@ -1,0 +1,128 @@
+{
+  "name": "GRANDPIANO",
+  "model_src": "GRANDPIANO.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Grandpiano",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Steinway",
+      "Category": "Instruments and access",
+      "Comment": "Concert Grand Piano Steinway & Sons Model D",
+      "Image": "Steinway.jpg",
+      "Weight": 500,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+    {
+      "name": "sm_94_for_piano",
+      "model_src": "sm_94_for_piano.json",
+      "X": 1.1,
+      "Y": 0.4,
+      "turn": 45,
+      "Title": "Shure sm94",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "Grand",
+          "Type": "mic",
+          "ChName": "piano_L",
+          "Comment": "",
+          "Phantom_power": "On"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM94",
+          "Category": "Microphones and DI",
+          "Comment": "Condenser cardioid instrumental microphone",
+          "Image": "Shure94.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Long microphone stand",
+          "Category": "Stands",
+          "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        }
+      ],
+      "children": []
+    },
+    {
+      "name": "sm_94_for_piano",
+      "model_src": "sm_94_for_piano.json",
+      "X": 0.6,
+      "Y": 1.3,
+      "turn": 45,
+      "Title": "Shure sm94",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "Grand",
+          "Type": "mic",
+          "ChName": "piano_R",
+          "Comment": "",
+          "Phantom_power": "On"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM94",
+          "Category": "Microphones and DI",
+          "Comment": "Condenser cardioid instrumental microphone",
+          "Image": "Shure94.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Long microphone stand",
+          "Category": "Stands",
+          "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        }
+      ]
+    }
+  ]
+}

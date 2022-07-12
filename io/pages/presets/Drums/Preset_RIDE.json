@@ -1,0 +1,27 @@
+{
+  "name": "RIDE",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Ride",
+      "Category": "Instruments and access",
+      "Image": "",
+      "Comment": "Zildjian Ride",
+      "Weight": 5,
+      "Power_consumption": 0,
+      "Weight_round": 5,
+      "Count_round": 1,
+      "Count": 1,
+      "Owner": "Band"
+    }
+  ],
+  "Title": "Ride",
+  "model_src": "RIDE.json",
+  "X": -3.4,
+  "Y": -0.8,
+  "Z": 0,
+  "turn": 0,
+  "children": []
+}

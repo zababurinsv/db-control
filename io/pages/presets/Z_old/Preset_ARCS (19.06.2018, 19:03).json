@@ -1,0 +1,82 @@
+{
+  "name": "ARCS",
+  "model_src": "ARCS.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Stage monitor",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [
+    {
+      "Source": "mix",
+      "Type": "mono",
+      "ChName": "SideFILL",
+      "Comment": ""
+    }
+  ],
+  "gear_list": [
+    {
+      "Name": "L-Acoustics ARCS WIDE",
+      "Category": "Monitoring",
+      "Comment": "The 2-way bi-amp cabinet enclosure : 12'LF + 1'HF, RMS power LF 450W, HF 150W",
+      "Image": "L-Acoustics ARCS.jpg",
+      "Weight": 36,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Speaker cable",
+      "Category": "Wire",
+      "Comment": "Speakon-speakon, SP25, 4 x 4mm2 NL4 25m length",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "L-Acoustics LA4X",
+      "Category": "Monitoring",
+      "Comment": "Cutting edge loudspeaker amplification, DSP, network; High-grade 24 bit A/D converters, 130 dB dynamic range; 32 bit floating point SHARC DSP, 96 kHz sampling rate; 4 channel high efficiency amplifier section fed by 2 inputs; 4 X 1000W/4 Ohms",
+      "Image": "LA4X.jpg",
+      "Weight": 2.825,
+      "Count": 0.25,
+      "Count_round": 1,
+      "Weight_round": 11.3,
+      "Owner": "Rent",
+      "Power_consumption": 1025
+    },
+    {
+      "Name": "Audio cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for LA4X. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.05,
+      "Count": 0.25,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Image": "Schuko.jpg",
+      "Weight": 0.05,
+      "Count": 0.25,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    }
+  ],
+  "children": []
+}

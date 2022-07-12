@@ -22,4 +22,4 @@ function concat (arrays, length) {
   return output
 }
 
-export default concat
+module.exports = concat

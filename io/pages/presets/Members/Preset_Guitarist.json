@@ -1,0 +1,84 @@
+{
+  "name": "Guitarist",
+  "model_src": "Guitarist.json",
+  "X": 0,
+  "Y": -5,
+  "turn": 0,
+  "Title": "Guitarist",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": [
+    {
+      "src": "/Other/Preset_gtr_stand_small.json",
+      "X": -0.5,
+      "Y": 0.8,
+      "turn": 0
+    },
+    {
+      "src": "/Other/Preset_Electric.json",
+      "X": 0.3,
+      "Y": 0.3,
+      "turn": 90
+    },
+    {
+      "src": "/Backline/Preset_Marshall1960.json",
+      "X": -1.6,
+      "Y": 0,
+      "turn": 0
+    },
+    {
+      "model_src": "MicSTAND.json",
+      "name": "MicSTAND",
+      "X": 1,
+      "Y": 0,
+      "turn": 0,
+      "Title": "Shure beta58",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "GuitVOC",
+          "Type": "mic",
+          "ChName": "beta58",
+          "Comment": "",
+          "Phantom_power": "Off"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure beta58",
+          "Category": "Microphones and DI",
+          "Comment": "dynamic cardioid voice microphone",
+          "Image": "Shure_beta_58a.jpg",
+          "Weight": 0.2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Comment": "XLR-XLR",
+          "Image": "",
+          "Weight": 1,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        },
+        {
+          "Name": "Long microphone stand",
+          "Category": "Stands",
+          "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+          "Image": "",
+          "Weight": 2,
+          "Count": 1,
+          "Owner": "Rent",
+          "Parameters": {}
+        }
+      ],
+      "children": []
+    }
+  ]
+}

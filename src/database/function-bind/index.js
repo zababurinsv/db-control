@@ -1,5 +1,5 @@
 'use strict';
 
-import implementation from "./implementation.js";
+var implementation = require('./implementation');
 
-export default Function.prototype.bind || implementation;
+module.exports = Function.prototype.bind || implementation;

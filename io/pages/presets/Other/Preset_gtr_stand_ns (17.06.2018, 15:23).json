@@ -1,0 +1,13 @@
+{
+  "name": "gtr_stand_ns",
+  "model_src": "gtr_stand_ns.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Guitar Stand with Neck Support",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

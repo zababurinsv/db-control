@@ -1,7 +1,9 @@
+module.exports = read
+
 var MSB = 0x80
   , REST = 0x7F
 
-export function read(buf, offset) {
+function read(buf, offset) {
   var res    = 0
     , offset = offset || 0
     , shift  = 0
@@ -25,4 +27,3 @@ export function read(buf, offset) {
 
   return res
 }
-export default read

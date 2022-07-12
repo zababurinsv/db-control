@@ -1,0 +1,40 @@
+{
+  "name": "MarshallJCM900",
+  "model_src": "MarshallJCM900.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Marshall JCM 900 amp",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Marshall JCM 900",
+      "Category": "Backline",
+      "Comment": "Marshall JCM900 4100 100W Dual Reverb Valve Amplifier",
+      "Image": "MarshallJCM900.jpg",
+      "Weight": 18.8,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 375
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for the Marshall JCM100. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent"
+    }
+  ],
+  "children": [
+    {
+      "src": "/Other/Preset_Electric.json",
+      "X": 0,
+      "Y": 0.6,
+      "turn": 90
+    }
+  ]
+}

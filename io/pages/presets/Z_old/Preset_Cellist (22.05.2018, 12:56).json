@@ -1,0 +1,134 @@
+{
+  "name": "Cellist",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "Title": "Cello player",
+  "model_src": "Cellist.json",
+  "X": 0.14807717502117157,
+  "Y": 0.13539409637451172,
+  "Z": 0,
+  "is_structure": false,
+  "Height": 0,
+  "turn": 0,
+  "Title_to_Source": false,
+  "children": [
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "Chair for cello",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "1",
+      "Title": "Chair",
+      "model_src": "STUL.json",
+      "X": -0.20937752723693848,
+      "Y": 0.0022733211517333984,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "Cello",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [],
+      "parent": "1",
+      "Title": "Cello",
+      "model_src": "Cello.json",
+      "X": 0.7006176859140396,
+      "Y": -0.00018298625946044922,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": [
+        {
+          "name": "SM81_on_STAND",
+          "Comment": "",
+          "input_list": [
+            {
+              "Source": "Cello",
+              "Type": "in",
+              "ChName": "SM81",
+              "Comment": "",
+              "Phantom_power": "On",
+              "Channel": 1,
+              "Locked": false
+            }
+          ],
+          "output_list": [],
+          "gear_list": [
+            {
+              "Name": "Shure SM81",
+              "Category": "Microphones and DI",
+              "Image": "Shure81.jpg",
+              "Comment": "Condenser cardioid instrumental microphone",
+              "Weight": 0.2,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            },
+            {
+              "Name": "Long microphone stand",
+              "Category": "Stands",
+              "Image": "",
+              "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+              "Weight": 2,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            },
+            {
+              "Name": "Microphone cable",
+              "Category": "Wire",
+              "Image": "",
+              "Comment": "XLR-XLR",
+              "Weight": 1,
+              "Power_consumption": 0,
+              "Weight_round": 0.1,
+              "Count_round": 1,
+              "Count": 1,
+              "Owner": "Rent"
+            }
+          ],
+          "Title": "Shure sm81",
+          "model_src": "SM81_on_STAND.json",
+          "X": 0.32245856523513794,
+          "Y": -0.09829334914684296,
+          "Z": 0,
+          "is_structure": false,
+          "Height": 0,
+          "turn": 0,
+          "Title_to_Source": false,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

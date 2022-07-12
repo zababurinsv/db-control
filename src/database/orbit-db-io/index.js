@@ -1,6 +1,5 @@
-import dagPB from "../ipld-dag-pb/index.js";
-import CID from "../cids/dist/index.js";
-
+const CID = require('cids')
+const dagPB = require('ipld-dag-pb')
 const defaultBase = 'base58btc'
 
 const cidifyString = (str) => {
@@ -64,10 +63,11 @@ const writeCbor = async (ipfs, obj, options) => {
       dagNode[prop] = cidifyString(dagNode[prop])
     }
   })
+
   const base = options.base || defaultBase
   const onlyHash = options.onlyHash || false
   const cid = await ipfs.dag.put(dagNode, { onlyHash })
-  console.log('@@@@@@@@@@@@ cid @@@@@@@@@@@@@@@', cid, base)
+  console.log('@@@@@@@@@ cid @@@@@@@@@', cid)
   const res = cid.toBaseEncodedString(base)
   const pin = options.pin || false
   if (pin) {
@@ -128,7 +128,7 @@ const read = (ipfs, cid, options = {}) => {
   return format.read(ipfs, cid, options)
 }
 
-export default {
+module.exports = {
   read,
   write
 }

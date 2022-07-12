@@ -1,10 +1,9 @@
 "use strict";
-import asPromise from '../aspromise/index.js'
-import inquire from '../inquire/index.js'
-var fs = inquire("fs");
+import asPromise from "../aspromise/index.js";
+import inquire from "../inquire/index.js";
 
 export default fetch;
-
+var fs = inquire("fs");
 
 /**
  * Node-style callback as used by {@link util.fetch}.

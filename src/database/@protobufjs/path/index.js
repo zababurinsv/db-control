@@ -7,7 +7,9 @@
  */
 var path = {}
 
-var isAbsolute =
+export default path
+
+var isAbsolute = {}
 /**
  * Tests if the specified path is absolute.
  * @param {string} path Path to test
@@ -63,5 +65,3 @@ path.resolve = function resolve(originPath, includePath, alreadyNormalized) {
         originPath = normalize(originPath);
     return (originPath = originPath.replace(/(?:\/|^)[^/]+$/, "")).length ? normalize(originPath + "/" + includePath) : includePath;
 };
-
-export default path

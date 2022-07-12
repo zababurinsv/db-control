@@ -1,8 +1,8 @@
 'use strict'
 
-import pMap from "../../p-map/index.js";
-import pDoWhilst from "../../p-do-whilst/index.js";
-import Entry from "./entry.js";
+const pMap = require('p-map')
+const pDoWhilst = require('p-do-whilst')
+const Entry = require('./entry')
 
 const hasItems = arr => arr && arr.length > 0
 
@@ -177,4 +177,4 @@ class EntryIO {
   }
 }
 
-export default EntryIO
+module.exports = EntryIO

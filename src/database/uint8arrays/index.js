@@ -1,17 +1,12 @@
 'use strict'
-import compare from "./compare.js";
+const compare = require('./compare')
+const concat = require('./concat')
+const equals = require('./equals')
+const fromString = require('./from-string')
+const toString = require('./to-string')
+const xor = require('./xor')
 
-import concat from "./concat.js";
-
-import equals from "./equals.js";
-
-import fromString from "./from-string.js";
-
-import toString from "./to-string.js";
-
-import xor from "./xor.js";
-
-export default {
+module.exports = {
   compare,
   concat,
   equals,

@@ -1,5 +1,31 @@
-dir:
-  - io
-  - db
-  - orbitDb
-  - soundcheckbox
+---
+  - page: io
+    dir:
+    - /docs
+  - page: db
+    dir:
+    - /docs
+  - page: orbitDb
+    dir:
+    - /docs
+  - page: soundcheckbox
+    dir:
+    - /docs
+  - page: presets
+    dir:
+    -
+  - page: save
+    dir:
+    -
+  - page: interface
+    dir:
+    -
+  - page: group
+    dir:
+    -
+  - page: img
+    dir:
+    -
+  - page: soundStorage
+    dir:
+    -

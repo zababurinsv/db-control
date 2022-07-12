@@ -1,0 +1,50 @@
+{
+  "name": "LP_std",
+  "model_src": "LP_std.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Les Paul standart on stand",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Les Paul Standart",
+      "Category": "Instruments and access",
+      "Image": "",
+      "Comment": "Gibson Les Paul Standard",
+      "Weight": 8,
+      "Power_consumption": 0,
+      "Weight_round": 8,
+      "Count_round": 1,
+      "Count": 1,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Instrument cable",
+      "Category": "Wire",
+      "Comment": "TS-TS",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": [
+    {
+      "name": "gtr_stand_ns",
+      "model_src": "gtr_stand_ns.json",
+      "X": 0,
+      "Y": 0,
+      "turn": 0,
+      "Title": "Guitar Stand with Neck Support",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [],
+      "children": []
+    }
+  ]
+}

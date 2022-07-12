@@ -1,0 +1,52 @@
+{
+  "name": "TOM_RACK_12",
+  "model_src": "TOM_RACK_12.json",
+  "X": -3.6,
+  "Y": 0.3,
+  "turn": 0,
+  "Title": "Tom 12",
+  "Comment": "",
+  "input_list": [
+    {
+      "Source": "tom 12 mic",
+      "Type": "close",
+      "ChName": "e604",
+      "Comment": "",
+      "Phantom_power": "Off"
+    }
+  ],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Tom 12",
+      "Category": "Instruments and access",
+      "Comment": "Yamaha Maple Custom, Tom 12x8",
+      "Image": "",
+      "Weight": 4,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Sennheiser e904",
+      "Category": "Microphones and DI",
+      "Comment": "Dynamic cardioid instrumental microphone for drums or percussion",
+      "Image": "Sennh904.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Microphone cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

@@ -1,0 +1,13 @@
+{
+  "name": "AcGuit",
+  "model_src": "AcGuit.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Acoustic Dreadnought with Piezo Pick",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

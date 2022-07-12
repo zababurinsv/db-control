@@ -1,0 +1,25 @@
+{
+  "name": "DROP",
+  "model_src": "ELECTRIC.json",
+  "X": 0,
+  "Y": 0,
+    "Z": 0,
+  "turn": 0,
+  "Title": "220v",
+  "Comment": "220v",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

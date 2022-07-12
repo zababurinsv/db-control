@@ -1,9 +1,11 @@
+module.exports = encode
+
 var MSB = 0x80
   , REST = 0x7F
   , MSBALL = ~REST
   , INT = Math.pow(2, 31)
 
-export function encode(num, out, offset) {
+function encode(num, out, offset) {
   out = out || []
   offset = offset || 0
   var oldOffset = offset
@@ -17,9 +19,8 @@ export function encode(num, out, offset) {
     num >>>= 7
   }
   out[offset] = num | 0
-
+  
   encode.bytes = offset - oldOffset + 1
-
+  
   return out
 }
-export default encode

@@ -6,7 +6,7 @@ const NotALogError = () => new Error('Given argument is not an instance of Log')
 const CannotJoinWithDifferentId = () => new Error('Can\'t join logs with different IDs')
 const LtOrLteMustBeStringOrArray = () => new Error('lt or lte must be a string or array of Entries')
 
-export default {
+module.exports = {
   IPFSNotDefinedError: IPFSNotDefinedError,
   LogNotDefinedError: LogNotDefinedError,
   NotALogError: NotALogError,

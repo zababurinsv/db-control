@@ -1,0 +1,13 @@
+{
+	"name" : "Contrabass", 
+	"model_src" : "Contrabass.json",
+	"X" : 0,
+	"Y" : 0,
+	"turn" : 0,
+	"Title" : "Contrabass", 
+	"Comment" : "", 
+	"input_list": [],
+	"output_list": [],
+	"gear_list": [],
+	"children" : []
+}

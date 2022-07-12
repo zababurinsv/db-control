@@ -1,10 +1,8 @@
 'use strict'
 
-import Store from "../../orbit-db-store/dist/Store.js";
-
-import CounterIndex from "./CounterIndex.js";
-
-import Counter from "../../crdts/src/G-Counter.js";
+const Store = require('orbit-db-store')
+const CounterIndex = require('./CounterIndex')
+const Counter = require('crdts/src/G-Counter')
 
 class CounterStore extends Store {
   constructor (ipfs, id, dbname, options = {}) {
@@ -12,7 +10,6 @@ class CounterStore extends Store {
       Object.assign(options, { Index: CounterIndex })
     }
     super(ipfs, id, dbname, options)
-    this._index = new this.options.Index(this.identity.publicKey)
     this._type = 'counter'
   }
 
@@ -31,4 +28,4 @@ class CounterStore extends Store {
   }
 }
 
-export default  CounterStore
+module.exports = CounterStore

@@ -1,0 +1,61 @@
+{
+  "name": "BassPlayer",
+  "model_src": "BassPlayer.json",
+  "X": -1,
+  "Y": 4,
+  "turn": 0,
+  "Title": "Bassist",
+  "Comment": "Gruuvi BASS men",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Guitar stand",
+      "Category": "Instruments and access",
+      "Comment": "The short guitar stand",
+      "Image": "",
+      "Weight": 0.4,
+      "Count": 1,
+      "Owner": "Rent"
+    }
+  ],
+  "children": [
+    {
+      "name": "DI 48v",
+      "model_src": "DI_48VNORM.json",
+      "X": 0.3,
+      "Y": 0.3,
+      "turn": 0,
+      "Title": "DI",
+      "Comment": "write comment",
+      "input_list": [
+        {
+          "Source": "Electric Bass",
+          "Type": "DI",
+          "ChName": "BassDI",
+          "Comment": "",
+          "Phantom_power": "On"
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Di-box",
+          "Category": "Microphones and DI",
+          "Comment": "The active di-box, jack to XLR",
+          "Image": "DI.jpg",
+          "Weight": 0.5,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "children": []
+    },
+    {
+      "src": "AMPEGSVT4pro810.json",
+      "X": -1,
+      "Y": 0,
+      "turn": 0
+    }
+  ]
+}

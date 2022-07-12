@@ -1,7 +1,7 @@
 'use strict'
 
-import Store from "../../orbit-db-store/dist/Store.js";
-import EventIndex from "./EventIndex.js";
+const Store = require('orbit-db-store')
+const EventIndex = require('./EventIndex')
 
 // TODO: generalize the Iterator functions and spin to its own module
 
@@ -61,7 +61,7 @@ class EventStore extends Store {
       // Lower than and lastN case, search latest first by reversing the sequence
       result = this._read(events.reverse(), opts.lt ? opts.lt : opts.lte, amount, opts.lte || !opts.lt).reverse()
     }
-
+    
     if (opts.reverse) {
       result.reverse()
     }
@@ -81,4 +81,4 @@ class EventStore extends Store {
   }
 }
 
-export default  EventStore
+module.exports = EventStore

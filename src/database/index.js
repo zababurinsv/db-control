@@ -1,5 +1,5 @@
-import Config from '../config/index.js'
-import logs from '../utils/debug/index.js'
+import Config from '/config/index.js'
+import logs from '/utils/debug/index.js'
 let orbitdb = undefined
 let programs = undefined
 
@@ -13,14 +13,17 @@ let debug = (maxCount, id, ...args) => {
 
 export const initIPFS = async (props) => {
   const {IPFS} = props
-  debug( -4,'----------------------👀[(database)initIPFS]');
+  debug( -4,'--------------👀[(database)initIPFS]');
   return await IPFS.create(Config.ipfs)
 }
 
 export const initOrbitDB = async (props) => {
   const {ipfs, OrbitDB} = props;
-  debug( -4,'----------------------👀[(database)initOrbitDB]')
-  return await OrbitDB.createInstance(ipfs)
+  debug( -4,'----------------------👀[(database)initOrbitDB]', {
+    OrbitDB,
+    ipfs
+  })
+  return OrbitDB.createInstance(ipfs)
 }
 
 export const getAllDatabases = async () => {

@@ -1,7 +1,7 @@
 'use strict'
 
-import Store from "../../orbit-db-store/dist/Store.js";
-import KeyValueIndex from "./KeyValueIndex.js";
+const Store = require('orbit-db-store')
+const KeyValueIndex = require('./KeyValueIndex')
 
 class KeyValueStore extends Store {
   constructor(ipfs, id, dbname, options) {
@@ -40,4 +40,4 @@ class KeyValueStore extends Store {
   }
 }
 
-export default  KeyValueStore
+module.exports = KeyValueStore

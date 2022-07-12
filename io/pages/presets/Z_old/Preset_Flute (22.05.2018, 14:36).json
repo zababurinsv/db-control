@@ -1,0 +1,13 @@
+{
+  "name": "Flute",
+  "model_src": "Flute.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Flute",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

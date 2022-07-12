@@ -1,0 +1,132 @@
+{
+  "name": "Violin_player",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "Title": "Violin player",
+  "model_src": "Violin_player.json",
+  "X": 0,
+  "Y": 0,
+  "Z": 0,
+  "is_structure": false,
+  "Height": 0,
+  "turn": 0,
+  "Title_to_Source": false,
+  "children": [
+    {
+      "name": "MusicStand",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Music stand",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 0.5,
+          "Power_consumption": 0,
+          "Weight_round": 0.5,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "Title": "Music Stand",
+      "model_src": "MusicStand.json",
+      "X": 0.6759614944458008,
+      "Y": -0.321749746799469,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": false,
+      "Title_to_Source": false,
+      "children": [],
+      "relative_coord": false,
+      "is_jump": false
+    },
+    {
+      "name": "Violin",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "dpa 4061",
+          "Category": "Microphones and DI",
+          "Image": "Mic_dpa4060.jpg",
+          "Comment": "Condenser omni directional  microphone with special clip for violin",
+          "Weight": 0.2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 1,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "Title": "Violin",
+      "model_src": "Violin.json",
+      "X": 0,
+      "Y": 0,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": [],
+      "relative_coord": false,
+      "is_jump": false
+    },
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "1",
+      "Title": "Chair",
+      "model_src": "STUL.json",
+      "X": -0.2597496509552002,
+      "Y": 0.013296022079885006,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": [],
+      "relative_coord": false,
+      "is_jump": false
+    }
+  ],
+  "relative_coord": false,
+  "is_jump": false
+}

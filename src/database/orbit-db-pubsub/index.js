@@ -1,2 +1,1 @@
-import src from "./src/ipfs-pubsub.js";
-export default  src
+module.exports = require('./src/ipfs-pubsub')

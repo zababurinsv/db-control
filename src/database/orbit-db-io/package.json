@@ -21,10 +21,8 @@
   },
   "homepage": "https://github.com/orbitdb/orbit-db-io#readme",
   "dependencies": {
-    "@pinata/sdk": "^1.1.23",
     "cids": "^1.0.0",
-    "ipld-dag-pb": "^0.20.0",
-    "web3.storage": "^3.5.1"
+    "ipld-dag-pb": "^0.20.0"
   },
   "localMaintainers": [
     "shamb0t <shams@haja.io>",

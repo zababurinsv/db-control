@@ -1,3 +1,3 @@
 'use strict'
 
-export default 'ipfs-pubsub-direct-channel/v1'
+module.exports = 'ipfs-pubsub-direct-channel/v1'

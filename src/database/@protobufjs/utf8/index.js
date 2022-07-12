@@ -6,6 +6,7 @@
  * @namespace
  */
 var utf8 = {};
+export default utf8
 
 /**
  * Calculates the UTF8 byte length of a string.
@@ -103,4 +104,3 @@ utf8.write = function utf8_write(string, buffer, offset) {
     }
     return offset - start;
 };
-export default utf8

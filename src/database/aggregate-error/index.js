@@ -1,44 +1,47 @@
-import indentString from '../indent-string/index.js';
-import cleanStack from '../clean-stack/index.js';
+'use strict';
+const indentString = require('indent-string');
+const cleanStack = require('clean-stack');
 
 const cleanInternalStack = stack => stack.replace(/\s+at .*aggregate-error\/index.js:\d+:\d+\)?/g, '');
 
-export default class AggregateError extends Error {
-    #errors;
+class AggregateError extends Error {
+	constructor(errors) {
+		if (!Array.isArray(errors)) {
+			throw new TypeError(`Expected input to be an Array, got ${typeof errors}`);
+		}
 
-    name = 'AggregateError';
+		errors = [...errors].map(error => {
+			if (error instanceof Error) {
+				return error;
+			}
 
-    constructor(errors) {
-        if (!Array.isArray(errors)) {
-            throw new TypeError(`Expected input to be an Array, got ${typeof errors}`);
-        }
+			if (error !== null && typeof error === 'object') {
+				// Handle plain error objects with message property and/or possibly other metadata
+				return Object.assign(new Error(error.message), error);
+			}
 
-        errors = errors.map(error => {
-            if (error instanceof Error) {
-                return error;
-            }
+			return new Error(error);
+		});
 
-            if (error !== null && typeof error === 'object') {
-                // Handle plain error objects with message property and/or possibly other metadata
-                return Object.assign(new Error(error.message), error);
-            }
+		let message = errors
+			.map(error => {
+				// The `stack` property is not standardized, so we can't assume it exists
+				return typeof error.stack === 'string' ? cleanInternalStack(cleanStack(error.stack)) : String(error);
+			})
+			.join('\n');
+		message = '\n' + indentString(message, 4);
+		super(message);
 
-            return new Error(error);
-        });
+		this.name = 'AggregateError';
 
-        let message = errors
-            .map(error => {
-                // The `stack` property is not standardized, so we can't assume it exists
-                return typeof error.stack === 'string' && error.stack.length > 0 ? cleanInternalStack(cleanStack(error.stack)) : String(error);
-            })
-            .join('\n');
-        message = '\n' + indentString(message, 4);
-        super(message);
+		Object.defineProperty(this, '_errors', {value: errors});
+	}
 
-        this.#errors = errors;
-    }
-
-    get errors() {
-        return this.#errors.slice();
-    }
+	* [Symbol.iterator]() {
+		for (const error of this._errors) {
+			yield error;
+		}
+	}
 }
+
+module.exports = AggregateError;

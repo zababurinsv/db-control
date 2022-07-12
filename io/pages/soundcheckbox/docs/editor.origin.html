@@ -1,0 +1,1123 @@
+<html>
+
+<head>
+<!--    <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>-->
+<!--    <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-125695573-1"></script>-->
+<!--    <script>-->
+<!--        window.dataLayer = window.dataLayer || [];-->
+<!---->
+<!--        function gtag() {-->
+<!--            dataLayer.push(arguments);-->
+<!--        }-->
+<!--        gtag('js', new Date());-->
+<!--        gtag('config', 'UA-125695573-1');-->
+<!--    </script>-->
+    <title>SoundCheckBox.com - Set Up Your Show</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link href="/interface/editor/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="/interface/editor/favicon-32x32.png" rel="icon" type="image/png">
+    <link href="/interface/editor/favicon-16x16.png" rel="icon" type="image/png">
+    <link type="text/css" rel="stylesheet" href="./css/editor/my_project.min.css?v=15052019224219">
+    <link href="./css/editor/Muli|Quicksand.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/editor/b4w.simple.min.js?v=15052019224219"></script>
+    <script type="text/javascript" src="./js/editor/my_project.min.js?v=10012022165930"></script>
+    <script type="text/javascript" src="./js/editor/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "preview paste media searchreplace autolink code visualblocks visualchars image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount spellchecker imagetools textpattern help",
+            contextmenu: "link image imagetools table spellchecker",
+            menubar: 'file edit insert view format table tools help',
+            images_upload_url: '/postAcceptor.php',
+            images_upload_base_path: '../img/ridertext',
+            images_reuse_filename: false,
+            images_upload_credentials: true,
+            setup: function(editor) {
+                editor.on('change', function() {
+                    editor.save();
+                });
+            },
+            images_upload_handler: function(blobInfo, success, failure) {
+                var xhr, formData;
+                xhr = new XMLHttpRequest();
+                xhr.withCredentials = false;
+                xhr.open('POST', '/postAcceptor.php');
+                xhr.onload = function() {
+                    var json;
+                    if(xhr.status != 200) {
+                        failure('HTTP Error: ' + xhr.status);
+                        return;
+                    }
+                    json = JSON.parse(xhr.responseText);
+                    if(!json || typeof json.location != 'string') {
+                        failure('Invalid JSON: ' + xhr.responseText);
+                        return;
+                    }
+                    success(json.location);
+                };
+                formData = new FormData();
+                if(typeof(blobInfo.blob().name) !== undefined) {
+                    fileName = blobInfo.blob().name;
+                } else {
+                    fileName = blobInfo.filename();
+                }
+                formData.append('file', blobInfo.blob(), fileName);
+                formData.append(_CSRF, _CSRFToken);
+                xhr.send(formData);
+            }
+        });
+    </script>
+    <script>
+        _CSRF = "_as_csrf_token";
+        _CSRFToken = "39ff49f51e811f006695aafb692701996224c888";
+        _currentUser_id = 477;
+        _load_rider = false;
+        _rider_name = 'New Rider';
+        _rider_title = 'New Official Rider';
+        _band_name = '';
+        _band_logo = '/group/images/Bel_KIRP.jpg';
+        _phone = '';
+        _contact_name = ' ';
+        _email = 'zababurins@vk.com';
+    </script>
+    <link rel="stylesheet" type="text/css" id="mce-u0" referrerpolicy="origin" href="./css/editor/skin.min.css">
+</head>
+
+<body>
+<div id="title-page" class="hidden">
+    <div id="title-page-bandname-div">
+        <h1 id="title-page-bandname"></h1></div> <img id="title-page-logo" src="/group/images/Bel_KIRP.jpg" width="200px" height="200px">
+    <div id="title-page-rider-title-div">
+        <h2 id="title-page-title">New Official Rider</h2></div>
+    <div id="title-page-rider-link">
+        <a href="http://soundcheckbox.com/build/pub.php?id=0"><img src="https://chart.googleapis.com/chart?cht=qr&amp;chs=150x150&amp;chl=http://soundcheckbox.com/build/pub.php?id=0"></a>
+        <br><a href="http://soundcheckbox.com/build/pub.php?id=0">http://soundcheckbox.com/build/pub.php?id=0</a></div>
+    <div id="title-page-contacts"><span id="title-page-contact"> </span>
+        <br><span id="title-page-phone"></span>
+        <br><span id="title-page-email">zababurins@vk.com</span></div>
+    <div id="title-page-created">Created using SounCheckBox.com at <span id="title-page-date">19-6-2022</span></div>
+</div>
+<div id="main_canvas_container">
+    <canvas width="1848" height="631" style="position: absolute; left: 0px; top: 0px; width: 1848px; height: 631px;"></canvas>
+</div>
+<div id="rider-text"></div>
+<div id="head">
+    <a href="http://lp.soundcheckbox.com" title="Copyright by © SoundCheckBox.com 2018"><img class="logo" src="/interface/editor/SCB-gray.png"></a>
+    <div id="toggle_controls"></div>
+    <div id="controls-container">
+        <div title="Properties of object" class="button data-button-controls" id="properties_button"><span class="mobile-title">Properties of object</span></div>
+        <div title="Rotate left" class="button data-button-controls" id="rot-ccw"><span class="mobile-title">Rotate left</span></div>
+        <div title="Rotate right" class="button data-button-controls" id="rot-cw"><span class="mobile-title">Rotate right</span></div>
+        <div title="Delete selected object" class="button data-button-controls" id="delete"><span class="mobile-title">Delete selected object</span></div>
+        <div title="Attach object to another" class="button data-button-controls selectable" id="attach"><span class="mobile-title">Attach object to another</span></div>
+        <div title="Save preset" class="button data-button-controls" id="preset_save_button"><span class="mobile-title">Save preset</span></div>
+        <div title="Delete object will all children" class="button data-button-controls" id="deletechild"><span class="mobile-title">Delete object will all children</span></div>
+        <div class="button data-button-controls bolt"></div>
+        <div title="Show/hide annotations" class="button data-button-controls selectable" id="show_anchors_button"><span class="mobile-title">Show/hide annotations</span></div>
+        <div title="Save Rider to database" class="button data-button-controls" id="rider_save_button"><span class="mobile-title">Save Rider to database</span></div>
+        <div title="Restore rider" class="button data-button-controls" id="rider_restore_button"><span class="mobile-title">Restore rider</span></div>
+        <div title="Show/hide coordinate grid" class="button data-button-controls selectable" id="show_grid_button"><span class="mobile-title">Show/hide coordinate grid</span></div>
+        <div class="button data-button-controls bolt"></div>
+        <div title="Publish rider" class="button data-button-controls" id="stage_button"><span class="mobile-title">Publish rider</span></div>
+        <div title="Print of rider" class="button data-button-controls" id="print_button"><span class="mobile-title">Print of rider</span></div>
+        <div title="Exit to My Riders" class="button data-button-controls" id="exit_button"><span class="mobile-title">Exit to My Riders</span></div>
+    </div>
+    <div id="lists"> <img src="/interface/editor/finish.png" width="14px"><span id="rider-text-list-header" class="">Rider</span> <img src="/interface/editor/input-10.png"><span id="input-list-header" class="">input List (0)</span> <img src="../interface/output-10.png"><span id="output-list-header" class="active">output List (0)</span> <img src="../interface/gear-10.png"><span id="gear-list-header" class="">Gear List (0)</span> </div>
+</div>
+<div id="properties-container">
+    <div id="properties-form-container" class="hidden">
+        <input class="close-button" src="/interface/editor/close-button.png" type="image">
+        <form id="properties_form" name="properties_form">
+            <input disabled="disabled" name="ID" type="hidden" value="">
+            <input disabled="disabled" name="Name" type="hidden" value="">
+            <table class="properties">
+                <tbody>
+                <tr>
+                    <td>Title:</td>
+                    <td class="right">
+                        <input name="Title" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Title to Source:</td>
+                    <td class="right">
+                        <input name="titletosource" type="checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Comment:</td>
+                    <td class="right">
+                        <input name="Comment" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Parent:</td>
+                    <td class="right">
+                        <select name="Parent"></select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>X coord:</td>
+                    <td class="right">
+                        <input disabled="disabled" name="X" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Y coord:</td>
+                    <td class="right">
+                        <input disabled="disabled" name="Y" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Turn angle:</td>
+                    <td class="right">
+                        <input disabled="disabled" name="turn" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lock position:</td>
+                    <td class="right">
+                        <input name="lock" type="checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lock children:</td>
+                    <td class="right">
+                        <input name="lockall" type="checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="saveprop" name="button" type="button" value="Save">
+                        <br>
+                        <br>
+                        <div class="add_buttons">
+                            <input id="addinput" name="button" type="button" value="Add new Input">
+                            <input id="addoutput" name="button" type="button" value="Add new Output">
+                            <input id="addgear" name="button" type="button" value="Add new Gear"> </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div id="stage-container">
+    <div id="stage-form-container" class="hidden">
+        <input class="close-button" src="/interface/editor/close-button.png" type="image">
+        <form id="publish_form" name="publish_form">
+            <table class="properties">
+                <tbody>
+                <tr>
+                    <td>Title:</td>
+                    <td class="right">
+                        <input name="Title" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact name:</td>
+                    <td class="right">
+                        <input name="Contact" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact phone:</td>
+                    <td class="right">
+                        <input name="Phone" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Contact email:</td>
+                    <td class="right">
+                        <input name="email" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="publish" name="button" type="button" value="Publish" disabled=""> <span id="beforepub"><br>Before publish please check if all field are filled and Rider text is correct in <a id="openridertab" href="#">"Rider"</a> tab</span> </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div id="restore-container">
+    <div id="restore-form-container" class="hidden">
+        <input class="close-button" src="/interface/editor/close-button.png" type="image">
+        <form id="restore_form" name="restore_form">
+            <select name="rider"></select>
+            <input id="restorerider" name="button" type="button" value="Restore Rider">
+            <br>
+            <input id="deleterider" name="button" type="button" value="Delete Rider">
+            <br> </form>
+    </div>
+</div>
+<div id="savepreset-container">
+    <div id="savepreset-form-container" class="hidden">
+        <input class="close-button" src="/interface/editor/close-button.png" type="image">
+        <form id="savepreset_form" name="savepreset_form">
+            <table class="properties">
+                <tbody>
+                <tr>
+                    <td>Save as:</td>
+                    <td class="right">
+                        <select name="id">
+                            <option value="0" selected="">NEW PRESET</option>
+                        </select>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td class="right">
+                        <input name="name" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select categories:</td>
+                    <td class="right">
+                        <select name="categories[]" multiple="">
+                            <option value="members">members</option>
+                            <option value="instruments">instruments</option>
+                            <option value="Drums &amp; Perc">Drums &amp; Perc</option>
+                            <option value="mic &amp; DI">mic &amp; DI</option>
+                            <option value="monitors">monitors</option>
+                            <option value="backline">backline</option>
+                            <option value="other">other</option>
+                            <option value="orchestras">orchestras</option>
+                        </select>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select tags:</td>
+                    <td class="right">
+                        <select name="tags[]" multiple="">
+                            <optgroup>
+                                <option value="man">man</option>
+                                <option value="woman">woman</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="rock">rock</option>
+                                <option value="jazz">jazz</option>
+                                <option value="classic">classic</option>
+                                <option value="world">world</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="orchestra">orchestra</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="standing">standing</option>
+                                <option value="sitting">sitting</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="playbacks">playbacks</option>
+                                <option value="synths">synths</option>
+                                <option value="harmonica">harmonica</option>
+                                <option value="brass">brass</option>
+                                <option value="woodwinds">woodwinds</option>
+                                <option value="MC">MC</option>
+                                <option value="DJ">DJ</option>
+                                <option value="conductor">conductor</option>
+                                <option value="dancer">dancer</option>
+                                <option value="winds">winds</option>
+                                <option value="keys">keys</option>
+                                <option value="sing">sing</option>
+                                <option value="strings">strings</option>
+                                <option value="guitars">guitars</option>
+                                <option value="drums">drums</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="electro">electro</option>
+                                <option value="acoustic">acoustic</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="video">video</option>
+                                <option value="stand">stand</option>
+                                <option value="furniture">furniture</option>
+                                <option value="mixer">mixer</option>
+                                <option value="stagecraft">stagecraft</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="wireless">wireless</option>
+                                <option value="wire">wire</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="condenser">condenser</option>
+                                <option value="dynamic">dynamic</option>
+                                <option value="headset">headset</option>
+                                <option value="clips">clips</option>
+                                <option value="short">short</option>
+                                <option value="boom">boom</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="wedge">wedge</option>
+                                <option value="cabinet">cabinet</option>
+                                <option value="combo">combo</option>
+                                <option value="stack">stack</option>
+                                <option value="amplifier">amplifier</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="percussion">percussion</option>
+                                <option value="cymbal">cymbal</option>
+                                <option value="set">set</option>
+                                <option value="hardware">hardware</option>
+                            </optgroup>
+                            <optgroup>
+                                <option value="active">active</option>
+                                <option value="passive">passive</option>
+                            </optgroup>
+                        </select>
+                        <br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Current image of button:</td>
+                    <td class="right"><img id="savepreset_img" src=""> </td>
+                </tr>
+                <tr>
+                    <td>New image of button:</td>
+                    <td class="right">
+                        <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="savepreset" name="button" type="button" value="Save preset to menu">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div id="addobject-container">
+    <div id="addobject-form-container" class="hidden">
+        <input class="close-button" src="/interface/editor/close-button.png" type="image">
+        <form id="addobject_form" name="addobject_form">
+            <table class="properties">
+                <tbody>
+                <tr>
+                    <td>Select 3d Object:</td>
+                    <td class="right">
+                        <select name="object">
+                            <option>Upload New Object</option>
+                            <option value="null">Alto</option>
+                            <option value="./assets/images/Mic_STD_PIVOC.png">Mic_STD_PIVOC</option>
+                            <option value="null">AcGuit</option>
+                            <option value="null">Jazz_bass</option>
+                            <option value="./assets/images/Cable_cross.png">Cable_cross</option>
+                            <option value="null">CaseSCB</option>
+                            <option value="null">Carpet</option>
+                            <option value="null">LED_wall</option>
+                            <option value="null">BackDrop</option>
+                            <option value="null">LCD_Proector</option>
+                            <option value="null">Curtain</option>
+                            <option value="null">Accordion</option>
+                            <option value="null">Strat72</option>
+                            <option value="null">SketchUp</option>
+                            <option value="null">HammondB3</option>
+                            <option value="null">MidasRack</option>
+                            <option value="null">Midas_PRO2</option>
+                            <option value="null">Incognito_Logo</option>
+                            <option value="null">KIWA</option>
+                            <option value="/assets/images/MJF_212.png">MJF_212</option>
+                            <option value="null">db_m4</option>
+                            <option value="null">CHAIR</option>
+                            <option value="null">Stair</option>
+                            <option value="null">AcGuit_std</option>
+                            <option value="null">D112</option>
+                            <option value="null">E_drumset</option>
+                            <option value="null">XLR_MALE</option>
+                            <option value="null">DrumRack</option>
+                            <option value="null">Rototoms</option>
+                            <option value="null">KICK_Pearl</option>
+                            <option value="null">DW9000</option>
+                            <option value="null">Snare_Pearl</option>
+                            <option value="null">Stand_snare_pearl</option>
+                            <option value="null">HH_stand_pearl</option>
+                            <option value="null">HH_cymbals</option>
+                            <option value="null">Ride_Heavy_cymbal</option>
+                            <option value="null">Floor_tom_18_pearl</option>
+                            <option value="null">Floor_tom_16_pearl</option>
+                            <option value="null">Rack_tom_12</option>
+                            <option value="null">Rack_tom10</option>
+                            <option value="null">Rack_tom_8</option>
+                            <option value="null">Rack_holder</option>
+                            <option value="null">Trone_pearl</option>
+                            <option value="null">DoubleBoom_with_holder</option>
+                            <option value="null">Cymbal_boom_stand</option>
+                            <option value="null">Small_cymbal_boom</option>
+                            <option value="null">Splash_Meinl</option>
+                            <option value="null">Sabian_HHX_Crash_16_inch</option>
+                            <option value="null">Beta91A</option>
+                            <option value="null">Beta52A</option>
+                            <option value="null">orchestra_pit</option>
+                            <option value="null">Yamaha_cl5</option>
+                            <option value="null">e906</option>
+                            <option value="null">Key_stand_2floor</option>
+                            <option value="null">KORG_triton</option>
+                            <option value="null">KeyStand_simple</option>
+                            <option value="null">e901</option>
+                            <option value="null">EBS_410</option>
+                            <option value="null">MB_410</option>
+                            <option value="null">SMOKE</option>
+                            <option value="null">HAZER</option>
+                            <option value="null">SITAR</option>
+                            <option value="null">trombone</option>
+                            <option value="null">French_Horn</option>
+                            <option value="null">Tuba</option>
+                            <option value="null">Clarinet</option>
+                            <option value="null">Bassoon</option>
+                            <option value="null">GuitarHero</option>
+                            <option value="null">Strat_for_Hero</option>
+                            <option value="null">RED_BURELL</option>
+                            <option value="null">Timbales</option>
+                            <option value="null">DigitalPiano</option>
+                            <option value="null">DigitalPiano2</option>
+                            <option value="null">BAR_STOOL2</option>
+                            <option value="null">BAR_STOOL3</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr id="jsonfile">
+                    <td>JSON file:</td>
+                    <td class="right">
+                        <input type="file" name="json" accept=".json">
+                    </td>
+                </tr>
+                <tr id="binfile">
+                    <td>BIN file:</td>
+                    <td class="right">
+                        <input type="file" name="bin" accept=".bin">
+                    </td>
+                </tr>
+                <tr id="imagefile">
+                    <td>Image of object
+                        <br> (optional):</td>
+                    <td class="right">
+                        <input type="file" name="image" accept="image/x-png,image/gif,image/jpeg">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Z coord, m:</td>
+                    <td class="right">
+                        <input name="Z" type="text" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Height, m:</td>
+                    <td class="right">
+                        <input name="Height" type="text" value="0">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Is structure (rizer)</td>
+                    <td class="right">
+                        <input name="structure" type="checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Title to Source:</td>
+                    <td class="right">
+                        <input name="Title_to_Source" type="checkbox">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="addobject" name="button" type="button" value="Add object">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div id="list-edit-container" class="hidden">
+    <input class="close-button" src="../interface/close-button.png" type="image">
+    <div id="list-edit-form-container">
+        <form id="list_edit_form" name="list_edit_form">
+            <input name="ID" type="hidden" value="">
+            <table class="properties">
+                <tbody>
+                <tr>
+                    <td>Channel: ( Lock:
+                        <input name="Locked" type="checkbox"> )</td>
+                    <td class="right">
+                        <input name="Channel" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Source:</td>
+                    <td class="right">
+                        <input name="Source" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td class="right">
+                        <input name="Name" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td class="right">
+                        <input name="Type" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Comment:</td>
+                    <td class="right">
+                        <input name="Comment" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="savelistrow" name="button" type="button" value="Save">
+                        <input id="deletelistrow" name="delete" type="button" value="Delete element">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div id="gear-list-edit-container" class="hidden">
+    <input class="close-button" src="../interface/close-button.png" type="image">
+    <div id="gear-list-edit-form-container">
+        <form id="gear_list_edit_form" name="gear_list_edit_form">
+            <input name="ID" type="hidden" value="">
+            <table class="properties">
+                <tbody>
+                <tr>
+                    <td>Name:</td>
+                    <td class="right">
+                        <input name="Name" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Category:</td>
+                    <td class="right">
+                        <input name="Category" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Image:</td>
+                    <td class="right">
+                        <input name="Image" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Count:</td>
+                    <td class="right">
+                        <input name="Count" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Weight:</td>
+                    <td class="right">
+                        <input name="Weight" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Power:</td>
+                    <td class="right">
+                        <input name="Power" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Owner:</td>
+                    <td class="right">
+                        <input name="Owner" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Comment:</td>
+                    <td class="right">
+                        <input name="Comment" type="text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="savegearlistrow" name="button" type="button" value="Save">
+                        <input id="deletegearlistrow" name="delete" type="button" value="Delete element">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="hidden" id="input-list-container">
+    <button class="edit-mode-button"><img src="../interface/8_1.png"></button>
+    <h2>input List (0)</h2>
+    <table id="input_list_table" class="info-table noedit-mode">
+        <tbody>
+        <tr>
+            <th>№</th>
+            <th></th>
+            <th>Source</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Comment</th>
+            <th></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="" id="output-list-container">
+    <button class="edit-mode-button"><img src="../interface/8_1.png"></button>
+    <h2>output List (0)</h2>
+    <table id="output_list_table" class="info-table noedit-mode">
+        <tbody>
+        <tr>
+            <th>№</th>
+            <th></th>
+            <th>Source</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Comment</th>
+            <th></th>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="hidden" id="gear-list-container">
+    <button class="edit-mode-button"><img src="../interface/8_1.png"></button>
+    <h2 class="gear-list-header">Gear List (0 it. w.: 0.0 kg 0.0 kW)</h2></div>
+<div class="hidden" id="rider-text-list-container">
+    <h2></h2>
+    <form id="stage_form" name="stage_form">
+        <table class="properties">
+            <tbody>
+            <tr>
+                <td>Title*:</td>
+                <td class="right">
+                    <input name="Title" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>Contact name*:</td>
+                <td class="right">
+                    <input name="Contact" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>Contact phone*:</td>
+                <td class="right">
+                    <input name="Phone" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>Contact email*:</td>
+                <td class="right">
+                    <input name="email" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>Band name:</td>
+                <td class="right">
+                    <input name="band" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td>Band logo:</td>
+                <td class="right">
+                    <input name="bandlogo" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">Rider text*:</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea name="Text" id="mce_0" aria-hidden="true" style="display: none;"></textarea>
+                    <div role="application" class="tox tox-tinymce" aria-disabled="false" style="visibility: hidden; height: 200px;">
+                        <div class="tox-editor-container">
+                            <div data-alloy-vertical-dir="toptobottom" class="tox-editor-header">
+                                <div role="menubar" data-alloy-tabstop="true" class="tox-menubar">
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">File</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">Edit</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">Insert</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">View</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">Format</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">Table</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">Tools</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <button aria-haspopup="true" role="menuitem" type="button" tabindex="-1" data-alloy-tabstop="true" unselectable="on" class="tox-mbtn tox-mbtn--select" aria-expanded="false" style="user-select: none;"><span class="tox-mbtn__select-label">Help</span>
+                                        <div class="tox-mbtn__select-chevron">
+                                            <svg width="10" height="10" focusable="false">
+                                                <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div role="group" class="tox-toolbar-overlord" aria-disabled="false">
+                                    <div role="group" class="tox-toolbar__primary">
+                                        <div title="history" role="toolbar" data-alloy-tabstop="true" tabindex="-1" class="tox-toolbar__group">
+                                            <button aria-label="Undo" title="Undo" type="button" tabindex="-1" class="tox-tbtn tox-tbtn--disabled" aria-disabled="true"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M6.4 8H12c3.7 0 6.2 2 6.8 5.1.6 2.7-.4 5.6-2.3 6.8a1 1 0 01-1-1.8c1.1-.6 1.8-2.7 1.4-4.6-.5-2.1-2.1-3.5-4.9-3.5H6.4l3.3 3.3a1 1 0 11-1.4 1.4l-5-5a1 1 0 010-1.4l5-5a1 1 0 011.4 1.4L6.4 8z" fill-rule="nonzero"></path></svg></span></button>
+                                            <button aria-label="Redo" title="Redo" type="button" tabindex="-1" class="tox-tbtn tox-tbtn--disabled" aria-disabled="true"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M17.6 10H12c-2.8 0-4.4 1.4-4.9 3.5-.4 2 .3 4 1.4 4.6a1 1 0 11-1 1.8c-2-1.2-2.9-4.1-2.3-6.8.6-3 3-5.1 6.8-5.1h5.6l-3.3-3.3a1 1 0 111.4-1.4l5 5a1 1 0 010 1.4l-5 5a1 1 0 01-1.4-1.4l3.3-3.3z" fill-rule="nonzero"></path></svg></span></button>
+                                        </div>
+                                        <div title="styles" role="toolbar" data-alloy-tabstop="true" tabindex="-1" class="tox-toolbar__group">
+                                            <button title="Formats" aria-label="Formats" aria-haspopup="true" type="button" tabindex="-1" unselectable="on" class="tox-tbtn tox-tbtn--select tox-tbtn--bespoke" aria-expanded="false" style="user-select: none;"><span class="tox-tbtn__select-label">Paragraph</span>
+                                                <div class="tox-tbtn__select-chevron">
+                                                    <svg width="10" height="10" focusable="false">
+                                                        <path d="M8.7 2.2c.3-.3.8-.3 1 0 .4.4.4.9 0 1.2L5.7 7.8c-.3.3-.9.3-1.2 0L.2 3.4a.8.8 0 010-1.2c.3-.3.8-.3 1.1 0L5 6l3.7-3.8z" fill-rule="nonzero"></path>
+                                                    </svg>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div title="formatting" role="toolbar" data-alloy-tabstop="true" tabindex="-1" class="tox-toolbar__group">
+                                            <button aria-label="Bold" title="Bold" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false" aria-pressed="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M7.8 19c-.3 0-.5 0-.6-.2l-.2-.5V5.7c0-.2 0-.4.2-.5l.6-.2h5c1.5 0 2.7.3 3.5 1 .7.6 1.1 1.4 1.1 2.5a3 3 0 01-.6 1.9c-.4.6-1 1-1.6 1.2.4.1.9.3 1.3.6s.8.7 1 1.2c.4.4.5 1 .5 1.6 0 1.3-.4 2.3-1.3 3-.8.7-2.1 1-3.8 1H7.8zm5-8.3c.6 0 1.2-.1 1.6-.5.4-.3.6-.7.6-1.3 0-1.1-.8-1.7-2.3-1.7H9.3v3.5h3.4zm.5 6c.7 0 1.3-.1 1.7-.4.4-.4.6-.9.6-1.5s-.2-1-.7-1.4c-.4-.3-1-.4-2-.4H9.4v3.8h4z" fill-rule="evenodd"></path></svg></span></button>
+                                            <button aria-label="Italic" title="Italic" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false" aria-pressed="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M16.7 4.7l-.1.9h-.3c-.6 0-1 0-1.4.3-.3.3-.4.6-.5 1.1l-2.1 9.8v.6c0 .5.4.8 1.4.8h.2l-.2.8H8l.2-.8h.2c1.1 0 1.8-.5 2-1.5l2-9.8.1-.5c0-.6-.4-.8-1.4-.8h-.3l.2-.9h5.8z" fill-rule="evenodd"></path></svg></span></button>
+                                        </div>
+                                        <div title="alignment" role="toolbar" data-alloy-tabstop="true" tabindex="-1" class="tox-toolbar__group">
+                                            <button aria-label="Align left" title="Align left" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false" aria-pressed="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2zm0-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z" fill-rule="evenodd"></path></svg></span></button>
+                                            <button aria-label="Align center" title="Align center" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false" aria-pressed="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm3 4h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 110-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1H8a1 1 0 010-2zm-3-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z" fill-rule="evenodd"></path></svg></span></button>
+                                            <button aria-label="Align right" title="Align right" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false" aria-pressed="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm6 4h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 010-2zm0 8h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 010-2zm-6-4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z" fill-rule="evenodd"></path></svg></span></button>
+                                            <button aria-label="Justify" title="Justify" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false" aria-pressed="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M5 5h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 110-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2zm0 4h14c.6 0 1 .4 1 1s-.4 1-1 1H5a1 1 0 010-2z" fill-rule="evenodd"></path></svg></span></button>
+                                        </div>
+                                        <div title="indentation" role="toolbar" data-alloy-tabstop="true" tabindex="-1" class="tox-toolbar__group">
+                                            <button aria-label="Decrease indent" title="Decrease indent" type="button" tabindex="-1" class="tox-tbtn tox-tbtn--disabled" aria-disabled="true"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M7 5h12c.6 0 1 .4 1 1s-.4 1-1 1H7a1 1 0 110-2zm5 4h7c.6 0 1 .4 1 1s-.4 1-1 1h-7a1 1 0 010-2zm0 4h7c.6 0 1 .4 1 1s-.4 1-1 1h-7a1 1 0 010-2zm-5 4h12a1 1 0 010 2H7a1 1 0 010-2zm1.6-3.8a1 1 0 01-1.2 1.6l-3-2a1 1 0 010-1.6l3-2a1 1 0 011.2 1.6L6.8 12l1.8 1.2z" fill-rule="evenodd"></path></svg></span></button>
+                                            <button aria-label="Increase indent" title="Increase indent" type="button" tabindex="-1" class="tox-tbtn" aria-disabled="false"><span class="tox-icon tox-tbtn__icon-wrap"><svg width="24" height="24" focusable="false"><path d="M7 5h12c.6 0 1 .4 1 1s-.4 1-1 1H7a1 1 0 110-2zm5 4h7c.6 0 1 .4 1 1s-.4 1-1 1h-7a1 1 0 010-2zm0 4h7c.6 0 1 .4 1 1s-.4 1-1 1h-7a1 1 0 010-2zm-5 4h12a1 1 0 010 2H7a1 1 0 010-2zm-2.6-3.8L6.2 12l-1.8-1.2a1 1 0 011.2-1.6l3 2a1 1 0 010 1.6l-3 2a1 1 0 11-1.2-1.6z" fill-rule="evenodd"></path></svg></span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tox-anchorbar"></div>
+                            </div>
+                            <div class="tox-sidebar-wrap">
+                                <div class="tox-edit-area">
+                                    <iframe id="mce_0_ifr" frameborder="0" allowtransparency="true" title="Rich Text Area" class="tox-edit-area__iframe"></iframe>
+                                </div>
+                                <div role="complementary" class="tox-sidebar">
+                                    <div data-alloy-tabstop="true" tabindex="-1" class="tox-sidebar__slider tox-sidebar--sliding-closed" style="width: 0px;">
+                                        <div class="tox-sidebar__pane-container"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tox-statusbar">
+                            <div class="tox-statusbar__text-container">
+                                <div role="navigation" data-alloy-tabstop="true" class="tox-statusbar__path" aria-disabled="false">
+                                    <div role="button" data-index="0" tab-index="-1" aria-level="1" tabindex="-1" class="tox-statusbar__path-item" aria-disabled="false">p</div>
+                                </div>
+                                <button type="button" tabindex="-1" data-alloy-tabstop="true" class="tox-statusbar__wordcount">6 words</button><span class="tox-statusbar__branding"><a href="https://www.tiny.cloud/?utm_campaign=editor_referral&amp;utm_medium=poweredby&amp;utm_source=tinymce&amp;utm_content=v5" rel="noopener" target="_blank" tabindex="-1" aria-label="Powered by Tiny">Powered by Tiny</a></span></div>
+                            <div title="Resize" data-alloy-tabstop="true" tabindex="-1" class="tox-statusbar__resize-handle">
+                                <svg width="10" height="10" focusable="false">
+                                    <g fill-rule="nonzero">
+                                        <path d="M8.1 1.1A.5.5 0 119 2l-7 7A.5.5 0 111 8l7-7zM8.1 5.1A.5.5 0 119 6l-3 3A.5.5 0 115 8l3-3z"></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div aria-hidden="true" class="tox-throbber" style="display: none;"></div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td class="right">
+                    <input name="Comment" type="text" value="">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"> "*" - It means necessary fields to publish version</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <hr style="width:100%">Stage properties</td>
+            </tr>
+            <tr>
+                <td>Length:</td>
+                <td class="right">
+                    <input name="Length" type="text" value="20">
+                </td>
+            </tr>
+            <tr>
+                <td>Width:</td>
+                <td class="right">
+                    <input disabled="disabled" name="Width" type="text" value="10">
+                </td>
+            </tr>
+            <tr>
+                <td>Show Title:</td>
+                <td class="right">
+                    <input name="showtitle" type="checkbox">
+                </td>
+            </tr>
+            <tr>
+                <td>Show CH:</td>
+                <td class="right">
+                    <input name="showch" type="checkbox">
+                </td>
+            </tr>
+            <tr>
+                <td>Show MIX:</td>
+                <td class="right">
+                    <input name="showmix" type="checkbox">
+                </td>
+            </tr>
+            <tr>
+                <td>Show Comments:</td>
+                <td class="right">
+                    <input name="showcomments" type="checkbox">
+                </td>
+            </tr>
+            <tr class="hidden" id="tr_useborder">
+                <td>Use border of stage:</td>
+                <td class="right">
+                    <input name="useborder" type="checkbox" checked="checked">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input id="savestage" name="button" type="button" value="Apply changes">
+                    <br>
+                    <br>
+                    <div class="add_buttons">
+                        <input id="addstageinput" name="button" type="button" value="Add new Input">
+                        <input id="addstageoutput" name="button" type="button" value="Add new Output">
+                        <input id="addstagegear" name="button" type="button" value="Add new Gear"> </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<div class="" id="menu-container">
+    <div id="tags-container"><span class="preset_tag_0 active" id="preset_tag_all">all</span><span class="preset_tag_1" id="preset_tag_man">man</span><span class="preset_tag_1" id="preset_tag_woman">woman</span><span class="preset_tag_2" id="preset_tag_rock">rock</span><span class="preset_tag_2" id="preset_tag_jazz">jazz</span><span class="preset_tag_2" id="preset_tag_classic">classic</span><span class="preset_tag_2 hidden" id="preset_tag_world">world</span><span class="hidden preset_tag_3" id="preset_tag_orchestra">orchestra</span><span class="preset_tag_4" id="preset_tag_standing">standing</span><span class="preset_tag_4" id="preset_tag_sitting">sitting</span><span class="hidden preset_tag_5" id="preset_tag_playbacks">playbacks</span><span class="hidden preset_tag_5" id="preset_tag_synths">synths</span><span class="hidden preset_tag_5" id="preset_tag_harmonica">harmonica</span><span class="hidden preset_tag_5" id="preset_tag_brass">brass</span><span class="preset_tag_5" id="preset_tag_woodwinds">woodwinds</span><span class="hidden preset_tag_5" id="preset_tag_MC">MC</span><span class="hidden preset_tag_5" id="preset_tag_DJ">DJ</span><span class="hidden preset_tag_5" id="preset_tag_conductor">conductor</span><span class="hidden preset_tag_5" id="preset_tag_dancer">dancer</span><span class="preset_tag_5" id="preset_tag_winds">winds</span><span class="preset_tag_5" id="preset_tag_keys">keys</span><span class="preset_tag_5" id="preset_tag_sing">sing</span><span class="preset_tag_5" id="preset_tag_strings">strings</span><span class="preset_tag_5" id="preset_tag_guitars">guitars</span><span class="preset_tag_5" id="preset_tag_drums">drums</span><span class="preset_tag_6" id="preset_tag_electro">electro</span><span class="preset_tag_6" id="preset_tag_acoustic">acoustic</span><span class="preset_tag_7 hidden" id="preset_tag_video">video</span><span class="preset_tag_7 hidden" id="preset_tag_stand">stand</span><span class="preset_tag_7 hidden" id="preset_tag_furniture">furniture</span><span class="preset_tag_7 hidden" id="preset_tag_mixer">mixer</span><span class="preset_tag_7 hidden" id="preset_tag_stagecraft">stagecraft</span><span class="preset_tag_8 hidden" id="preset_tag_wireless">wireless</span><span class="preset_tag_8 hidden" id="preset_tag_wire">wire</span><span class="preset_tag_9 hidden" id="preset_tag_condenser">condenser</span><span class="preset_tag_9 hidden" id="preset_tag_dynamic">dynamic</span><span class="hidden preset_tag_9" id="preset_tag_headset">headset</span><span class="hidden preset_tag_9" id="preset_tag_clips">clips</span><span class="preset_tag_9 hidden" id="preset_tag_short">short</span><span class="preset_tag_9 hidden" id="preset_tag_boom">boom</span><span class="preset_tag_10 hidden" id="preset_tag_wedge">wedge</span><span class="preset_tag_10 hidden" id="preset_tag_cabinet">cabinet</span><span class="preset_tag_10 hidden" id="preset_tag_combo">combo</span><span class="preset_tag_10 hidden" id="preset_tag_stack">stack</span><span class="preset_tag_10 hidden" id="preset_tag_amplifier">amplifier</span><span class="preset_tag_11 hidden" id="preset_tag_percussion">percussion</span><span class="preset_tag_11 hidden" id="preset_tag_cymbal">cymbal</span><span class="preset_tag_11 hidden" id="preset_tag_set">set</span><span class="preset_tag_11 hidden" id="preset_tag_hardware">hardware</span><span class="hidden preset_tag_12" id="preset_tag_active">active</span><span class="hidden preset_tag_12" id="preset_tag_passive">passive</span></div>
+    <div id="button-container">
+        <div class="button data-button" title="Drummer" id="preset_button_1"><img src="/presets/images/Drummer1.png" alt="Drummer"></div>
+        <div class="button data-button hidden" title="Fender Jazz Bass" id="preset_button_5"><img src="/presets/images/Fender Jazz Bass5.png" alt="Fender Jazz Bass"></div>
+        <div class="button data-button hidden" title="Drums 3 toms set" id="preset_button_7"><img src="/presets/images/Drums 3 toms set7.png" alt="Drums 3 toms set"></div>
+        <div class="button data-button hidden" title="220v Shuko power socket" id="preset_button_9"><img src="/presets/images/220v Shuko power socket9.png" alt="220v Shuko power socket"></div>
+        <div class="button data-button hidden" title="Vocal mic on boom stand" id="preset_button_101"><img src="/presets/images/Vocal mic on boom stand101.png" alt="Vocal mic on boom stand"></div>
+        <div class="button data-button hidden" title="Vocal mic for sitting players" id="preset_button_102"><img src="/presets/images/Vocal mic for sitting players102.png" alt="Vocal mic for sitting players"></div>
+        <div class="button data-button hidden" title="instrumental mic on short" id="preset_button_103"><img src="/presets/images/instrumental mic on short103.png" alt="instrumental mic on short"></div>
+        <div class="button data-button hidden" title="Condenser mic on boom" id="preset_button_104"><img src="/presets/images/Condenser mic on boom104.png" alt="Condenser mic on boom"></div>
+        <div class="button data-button hidden" title="AKG c414XLii" id="preset_button_105"><img src="/presets/images/AKG c414XLii105.png" alt="AKG c414XLii"></div>
+        <div class="button data-button hidden" title="DI-box mono, active" id="preset_button_106"><img src="/presets/images/Active DI BOX106.png" alt="DI-box mono, active"></div>
+        <div class="button data-button hidden" title="In-Ear Monitor Set" id="preset_button_107"><img src="/presets/images/In-Ear Monitor Set107.png" alt="In-Ear Monitor Set"></div>
+        <div class="button data-button hidden" title="Monitor wedge 115" id="preset_button_108"><img src="/presets/images/Monitor wedge 115108.png" alt="Monitor wedge 115"></div>
+        <div class="button data-button hidden" title="pair of monitor wedges 115XT" id="preset_button_109"><img src="/presets/images/pair of monitor wedges 115XT109.png" alt="pair of monitor wedges 115XT"></div>
+        <div class="button data-button hidden" title="Subwoofer for monitor applications" id="preset_button_110"><img src="/presets/images/Subwoofer for monitor applications110.png" alt="Subwoofer for monitor applications"></div>
+        <div class="button data-button hidden" title="Cabinet for monitor and fills" id="preset_button_111"><img src="/presets/images/Cabinet for monitor and fills111.png" alt="Cabinet for monitor and fills"></div>
+        <div class="button data-button hidden" title="Bass Stack Ampeg SVT4 Amp with Classic 810 cabinet" id="preset_button_112"><img src="/presets/images/Bass Stack Ampeg SVT4 Amp with Classic 810 cabinet112.png" alt="Bass Stack Ampeg SVT4 Amp with Classic 810 cabinet"></div>
+        <div class="button data-button hidden" title="Guitar half stack Marshall JCM900 with 1960a cabinet" id="preset_button_115"><img src="/presets/images/Guitar half stack Marshall JCM900 with 1960a cabinet115.png" alt="Guitar half stack Marshall JCM900 with 1960a cabinet"></div>
+        <div class="button data-button hidden" title="Guitar full stack Marshall JCM900 with 1960a and 1960b cabinets" id="preset_button_116"><img src="/presets/images/Guitar full stack Marshall JCM900 with 1960a and 1960b cabinets116.png" alt="Guitar full stack Marshall JCM900 with 1960a and 1960b cabinets"></div>
+        <div class="button data-button hidden" title="Guitar half stack Mesa Boogie Triple Rectifier with Rectifier Standard Slant Cabinet" id="preset_button_117"><img src="/presets/images/Guitar half stack Mesa Boogie Triple Rectifier with Rectifier Standard Slant Cabinet117.png" alt="Guitar half stack Mesa Boogie Triple Rectifier with Rectifier Standard Slant Cabinet"></div>
+        <div class="button data-button hidden" title="guitar combo VOX AC-30" id="preset_button_118"><img src="/presets/images/guitar combo VOX AC-30118.png" alt="guitar combo VOX AC-30"></div>
+        <div class="button data-button hidden" title="guitar combo Fender Twin Reverb 65" id="preset_button_119"><img src="/presets/images/guitar combo Fender Twin Reverb 65119.png" alt="guitar combo Fender Twin Reverb 65"></div>
+        <div class="button data-button hidden" title="guitar combo Fender Hod Rod De Lux" id="preset_button_120"><img src="/presets/images/FenderHodRodDeLUX120.png" alt="guitar combo Fender Hod Rod De Lux"></div>
+        <div class="button data-button hidden" title="KIVA small array element" id="preset_button_122"><img src="/presets/images/KIVA122.png" alt="KIVA small array element"></div>
+        <div class="button data-button hidden" title="Riser 3x3 h=0.5 black drapery" id="preset_button_123"><img src="/presets/images/Riser 3x3 h=0.5 black drapery123.png" alt="Riser 3x3 h=0.5 black drapery"></div>
+        <div class="button data-button hidden" title="MJF 212A active monitor" id="preset_button_125"><img src="/presets/images/MJF 212A125.png" alt="MJF 212A active monitor"></div>
+        <div class="button data-button hidden" title="m4 monitor" id="preset_button_126"><img src="/presets/images/d&amp;b m4 monitor126.png" alt="m4 monitor"></div>
+        <div class="button data-button hidden" title="Riser part 2x1x0.5" id="preset_button_127"><img src="/presets/images/Riser part 2x1x0.5127.png" alt="Riser part 2x1x0.5"></div>
+        <div class="button data-button hidden" title="Riser part 2x1x0.25" id="preset_button_128"><img src="/presets/images/Riser part 2x1x0.25128.png" alt="Riser part 2x1x0.25"></div>
+        <div class="button data-button hidden" title="guitar stand" id="preset_button_129"><img src="/presets/images/guitar stand129.png" alt="guitar stand"></div>
+        <div class="button data-button hidden" title="Guitar Stand with Neck Support" id="preset_button_130"><img src="/presets/images/Guitar Stand with Neck Support130.png" alt="Guitar Stand with Neck Support"></div>
+        <div class="button data-button hidden" title="Music Stand" id="preset_button_131"><img src="/presets/images/Music Stand131.png" alt="Music Stand"></div>
+        <div class="button data-button hidden" title="Ajustable Throne" id="preset_button_132"><img src="/presets/images/Ajustable Throne132.png" alt="Ajustable Throne"></div>
+        <div class="button data-button hidden" title="CHAIR" id="preset_button_133"><img src="/presets/images/Chair133.png" alt="CHAIR"></div>
+        <div class="button data-button hidden" title="Curtains" id="preset_button_135"><img src="/presets/images/Curtains135.png" alt="Curtains"></div>
+        <div class="button data-button hidden" title="Carpet 2x2 " id="preset_button_136"><img src="/presets/images/Carpet 2x2 136.png" alt="Carpet 2x2 "></div>
+        <div class="button data-button hidden" title="Stair" id="preset_button_137"><img src="/presets/images/Stair137.png" alt="Stair"></div>
+        <div class="button data-button hidden" title="AKG D112 " id="preset_button_150"><img src="/presets/images/AKG D112 150.png" alt="AKG D112 "></div>
+        <div class="button data-button hidden" title="Electronic Drum set" id="preset_button_151"><img src="/presets/images/Electronic Drum set151.png" alt="Electronic Drum set"></div>
+        <div class="button data-button hidden" title="XLR male - out from console" id="preset_button_152"><img src="/presets/images/XLR male - out from console152.png" alt="XLR male - out from console"></div>
+        <div class="button data-button hidden" title="Pearl Ultimate Drum Set" id="preset_button_162"><img src="/presets/images/Pearl Ultimate Drum Set162.png" alt="Pearl Ultimate Drum Set"></div>
+        <div class="button data-button hidden" title="Shure Beta91A" id="preset_button_167"><img src="/presets/images/Shure Beta91A167.png" alt="Shure Beta91A"></div>
+        <div class="button data-button hidden" title="Shure Beta52A" id="preset_button_168"><img src="/presets/images/Shure Beta52A168.png" alt="Shure Beta52A"></div>
+        <div class="button data-button hidden" title="Yamaha cl5 monitor console" id="preset_button_169"><img src="/presets/images/Yamaha cl5 monitor console169.png" alt="Yamaha cl5 monitor console"></div>
+        <div class="button data-button hidden" title="Sennhieser e906" id="preset_button_171"><img src="/presets/images/Sennhieser e906171.png" alt="Sennhieser e906"></div>
+        <div class="button data-button hidden" title="Sennheiser e901" id="preset_button_174"><img src="/presets/images/Sennheiser e901174.png" alt="Sennheiser e901"></div>
+        <div class="button data-button hidden" title="EBS 410" id="preset_button_177"><img src="/presets/images/EBS 410177.png" alt="EBS 410"></div>
+        <div class="button data-button hidden" title="Mark Bass 4x10" id="preset_button_178"><img src="/presets/images/Mark Bass 4x10178.png" alt="Mark Bass 4x10"></div>
+        <div class="button data-button hidden" title="Timbales" id="preset_button_193"><img src="/presets/images/Timbales193.png" alt="Timbales"></div>
+        <div class="button data-button" title="BassPlayer" id="preset_button_2"><img src="/presets/images/BassPlayer2.png" alt="BassPlayer"></div>
+        <div class="button data-button hidden" title="Midas PRO2 monitor console" id="preset_button_91"><img src="/presets/images/Midas PRO2 monitor console91.png" alt="Midas PRO2 monitor console"></div>
+        <div class="button data-button hidden" title="Fender Stratocaster model 72'" id="preset_button_92"><img src="/presets/images/Fender Stratocaster 72 model92.png" alt="Fender Stratocaster model 72'"></div>
+        <div class="button data-button hidden" title="KICK_24x22" id="preset_button_93"><img src="/presets/images/KICK_24x2293.png" alt="KICK_24x22"></div>
+        <div class="button data-button hidden" title="SNARE_14x6" id="preset_button_94"><img src="/presets/images/SNARE_14x694.png" alt="SNARE_14x6"></div>
+        <div class="button data-button hidden" title="TOM_RACK_12" id="preset_button_95"><img src="/presets/images/TOM_RACK_1295.png" alt="TOM_RACK_12"></div>
+        <div class="button data-button hidden" title="TOM_RACK_14" id="preset_button_96"><img src="/presets/images/TOM_RACK_1496.png" alt="TOM_RACK_14"></div>
+        <div class="button data-button hidden" title="TOM_FLOOR_16x18" id="preset_button_97"><img src="/presets/images/TOM_FLOOR_16x1897.png" alt="TOM_FLOOR_16x18"></div>
+        <div class="button data-button hidden" title="Hi-HAT" id="preset_button_98"><img src="/presets/images/Hi-HAT98.png" alt="Hi-HAT"></div>
+        <div class="button data-button hidden" title="Crash 16 inch" id="preset_button_99"><img src="/presets/images/Crash 16 inch99.png" alt="Crash 16 inch"></div>
+        <div class="button data-button hidden" title="Ride Cymbal" id="preset_button_100"><img src="/presets/images/Ride Cymbal100.png" alt="Ride Cymbal"></div>
+        <div class="button data-button hidden" title="Conga" id="preset_button_113"><img src="/presets/images/Conga113.png" alt="Conga"></div>
+        <div class="button data-button hidden" title="Cajon" id="preset_button_114"><img src="/presets/images/Cajon114.png" alt="Cajon"></div>
+        <div class="button data-button hidden" title="Case box with wheels h=0.7" id="preset_button_124"><img src="/presets/images/Case box with wheels h=0.7124.png" alt="Case box with wheels h=0.7"></div>
+        <div class="button data-button hidden" title="LED screen" id="preset_button_134"><img src="/presets/images/LED screen134.png" alt="LED screen"></div>
+        <div class="button data-button hidden" title="LCD Proector" id="preset_button_138"><img src="/presets/images/LCD Proector138.png" alt="LCD Proector"></div>
+        <div class="button data-button" title="Contrabass player" id="preset_button_143"><img src="/presets/images/Contrabass player  with di-box143.png" alt="Contrabass player"></div>
+        <div class="button data-button hidden" title="Kick Drum Pearl 22x20" id="preset_button_156"><img src="/presets/images/Kick Drum Pearl 22x20156.png" alt="Kick Drum Pearl 22x20"></div>
+        <div class="button data-button hidden" title="Drum Rack" id="preset_button_157"><img src="/presets/images/Drum Rack157.png" alt="Drum Rack"></div>
+        <div class="button data-button hidden" title="DW 9000 drum kick pedal" id="preset_button_158"><img src="/presets/images/DW 9000 drum kick pedal158.png" alt="DW 9000 drum kick pedal"></div>
+        <div class="button data-button hidden" title="Snare on stand pearl" id="preset_button_159"><img src="/presets/images/Snare on stand pearl159.png" alt="Snare on stand pearl"></div>
+        <div class="button data-button hidden" title="Stand for snare drum" id="preset_button_160"><img src="/presets/images/Stand for snare drum160.png" alt="Stand for snare drum"></div>
+        <div class="button data-button hidden" title="Hi-Hat cymbals on stand" id="preset_button_161"><img src="/presets/images/Hi-Hat cymbals on stand161.png" alt="Hi-Hat cymbals on stand"></div>
+        <div class="button data-button" title="Guitar Hero" id="preset_button_191"><img src="/presets/images/Guitar Hero191.png" alt="Guitar Hero"></div>
+        <div class="button data-button" title="Guitarist" id="preset_button_3"><img src="/presets/images/Guitarist3.png" alt="Guitarist"></div>
+        <div class="button data-button hidden" title="Gibson Les Paul Standard" id="preset_button_8"><img src="/presets/images/Gibson Les Paul Standard11.png" alt="Gibson Les Paul Standard"></div>
+        <div class="button data-button" title="Keyboard Player" id="preset_button_139"><img src="/presets/images/KeyBoardPlayer139.png" alt="Keyboard Player"></div>
+        <div class="button data-button" title="Singer-Songwriter" id="preset_button_144"><img src="/presets/images/Singer-Songwriter144.png" alt="Singer-Songwriter"></div>
+        <div class="button data-button" title="Piano player" id="preset_button_145"><img src="/presets/images/Piano player145.png" alt="Piano player"></div>
+        <div class="button data-button" title="Saxophone player" id="preset_button_146"><img src="/presets/images/Saxophone player146.png" alt="Saxophone player"></div>
+        <div class="button data-button" title="Flutist" id="preset_button_147"><img src="/presets/images/Flutist147.png" alt="Flutist"></div>
+        <div class="button data-button hidden" title="Acoustic dreadnought with piezo pick" id="preset_button_4"><img src="/presets/images/AcGuit234.png" alt="Acoustic dreadnought with piezo pick"></div>
+        <div class="button data-button" title="Singer" id="preset_button_140"><img src="/presets/images/Singer140.png" alt="Singer"></div>
+        <div class="button data-button" title="Singer Female" id="preset_button_141"><img src="/presets/images/Singer Female141.png" alt="Singer Female"></div>
+        <div class="button data-button" title="Singer Female 2" id="preset_button_142"><img src="/presets/images/Singer Female 2142.png" alt="Singer Female 2"></div>
+        <div class="button data-button hidden" title="stand for keyboard, 2 level" id="preset_button_172"><img src="/presets/images/stand for keyboard, 2 level172.png" alt="stand for keyboard, 2 level"></div>
+        <div class="button data-button hidden" title="stand for keyboard XX type" id="preset_button_175"><img src="/presets/images/Keyboard stand XX type175.png" alt="stand for keyboard XX type"></div>
+        <div class="button data-button" title="Cellist" id="preset_button_148"><img src="/presets/images/Cellist148.png" alt="Cellist"></div>
+        <div class="button data-button" title="Violin player" id="preset_button_149"><img src="/presets/images/Violin player149.png" alt="Violin player"></div>
+        <div class="button data-button hidden" title="Cable cross" id="preset_button_6"><img src="/presets/images/Cable cross6.png" alt="Cable cross"></div>
+        <div class="button data-button hidden" title="Hammond B3 " id="preset_button_121"><img src="/presets/images/Hammond B3 121.png" alt="Hammond B3 "></div>
+        <div class="button data-button hidden" title="KeyBoard with Stand" id="preset_button_10"><img src="/presets/images/KeyBoard with Stand10.png" alt="KeyBoard with Stand"></div>
+        <div class="button data-button hidden" title="Grandpiano" id="preset_button_11"><img src="/presets/images/Grandpiano8.png" alt="Grandpiano"></div>
+        <div class="button data-button hidden" title="KORG Triton Studio" id="preset_button_173"><img src="/presets/images/KORG_triton173.png" alt="KORG Triton Studio"></div>
+        <div class="button data-button hidden" title="LAPTOP" id="preset_button_82"><img src="/presets/images/LAPTOP82.png" alt="LAPTOP"></div>
+        <div class="button data-button hidden" title="Violin" id="preset_button_83"><img src="/presets/images/Violin83.png" alt="Violin"></div>
+        <div class="button data-button hidden" title="Alto" id="preset_button_84"><img src="/presets/images/Alto84.png" alt="Alto"></div>
+        <div class="button data-button hidden" title="Cello" id="preset_button_85"><img src="/presets/images/Cello85.png" alt="Cello"></div>
+        <div class="button data-button hidden" title="Contrabass" id="preset_button_86"><img src="/presets/images/Contrabass86.png" alt="Contrabass"></div>
+        <div class="button data-button hidden" title="Flute" id="preset_button_87"><img src="/presets/images/Flute87.png" alt="Flute"></div>
+        <div class="button data-button hidden" title="Sax Alto" id="preset_button_88"><img src="/presets/images/Sax_Alto88.png" alt="Sax Alto"></div>
+        <div class="button data-button hidden" title="Clarinet" id="preset_button_189"><img src="/presets/images/Clarinet189.png" alt="Clarinet"></div>
+        <div class="button data-button hidden" title="Bassoon" id="preset_button_190"><img src="/presets/images/Bassoon190.png" alt="Bassoon"></div>
+        <div class="button data-button hidden" title="Trumpet" id="preset_button_89"><img src="/presets/images/Trumpet89.png" alt="Trumpet"></div>
+        <div class="button data-button hidden" title="Trombone" id="preset_button_186"><img src="/presets/images/trombone186.png" alt="Trombone"></div>
+        <div class="button data-button hidden" title="French Horn" id="preset_button_187"><img src="/presets/images/French Horn187.png" alt="French Horn"></div>
+        <div class="button data-button hidden" title="Tuba" id="preset_button_188"><img src="/presets/images/Tuba188.png" alt="Tuba"></div>
+        <div class="button data-button hidden" title="Accordion" id="preset_button_90"><img src="/presets/images/Accordion90.png" alt="Accordion"></div>
+    </div>
+</div>
+<div id="tabs-container">
+    <div class="category_button category_active" id="menu_category_members">members</div>
+    <div class="category_button" id="menu_category_instruments">instruments</div>
+    <div class="category_button" id="menu_category_Drums &amp; Perc">Drums &amp; Perc</div>
+    <div class="category_button" id="menu_category_mic &amp; DI">mic &amp; DI</div>
+    <div class="category_button" id="menu_category_monitors">monitors</div>
+    <div class="category_button" id="menu_category_backline">backline</div>
+    <div class="category_button" id="menu_category_other">other</div>
+</div>
+<div id="waiticon" class="hidden"></div>
+<div class="tox tox-silver-sink tox-tinymce-aux" style="position: relative;"></div>
+<style>
+    .data-button-controls#properties_button:before {
+        background-image: url('../interface/obj_properties.png');
+    }
+</style>
+<style>
+    .data-button-controls#rot-ccw:before {
+        background-image: url('../interface/turn-left.png');
+    }
+</style>
+<style>
+    .data-button-controls#rot-cw:before {
+        background-image: url('../interface/turn-right.png');
+    }
+</style>
+<style>
+    .data-button-controls#delete:before {
+        background-image: url('../interface/delete.png');
+    }
+</style>
+<style>
+    .data-button-controls#attach:before {
+        background-image: url('../interface/link.png');
+    }
+</style>
+<style>
+    .data-button-controls#preset_save_button:before {
+        background-image: url('../interface/save-preset.png');
+    }
+</style>
+<style>
+    .data-button-controls#deletechild:before {
+        background-image: url('../interface/delete-ierarhy.png');
+    }
+</style>
+<style>
+    .data-button-controls#show_anchors_button:before {
+        background-image: url('../interface/showannot.png');
+    }
+</style>
+<style>
+    .data-button-controls#rider_save_button:before {
+        background-image: url('../interface/editor/save-rider.png');
+    }
+</style>
+<style>
+    .data-button-controls#rider_restore_button:before {
+        background-image: url('../interface/editor/restore-stage.png');
+    }
+</style>
+<style>
+    .data-button-controls#show_grid_button:before {
+        background-image: url('../interface/editor/showgrid.png');
+    }
+</style>
+<style>
+    .data-button-controls#stage_button:before {
+        background-image: url('../interface/editor/finish.png');
+    }
+</style>
+<style>
+    .data-button-controls#print_button:before {
+        background-image: url('../interface/editor/print.png');
+    }
+</style>
+<style>
+    .data-button-controls#exit_button:before {
+        background-image: url('../interface/editor/exit_button.png');
+    }
+</style>
+</body>
+
+</html>

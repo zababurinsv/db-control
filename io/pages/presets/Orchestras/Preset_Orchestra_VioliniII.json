@@ -1,0 +1,363 @@
+{
+  "name": "Violin_player",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "Title": "Violini II",
+  "model_src": "Violin_player.json",
+  "X": 1.23,
+  "Y": -2.55,
+  "Z": 0,
+  "is_structure": false,
+  "Height": 0,
+  "turn": 45,
+  "Locked": false,
+  "Title_to_Source": false,
+  "children": [
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "STUL.json",
+      "X": -0.71,
+      "Y": 0.42,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "STUL.json",
+      "X": -0.79,
+      "Y": -0.79,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "STUL.json",
+      "X": -1.46,
+      "Y": -0.27,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "STUL.json",
+      "X": -2.2,
+      "Y": -1.05,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "MusicStand",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Music stand",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 0.5,
+          "Power_consumption": 0,
+          "Weight_round": 0.5,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "MusicStand.json",
+      "X": 0.37,
+      "Y": 0.81,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "SM81_on_STAND",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "",
+          "Type": "mic",
+          "ChName": "SM81",
+          "Comment": "",
+          "Phantom_power": "On",
+          "Channel": 1,
+          "Locked": false
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM81",
+          "Category": "Microphones and DI",
+          "Image": "Shure81.jpg",
+          "Comment": "Condenser cardioid instrumental microphone",
+          "Weight": 0.2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Long microphone stand",
+          "Category": "Stands",
+          "Image": "",
+          "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 1,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "Shure sm81",
+      "model_src": "SM81_on_STAND.json",
+      "X": 0.6,
+      "Y": 0.2,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 0,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "STUL.json",
+      "X": -1.55,
+      "Y": -1.61,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "CHAIR",
+      "Comment": "",
+      "input_list": [],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Chair",
+          "Category": "Instruments and access",
+          "Image": "",
+          "Comment": "",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "STUL.json",
+      "X": -0.06,
+      "Y": -0.03,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    },
+    {
+      "name": "Violin",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "Violin",
+          "Type": "mic",
+          "ChName": "dpa4060",
+          "Comment": "",
+          "Phantom_power": "On",
+          "Channel": 2,
+          "Locked": false
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "dpa 4061",
+          "Category": "Microphones and DI",
+          "Image": "Mic_dpa4060.jpg",
+          "Comment": "Condenser omni directional  microphone with special clip for violin",
+          "Weight": 0.2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 1,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "21",
+      "Title": "",
+      "model_src": "Violin.json",
+      "X": -0.05,
+      "Y": -0.14,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 45,
+      "Locked": true,
+      "Title_to_Source": false,
+      "children": []
+    }
+  ]
+}

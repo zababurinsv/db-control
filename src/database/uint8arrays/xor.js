@@ -20,4 +20,4 @@ function xor (a, b) {
   return result
 }
 
-export default xor
+module.exports = xor

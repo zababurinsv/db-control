@@ -25,4 +25,4 @@ class FeedIndex {
   }
 }
 
-export default  FeedIndex
+module.exports = FeedIndex

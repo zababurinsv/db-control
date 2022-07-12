@@ -1,6 +1,6 @@
 'use strict'
 
-import Clock from "./lamport-clock.js";
+const Clock = require('./lamport-clock')
 
 /**
  * Sort two entries as Last-Write-Wins (LWW).
@@ -12,7 +12,7 @@ import Clock from "./lamport-clock.js";
  * @param {Entry} b Second entry
  * @returns {number} 1 if a is latest, -1 if b is latest
  */
-export function LastWriteWins (a, b) {
+function LastWriteWins (a, b) {
   // Ultimate conflict resolution (take the first/left arg)
   const First = (a, b) => a
   // Sort two entries by their clock id, if the same always take the first
@@ -31,7 +31,7 @@ export function LastWriteWins (a, b) {
  * @param {Entry} b Second entry
  * @returns {number} 1 if a is latest, -1 if b is latest
  */
-export function SortByEntryHash (a, b) {
+function SortByEntryHash (a, b) {
   // Ultimate conflict resolution (compare hashes)
   const compareHash = (a, b) => a.hash < b.hash ? -1 : 1
   // Sort two entries by their clock id, if the same then compare hashes
@@ -50,7 +50,7 @@ export function SortByEntryHash (a, b) {
  * @param {function(a, b)} resolveConflict A function to call if entries are concurrent (happened at the same time). The function should take in two entries and return 1 if the first entry should be chosen and -1 if the second entry should be chosen.
  * @returns {number} 1 if a is greater, -1 if b is greater
  */
-export function SortByClocks (a, b, resolveConflict) {
+function SortByClocks (a, b, resolveConflict) {
   // Compare the clocks
   const diff = Clock.compare(a.clock, b.clock)
   // If the clocks are concurrent, use the provided
@@ -65,7 +65,7 @@ export function SortByClocks (a, b, resolveConflict) {
  * @param {function(a, b)} resolveConflict A function to call if the clocks ids are the same. The function should take in two entries and return 1 if the first entry should be chosen and -1 if the second entry should be chosen.
  * @returns {number} 1 if a is greater, -1 if b is greater
  */
-export function SortByClockId (a, b, resolveConflict) {
+function SortByClockId (a, b, resolveConflict) {
   // Sort by ID if clocks are concurrent,
   // take the entry with a "greater" clock id
   return a.clock.id === b.clock.id
@@ -79,7 +79,7 @@ export function SortByClockId (a, b, resolveConflict) {
  * @returns {function(a, b)} 1 if a is greater, -1 if b is greater
  * @throws {Error} if func ever returns 0
  */
-export function NoZeroes (func) {
+function NoZeroes (func) {
   const msg = `Your log's tiebreaker function, ${func.name}, has returned zero and therefore cannot be`
 
   const comparator = (a, b) => {
@@ -92,10 +92,8 @@ export function NoZeroes (func) {
   return comparator
 }
 
-export default {
-  SortByClocks,
-  SortByClockId,
-  LastWriteWins,
-  SortByEntryHash,
-  NoZeroes
-}
+exports.SortByClocks = SortByClocks
+exports.SortByClockId = SortByClockId
+exports.LastWriteWins = LastWriteWins
+exports.SortByEntryHash = SortByEntryHash
+exports.NoZeroes = NoZeroes

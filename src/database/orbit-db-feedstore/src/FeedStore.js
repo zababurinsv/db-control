@@ -1,7 +1,7 @@
 'use strict'
 
-import EventStore from "../../orbit-db-eventstore/src/EventStore.js";
-import FeedIndex from "./FeedIndex.js";
+const EventStore = require('orbit-db-eventstore')
+const FeedIndex  = require('./FeedIndex')
 
 class FeedStore extends EventStore {
   constructor (ipfs, id, dbname, options) {
@@ -25,4 +25,4 @@ class FeedStore extends EventStore {
   }
 }
 
-export default  FeedStore
+module.exports = FeedStore

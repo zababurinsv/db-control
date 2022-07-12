@@ -28,4 +28,4 @@ function compare (a, b) {
   return 0
 }
 
-export default compare
+module.exports = compare

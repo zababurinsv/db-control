@@ -1,0 +1,13 @@
+{
+  "name": "Conga",
+  "model_src": "Conga.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Conga Drum",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": []
+}

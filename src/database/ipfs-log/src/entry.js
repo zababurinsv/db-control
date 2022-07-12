@@ -1,16 +1,14 @@
 'use strict'
 
-import Clock from "./lamport-clock.js";
-
-import {io, isDefined} from "./utils/index.js";
-import stringify from "../../json-stringify-deterministic/index.js";
-
+const Clock = require('./lamport-clock')
+const { isDefined, io } = require('./utils')
+const stringify = require('json-stringify-deterministic')
 const IpfsNotDefinedError = () => new Error('Ipfs instance not defined')
-export const IPLD_LINKS = ['next', 'refs']
+const IPLD_LINKS = ['next', 'refs']
 const getWriteFormatForVersion = v => v === 0 ? 'dag-pb' : 'dag-cbor'
-export const getWriteFormat = e => Entry.isEntry(e) ? getWriteFormatForVersion(e.v) : getWriteFormatForVersion(e)
+const getWriteFormat = e => Entry.isEntry(e) ? getWriteFormatForVersion(e.v) : getWriteFormatForVersion(e)
 
-export class Entry {
+class Entry {
   /**
    * Create an Entry
    * @param {IPFS} ipfs An IPFS instance
@@ -96,7 +94,6 @@ export class Entry {
    * @deprecated
    */
   static async toMultihash (ipfs, entry, pin = false) {
-    console.log('💯 Mulihash 💯 ')
     if (!ipfs) throw IpfsNotDefinedError()
     if (!Entry.isEntry(entry)) throw new Error('Invalid object format, cannot generate entry hash')
 
@@ -221,8 +218,6 @@ export class Entry {
   }
 }
 
-export default {
-  Entry: Entry,
-  IPLD_LINKS: IPLD_LINKS,
-  getWriteFormat: getWriteFormat
-}
+module.exports = Entry
+module.exports.IPLD_LINKS = IPLD_LINKS
+module.exports.getWriteFormat = getWriteFormat

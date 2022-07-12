@@ -1,0 +1,52 @@
+{
+  "name": "MicSTAND",
+  "model_src": "MicSTAND.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Shure sm58",
+  "Comment": "",
+  "input_list": [
+    {
+      "Source": "Vocal",
+      "Type": "mic",
+      "ChName": "sm58",
+      "Comment": "",
+      "Phantom_power": "Off"
+    }
+  ],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Shure sm58",
+      "Category": "Microphones and DI",
+      "Comment": "dynamic cardioid voice microphone",
+      "Image": "ShureSM58.jpg",
+      "Weight": 0.2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Microphone cable",
+      "Category": "Wire",
+      "Comment": "XLR-XLR",
+      "Image": "",
+      "Weight": 1,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    },
+    {
+      "Name": "Long microphone stand",
+      "Category": "Stands",
+      "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+      "Image": "",
+      "Weight": 2,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

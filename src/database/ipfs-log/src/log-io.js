@@ -1,12 +1,11 @@
 'use strict'
 
-import Entry from "./entry.js";
-import EntryIO from "./entry-io.js";
-import Sorting from "./log-sorting.js";
-import LogError from "./log-errors.js";
-import {difference, findUniques, io, isDefined} from "./utils/index.js";
-
+const Entry = require('./entry')
+const EntryIO = require('./entry-io')
+const Sorting = require('./log-sorting')
 const { LastWriteWins, NoZeroes } = Sorting
+const LogError = require('./log-errors')
+const { isDefined, findUniques, difference, io } = require('./utils')
 
 const IPLD_LINKS = ['heads']
 const last = (arr, n) => arr.slice(arr.length - Math.min(arr.length, n), arr.length)
@@ -162,4 +161,4 @@ class LogIO {
   }
 }
 
-export default LogIO
+module.exports = LogIO

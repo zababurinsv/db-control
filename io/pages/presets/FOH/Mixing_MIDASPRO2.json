@@ -1,0 +1,65 @@
+{
+  "name": "MIDASPRO2",
+  "model_src": "",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "MIDAS PRO2",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "MIDAS PRO2",
+      "Category": "Mixing",
+      "Comment": "MIDAS PRO2-СС-IP.AES50. 24bit, 96kHz",
+      "Image": "PPRO2-CC-IP.png",
+      "Weight": 40,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 180
+    },
+    {
+      "Name": "Midas DL251 Stage Box",
+      "Category": "Mixing",
+      "Comment": "24bit, 48 input - 48kHz, 24 input - 96 kHz; 16 output; AES50",
+      "Image": "",
+      "Weight": 18,
+      "Count": 1,
+      "Owner": "Rent",
+      "Power_consumption": 110
+    },
+    {
+      "Name": "AT5 RJ45",
+      "Category": "Wire",
+      "Comment": "CAT5 RJ45",
+      "Image": "",
+      "Weight": 7.5,
+      "Count": 3,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power cord",
+      "Category": "Wire",
+      "Comment": "The electrical cable for Mixing system. C13 - 7/7 Schuco",
+      "Image": "",
+      "Weight": 0.8,
+      "Count": 4,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    },
+    {
+      "Name": "Power socket",
+      "Category": "Power distribution",
+      "Comment": "The single protective contact sockets 7/7 Schuco",
+      "Image": "Schuko.jpg",
+      "Weight": 0.8,
+      "Count": 4,
+      "Count_round": 1,
+      "Weight_round": 0.2,
+      "Owner": "Rent"
+    }
+  ],
+  "children": []
+}

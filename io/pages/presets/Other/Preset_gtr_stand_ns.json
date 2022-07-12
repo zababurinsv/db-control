@@ -1,0 +1,24 @@
+{
+  "name": "gtr_stand_ns",
+  "model_src": "gtr_stand_ns.json",
+  "X": 0,
+  "Y": 0,
+  "turn": 0,
+  "Title": "Guitar Stand with Neck Support",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [
+    {
+      "Name": "Guitar stand whith neck support",
+      "Category": "Instruments and access",
+      "Comment": "The guitar stand whith neck support for acoustic or electric guitar",
+      "Image": "",
+      "Weight": 1.3,
+      "Count": 1,
+      "Owner": "Rent",
+      "Parameters": {}
+    }
+  ],
+  "children": []
+}

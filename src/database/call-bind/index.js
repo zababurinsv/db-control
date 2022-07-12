@@ -1,6 +1,7 @@
 'use strict';
-import bind from '../function-bind/index.js'
-import GetIntrinsic from '../get-intrinsic/index.js'
+
+var bind = require('function-bind');
+var GetIntrinsic = require('get-intrinsic');
 
 var $apply = GetIntrinsic('%Function.prototype.apply%');
 var $call = GetIntrinsic('%Function.prototype.call%');
@@ -11,33 +12,36 @@ var $defineProperty = GetIntrinsic('%Object.defineProperty%', true);
 var $max = GetIntrinsic('%Math.max%');
 
 if ($defineProperty) {
-    try {
-        $defineProperty({}, 'a', { value: 1 });
-    } catch (e) {
-        // IE 8 has a broken defineProperty
-        $defineProperty = null;
-    }
+	try {
+		$defineProperty({}, 'a', { value: 1 });
+	} catch (e) {
+		// IE 8 has a broken defineProperty
+		$defineProperty = null;
+	}
 }
 
-export function callBind(originalFunction) {
-    var func = $reflectApply(bind, $call, arguments);
-    if ($gOPD && $defineProperty) {
-        var desc = $gOPD(func, 'length');
-        if (desc.configurable) {
-            // original length, plus the receiver, minus any additional arguments (after the receiver)
-            $defineProperty(
-                func,
-                'length',
-                { value: 1 + $max(0, originalFunction.length - (arguments.length - 1)) }
-            );
-        }
-    }
-    return func;
+module.exports = function callBind(originalFunction) {
+	var func = $reflectApply(bind, $call, arguments);
+	if ($gOPD && $defineProperty) {
+		var desc = $gOPD(func, 'length');
+		if (desc.configurable) {
+			// original length, plus the receiver, minus any additional arguments (after the receiver)
+			$defineProperty(
+				func,
+				'length',
+				{ value: 1 + $max(0, originalFunction.length - (arguments.length - 1)) }
+			);
+		}
+	}
+	return func;
 };
 
 var applyBind = function applyBind() {
-    return $reflectApply(bind, $apply, arguments);
+	return $reflectApply(bind, $apply, arguments);
 };
 
-export const apply = applyBind;
-export default callBind
+if ($defineProperty) {
+	$defineProperty(module.exports, 'apply', { value: applyBind });
+} else {
+	module.exports.apply = applyBind;
+}

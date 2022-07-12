@@ -1,0 +1,81 @@
+{
+  "name": "Sax_Alto",
+  "model_src": "Sax_Alto.json",
+  "X": 0,
+  "Y": 0,
+  "Z": 0,
+  "turn": 0,
+  "Title": "Sax Alto",
+  "Comment": "",
+  "input_list": [],
+  "output_list": [],
+  "gear_list": [],
+  "children": [
+    {
+      "name": "SM81_on_STAND",
+      "Comment": "",
+      "input_list": [
+        {
+          "Source": "Sax Alto",
+          "Type": "mic",
+          "ChName": "SM81",
+          "Comment": "",
+          "Phantom_power": "On",
+          "Channel": 1,
+          "Locked": false
+        }
+      ],
+      "output_list": [],
+      "gear_list": [
+        {
+          "Name": "Shure SM81",
+          "Category": "Microphones and DI",
+          "Image": "Shure81.jpg",
+          "Comment": "Condenser cardioid instrumental microphone",
+          "Weight": 0.2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Long microphone stand",
+          "Category": "Stands",
+          "Image": "",
+          "Comment": "The long microphone stand with folding tripod base, boom arm, and shock mount",
+          "Weight": 2,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        },
+        {
+          "Name": "Microphone cable",
+          "Category": "Wire",
+          "Image": "",
+          "Comment": "XLR-XLR",
+          "Weight": 1,
+          "Power_consumption": 0,
+          "Weight_round": 0.1,
+          "Count_round": 1,
+          "Count": 1,
+          "Owner": "Rent"
+        }
+      ],
+      "parent": "5",
+      "Title": "Shure sm81",
+      "model_src": "SM81_on_STAND.json",
+      "X": 0.7,
+      "Y": 0.03,
+      "Z": 0,
+      "is_structure": false,
+      "Height": 0,
+      "turn": 360,
+      "Locked": false,
+      "Title_to_Source": false,
+      "children": []
+    }
+  ]
+}
