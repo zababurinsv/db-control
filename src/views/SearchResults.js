@@ -3,7 +3,7 @@ import { majorScale, Heading, Pane, Spinner } from 'evergreen-ui'
 import { useLocation, Navigate } from 'react-router-dom'
 import { useStateValue, actions, loadingState } from '../state'
 
-// import { getAllDatabases, removeDatabase } from '../database'
+import { getAllDatabases, removeDatabase } from '../database'
 
 import ProgramList from '../components/DatabaseList'
 
@@ -27,22 +27,21 @@ function SearchResultsView () {
   }
 
   async function fetchDatabases () {
-  //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: true })
-  //   const programs = await getAllDatabases()
-  //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
-  //   dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })
-  //   return programs
-    return []
+    dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: true })
+    const programs = await getAllDatabases()
+    dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })
+    dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: false })
+    return programs
   }
 
   const handleRemoveDatabase = (hash, program) => {
     console.log("Remove database...", hash, program)
-    // removeDatabase(hash).then(() => {
-    //   console.log("Removed")
-    //   fetchDatabases().then((data) => {
-    //     console.log("Loaded programs", data)
-    //   })
-    // })
+    removeDatabase(hash).then(() => {
+      console.log("Removed")
+      fetchDatabases().then((data) => {
+        console.log("Loaded programs", data)
+      })
+    })
   }
 
   return (

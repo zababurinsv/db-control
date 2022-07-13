@@ -1,109 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <title>NewKind Control</title>
-    <link rel="shortcut icon" href="data:image/png;base64, AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbbv+DGW3/mRlt/5kZbf+ZGq6/hIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGa3/ohkt/7/Zbj//2S3/v9lt/6WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGm5/iRlt/74Zbj//2W4//9luP//Zbf++mi4/i4gIPciGhr24hsb9uwbG/bsGhr24CEh9xoAAAAAAAAAAAAAAABnuP5mZLf+/2W4//9luP//Zbj//2S3/v9muP5yGBj2rhMT9v8TE/b/ExP2/xMT9f8YGPWkAAAAAAAAAAAAAAAAb7z/BGW3/tZluP//Zbj//2W4//9lt/7gJzH3ShMT9f8TE/b/ExP2/xMT9v8TE/b/ExP1/CAg9joAAAAAAAAAAAAAAABmuP5GZLf+6GS3/uhkt/7oZbf+UhgY9YQSEvX/ExP2/xMT9v8TE/b/ExP2/xIS9f8aGvZ8AAAAAD4++gQgIPZ6IiL2hiIi9oYgIPZ8KCj5BAAAAAAtLfgUFBT17BMT9v8TE/b/ExP2/xMT9v8VFfXoLCz4DgAAAAAaGvZqEhL1/xMT9v8TE/b/EhL1/xsb9nIAAAAAAAAAABwc9m4SEvX/ExP2/xMT9v8SEvX/HR32ZAAAAAAnJ/gSFRX16hMT9v8TE/b/ExP2/xMT9v8UFPXuJyf4Fp2xlAKNnqUYLC/mfhYW83ATE/VuFxf1aDc3+gIAAAAAGBj1fhIS9f8TE/b/ExP2/xMT9v8TE/b/ExP1/xkZ9YaGn3yIhZ57/4Wee/+Gn3yKAAAAAAAAAAAAAAAAAAAAACMj9zYTE/X8ExP2/xMT9v8TE/b/ExP2/xMT9f9JUshihZ57+IaffP+Gn3z/hZ579oigfiYAAAAAAAAAAAAAAAAAAAAAGBj1oBIS9f8TE/b/ExP2/xMT9f8YGPWmiKB+PIWee/+Gn3z/hp98/4Wee/+HoH06AAAAAAAAAAAAAAAAAAAAACUl9xgVFfXOExP11BMT9dQUFPXQJib3HgAAAACGn3ymhp98/4affP+Gn3ymAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiKB+EIihf0CIoX9AiKB+EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AADg/wAA4MMAAOCBAADggQAA8QEAAOeBAADDwwAAgf8AAIAPAACBDwAAgQ8AAMMPAAD//wAA//8AAA==" type="image/png">
-    <link rel="manifest" crossorigin="use-credentials" href="./manifest.json"/>
-    <link rel="icon" type="image/png" href="./manifest/newkind-icon-128-any.png" sizes="128x128" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="./favicon.ico" type="image/png">
-    <meta name="description" content="Put your description here.">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta property="og:site_name" content="Elite"/>
-    <meta property="og:locale" content="ru_RU"/>
-    <meta property="og:type" content="contract"/>
-    <meta property="og:title" content="Elite"/>
-    <meta property="og:description" content="markdown"/>
-    <meta property="og:url" content="https://zababurinsv.github.io/newkind-service/"/>
-    <meta property="og:image" content="https://i.imgur.com/SfrC1my.png"/>
-    <meta property="og:image:width" content="537"/>
-    <meta property="og:image:height" content="240"/>
-    <meta name="theme-color" content="white"/>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="New Kind">
-    <meta name="msapplication-TileImage" content="data:image/png;base64, AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbbv+DGW3/mRlt/5kZbf+ZGq6/hIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGa3/ohkt/7/Zbj//2S3/v9lt/6WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGm5/iRlt/74Zbj//2W4//9luP//Zbf++mi4/i4gIPciGhr24hsb9uwbG/bsGhr24CEh9xoAAAAAAAAAAAAAAABnuP5mZLf+/2W4//9luP//Zbj//2S3/v9muP5yGBj2rhMT9v8TE/b/ExP2/xMT9f8YGPWkAAAAAAAAAAAAAAAAb7z/BGW3/tZluP//Zbj//2W4//9lt/7gJzH3ShMT9f8TE/b/ExP2/xMT9v8TE/b/ExP1/CAg9joAAAAAAAAAAAAAAABmuP5GZLf+6GS3/uhkt/7oZbf+UhgY9YQSEvX/ExP2/xMT9v8TE/b/ExP2/xIS9f8aGvZ8AAAAAD4++gQgIPZ6IiL2hiIi9oYgIPZ8KCj5BAAAAAAtLfgUFBT17BMT9v8TE/b/ExP2/xMT9v8VFfXoLCz4DgAAAAAaGvZqEhL1/xMT9v8TE/b/EhL1/xsb9nIAAAAAAAAAABwc9m4SEvX/ExP2/xMT9v8SEvX/HR32ZAAAAAAnJ/gSFRX16hMT9v8TE/b/ExP2/xMT9v8UFPXuJyf4Fp2xlAKNnqUYLC/mfhYW83ATE/VuFxf1aDc3+gIAAAAAGBj1fhIS9f8TE/b/ExP2/xMT9v8TE/b/ExP1/xkZ9YaGn3yIhZ57/4Wee/+Gn3yKAAAAAAAAAAAAAAAAAAAAACMj9zYTE/X8ExP2/xMT9v8TE/b/ExP2/xMT9f9JUshihZ57+IaffP+Gn3z/hZ579oigfiYAAAAAAAAAAAAAAAAAAAAAGBj1oBIS9f8TE/b/ExP2/xMT9f8YGPWmiKB+PIWee/+Gn3z/hp98/4Wee/+HoH06AAAAAAAAAAAAAAAAAAAAACUl9xgVFfXOExP11BMT9dQUFPXQJib3HgAAAACGn3ymhp98/4affP+Gn3ymAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAiKB+EIihf0CIoX9AiKB+EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AADg/wAA4MMAAOCBAADggQAA8QEAAOeBAADDwwAAgf8AAIAPAACBDwAAgQ8AAMMPAAD//wAA//8AAA==">
-    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Control Center</title>
 </head>
+<body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
-<body><div id="root"></div></body>
-<template id="main__data_files_fs">
-    <option class="main__data_files_fs"></option>
-</template>
+<div id="root"></div>
 <script type="module">
-    import crypto from './libp2p-crypto/dist/index.js';
-    import require$$1 from './safe-buffer/dist/index.js';
-    import require$$2 from './secp256k1/dist/index.js';
-    import cryptoBrowserify from './crypto-browserify/dist/index.js'
-    import randomBytes from '../../iso-random-stream/dist/randomBytes.js';
-    const Buffer = require$$1.Buffer;
-    const secp256k1 = require$$2;
-
-    (async () => {
-        const genKeyPair = () => new Promise((resolve, reject) => {
-            console.assert(false)
-            crypto.keys.generateKeyPair('secp256k1', 256, (err, key) => {
-                console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4')
-                console.assert(false)
-                if (!err) {
-                    resolve(key)
-                }
-                reject(err)
-            })
-        })
-
-        function assert (cond, msg) {
-            if (!cond) throw new Error(msg)
-        }
-
-        function isUint8Array (name, value, length) {
-            console.log(value, value instanceof Uint8Array, typeof value)
-            assert(value instanceof Uint8Array, `Expected ${name} to be an Uint8Array`);
-
-            if (length !== undefined) {
-                if (Array.isArray(length)) {
-                    const numbers = length.join(', ');
-                    const msg = `Expected ${name} to be an Uint8Array with length [${numbers}]`;
-                    assert(length.includes(value.length), msg);
-                } else {
-                    const msg = `Expected ${name} to be an Uint8Array with length ${length}`;
-                    assert(value.length === length, msg);
-                }
-            }
-        }
-
-        // console.log(secp256k1L(32), secp256k1)
-        // const secp = secp256k1L(256, (error, key) => {
-        //     console.log('dddddddddddd', key, error)
-        // })
-        // console.log('secp', cryptoBrowserify.randomBytes(32))
-        // console.assert(false)
-        // secp.generateKeyPair(cryptoBrowserify.randomBytes)
-        // console.assert(false)
-        // const mars = keys.public.marshal()
-        // const decompressedKey = Buffer.from(secp256k1.publicKeyConvert(mars, false))
-        // console.log('==============================', decompressedKey)
-
-        const keys = await genKeyPair()
-        console.log('@@@@@@@@@@ keys @@@@@@@@@@', keys)
-        console.assert(false)
-        const marshal = keys.marshal()
-        const priv = marshal.toString('hex')
-
-        // let test = {"type":"Buffer","data":[251,129,226,232,244,90,202,122,173,191,153,189,205,221,241,210,122,47,60,220,250,115,220,15,114,179,100,22,51,233,161,183]}
-        // let test4 = Buffer.from(test.data)
-        // console.assert(false)
-        // isUint8Array('test', randomBytes(32), 32)
-
-        // console.log('sssssssssssss createKey keys.marshal() priv sssssssssssssssssss',  test4.toString('hex'))
-        console.log('sssssssssssss createKey keys.marshal() priv sssssssssssssssssss', priv)
-        // const key = {
-        //     publicKey: decompressedKey.toString('hex'),
-        //     privateKey: keys.marshal().toString('hex')
-        // };
-        // console.log('%%%%%%%%%%%% keys %%%%%%%%%%%%', key)
-        // const decompressedKey = Buffer.from(secp256k1.publicKeyConvert(keys.public.marshal(), false));
-        // console.log('=========', keyPair, decompressedKey)
-    })()
+    import OrbitDB from '/modules/orbit-db/dist/index.js'
+    import IPFS from '/modules/ipfs/dist/index.js'
+    import node from '/modules/index.mjs'
+    node({IPFS, OrbitDB})
 </script>
+</body>
 </html>

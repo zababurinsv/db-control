@@ -23,16 +23,16 @@ export const initOrbitDB = async (props) => {
     OrbitDB,
     ipfs
   })
-  return OrbitDB.createInstance(ipfs)
+  orbitdb = await OrbitDB.createInstance(ipfs)
+  return orbitdb
 }
 
 export const getAllDatabases = async (props) => {
-  const {db} = props;
-  if (!programs && db) {
+  if (!programs && orbitdb) {
     // Load programs database
     debug( -4,'👀[(database)Load programs database orbitdb.feed]')
-    programs = await db.feed('network.programs', {
-      accessController: { write: [db.identity.id] },
+    programs = await orbitdb.feed('network.programs', {
+      accessController: { write: [orbitdb.identity.id] },
       create: true
     })
     await programs.load()
@@ -41,11 +41,6 @@ export const getAllDatabases = async (props) => {
   const result =  programs
       ? programs.iterator({ limit: -1 }).collect()
       : []
-  console.log('@@@@@@@@@@@@@ getAllDatabases @@@@@@@@@@@@@@@@@', {
-    db: db,
-    programs: programs,
-    result: result
-  })
   return result
 }
 
@@ -77,6 +72,7 @@ export const createDatabase = async (name, type, permissions) => {
     type: type,
     permissions: permissions
   })
+  console.log('@@@@@@@@@@@ orbitdb @@@@@@@@@@@@@', orbitdb)
   switch (permissions) {
     case 'public':
       accessController = { write: ['*'] }

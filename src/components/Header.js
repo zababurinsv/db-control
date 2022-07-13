@@ -13,7 +13,7 @@ function Header (props) {
 
   function handleKeyUp (event) {
     // TODO: Do not use "ENTER" key as the trigger, maybe onSubmit of a form
-    if (event.keyCode === 13) history.push(`/search?q=${event.target.value}`)
+    if (event.keyCode === 13) history(`/search?q=${event.target.value}`)
   }
 
   return (

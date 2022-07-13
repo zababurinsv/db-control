@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom'
-import logo from './logo.svg';
 import logs from './utils/debug/index.js'
 import { Pane } from 'evergreen-ui'
 import './App.css';
@@ -8,9 +7,9 @@ import { actions, loadingState, StateProvider } from './state'
 import Header from './components/Header'
 import Systems from './components/Systems'
 
-import DatabaseView from './views/Database'
-import DatabasesView from './views/Databases'
 import SearchResultsView from './views/SearchResults'
+import DatabasesView from './views/DatabasesView'
+import DatabaseView from './views/DatabaseView'
 
 const debug = (maxCount, id, ...args) => {
     let path = 'App'
@@ -104,7 +103,7 @@ function App(props) {
                 return state
         }
     }
-
+    console.log('< ================================== >')
     return (
         <StateProvider
             initialState={initialState}

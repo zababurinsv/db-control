@@ -24,9 +24,8 @@ const colors = {
 
 function ProgramList ({ programs, onRemove }) {
     const history = useNavigate()
-
     function handleSelect (program) {
-        history.push(program.address)
+        history(program.address)
     }
 
     return (

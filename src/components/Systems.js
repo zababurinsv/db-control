@@ -27,15 +27,15 @@ function Systems (props) {
     debug('o!o[(useEffect)appState]',appState)
     initIPFS({
       IPFS: appState.IPFS
-    }).then(async (ipfs) => {
+    })
+    .then(async (ipfs) => {
       dispatch({ type: actions.SYSTEMS.SET_IPFS, ipfsStatus: 'Started' })
-
       // @ts-ignore
       initOrbitDB({
         ipfs: ipfs,
         OrbitDB: appState.OrbitDB
-      }).then(async (databases) => {
-        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+      })
+      .then(async (db) => {
         dispatch({ type: actions.SYSTEMS.SET_ORBITDB, orbitdbStatus: 'Started' })
         const programs = await getAllDatabases()
         dispatch({ type: actions.PROGRAMS.SET_PROGRAMS, programs: programs.reverse() })

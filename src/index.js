@@ -21,6 +21,7 @@ function AppWithCallbackAfterRender(props) {
 export default (props) => {
     const {IPFS, OrbitDB} = props
     const root = createRoot(container);
+
     root.render(
         <BrowserRouter>
             <AppWithCallbackAfterRender
