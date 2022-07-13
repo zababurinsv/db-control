@@ -10,12 +10,11 @@
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
 <script type="module">
-    import OrbitDB from '/orbit-db/dist/index.js'
-    import IPFS from '/ipfs/dist/index.js'
+    import OrbitDB from '/modules/orbit-db/dist/index.js'
+    import IPFS from '/modules/ipfs/dist/index.js'
     import { initIPFS, initOrbitDB, getAllDatabases } from '/index.js'
     initIPFS({IPFS}).then(ipfs => {
         console.log('========= ipfs ===========', ipfs)
-        console.assert(false)
         initOrbitDB({ipfs, OrbitDB}).then(db => {
             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ========= orbitdb =========== !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', db)
             getAllDatabases({db}).then(dbs => {
