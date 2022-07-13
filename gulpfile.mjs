@@ -57,80 +57,11 @@ gulp.task('sync--libp2p-crypto--build-module', async () => {
     });
 });
 
-// gulp.task('sync--level-transcoder-module', async () => {
-//     const bundle = await rollup.rollup({
-//         input: './node_modules/level-transcoder/index.js',
-//         plugins: [
-//             commonjs(),
-//         ],
-//     });
-//     return await bundle.write({
-//         sourcemap: false,
-//         format: 'es',
-//         file: './src/database/level-transcoder/index.js',
-//     });
-// });
-
-// gulp.task('sync--abstract-iterator-module', async () => {
-//     const bundle = await rollup.rollup({
-//         input: './src/database/abortable-iterator/index.js',
-//         plugins: [
-//             commonjs(),
-//         ],
-//     });
-//     return await bundle.write({
-//         sourcemap: false,
-//         format: 'es',
-//         file: './src/database/abortable-iterator/dist/index.js',
-//     });
-// });
-//
-// gulp.task('sync--abstract-error-module', async () => {
-//     const bundle = await rollup.rollup({
-//         input: './node_modules/abstract-error/lib/abstract-error.js',
-//         plugins: [
-//             commonjs(),
-//         ],
-//     });
-//     return await bundle.write({
-//         sourcemap: false,
-//         format: 'es',
-//         file: './src/database/abstract-error/index.js',
-//     });
-// });
-
-// gulp.task('sync--inherits-ex-module', async () => {
-//     const bundle = await rollup.rollup({
-//         input: './node_modules/inherits-ex/index.js',
-//         plugins: [
-//             commonjs(),
-//         ],
-//     });
-//     return await bundle.write({
-//         sourcemap: false,
-//         format: 'es',
-//         file: './src/database/inherits-ex/index.js',
-//     });
-// });
-//
-// gulp.task('sync--abstract-level-module', async () => {
-//     const bundle = await rollup.rollup({
-//         input: './node_modules/abstract-level/index.js',
-//         plugins: [
-//             commonjs(),
-//         ],
-//     });
-//     return await bundle.write({
-//         sourcemap: false,
-//         format: 'es',
-//         file: './src/database/abstract-level/index.js',
-//     });
-// });
-
 gulp.task('sync--secp256k1-module', async () => {
     const bundle = await rollup.rollup({
         input: './src/database/secp256k1/elliptic.js',
         plugins: [
+            json(),
             commonjs(),
         ],
     });
@@ -3252,6 +3183,201 @@ gulp.task('sync--async/setImmediate-module', async () => {
     });
 });
 
+gulp.task('sync--murmurhash3js-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/murmurhash3js/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/murmurhash3js/dist/index.js',
+    });
+});
+
+gulp.task('sync--nodeify-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/nodeify/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/nodeify/dist/index.js',
+    });
+});
+
+gulp.task('sync--is-promise-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/is-promise/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/is-promise/dist/index.js',
+    });
+});
+
+gulp.task('sync--promise-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/promise/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/promise/dist/index.js',
+    });
+});
+
+gulp.task('sync--asap/asap-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/asap/asap.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/asap/dist/asap.js',
+    });
+});
+
+gulp.task('sync--asap/raw-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/asap/raw.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/asap/dist/raw.js',
+    });
+});
+
+gulp.task('sync--bip66-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/bip66/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/bip66/dist/index.js',
+    });
+});
+
+gulp.task('sync--levelup/3.0.0/lib/levelup-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/levelup/3.0.0/lib/levelup.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/levelup/3.0.0/dist/index.js',
+    });
+});
+
+gulp.task('sync--xtend-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/xtend/immutable.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/xtend/dist/index.js',
+    });
+});
+
+gulp.task('sync--level-js/4.0.2/index-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/level-js/4.0.2/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/level-js/4.0.2/dist/index.js',
+    });
+});
+
+gulp.task('sync--typedarray-to-buffer-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/typedarray-to-buffer/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/typedarray-to-buffer/dist/index.js',
+    });
+});
+
+gulp.task('sync--immediate-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/immediate/lib/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/immediate/dist/index.js',
+    });
+});
+
+gulp.task('sync--is-typedarray-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/is-typedarray/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/is-typedarray/dist/index.js',
+    });
+});
+
 gulp.task('watch',  () => {
     gulp.watch([`.${pkg.config.gulp.scope}/**/*.scss`], gulp.series('scss'))
     gulp.watch([`.${pkg.config.gulp.scope}/**/*`], gulp.series('build'))
@@ -3262,11 +3388,6 @@ gulp.task('ipfs', gulp.series('sync--ipfs--build-module'))
 gulp.task('libp2p-crypto', gulp.series('sync--libp2p-crypto--build-module'))
 gulp.task('level', gulp.series('sync--level-module'))
 gulp.task('levelup', gulp.series('sync--levelup-module'))
-// gulp.task('level-transcoder', gulp.series('sync--level-transcoder-module'))
-// gulp.task('abstract-iterator', gulp.series('sync--abstract-iterator-module'))
-// gulp.task('abstract-error', gulp.series('sync--abstract-error-module'))
-// gulp.task('inherits-ex', gulp.series('sync--inherits-ex-module'))
-// gulp.task('abstract-level', gulp.series('sync--abstract-level-module'))
 gulp.task('secp256k1', gulp.series('sync--secp256k1-module'))
 gulp.task('elliptic', gulp.series('sync--elliptic-module'))
 gulp.task('node-gyp-build', gulp.series('sync--node-gyp-build-module'))
@@ -3468,18 +3589,25 @@ gulp.task('crdts/src/G-Set', gulp.series('sync--crdts/src/G-Set-module'))
 gulp.task('crdts/src/PN-Counter', gulp.series('sync--crdts/src/PN-Counter-module'))
 gulp.task('crdts/src/CmRDT-Set', gulp.series('sync--crdts/src/CmRDT-Set-module'))
 gulp.task('iso-random-stream/src/randomBytes', gulp.series('sync--iso-random-stream/src/randomBytes-module'))
-
-
 gulp.task('libp2p-crypto/src/hmac', gulp.series('sync--libp2p-crypto/src/hmac-module'))
 gulp.task('libp2p-crypto/src/aes', gulp.series('sync--libp2p-crypto/src/aes-module'))
 gulp.task('libp2p-crypto/src/pbkdf2', gulp.series('sync--libp2p-crypto/src/pbkdf2-module'))
 gulp.task('libp2p-crypto/src/random-bytes', gulp.series('sync--libp2p-crypto/src/random-bytes-module'))
 gulp.task('libp2p-crypto/src/keys', gulp.series('sync--libp2p-crypto/src/keys-module'))
 gulp.task('libp2p-crypto-secp256k1', gulp.series('sync--libp2p-crypto-secp256k1-module'))
-
 gulp.task('bs58', gulp.series('sync--bs58-module'))
-
 gulp.task('base-x', gulp.series('sync--base-x-module'))
-
 gulp.task('async/setImmediate', gulp.series('sync--async/setImmediate-module'))
-
+gulp.task('murmurhash3js', gulp.series('sync--murmurhash3js-module'))
+gulp.task('nodeify', gulp.series('sync--nodeify-module'))
+gulp.task('is-promise', gulp.series('sync--is-promise-module'))
+gulp.task('promise', gulp.series('sync--promise-module'))
+gulp.task('asap/asap', gulp.series('sync--asap/asap-module'))
+gulp.task('asap/raw', gulp.series('sync--asap/raw-module'))
+gulp.task('bip66', gulp.series('sync--bip66-module'))
+gulp.task('levelup/3.0.0/lib/levelup', gulp.series('sync--levelup/3.0.0/lib/levelup-module'))
+gulp.task('xtend', gulp.series('sync--xtend-module'))
+gulp.task('level-js/4.0.2/index', gulp.series('sync--level-js/4.0.2/index-module'))
+gulp.task('typedarray-to-buffer', gulp.series('sync--typedarray-to-buffer-module'))
+gulp.task('is-typedarray', gulp.series('sync--is-typedarray-module'))
+gulp.task('immediate', gulp.series('sync--immediate-module'))

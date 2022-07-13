@@ -18,9 +18,9 @@
         console.assert(false)
         initOrbitDB({ipfs, OrbitDB}).then(db => {
             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ========= orbitdb =========== !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!', db)
-            // getAllDatabases().then(dbs => {
-            //     console.log('==== dbs ====', dbs)
-            // })
+            getAllDatabases({db}).then(dbs => {
+                console.log('==== dbs ====', dbs.length)
+            })
         })
     })
 </script>

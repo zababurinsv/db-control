@@ -26,28 +26,27 @@ export const initOrbitDB = async (props) => {
   return OrbitDB.createInstance(ipfs)
 }
 
-export const getAllDatabases = async () => {
-    console.log('@@@@@@@@@@@@@ getAllDatabases @@@@@@@@@@@@@@@@@', {
-      orbitdb: orbitdb,
-      programs: programs
-    })
-  if (!programs && orbitdb) {
+export const getAllDatabases = async (props) => {
+  const {db} = props;
+  if (!programs && db) {
     // Load programs database
     debug( -4,'👀[(database)Load programs database orbitdb.feed]')
-    console.log('< @@@@@@@@ getAllDatabases @@@@@@@@@@ >', {
-      orbitdb: orbitdb,
-      accessController: { write: [orbitdb.identity.id] }
-    })
-    programs = await orbitdb.feed('network.programs', {
-      accessController: { write: [orbitdb.identity.id] },
+    programs = await db.feed('network.programs', {
+      accessController: { write: [db.identity.id] },
       create: true
     })
     await programs.load()
   }
   debug( -4,'👀[(database)getAllDatabases]',programs)
-  return programs
-    ? programs.iterator({ limit: -1 }).collect()
-    : []
+  const result =  programs
+      ? programs.iterator({ limit: -1 }).collect()
+      : []
+  console.log('@@@@@@@@@@@@@ getAllDatabases @@@@@@@@@@@@@@@@@', {
+    db: db,
+    programs: programs,
+    result: result
+  })
+  return result
 }
 
 export const getDB = async (address) => {

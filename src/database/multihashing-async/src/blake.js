@@ -1,7 +1,8 @@
 'use strict'
 
-// @ts-ignore - no types available
 const blake = require('blakejs')
+
+const toCallback = require('./utils').toCallback
 
 const minB = 0xb201
 const minS = 0xb241
@@ -18,25 +19,12 @@ const blake2s = {
   digest: blake.blake2sFinal
 }
 
-// Note that although this function doesn't do any asynchronous work, we mark
-// the function as async because it must return a Promise to match the API
-// for other functions that do perform asynchronous work (see sha.browser.js)
-// eslint-disable-next-line
-
-/**
- * @param {number} size
- * @param {any} hf
- * @returns {import('./types').Digest}
- */
-const makeB2Hash = (size, hf) => async (data) => {
+const makeB2Hash = (size, hf) => toCallback((buf) => {
   const ctx = hf.init(size, null)
-  hf.update(ctx, data)
-  return hf.digest(ctx)
-}
+  hf.update(ctx, buf)
+  return Buffer.from(hf.digest(ctx))
+})
 
-/**
- * @param {Record<number, import('./types').Digest>} table
- */
 module.exports = (table) => {
   for (let i = 0; i < 64; i++) {
     table[minB + i] = makeB2Hash(i + 1, blake2b)

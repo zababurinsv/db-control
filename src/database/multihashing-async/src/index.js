@@ -1,27 +1,45 @@
 'use strict'
 
-const errcode = require('err-code')
 const multihash = require('multihashes')
 const crypto = require('./crypto')
-const equals = require('uint8arrays/equals')
+
+module.exports = Multihashing
 
 /**
- * @typedef {import("./types").Digest} Digest
- * @typedef {import("multihashes").HashName} HashName
- */
-
-/**
- * Hash the given `bytes` using the algorithm specified by `alg`.
+ * Hash the given `buf` using the algorithm specified
+ * by `func`.
  *
- * @param {Uint8Array} bytes - The value to hash.
- * @param {HashName} alg - The algorithm to use eg 'sha1'
+ * @param {Buffer} buf - The value to hash.
+ * @param {number|string} func - The algorithm to use.
  * @param {number} [length] - Optionally trim the result to this length.
- * @returns {Promise<Uint8Array>}
+ * @param {function(Error, Buffer)} callback
+ * @returns {undefined}
  */
-async function Multihashing (bytes, alg, length) {
-  const digest = await Multihashing.digest(bytes, alg, length)
-  return multihash.encode(digest, alg, length)
+function Multihashing (buf, func, length, callback) {
+  if (typeof length === 'function') {
+    callback = length
+    length = undefined
+  }
+
+  if (!callback) {
+    throw new Error('Missing callback')
+  }
+
+  Multihashing.digest(buf, func, length, (err, digest) => {
+    if (err) {
+      return callback(err)
+    }
+
+    callback(null, multihash.encode(digest, func, length))
+  })
 }
+
+/**
+ * The `buffer` module for easy use in the browser.
+ *
+ * @type {Buffer}
+ */
+Multihashing.Buffer = Buffer // for browser things
 
 /**
  * Expose multihash itself, to avoid silly double requires.
@@ -29,46 +47,62 @@ async function Multihashing (bytes, alg, length) {
 Multihashing.multihash = multihash
 
 /**
- * @param {Uint8Array} bytes - The value to hash.
- * @param {HashName} alg - The algorithm to use eg 'sha1'
+ * @param {Buffer} buf - The value to hash.
+ * @param {number|string} func - The algorithm to use.
  * @param {number} [length] - Optionally trim the result to this length.
- * @returns {Promise<Uint8Array>}
+ * @param {function(Error, Buffer)} callback
+ * @returns {undefined}
  */
-Multihashing.digest = async (bytes, alg, length) => {
-  const hash = Multihashing.createHash(alg)
-  const digest = await hash(bytes)
-  return length ? digest.slice(0, length) : digest
+Multihashing.digest = function (buf, func, length, callback) {
+  if (typeof length === 'function') {
+    callback = length
+    length = undefined
+  }
+
+  if (!callback) {
+    throw new Error('Missing callback')
+  }
+
+  let cb = callback
+  if (length) {
+    cb = (err, digest) => {
+      if (err) {
+        return callback(err)
+      }
+
+      callback(null, digest.slice(0, length))
+    }
+  }
+
+  let hash
+  try {
+    hash = Multihashing.createHash(func)
+  } catch (err) {
+    return cb(err)
+  }
+
+  hash(buf, cb)
 }
 
 /**
- * Creates a function that hashes with the given algorithm
+ * @param {string|number} func
  *
- * @param {HashName} alg - The algorithm to use eg 'sha1'
- * @returns {Digest} - The hash function corresponding to `alg`
+ * @returns {function} - The to `func` corresponding hash function.
  */
-Multihashing.createHash = function (alg) {
-  if (!alg) {
-    const e = errcode(new Error('hash algorithm must be specified'), 'ERR_HASH_ALGORITHM_NOT_SPECIFIED')
-    throw e
+Multihashing.createHash = function (func) {
+  func = multihash.coerceCode(func)
+  if (!Multihashing.functions[func]) {
+    throw new Error('multihash function ' + func + ' not yet supported')
   }
 
-  const code = multihash.coerceCode(alg)
-  if (!Multihashing.functions[code]) {
-    throw errcode(new Error(`multihash function '${alg}' not yet supported`), 'ERR_HASH_ALGORITHM_NOT_SUPPORTED')
-  }
-
-  return Multihashing.functions[code]
+  return Multihashing.functions[func]
 }
 
 /**
  * Mapping of multihash codes to their hashing functions.
- *
- * @type {Record<number, Digest>}
+ * @type {Object}
  */
-// @ts-ignore - most of those functions aren't typed
 Multihashing.functions = {
-  // identity
-  0x00: crypto.identity,
   // sha1
   0x11: crypto.sha1,
   // sha2-256
@@ -106,15 +140,10 @@ Multihashing.functions = {
 // add blake functions
 crypto.addBlake(Multihashing.functions)
 
-/**
- * @param {Uint8Array} bytes
- * @param {Uint8Array} hash
- * @returns {Promise<boolean>}
- */
-Multihashing.validate = async (bytes, hash) => {
-  const newHash = await Multihashing(bytes, multihash.decode(hash).name)
-
-  return equals(hash, newHash)
+Multihashing.validate = (data, hash, callback) => {
+  let algo = multihash.decode(hash).name
+  Multihashing(data, algo, (err, newHash) => {
+    if (err) return callback(err)
+    callback(err, Buffer.compare(hash, newHash) === 0)
+  })
 }
-
-module.exports = Multihashing
