@@ -18,8 +18,6 @@ import AddDialog from '../components/AddDialog'
 function DatabasesView () {
   const [appState, dispatch] = useStateValue()
 
-  console.log('============ DatabasesView ===============', appState)
-
   async function fetchDatabases () {
     dispatch({ type: actions.PROGRAMS.SET_PROGRAMS_LOADING, loading: true })
     const programs = await getAllDatabases()
@@ -48,6 +46,7 @@ function DatabasesView () {
 
   const addDB = (args) => {
     console.log("Add database...", args)
+    console.assert(false)
     addDatabase(args.address).then((hash) => {
       console.log("Added", args.address)
       fetchDatabases().then((data) => {

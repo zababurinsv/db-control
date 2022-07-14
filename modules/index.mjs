@@ -81003,8 +81003,6 @@ function DatabasesView() {
       appState = _useStateValue2[0],
       dispatch = _useStateValue2[1];
 
-  console.log('============ DatabasesView ===============', appState);
-
   function fetchDatabases() {
     return _fetchDatabases.apply(this, arguments);
   }
@@ -81069,6 +81067,7 @@ function DatabasesView() {
 
   var addDB = function addDB(args) {
     console.log("Add database...", args);
+    console.assert(false);
     addDatabase(args.address).then(function (hash) {
       console.log("Added", args.address);
       fetchDatabases().then(function (data) {
@@ -81675,7 +81674,7 @@ function ProgramView() {
           db: null,
           entries: []
         });
-        history.goBack();
+        history(-1);
       });
     }
   };
@@ -81833,7 +81832,6 @@ function ProgramView() {
     }, "No input controls found for '", db.type, "'");
   }
 
-  console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Pane$1, {
     marginTop: majorScale(3),
     marginBottom: majorScale(2),
@@ -81977,7 +81975,6 @@ function App(props) {
     }
   };
 
-  console.log('< ================================== >');
   return /*#__PURE__*/React.createElement(StateProvider, {
     initialState: initialState,
     reducer: reducer

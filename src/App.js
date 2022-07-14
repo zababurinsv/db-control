@@ -103,7 +103,7 @@ function App(props) {
                 return state
         }
     }
-    console.log('< ================================== >')
+
     return (
         <StateProvider
             initialState={initialState}

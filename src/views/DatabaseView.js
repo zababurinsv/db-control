@@ -45,7 +45,7 @@ function ProgramView () {
       appState.db.close().then(() => {
         dispatch({ type: actions.PROGRAMS.SET_PROGRAM, program: null })
         dispatch({ type: actions.DB.SET_DB, db: null, entries: [] })
-        history.goBack()
+        history(-1)
       })
     }
   }
@@ -185,7 +185,7 @@ function ProgramView () {
     else
       return <Text intent='danger'>No input controls found for '{db.type}'</Text>
   }
-  console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+
   return (
       <>
         <Pane

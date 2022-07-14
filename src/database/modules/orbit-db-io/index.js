@@ -67,7 +67,6 @@ const writeCbor = async (ipfs, obj, options) => {
   const base = options.base || defaultBase
   const onlyHash = options.onlyHash || false
   const cid = await ipfs.dag.put(dagNode, { onlyHash })
-  console.log('@@@@@@@@@ cid @@@@@@@@@', cid)
   const res = cid.toBaseEncodedString(base)
   const pin = options.pin || false
   if (pin) {
