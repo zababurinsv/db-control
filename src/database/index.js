@@ -54,25 +54,23 @@ export const getDB = async (address) => {
   return db
 }
 
-export const addDatabase = async (address) => {
-  debug( -4,'👀[(database)addDatabase]',address)
-  const db = await orbitdb.open(address)
-  return programs.add({
-    name: db.dbname,
-    type: db.type,
-    address: address,
-    added: Date.now()
-  })
+export const addDatabase = (address) => {
+  console.log('=== orbitdb ====');
+  return orbitdb.open(address)
+    .then(db => {
+      console.assert(false)
+      programs.add({
+        name: db.dbname,
+        type: db.type,
+        address: address,
+        added: Date.now()
+      });
+    });
 }
 
 export const createDatabase = async (name, type, permissions) => {
   let accessController
-  debug( -4,'👀[(database)createDatabase]',{
-    name: name,
-    type: type,
-    permissions: permissions
-  })
-  console.log('@@@@@@@@@@@ orbitdb @@@@@@@@@@@@@', orbitdb)
+
   switch (permissions) {
     case 'public':
       accessController = { write: ['*'] }
@@ -83,6 +81,7 @@ export const createDatabase = async (name, type, permissions) => {
   }
 
   const db = await orbitdb.create(name, type, { accessController })
+
   return programs.add({
     name,
     type,
@@ -91,7 +90,7 @@ export const createDatabase = async (name, type, permissions) => {
   })
 }
 
-export const removeDatabase = async (hash) => {
+export const removeDatabase = (hash) => {
   debug( -4,'👀[(database)removeDatabase]',{
     hash: hash,
   })

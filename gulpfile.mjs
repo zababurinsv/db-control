@@ -59,7 +59,7 @@ gulp.task('sync--libp2p-crypto--build-module', async () => {
 
 gulp.task('sync--secp256k1-module', async () => {
     const bundle = await rollup.rollup({
-        input: './src/database/secp256k1/elliptic.js',
+        input: './src/database/modules/secp256k1/elliptic.js',
         plugins: [
             json(),
             commonjs(),
@@ -68,7 +68,7 @@ gulp.task('sync--secp256k1-module', async () => {
     return await bundle.write({
         sourcemap: false,
         format: 'es',
-        file: './src/database/secp256k1/dist/index.js',
+        file: './src/database/modules/secp256k1/dist/index.js',
     });
 });
 
@@ -3378,6 +3378,142 @@ gulp.task('sync--is-typedarray-module', async () => {
     });
 });
 
+gulp.task('sync--p-map/1.1.1/index-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/p-map/1.1.1/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/p-map/1.1.1/dist/index.js',
+    });
+});
+
+gulp.task('sync--ipld-dag-pb/0.20.0-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipld-dag-pb/0.20.0/src/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipld-dag-pb/0.20.0/dist/index.js',
+    });
+});
+
+gulp.task('sync--class-is-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/class-is/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/class-is/dist/index.js',
+    });
+});
+
+
+gulp.task('sync--protons-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/protons/src/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/protons/dist/index.js',
+    });
+});
+
+gulp.task('sync--protocol-buffers-schema-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/protocol-buffers-schema/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/protocol-buffers-schema/dist/index.js',
+    });
+});
+
+gulp.task('sync--signed-varint-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/signed-varint/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/signed-varint/dist/index.js',
+    });
+});
+
+gulp.task('sync--multibase/4.0.4-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/multibase/4.0.4/src/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/multibase/4.0.4/dist/index.js',
+    });
+});
+
+gulp.task('sync--web-encoding-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/web-encoding/src/lib.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/web-encoding/dist/index.js',
+    });
+});
+
+gulp.task('sync--secp256k1/3.8.0-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/secp256k1/3.8.0/elliptic.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/secp256k1/3.8.0/dist/index.js',
+    });
+});
+
 gulp.task('watch',  () => {
     gulp.watch([`.${pkg.config.gulp.scope}/**/*.scss`], gulp.series('scss'))
     gulp.watch([`.${pkg.config.gulp.scope}/**/*`], gulp.series('build'))
@@ -3611,3 +3747,21 @@ gulp.task('level-js/4.0.2/index', gulp.series('sync--level-js/4.0.2/index-module
 gulp.task('typedarray-to-buffer', gulp.series('sync--typedarray-to-buffer-module'))
 gulp.task('is-typedarray', gulp.series('sync--is-typedarray-module'))
 gulp.task('immediate', gulp.series('sync--immediate-module'))
+gulp.task('p-map/1.1.1/index', gulp.series('sync--p-map/1.1.1/index-module'))
+
+gulp.task('ipld-dag-pb/0.20.0', gulp.series('sync--ipld-dag-pb/0.20.0-module'))
+
+gulp.task('class-is', gulp.series('sync--class-is-module'))
+
+gulp.task('protons', gulp.series('sync--protons-module'))
+
+gulp.task('protocol-buffers-schema', gulp.series('sync--protocol-buffers-schema-module'))
+
+gulp.task('signed-varint', gulp.series('sync--signed-varint-module'))
+
+gulp.task('multibase/4.0.4', gulp.series('sync--multibase/4.0.4-module'))
+
+gulp.task('web-encoding', gulp.series('sync--web-encoding-module'))
+
+gulp.task('secp256k1/3.8.0', gulp.series('sync--secp256k1/3.8.0-module'))
+

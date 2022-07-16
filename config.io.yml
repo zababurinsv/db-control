@@ -2,8 +2,9 @@
   - page: io
     dir:
     - /docs
-    router:
-        - orbitdb
+  - page: ipfs
+    dir:
+    - /docs
   - page: soundcheckbox
     dir:
     - /docs

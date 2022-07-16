@@ -79112,117 +79112,64 @@ var getDB = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
-var addDatabase = /*#__PURE__*/function () {
-  var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5(address) {
-    var db;
-    return regenerator.wrap(function _callee5$(_context5) {
-      while (1) {
-        switch (_context5.prev = _context5.next) {
-          case 0:
-            debug$1(-4, '👀[(database)addDatabase]', address);
-            _context5.next = 3;
-            return orbitdb.open(address);
+var addDatabase = function addDatabase(address) {
+  console.log('=== orbitdb ====');
+  return orbitdb.open(address).then(function (db) {
+    console.assert(false);
+    programs.add({
+      name: db.dbname,
+      type: db.type,
+      address: address,
+      added: Date.now()
+    });
+  });
+};
+var createDatabase = function createDatabase(name, type, permissions) {
+  var accessController;
+  debug$1(-4, '👀[(database)createDatabase]', {
+    name: name,
+    type: type,
+    permissions: permissions
+  });
+  console.log('@@@@@@@@@@@ orbitdb @@@@@@@@@@@@@', orbitdb);
 
-          case 3:
-            db = _context5.sent;
-            return _context5.abrupt("return", programs.add({
-              name: db.dbname,
-              type: db.type,
-              address: address,
-              added: Date.now()
-            }));
+  switch (permissions) {
+    case 'public':
+      accessController = {
+        write: ['*']
+      };
+      break;
 
-          case 5:
-          case "end":
-            return _context5.stop();
-        }
-      }
-    }, _callee5);
-  }));
+    default:
+      accessController = {
+        write: [orbitdb.identity.id]
+      };
+      break;
+  }
 
-  return function addDatabase(_x5) {
-    return _ref5.apply(this, arguments);
-  };
-}();
-var createDatabase = /*#__PURE__*/function () {
-  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6(name, type, permissions) {
-    var accessController, db;
-    return regenerator.wrap(function _callee6$(_context6) {
-      while (1) {
-        switch (_context6.prev = _context6.next) {
-          case 0:
-            debug$1(-4, '👀[(database)createDatabase]', {
-              name: name,
-              type: type,
-              permissions: permissions
-            });
-            console.log('@@@@@@@@@@@ orbitdb @@@@@@@@@@@@@', orbitdb);
-            _context6.t0 = permissions;
-            _context6.next = _context6.t0 === 'public' ? 5 : 7;
-            break;
-
-          case 5:
-            accessController = {
-              write: ['*']
-            };
-            return _context6.abrupt("break", 9);
-
-          case 7:
-            accessController = {
-              write: [orbitdb.identity.id]
-            };
-            return _context6.abrupt("break", 9);
-
-          case 9:
-            _context6.next = 11;
-            return orbitdb.create(name, type, {
-              accessController: accessController
-            });
-
-          case 11:
-            db = _context6.sent;
-            return _context6.abrupt("return", programs.add({
-              name: name,
-              type: type,
-              address: db.address.toString(),
-              added: Date.now()
-            }));
-
-          case 13:
-          case "end":
-            return _context6.stop();
-        }
-      }
-    }, _callee6);
-  }));
-
-  return function createDatabase(_x6, _x7, _x8) {
-    return _ref6.apply(this, arguments);
-  };
-}();
-var removeDatabase = /*#__PURE__*/function () {
-  var _ref7 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee7(hash) {
-    return regenerator.wrap(function _callee7$(_context7) {
-      while (1) {
-        switch (_context7.prev = _context7.next) {
-          case 0:
-            debug$1(-4, '👀[(database)removeDatabase]', {
-              hash: hash
-            });
-            return _context7.abrupt("return", programs.remove(hash));
-
-          case 2:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    }, _callee7);
-  }));
-
-  return function removeDatabase(_x9) {
-    return _ref7.apply(this, arguments);
-  };
-}();
+  console.log('======= created start =======', {
+    name: name,
+    type: type,
+    accessController: accessController
+  });
+  return orbitdb.create(name, type, {
+    accessController: accessController
+  }).then(function (db) {
+    console.log('=== db ===', db);
+    programs.add({
+      name: name,
+      type: type,
+      address: db.address.toString(),
+      added: Date.now()
+    });
+  });
+};
+var removeDatabase = function removeDatabase(hash) {
+  debug$1(-4, '👀[(database)removeDatabase]', {
+    hash: hash
+  });
+  return programs.remove(hash);
+};
 
 function truncateAddress(address) {
   return "".concat(address.substring(0, 6), "...").concat(address.substring(address.length - 4));
@@ -81051,6 +80998,7 @@ function DatabasesView() {
 
   var createDB = function createDB(args) {
     console.log("Create database...", args);
+    console.assert(false);
     createDatabase(args.name, args.type, args.permissions).then(function (hash) {
       console.log("Created", hash);
       fetchDatabases().then(function (data) {
@@ -81067,9 +81015,8 @@ function DatabasesView() {
 
   var addDB = function addDB(args) {
     console.log("Add database...", args);
-    console.assert(false);
-    addDatabase(args.address).then(function (hash) {
-      console.log("Added", args.address);
+    addDatabase(args.address.trim()).then(function (hash) {
+      console.log("Added", args.address.trim());
       fetchDatabases().then(function (data) {
         console.log("Loaded programs", data);
       });

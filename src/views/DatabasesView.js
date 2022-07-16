@@ -32,6 +32,7 @@ function DatabasesView () {
 
   const createDB = (args) => {
     console.log("Create database...", args)
+    console.assert(false)
     createDatabase(args.name, args.type, args.permissions).then((hash) => {
       console.log("Created", hash)
       fetchDatabases().then((data) => {
@@ -46,9 +47,8 @@ function DatabasesView () {
 
   const addDB = (args) => {
     console.log("Add database...", args)
-    console.assert(false)
-    addDatabase(args.address).then((hash) => {
-      console.log("Added", args.address)
+    addDatabase(args.address.trim()).then((hash) => {
+      console.log("Added", args.address.trim())
       fetchDatabases().then((data) => {
         console.log("Loaded programs", data)
       })
