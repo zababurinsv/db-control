@@ -8,19 +8,30 @@
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
+<!--<script src="./ipfs/index.min.js" defer></script>-->
 <script type="module">
+    // console.log('cccccccccccccccc', window.Ipfs)
+    // const IPFS = window.Ipfs
     import OrbitDB from '/modules/orbit-db/dist/index.js'
-    import IPFS from '/modules/ipfs/dist/index.js'
-    import {createDatabase} from '/index.js'
-    // import orbitDbIO from '/modules/orbit-db-io/dist/index.js'
-
-    // console.log('createDatabase', orbitDbIO)
-
-    //2 export const createDatabase = async (name, type, permissions)
-    //3 async create (name, type, options = {})
-    //4 async _determineAddress (name, type, options = {})
-
-
+    import IPFS from '/modules/ipfs-core/dist/index.all.js'
+    import {initIPFS, initOrbitDB} from '/index.js'
+    // import io from '/modules/orbit-db-io/dist/index.js'
+    console.log('IPFS', IPFS)
+    initIPFS({IPFS: IPFS})
+        .then(ipfs => {
+            initOrbitDB({ipfs: ipfs, OrbitDB: OrbitDB})
+                .then(async orbitdb => {
+                    const db = await orbitdb.open('/orbitdb/zdpuAvrbqb2WoJ32oZ6EguJPEi5DKGnWwQZv4mm9jrtZjyZrj/hello')
+                    console.log('=============', db)
+                    // io.read(ipfs, '/orbitdb/zdpuB3ZeZBLhiT5zUgfZkbpunwHb5RS5wdiBZUgPQ3BLCa61C/aaaввы')
+                })
+                .catch(e => {
+                    console.log('=== ERROR orbitdb ===', e)
+                })
+        })
+        .catch(e => {
+          console.log('=== ERROR === ipfs', e)
+        })
 </script>
 </body>
 </html>

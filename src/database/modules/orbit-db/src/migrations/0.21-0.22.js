@@ -21,7 +21,7 @@ async function migrate (OrbitDB, options, dbAddress) {
   if (!_localHeads) return
 
   const keyRoot = dbAddress.toString()
-  logger.debug('Attempting to migrate from old cache location')
+  console.log('Attempting to migrate from old cache location')
   const migrationKeys = [
     '_remoteHeads',
     '_localHeads',
@@ -35,7 +35,7 @@ async function migrate (OrbitDB, options, dbAddress) {
       const val = await oldCache.get(migrationKeys[i])
       if (val) await options.cache.set(key, val)
     } catch (e) {
-      logger.debug(e.message)
+      console.log(e.message)
     }
   }
   await options.cache.set(path.join(keyRoot, '_manifest'), dbAddress.root)

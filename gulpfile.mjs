@@ -29,20 +29,6 @@ gulp.task('build', (cb) => {
     });
 })
 
-gulp.task('sync--ipfs--build-module', async () => {
-    const bundle = await rollup.rollup({
-        input: './src/database/ipfs/dist/index.min.js',
-        plugins: [
-            commonjs(),
-        ],
-    });
-    return await bundle.write({
-        sourcemap: false,
-        format: 'es',
-        file: './src/database/ipfs/dist/index.js',
-    });
-});
-
 gulp.task('sync--libp2p-crypto--build-module', async () => {
     const bundle = await rollup.rollup({
         input: './src/database/libp2p-crypto/dist/index.min.js',
@@ -3514,13 +3500,161 @@ gulp.task('sync--secp256k1/3.8.0-module', async () => {
     });
 });
 
+gulp.task('sync--ipfs-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs/src/index.js',
+        plugins: [
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs/dist/index.js',
+    });
+});
+
+gulp.task('sync--ipfs-core-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-core/src/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-core/dist/index.js',
+    });
+});
+
+gulp.task('sync--ipfs-unixfs-importer-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-unixfs-importer/src/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-unixfs-importer/dist/index.js',
+    });
+});
+
+gulp.task('sync--ipfs-unixfs-importer/src/utils/persist-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-unixfs-importer/src/utils/persist.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-unixfs-importer/dist/utils/persist.js',
+    });
+});
+
+gulp.task('sync--ipfs-unixfs-importer/src/dir-sharded-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-unixfs-importer/src/dir-sharded.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-unixfs-importer/dist/dir-sharded.js',
+    });
+});
+
+gulp.task('sync--ipfs-unixfs-importer/src/options-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-unixfs-importer/src/options.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-unixfs-importer/dist/options.js',
+    });
+});
+
+gulp.task('sync--ipfs-core-utils/src/files/normalise-input-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-core-utils/src/files/normalise-input/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-core-utils/dist/files/normalise-input/index.js',
+    });
+});
+
+gulp.task('sync--ipfs-core-utils/src/with-timeout-option-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-core-utils/src/with-timeout-option.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-core-utils/dist/with-timeout-option.js',
+    });
+});
+
+gulp.task('sync--ipfs-core-utils/src/to-cid-and-path-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-core-utils/src/to-cid-and-path.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-core-utils/dist/to-cid-and-path.js',
+    });
+});
+
+gulp.task('sync--ipfs-core-all-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './src/database/modules/ipfs-core/dist/index.min.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './src/database/modules/ipfs-core/dist/index.all.js',
+    });
+});
+
 gulp.task('watch',  () => {
     gulp.watch([`.${pkg.config.gulp.scope}/**/*.scss`], gulp.series('scss'))
     gulp.watch([`.${pkg.config.gulp.scope}/**/*`], gulp.series('build'))
 });
 
 gulp.task('default', gulp.series('scss','build',  'watch'))
-gulp.task('ipfs', gulp.series('sync--ipfs--build-module'))
 gulp.task('libp2p-crypto', gulp.series('sync--libp2p-crypto--build-module'))
 gulp.task('level', gulp.series('sync--level-module'))
 gulp.task('levelup', gulp.series('sync--levelup-module'))
@@ -3748,20 +3882,32 @@ gulp.task('typedarray-to-buffer', gulp.series('sync--typedarray-to-buffer-module
 gulp.task('is-typedarray', gulp.series('sync--is-typedarray-module'))
 gulp.task('immediate', gulp.series('sync--immediate-module'))
 gulp.task('p-map/1.1.1/index', gulp.series('sync--p-map/1.1.1/index-module'))
-
 gulp.task('ipld-dag-pb/0.20.0', gulp.series('sync--ipld-dag-pb/0.20.0-module'))
-
 gulp.task('class-is', gulp.series('sync--class-is-module'))
-
 gulp.task('protons', gulp.series('sync--protons-module'))
-
 gulp.task('protocol-buffers-schema', gulp.series('sync--protocol-buffers-schema-module'))
-
 gulp.task('signed-varint', gulp.series('sync--signed-varint-module'))
-
 gulp.task('multibase/4.0.4', gulp.series('sync--multibase/4.0.4-module'))
-
 gulp.task('web-encoding', gulp.series('sync--web-encoding-module'))
-
 gulp.task('secp256k1/3.8.0', gulp.series('sync--secp256k1/3.8.0-module'))
+
+gulp.task('ipfs', gulp.series('sync--ipfs-module'))
+
+gulp.task('ipfs-core', gulp.series('sync--ipfs-core-module'))
+
+gulp.task('ipfs-unixfs-importer', gulp.series('sync--ipfs-unixfs-importer-module'))
+
+gulp.task('ipfs-unixfs-importer/src/utils/persist', gulp.series('sync--ipfs-unixfs-importer/src/utils/persist-module'))
+
+gulp.task('ipfs-unixfs-importer/src/dir-sharded', gulp.series('sync--ipfs-unixfs-importer/src/dir-sharded-module'))
+
+gulp.task('ipfs-unixfs-importer/src/options', gulp.series('sync--ipfs-unixfs-importer/src/options-module'))
+
+gulp.task('ipfs-core-utils/src/files/normalise-input', gulp.series('sync--ipfs-core-utils/src/files/normalise-input-module'))
+
+gulp.task('ipfs-core-utils/src/with-timeout-option', gulp.series('sync--ipfs-core-utils/src/with-timeout-option-module'))
+
+gulp.task('ipfs-core-utils/src/to-cid-and-path', gulp.series('sync--ipfs-core-utils/src/to-cid-and-path-module'))
+
+gulp.task('ipfs-core-all', gulp.series('sync--ipfs-core-all-module'))
 

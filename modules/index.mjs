@@ -79112,58 +79112,87 @@ var getDB = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
-var addDatabase = function addDatabase(address) {
-  console.log('=== orbitdb ====');
-  return orbitdb.open(address).then(function (db) {
-    console.assert(false);
-    programs.add({
-      name: db.dbname,
-      type: db.type,
-      address: address,
-      added: Date.now()
-    });
-  });
-};
-var createDatabase = function createDatabase(name, type, permissions) {
-  var accessController;
-  debug$1(-4, '👀[(database)createDatabase]', {
-    name: name,
-    type: type,
-    permissions: permissions
-  });
-  console.log('@@@@@@@@@@@ orbitdb @@@@@@@@@@@@@', orbitdb);
+var addDatabase = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee5(address) {
+    var db;
+    return regenerator.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.next = 2;
+            return orbitdb.open(address);
 
-  switch (permissions) {
-    case 'public':
-      accessController = {
-        write: ['*']
-      };
-      break;
+          case 2:
+            db = _context5.sent;
+            return _context5.abrupt("return", programs.add({
+              name: db.dbname,
+              type: db.type,
+              address: address,
+              added: Date.now()
+            }));
 
-    default:
-      accessController = {
-        write: [orbitdb.identity.id]
-      };
-      break;
-  }
+          case 4:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
 
-  console.log('======= created start =======', {
-    name: name,
-    type: type,
-    accessController: accessController
-  });
-  return orbitdb.create(name, type, {
-    accessController: accessController
-  }).then(function (db) {
-    console.log('=== db ===', db);
-    programs.add({
-      name: name,
-      type: type,
-      address: db.address.toString(),
-      added: Date.now()
-    });
-  });
-};
+  return function addDatabase(_x5) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+var createDatabase = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/regenerator.mark(function _callee6(name, type, permissions) {
+    var accessController, db;
+    return regenerator.wrap(function _callee6$(_context6) {
+      while (1) {
+        switch (_context6.prev = _context6.next) {
+          case 0:
+            _context6.t0 = permissions;
+            _context6.next = _context6.t0 === 'public' ? 3 : 5;
+            break;
+
+          case 3:
+            accessController = {
+              write: ['*']
+            };
+            return _context6.abrupt("break", 7);
+
+          case 5:
+            accessController = {
+              write: [orbitdb.identity.id]
+            };
+            return _context6.abrupt("break", 7);
+
+          case 7:
+            _context6.next = 9;
+            return orbitdb.create(name, type, {
+              accessController: accessController
+            });
+
+          case 9:
+            db = _context6.sent;
+            return _context6.abrupt("return", programs.add({
+              name: name,
+              type: type,
+              address: db.address.toString(),
+              added: Date.now()
+            }));
+
+          case 11:
+          case "end":
+            return _context6.stop();
+        }
+      }
+    }, _callee6);
+  }));
+
+  return function createDatabase(_x6, _x7, _x8) {
+    return _ref6.apply(this, arguments);
+  };
+}();
 var removeDatabase = function removeDatabase(hash) {
   debug$1(-4, '👀[(database)removeDatabase]', {
     hash: hash
@@ -81604,6 +81633,8 @@ function ProgramView() {
   var _React$useState5 = React.useState("/orbitdb/".concat(programName, "/").concat(dbName)),
       _React$useState6 = _slicedToArray$1(_React$useState5, 1),
       address = _React$useState6[0];
+
+  console.log('=== appState.entries ===', appState.entries);
 
   var handleSelect = function handleSelect(idx) {
     setIndex(idx !== index ? idx : null);

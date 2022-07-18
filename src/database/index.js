@@ -54,18 +54,14 @@ export const getDB = async (address) => {
   return db
 }
 
-export const addDatabase = (address) => {
-  console.log('=== orbitdb ====');
-  return orbitdb.open(address)
-    .then(db => {
-      console.assert(false)
-      programs.add({
-        name: db.dbname,
-        type: db.type,
-        address: address,
-        added: Date.now()
-      });
-    });
+export const addDatabase = async (address) => {
+  const db = await orbitdb.open(address)
+  return programs.add({
+    name: db.dbname,
+    type: db.type,
+    address: address,
+    added: Date.now()
+  })
 }
 
 export const createDatabase = async (name, type, permissions) => {

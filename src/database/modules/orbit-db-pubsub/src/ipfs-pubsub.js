@@ -34,17 +34,17 @@ class IPFSPubsub {
       const topicMonitor = new PeerMonitor(this._ipfs.pubsub, topic)
 
       topicMonitor.on('join', (peer) => {
-        logger.debug(`Peer joined ${topic}:`)
-        logger.debug(peer)
+        console.log(`Peer joined ${topic}:`)
+        console.log(peer)
         if (this._subscriptions[topic]) {
           onNewPeerCallback(topic, peer)
         } else {
-          logger.warn('Peer joined a room we don\'t have a subscription for')
-          logger.warn(topic, peer)
+          console.warn('Peer joined a room we don\'t have a subscription for')
+          console.warn(topic, peer)
         }
       })
 
-      topicMonitor.on('leave', (peer) => logger.debug(`Peer ${peer} left ${topic}`))
+      topicMonitor.on('leave', (peer) => console.log(`Peer ${peer} left ${topic}`))
       topicMonitor.on('error', (e) => logger.error(e))
 
       this._subscriptions[topic] = {
@@ -54,7 +54,7 @@ class IPFSPubsub {
       }
 
       topicsOpenCount ++
-      logger.debug("Topics open:", topicsOpenCount)
+      console.log("Topics open:", topicsOpenCount)
     }
   }
 
@@ -63,9 +63,9 @@ class IPFSPubsub {
       await this._ipfs.pubsub.unsubscribe(hash, this._handleMessage)
       this._subscriptions[hash].topicMonitor.stop()
       delete this._subscriptions[hash]
-      logger.debug(`Unsubscribed from '${hash}'`)
+      console.log(`Unsubscribed from '${hash}'`)
       topicsOpenCount --
-      logger.debug("Topics open:", topicsOpenCount)
+      console.log("Topics open:", topicsOpenCount)
     }
   }
 

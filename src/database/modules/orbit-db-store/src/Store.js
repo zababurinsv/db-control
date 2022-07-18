@@ -91,7 +91,7 @@ class Store {
         // Update the latest entry state (latest is the entry with largest clock time)
         this._replicationStatus.queued++
         this._recalculateReplicationMax(entry.clock ? entry.clock.time : 0)
-        // logger.debug(`<replicate>`)
+        // console.log(`<replicate>`)
         this.events.emit('replicate', this.address.toString(), entry)
       })
       this._replicator.on('load.progress', (id, hash, entry, have, bufferedLength) => {
@@ -102,7 +102,7 @@ class Store {
         }
         this._replicationStatus.buffered = bufferedLength
         this._recalculateReplicationMax(this.replicationStatus.progress)
-        // logger.debug(`<replicate.progress>`)
+        // console.log(`<replicate.progress>`)
         this.events.emit('replicate.progress', this.address.toString(), hash, entry, this.replicationStatus.progress, this.replicationStatus.max)
       })
 
@@ -118,9 +118,9 @@ class Store {
           // only store heads that has been verified and merges
           const heads = this._oplog.heads
           await this._cache.set(this.remoteHeadsPath, heads)
-          logger.debug(`Saved heads ${heads.length} [${heads.map(e => e.hash).join(', ')}]`)
+          console.log(`Saved heads ${heads.length} [${heads.map(e => e.hash).join(', ')}]`)
 
-          // logger.debug(`<replicated>`)
+          // console.log(`<replicated>`)
           this.events.emit('replicated', this.address.toString(), logs.length)
         } catch (e) {
           console.error(e)
@@ -271,7 +271,7 @@ class Store {
 
   async sync (heads) {
     this._stats.syncRequestsReceieved += 1
-    logger.debug(`Sync request #${this._stats.syncRequestsReceieved} ${heads.length}`)
+    console.log(`Sync request #${this._stats.syncRequestsReceieved} ${heads.length}`)
     if (heads.length === 0) {
       return
     }
@@ -346,7 +346,7 @@ class Store {
     await this._cache.set(this.snapshotPath, snapshot)
     await this._cache.set(this.queuePath, unfinished)
 
-    logger.debug(`Saved snapshot: ${snapshot.hash}, queue length: ${unfinished.length}`)
+    console.log(`Saved snapshot: ${snapshot.hash}, queue length: ${unfinished.length}`)
 
     return [snapshot]
   }

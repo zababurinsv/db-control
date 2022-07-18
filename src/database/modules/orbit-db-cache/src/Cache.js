@@ -53,7 +53,7 @@ class Cache {
             return reject(err)
           }
         }
-        logger.debug(`cache: Set ${key} to ${value}`)
+        console.log(`cache: Set ${key} to ${value}`)
         resolve()
       })
     })

@@ -35,7 +35,7 @@ class Replicator extends EventEmitter {
     // Flush the queue as an emergency switch
     this._flushTimer = setInterval(() => {
       if (this.tasksRunning === 0 && Object.keys(this._queue).length > 0) {
-        logger.warn('Had to flush the queue!', Object.keys(this._queue).length, 'items in the queue, ', this.tasksRequested, this.tasksFinished, ' tasks requested/finished')
+        console.warn('Had to flush the queue!', Object.keys(this._queue).length, 'items in the queue, ', this.tasksRequested, this.tasksFinished, ' tasks requested/finished')
         setTimeout(() => this._processQueue(), 0)
       }
     }, 3000)

@@ -37,10 +37,10 @@ See [example/example.js](https://github.com/haadcode/logplease/blob/master/examp
 ```javascript
 const Logger = require('logplease');
 const logger = Logger.create('utils');
-logger.debug(`This is a debug message`);
+console.log(`This is a debug message`);
 logger.log(`This is a log message`); // alias for debug()
 logger.info(`This is a info message`);
-logger.warn(`This is a warning`);
+console.warn(`This is a warning`);
 logger.error(`This is an error`);
 ```
 
@@ -56,10 +56,10 @@ Copy `dist/logplease.min.js` to your javascripts directory and include it in you
   <script type="text/javascript" src="dist/logplease.min.js" charset="utf-8"></script>
   <script type="text/javascript">
     var logger  = Logger.create('logger name');
-    logger.debug(`This is a debug message`);
+    console.log(`This is a debug message`);
     logger.log(`This is a log message`); // alias for debug()
     logger.info(`This is a info message`);
-    logger.warn(`This is a warning`);
+    console.warn(`This is a warning`);
     logger.error(`This is an error`);
   </script>
 </body>

@@ -35,7 +35,7 @@ function ProgramView () {
   const [index, setIndex] = React.useState(null)
   const [loading, setLoading] = React.useState(false)
   const [address] = React.useState(`/orbitdb/${programName}/${dbName}`)
-
+  console.log('=== appState.entries ===', appState.entries)
   const handleSelect = (idx) => {
     setIndex(idx !== index ? idx : null)
   }
