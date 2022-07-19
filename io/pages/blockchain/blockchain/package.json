@@ -1,0 +1,42 @@
+{
+  "name": "credit",
+  "version": "1.0.0",
+  "description": "Tera wallet",
+  "main": "run-nw.js",
+  "main2": "run-electron.js",
+  "repository": "https://gitlab.com/terafoundation/tera2",
+  "scripts": {
+    "node": "redrun -S kill:web kill:wallet blockchain:node",
+    "blockchain:node": "node --inspect run-node.mjs",
+    "kill:web": "kill $(lsof -t -i:8008)",
+    "kill:wallet": "kill $(lsof -t -i:7007)",
+    "pm2:monit": "pm2 monit",
+    "pm2:logs": "pm2 logs --out --lines 200",
+    "pm2:list": "pm2 list"
+  },
+  "keywords": [
+    "wallet",
+    "cryptowallet",
+    "quick",
+    "messenger",
+    "cryptocurrency",
+    "cryptomessenger"
+  ],
+  "author": "progr76@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "bintrees": "^1.0.2",
+    "bitcore-lib": "^8.22.2",
+    "bitcore-message": "^1.0.4",
+    "bs58check": "^2.1.2",
+    "greenlock": "^2.6.7",
+    "nat-upnp": "^1.1.1",
+    "secp256k1": "^3.6.1",
+    "stun": "^1.1.1",
+    "zip": "^1.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "redrun": "^9.0.1"
+  }
+}
