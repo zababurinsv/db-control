@@ -26,3 +26,6 @@
   - page: soundStorage
     dir:
     -
+  - page: blockchain
+    dir:
+    - /docs
