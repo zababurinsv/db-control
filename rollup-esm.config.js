@@ -8,7 +8,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import cleaner from 'rollup-plugin-cleaner';
 const extensions = ['.js','.mjs', '.ts', '.tsx'];
-import { baseUrl } from 'rollup-plugin-base-url';
 
 const isProduction = process.env.NODE_ENV === 'production';
 

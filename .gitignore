@@ -1,5 +1,6 @@
 node_modules/
 build/
+yarn.lock
 # Logs
 dist/
 worker/
