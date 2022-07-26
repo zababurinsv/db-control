@@ -1,7 +1,7 @@
 ---
   - page: io
     dir:
-    - /docs
+    - /
   - page: ipfs
     dir:
     - /docs

@@ -12,16 +12,16 @@ const extensions = ['.js','.mjs', '.ts', '.tsx'];
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
-    input: "src/index.js",
+    input: "src/controlCenter/index.js",
     output: {
-        file: "modules/index.mjs",
+        file: "modules/controlCenter/index.mjs",
         format: "es",
         sourcemap: true,
     },
     plugins: [
         cleaner({
             targets: [
-                './modules/'
+                './modules/controlCenter/'
             ]
         }),
         replace({
