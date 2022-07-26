@@ -39,10 +39,7 @@ config.forEach(item => {
     app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/manifest`)));
 })
 
-app.use(express.static(__dirname + 'src/assets/'));
-app.use(express.static(__dirname + 'src/database/'));
-app.use('/config',express.static(__dirname + 'src/config/'));
-app.use('/utils',express.static(__dirname + 'src/utils/'));
+app.use('/src', express.static(__dirname + 'src'));
 app.use('/modules', express.static(__dirname + 'modules'));
 
 app.options(`/*`, await cors(corsOptions))
