@@ -1,0 +1,55 @@
+const diff = (a, b) => {
+    return a.filter(function(i){return b.indexOf(i) < 0;});
+};
+
+export const Hooks = (() => {
+    let hooks = [], currentHook = 0, forceUpdate = false// array of hooks, and an iterator!
+    return {
+        async init(Component, self = false) {
+            const Comp = await Component(self) // run effects
+            currentHook = 0 // reset for next render
+            return Comp
+        },
+        async render(Component) {
+            const Comp = await Component() // run effects
+            currentHook = 0 // reset for next render
+            return forceUpdate ? (forceUpdate = false, await Comp.update()) : Comp
+        },
+        async update(Component, state) {
+            const Comp = await Component() // run effects
+            currentHook = 0 // reset for next render
+            return Comp
+        },
+        async useEffect(callback, depArray) {
+            const hasNoDeps = !Array.isArray(depArray)
+            const deps = hooks[currentHook] // type: array | undefined
+            const hasChangedDeps = deps ? !depArray.every((el, i) => {
+                    return (Array.isArray(el) && Array.isArray(deps[i]))
+                        ? diff(el, deps[i]).length === 0
+                        : el === deps[i]
+                }
+            ) : depArray.length === 0
+
+            if (hasNoDeps || hasChangedDeps) {
+                forceUpdate = true
+                await callback()
+            }
+            hooks[currentHook] = depArray
+            currentHook++
+        },
+        useState(initialValue) {
+            hooks[currentHook] = hooks[currentHook] || initialValue // type: any
+            const setStateHookIndex = currentHook // for setState's closure!
+            const setState = newState => (hooks[setStateHookIndex] = newState)
+            return [hooks[currentHook++], setState]
+        },
+        useRef(initialValue) {
+            if(hooks[currentHook] === undefined) {
+                hooks[currentHook] = document.querySelector(`[data-ref=${initialValue}]`)
+            }
+            const setStateHookIndex = currentHook
+            currentHook++
+            return hooks[setStateHookIndex]
+        }
+    }
+})()
