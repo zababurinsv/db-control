@@ -1,31 +1,41 @@
 ---
-  - page: io
-    dir:
+  - namespace: io
+    type: MVP
+    scope:
     - /
-  - page: ipfs
-    dir:
-    - /docs
-  - page: soundcheckbox
-    dir:
-    - /docs
-  - page: presets
-    dir:
+  - namespace: ipfs
+    type: MVP
+    scope:
+    - /
+  - namespace: soundcheckbox
+    type: MVP
+    scope:
+    - /
+  - namespace: presets
+    type: MVP
+    scope:
     -
-  - page: save
-    dir:
-    -
-  - page: interface
-    dir:
-    -
-  - page: group
-    dir:
-    -
-  - page: img
-    dir:
-    -
-  - page: soundStorage
-    dir:
-    -
-  - page: blockchain
-    dir:
-    - /docs
+  - namespace: save
+    type: MVP
+    scope:
+    - /
+  - namespace: interface
+    type: MVP
+    scope:
+    - /
+  - namespace: group
+    type: MVP
+    scope:
+    - /
+  - namespace: img
+    type: MVP
+    scope:
+    - /
+  - namespace: soundStorage
+    type: MVP
+    scope:
+    - /
+  - namespace: blockchain
+    type: MVP
+    scope:
+    - /

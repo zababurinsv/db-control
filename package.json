@@ -38,7 +38,7 @@
   },
   "scripts": {
     "rollup:build": "rollup -c rollup-esm.config.js --watch",
-    "nodemon:pages:io:start": "nodemon ./io/server.mjs",
+    "nodemon:pages:io:start": "nodemon ./namespace/server.mjs",
     "nodemon:nodes:io:start": "nodemon ./node/soundcheckbox/server.mjs",
     "nodemon:flomons:io:start": "nodemon ./node/flomons/server.mjs",
     "scss": "gulp",

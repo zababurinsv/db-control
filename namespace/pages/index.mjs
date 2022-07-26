@@ -26,18 +26,20 @@ app.use((req, res, next) => {
     next();
 });
 
-config.forEach(item => {
-    console.log(`${item.page} :`, {
-        'index': path.join(__page, `${item.page}${item.dir}`),
-        'assets': path.join(__page, `${item.page}${item.dir}/assets`),
-        'manifest': path.join(__page, `${item.page}${item.dir}/manifest`),
-        'path': `/${item.page !== 'io'? item.page: ''}`
+for(let item of config) {
+    console.log(`${item.namespace} :`, {
+        'index': path.join(__page, `${item.namespace}${item.dir}`),
+        'assets': path.join(__page, `${item.namespace}${item.dir}/assets`),
+        'manifest': path.join(__page, `${item.namespace}${item.dir}/manifest`),
+        'path': `/${item.namespace !== 'io'? item.namespace: ''}`
     });
-    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}`)));
-    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/assets`)));
-    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/modules`)));
-    app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/manifest`)));
-})
+    for(let page of item.scope) {
+        app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}`)));
+        app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}/assets`)));
+        app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}/modules`)));
+        app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}/manifest`)));
+    }
+}
 
 // const dirs = fs.readdirSync(`${__dirname}/src`, { withFileTypes: true })
 //     .filter(d => d.isDirectory())
