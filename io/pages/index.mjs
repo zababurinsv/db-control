@@ -39,6 +39,10 @@ config.forEach(item => {
     app.use(`/${item.page !== 'io'? item.page: ''}`, express.static(path.join(__page, `${item.page}${item.dir}/manifest`)));
 })
 
+// const dirs = fs.readdirSync(`${__dirname}/src`, { withFileTypes: true })
+//     .filter(d => d.isDirectory())
+//     .map(d => d.name);
+
 app.use('/src', express.static(__dirname + 'src'));
 app.use('/modules', express.static(__dirname + 'modules'));
 

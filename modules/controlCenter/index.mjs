@@ -1,6 +1,3 @@
-import Config from '../../../../../../../config/index.js';
-import logs$1 from '../../../../../../../utils/debug/index.js';
-
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
 function getDefaultExportFromCjs (x) {
@@ -57427,7 +57424,7 @@ var argv = [];
 var version = ''; // empty string to avoid regexp issues
 var versions = {};
 var release = {};
-var config$1 = {};
+var config$2 = {};
 
 function noop$k() {}
 
@@ -57504,7 +57501,7 @@ var browser$1 = {
   hrtime: hrtime,
   platform: platform,
   release: release,
-  config: config$1,
+  config: config$2,
   uptime: uptime
 };
 
@@ -58474,7 +58471,7 @@ function removeClass$1(element, className) {
   }
 }
 
-var config = {
+var config$1 = {
   disabled: false
 };
 
@@ -58742,7 +58739,7 @@ var Transition = /*#__PURE__*/function (_React$Component) {
     var enterTimeout = appearing ? timeouts.appear : timeouts.enter; // no enter animation skip right to ENTERED
     // if we are mounting and running this it means appear _must_ be set
 
-    if (!mounting && !enter || config.disabled) {
+    if (!mounting && !enter || config$1.disabled) {
       this.safeSetState({
         status: ENTERED
       }, function () {
@@ -58774,7 +58771,7 @@ var Transition = /*#__PURE__*/function (_React$Component) {
     var timeouts = this.getTimeouts();
     var maybeNode = this.props.nodeRef ? undefined : ReactDOM.findDOMNode(this); // no exit animation skip right to EXITED
 
-    if (!exit || config.disabled) {
+    if (!exit || config$1.disabled) {
       this.safeSetState({
         status: EXITED
       }, function () {
@@ -80208,6 +80205,20 @@ try {
   }
 }
 
+var config = {
+  ipfs: {
+    preload: {
+      enabled: false
+    },
+    config: {
+      Addresses: {
+        Swarm: ['/dns4/wrtc-star1.par.dwebops.pub/tcp/443/wss/p2p-webrtc-star/', '/dns4/wrtc-star2.sjc.dwebops.pub/tcp/443/wss/p2p-webrtc-star/', '/dns4/webrtc-star.discovery.libp2p.io/tcp/443/wss/p2p-webrtc-star/']
+      }
+    }
+  }
+};
+var Config = config;
+
 var orbitdb = undefined;
 var programs = undefined;
 
@@ -80221,7 +80232,7 @@ var debug$1 = function debug(maxCount, id) {
     args[_key - 2] = arguments[_key];
   }
 
-  logs$1.assert(maxCount, url, id, args);
+  logs.assert(maxCount, url, id, args);
 };
 
 var initIPFS = /*#__PURE__*/function () {
