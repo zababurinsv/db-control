@@ -9,7 +9,7 @@ import Enqueue from "express-enqueue";
 import compression from "compression";
 import corsOptions from './config/cors/index.mjs'
 import shouldCompress from './config/compression/index.mjs'
-import io from './pages/index.mjs'
+import scope from './scope/index.mjs'
 
 const app = express()
 app.use(await express.json())
@@ -24,7 +24,7 @@ const queue = new Enqueue({
 
 app.use(queue.getMiddleware());
 app.options(await cors(corsOptions))
-app.use(io);
+app.use(scope);
 
 app.use(queue.getErrorMiddleware())
 
