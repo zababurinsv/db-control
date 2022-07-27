@@ -1,18 +1,18 @@
-[submodule "soundcheckbox.github.io"]
-	path = io/pages/soundcheckbox/soundcheckbox.github.io
+[submodule "namespace/scope/soundcheckbox/soundcheckbox.github.io.git"]
+	path = namespace/scope/soundcheckbox/soundcheckbox.github.io.git
 	url = https://github.com/soundcheckbox/soundcheckbox.github.io.git
-[submodule "assets"]
-	path = io/pages/soundcheckbox/assets
+[submodule "namespace/scope/soundcheckbox/assets"]
+	path = namespace/scope/soundcheckbox/assets
 	url = https://github.com/soundcheckbox/assets.git
-[submodule "login"]
-	path = io/pages/soundcheckbox/login
+[submodule "namespace/scope/soundcheckbox/login"]
+	path = namespace/scope/soundcheckbox/login
 	url = https://github.com/soundcheckbox/login.git
-[submodule "api"]
-    path = node/soundcheckbox/api
-    url = https://github.com/soundcheckbox/api.git
-[submodule "NadyaRakhmanova.github.io"]
-	path = io/pages/NadyaRakhmanova.github.io
+[submodule "node/soundcheckbox/api"]
+	path = node/soundcheckbox/api
+	url = https://github.com/soundcheckbox/api.git
+[submodule "namespace/scope/NadyaRakhmanova.github.io"]
+	path = namespace/scope/NadyaRakhmanova.github.io
 	url = https://github.com/NadyaRakhmanova/NadyaRakhmanova.github.io.git
-[submodule "node/tera"]
-	path = node/tera
+[submodule "node/empera"]
+	path = node/empera
 	url = https://gitlab.com/terafoundation/tera2.git
