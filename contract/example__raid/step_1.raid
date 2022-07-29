@@ -1,0 +1,12 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+let ownerPublickey = base58'3ghbp6Z5eXoKniLSE8XPjn5od7gT1K7qhk6zANBhv9C3'
+@Verifier(tx)
+func verify() = {
+        match tx {
+        case d:SetScriptTransaction => sigVerify(tx.bodyBytes, tx.proofs[0], ownerPublickey)
+        case d:DataTransaction => true
+        case _ => false
+        }
+}

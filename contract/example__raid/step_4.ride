@@ -1,0 +1,125 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+let ownerPublickey = base58'3ghbp6Z5eXoKniLSE8XPjn5od7gT1K7qhk6zANBhv9C3'
+let allicePubkey = base58'8vHZLEG3BmzYYVjQyNi1m11kh6FeSoVAKKwtsYXC3bqA'
+let bobPubkey = base58'BoU2oQn7y52MZgT1Q7vJCJwUxov9tXb2zpC5gmWQbutJ'
+let cooperPubkey = base58'6equaSt4fnw6gEoLGiL3dTDDGxDc4PY5NyV3gVkEEr1F'
+
+let NONE = "none"
+let VOTERS = 3
+let QUORUM = 2
+let VOTING = "voting"
+let REVEAL = "reveal"
+let FEATURED = "featured"
+let DELISTED = "delisted"
+let verifier = "3Ms9sUb7W3L55LLGxeHWiqgTfdH9yn2mayb"
+let VERIFIED = "verified"
+let BLACKLISTED = "blacklist"
+
+func getNumberByKey(key:String) = {
+    let num = match getInteger(this, key){
+case a:Int => a
+case _ => 0
+}
+num
+}
+func getStrByKey(key:String) = {
+    let str = match getString(this, key){
+case a:String => a
+case _ => NONE
+}
+str
+}
+func getKeyItemPrice(item:String) = { item + "_price" }
+func getValueItemPrice(item:String) = { getNumberByKey(getKeyItemPrice(item)) }
+func getKeyUserItemCounter(user:String, item:String) = { item + "_" + user + "_cnt" }
+func getValueUserItemCounter(user:String, item:String) = {getNumberByKey(getKeyUserItemCounter(user, item))}
+func getKeyItem(supplier:String, title:String) = { "item_" + toBase58String(sha256(toBytes(supplier + title))) }
+func getKeyItemData(item:String) = { item + "_data"}
+func getKeyItemSupplier(item:String) = { item + "_owner"}
+func getValueItemSupplier(item:String) = { getStrByKey(getKeyItemSupplier(item))}
+func getKeyBalanceSupplier(account:String) = { account + "_balance"}
+func getValueBalanceSupplier(account:String) = { getNumberByKey(getKeyBalanceSupplier(account)) }
+
+func getKeyCommit(item:String, user:String) = { item + "_" + user + "_commit" }
+func getValueCommit(item:String, user:String) = { getStrByKey(getKeyCommit(item, user)) }
+func getKeyCommitsCount(item:String) = { item + "_comcnt" }
+func getValueCommitsCount(item:String) = { getNumberByKey(getKeyCommitsCount(item)) }
+func getKeyReveal(item:String, user:String) = { item + "_" + user + "_reveal" }
+func getValueReveal(item:String, user:String) = { getStrByKey(getKeyReveal(item, user)) }
+func getKeyItemStatus(item:String) = { item + "_status" }
+func getValueItemStatus(item:String) = { getStrByKey(getKeyItemStatus(item)) }
+func getKeyVoteCount(item:String, voute:String) = { item + "_res:" + voute }
+func getValueVouteCount(item:String, voute:String) = { getNumberByKey(getKeyVoteCount(item, voute)) }
+
+
+@Verifier(tx)
+func verify () ={
+let alice1 = sigVerify(tx.bodyBytes, tx.proofs[0], allicePubkey)
+let alice2 = sigVerify(tx.bodyBytes, tx.proofs[1], allicePubkey)
+let alice3 = sigVerify(tx.bodyBytes, tx.proofs[2], allicePubkey)
+
+let bob1 = sigVerify(tx.bodyBytes, tx.proofs[0], bobPubkey)
+let bob2 = sigVerify(tx.bodyBytes, tx.proofs[1], bobPubkey)
+let bob3 = sigVerify(tx.bodyBytes, tx.proofs[2], bobPubkey)
+
+let cooper1 = sigVerify(tx.bodyBytes, tx.proofs[0], cooperPubkey)
+let copper2 = sigVerify(tx.bodyBytes, tx.proofs[1], cooperPubkey)
+let copper3 = sigVerify(tx.bodyBytes, tx.proofs[2], cooperPubkey)
+
+let alliceAndBob = (alice1 && bob2) || (alice1 && bob3) || (alice2 && bob1) || (alice2 && bob3) || (alice3 && bob1) || (alice3 && bob2)
+let alliceAndCooper = (alice1 && copper2) || (alice1 && copper3) || (alice2 && cooper1) || (alice2 && copper3) || (alice3 && cooper1) || (alice3 && copper2)
+let bobeAndCooper = (cooper1 && bob2) || (cooper1 && bob3) || (copper2 && bob1) || (copper2 && bob3) || (copper3 && bob1) || (copper3 && bob2)
+
+    match tx{
+
+        case d:SetScriptTransaction => sigVerify(tx.bodyBytes, tx.proofs[0], ownerPublickey)
+        case d:DataTransaction => true
+        case _ => alliceAndBob || alliceAndCooper || bobeAndCooper
+    }
+}
+
+@Callable(i)
+func purchase(item:String) = {
+    let pmt = extract(i.payment)
+    if (isDefined(pmt.assetId)) then throw("can use Waves only at the moment")
+else {
+    let customerAddress = toBase58String(i.caller.bytes)
+    #let userAddress = toBase58String(i.caller.bytes)
+    let price = match getInteger(this, "item_A_coupon_price"){
+        case a:Int => a
+        case _ => 0
+    }
+    #let price = getValueItemPrice(item)
+    #let supplierAddress = getValueItemSupplier(item)
+    if ( pmt.amount < price) then throw("purchase amount cannot be less than item price")
+    else if(pmt.amount > price) then throw("purchase amount cannot be higher than item price")
+#else if(supplierAddress == NONE) then throw("supplier is not exist")
+else
+    WriteSet([
+    DataEntry("status:purchase_item_A_customer_" + customerAddress,"confirned"),
+    DataEntry("price:purchase_item_A_customer_" + customerAddress,price)
+     #   DataEntry(getKeyUserItemCounter(userAddress, item), getValueUserItemCounter(userAddress, item) + 1 ),
+     #   DataEntry( getKeyBalanceSupplier(supplierAddress), getValueBalanceSupplier(supplierAddress) + pmt.amount)
+    ])
+  }
+}
+
+@Callable(i)
+func addItem(title:String, price:Int, data:String) = {
+    let supplierAddress = toBase58String(i.caller.bytes)
+    let item = getKeyItem(supplierAddress, title)
+    #let supplierWhiteList = getExtValueItemWiteListStatus(getExtAddressOracle(), supplierAddress)
+    if(price <= 0) then throw("purchase amount cannot be less than item price")
+    else if(getValueItemSupplier(item) != NONE) then throw("An item is allready exist")
+    else if (supplierAddress ==  BLACKLISTED) then throw("supplier's account has been blacklist")
+else{
+    WriteSet([
+        DataEntry( getKeyItemSupplier(item),supplierAddress ),
+        DataEntry( getKeyItemPrice(item), price),
+        DataEntry( getKeyItemData(item), data)
+     #   DataEntry( getExtKeyItemWiteListStatus(supplierAddress), supplierWhiteList)
+    ])
+  }
+}

@@ -1,0 +1,130 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+let NONE = "none"
+let VOTERS = 3
+let QUORUM = 2
+let VOTING = "voting"
+let REVEAL = "reveal"
+let FEATURED = "featured"
+let DELISTED = "delisted"
+func getNumberByKey(key:String) = {
+    let num = match getInteger(this, key){
+case a:Int => a
+case _ => 0
+}
+num
+}
+func getStrByKey(key:String) = {
+    let str = match getString(this, key){
+case a:String => a
+case _ => NONE
+}
+str
+}
+func getKeyItemPrice(item:String) = { item + "_price" }
+func getValueItemPrice(item:String) = { getNumberByKey(getKeyItemPrice(item)) }
+func getKeyUserItemCounter(user:String, item:String) = { item + "_" + user + "_cnt" }
+func getValueUserItemCounter(user:String, item:String) = {getNumberByKey(getKeyUserItemCounter(user, item))}
+func getKeyItem(supplier:String, title:String) = { "item_" + toBase58String(sha256(toBytes(supplier + title))) }
+func getKeyItemData(item:String) = { item + "_data"}
+func getKeyItemSupplier(item:String) = { item + "_owner"}
+func getValueItemSupplier(item:String) = { getStrByKey(getKeyItemSupplier(item))}
+func getKeyBalanceSupplier(account:String) = { account + "_balance"}
+func getValueBalanceSupplier(account:String) = { getNumberByKey(getKeyBalanceSupplier(account)) }
+
+func getKeyCommit(item:String, user:String) = { item + "_" + user + "_commit" }
+func getValueCommit(item:String, user:String) = { getStrByKey(getKeyCommit(item, user)) }
+func getKeyCommitsCount(item:String) = { item + "_comcnt" }
+func getValueCommitsCount(item:String) = { getNumberByKey(getKeyCommitsCount(item)) }
+func getKeyReveal(item:String, user:String) = { item + "_" + user + "_reveal" }
+func getValueReveal(item:String, user:String) = { getStrByKey(getKeyReveal(item, user)) }
+func getKeyItemStatus(item:String) = { item + "_status" }
+func getValueItemStatus(item:String) = { getStrByKey(getKeyItemStatus(item)) }
+func getKeyVoteCount(item:String, voute:String) = { item + "_res:" + voute }
+func getValueVouteCount(item:String, voute:String) = { getNumberByKey(getKeyVoteCount(item, voute)) }
+
+@Callable(i)
+func addItem(title:String, price:Int, data:String) = {
+    let supplierAddress = toBase58String(i.caller.bytes)
+    let item = getKeyItem(supplierAddress, title)
+    if(price <= 0) then throw("purchase amount cannot be less than item price")
+else if(getValueItemSupplier(item) != NONE) then throw("An item is allready exist")
+else{
+    WriteSet([
+        DataEntry( getKeyItemSupplier(item),supplierAddress ),
+        DataEntry( getKeyItemPrice(item), price),
+        DataEntry( getKeyItemData(item), data)
+    ])
+}
+}
+
+@Callable(i)
+func purchase(item:String) = {
+    let pmt = extract(i.payment)
+    if (isDefined(pmt.assetId)) then throw("can hold waves only at the moment")
+else {
+    let userAddress = toBase58String(i.caller.bytes)
+    let price = getValueItemPrice(item)
+    let supplierAddress = getValueItemSupplier(item)
+    if ( pmt.amount < price) then throw("purchase amount cannot be less than item price")
+else if(pmt.amount > price) then throw("purchase amount cannot be higher than item price")
+else if(supplierAddress == NONE) then throw("supplier is not exist")
+else
+    WriteSet([
+        DataEntry(getKeyUserItemCounter(userAddress, item), getValueUserItemCounter(userAddress, item) + 1 ),
+        DataEntry( getKeyBalanceSupplier(supplierAddress), getValueBalanceSupplier(supplierAddress) + pmt.amount)
+    ])
+}
+}
+
+@Callable(i)
+func withdraw() = {
+    let supplierAddress = toBase58String(i.caller.bytes)
+    let balance = getValueBalanceSupplier(supplierAddress)
+    if(balance <= 0) then throw("insufficient balance")
+else ScriptResult(
+    WriteSet([
+        DataEntry(getKeyBalanceSupplier(supplierAddress), 0)
+    ]),
+    TransferSet([ScriptTransfer(addressFromStringValue(supplierAddress),balance,unit)])
+)
+}
+
+@Callable(i)
+func voteCommit(item:String, hash:String) = {
+    let user = toBase58String(i.caller.bytes)
+    let commits = getValueCommitsCount(item)
+    let status = getValueItemStatus(item)
+    if(commits >= VOTERS) then throw("reached max num of vouters")
+else if(getValueCommit(item, user) != NONE) then throw("user has allready participated")
+else if(getKeyItemSupplier(item) == NONE) then throw("item dose not exist")
+else if(status != NONE && status != VOTING) then throw("vouting is not posible")
+else
+WriteSet([
+    DataEntry(getKeyCommit(item, user), hash),
+    DataEntry(getKeyCommitsCount(item), commits + 1),
+    DataEntry(getKeyItemStatus(item), if(commits == VOTERS) then REVEAL else VOTING)
+])
+}
+
+@Callable(i)
+func voteReveal(item:String, vote:String, salt:String) = {
+    let user = toBase58String(i.caller.bytes)
+    let status = getValueItemStatus(item)
+    let newVoteCount = getValueVouteCount(item, vote)
+
+    if(toBase58String(sha256(toBytes(vote+salt))) != getValueCommit(item, user) )
+then throw("reveal data is not valid")
+else if(getValueCommitsCount(item) < VOTERS) then throw("max num of hasn't reached yet")
+else if(getValueReveal(item, user) != NONE) then throw("user has already participated")
+else if(status != VOTING && status != REVEAL) then throw("wrong status")
+else if(vote != FEATURED && vote != DELISTED) then throw("wrong vote")
+else if(status == FEATURED || status == DELISTED) then throw("vote has finished")
+else
+WriteSet([
+    DataEntry(getKeyReveal(item, user), vote),
+    DataEntry(getKeyVoteCount(item, vote), newVoteCount),
+    DataEntry(getKeyItemStatus(item), if(newVoteCount >= QUORUM) then vote else REVEAL)
+])
+}

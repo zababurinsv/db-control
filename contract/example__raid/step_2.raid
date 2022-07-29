@@ -1,0 +1,33 @@
+{-# STDLIB_VERSION 3 #-}
+{-# CONTENT_TYPE DAPP #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+let ownerPublickey = base58'3ghbp6Z5eXoKniLSE8XPjn5od7gT1K7qhk6zANBhv9C3'
+let allicePubkey = base58'8vHZLEG3BmzYYVjQyNi1m11kh6FeSoVAKKwtsYXC3bqA'
+let bobPubkey = base58'BoU2oQn7y52MZgT1Q7vJCJwUxov9tXb2zpC5gmWQbutJ'
+let cooperPubkey = base58'6equaSt4fnw6gEoLGiL3dTDDGxDc4PY5NyV3gVkEEr1F'
+
+@Verifier(tx)
+func verify () ={
+let alice1 = sigVerify(tx.bodyBytes, tx.proofs[0], allicePubkey)
+let alice2 = sigVerify(tx.bodyBytes, tx.proofs[1], allicePubkey)
+let alice3 = sigVerify(tx.bodyBytes, tx.proofs[2], allicePubkey)
+
+let bob1 = sigVerify(tx.bodyBytes, tx.proofs[0], bobPubkey)
+let bob2 = sigVerify(tx.bodyBytes, tx.proofs[1], bobPubkey)
+let bob3 = sigVerify(tx.bodyBytes, tx.proofs[2], bobPubkey)
+
+let cooper1 = sigVerify(tx.bodyBytes, tx.proofs[0], cooperPubkey)
+let copper2 = sigVerify(tx.bodyBytes, tx.proofs[1], cooperPubkey)
+let copper3 = sigVerify(tx.bodyBytes, tx.proofs[2], cooperPubkey)
+
+let alliceAndBob = (alice1 && bob2) || (alice1 && bob3) || (alice2 && bob1) || (alice2 && bob3) || (alice3 && bob1) || (alice3 && bob2)
+let alliceAndCooper = (alice1 && copper2) || (alice1 && copper3) || (alice2 && cooper1) || (alice2 && copper3) || (alice3 && cooper1) || (alice3 && copper2)
+let bobeAndCooper = (cooper1 && bob2) || (cooper1 && bob3) || (copper2 && bob1) || (copper2 && bob3) || (copper3 && bob1) || (copper3 && bob2)
+
+    match tx{
+
+        case d:SetScriptTransaction => sigVerify(tx.bodyBytes, tx.proofs[0], ownerPublickey)
+        case d:DataTransaction => true
+        case _ => alliceAndBob || alliceAndCooper || bobeAndCooper
+    }
+}
