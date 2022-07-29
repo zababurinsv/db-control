@@ -1,5 +1,5 @@
 import Config from '../config/index.js'
-import logs from '../utils/debug/index.js'
+import logs from '../../../modules/debug/index.js'
 let orbitdb = undefined
 let programs = undefined
 

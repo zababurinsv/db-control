@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom'
-import logs from './utils/debug/index.js'
+import logs from '../../modules/debug/index.js'
 import { Pane } from 'evergreen-ui'
 import './App.css';
 import { actions, loadingState, StateProvider } from './state'

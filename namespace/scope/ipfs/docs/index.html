@@ -10,13 +10,10 @@
 <div id="root"></div>
 <!--<script src="./ipfs/index.min.js" defer></script>-->
 <script type="module">
-    // console.log('cccccccccccccccc', window.Ipfs)
-    // const IPFS = window.Ipfs
     import OrbitDB from '/modules/orbit-db/dist/index.js'
     import IPFS from '/modules/ipfs-core/dist/index.all.js'
     import {initIPFS, initOrbitDB} from '/index.js'
     // import io from '/modules/orbit-db-io/dist/index.js'
-    console.log('IPFS', IPFS)
     initIPFS({IPFS: IPFS})
         .then(ipfs => {
             initOrbitDB({ipfs: ipfs, OrbitDB: OrbitDB})

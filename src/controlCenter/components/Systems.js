@@ -10,7 +10,7 @@ import {
 import { initIPFS, initOrbitDB, getAllDatabases } from '../database/index.js'
 import { actions, useStateValue } from '../state'
 import ConnectToWalletButton from './ConnectToWalletButton'
-import logs from '../utils/debug/index.js'
+import logs from '../../../modules/debug/index.js'
 
 function Systems (props) {
   const [appState, dispatch] = useStateValue()
