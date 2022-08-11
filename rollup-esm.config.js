@@ -12,7 +12,7 @@ const extensions = ['.js','.mjs', '.ts', '.tsx'];
 const isProduction = process.env.NODE_ENV === 'production';
 
 export default {
-    input: "src/controlCenter/index.js",
+    input: "service/ReactNode/controlCenter/index.js",
     output: {
         file: "modules/controlCenter/index.mjs",
         format: "es",

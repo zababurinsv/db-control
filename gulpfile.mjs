@@ -29,6 +29,15 @@ gulp.task('build', (cb) => {
     });
 })
 
+gulp.task('watch',  () => {
+    gulp.watch([`.${pkg.config.gulp.scope}/**/*.scss`], gulp.series('scss'))
+    gulp.watch([`.${pkg.config.gulp.scope}/**/*`], gulp.series('build'))
+});
+
+gulp.task('default', gulp.series('scss','build',  'watch'))
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 gulp.task('sync--libp2p-crypto--build-module', async () => {
     const bundle = await rollup.rollup({
         input: './src/database/libp2p-crypto/dist/index.min.js',
@@ -3649,12 +3658,6 @@ gulp.task('sync--ipfs-core-all-module', async () => {
     });
 });
 
-gulp.task('watch',  () => {
-    gulp.watch([`.${pkg.config.gulp.scope}/**/*.scss`], gulp.series('scss'))
-    gulp.watch([`.${pkg.config.gulp.scope}/**/*`], gulp.series('build'))
-});
-
-gulp.task('default', gulp.series('scss','build',  'watch'))
 gulp.task('libp2p-crypto', gulp.series('sync--libp2p-crypto--build-module'))
 gulp.task('level', gulp.series('sync--level-module'))
 gulp.task('levelup', gulp.series('sync--levelup-module'))
@@ -3890,24 +3893,14 @@ gulp.task('signed-varint', gulp.series('sync--signed-varint-module'))
 gulp.task('multibase/4.0.4', gulp.series('sync--multibase/4.0.4-module'))
 gulp.task('web-encoding', gulp.series('sync--web-encoding-module'))
 gulp.task('secp256k1/3.8.0', gulp.series('sync--secp256k1/3.8.0-module'))
-
 gulp.task('ipfs', gulp.series('sync--ipfs-module'))
-
 gulp.task('ipfs-core', gulp.series('sync--ipfs-core-module'))
-
 gulp.task('ipfs-unixfs-importer', gulp.series('sync--ipfs-unixfs-importer-module'))
-
 gulp.task('ipfs-unixfs-importer/src/utils/persist', gulp.series('sync--ipfs-unixfs-importer/src/utils/persist-module'))
-
 gulp.task('ipfs-unixfs-importer/src/dir-sharded', gulp.series('sync--ipfs-unixfs-importer/src/dir-sharded-module'))
-
 gulp.task('ipfs-unixfs-importer/src/options', gulp.series('sync--ipfs-unixfs-importer/src/options-module'))
-
 gulp.task('ipfs-core-utils/src/files/normalise-input', gulp.series('sync--ipfs-core-utils/src/files/normalise-input-module'))
-
 gulp.task('ipfs-core-utils/src/with-timeout-option', gulp.series('sync--ipfs-core-utils/src/with-timeout-option-module'))
-
 gulp.task('ipfs-core-utils/src/to-cid-and-path', gulp.series('sync--ipfs-core-utils/src/to-cid-and-path-module'))
-
 gulp.task('ipfs-core-all', gulp.series('sync--ipfs-core-all-module'))
 
