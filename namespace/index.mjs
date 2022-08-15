@@ -3,13 +3,13 @@ const __dirname = path.join(path.dirname(process.argv[1]), '../');
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 const pkg = require("../package.json");
-import express from 'express'
+import express from 'express';
 import cors from "cors";
 import Enqueue from "express-enqueue";
 import compression from "compression";
-import corsOptions from './config/cors/index.mjs'
-import shouldCompress from './config/compression/index.mjs'
-import scope from './scope/index.mjs'
+import corsOptions from './config/cors/index.mjs';
+import shouldCompress from './config/compression/index.mjs';
+import scope from './scope/index.mjs';
 
 const app = express()
 app.use(await express.json())

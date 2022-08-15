@@ -37,10 +37,10 @@
     }
   },
   "scripts": {
-    "rollup:src:build": "rollup -c rollup-esm.config.js --watch",
+    "rollup:service:ReactNode:ControlCenter:build": "rollup -c rollup-esm.config.js --watch",
     "nodemon:namespace:start": "nodemon ./namespace/server.mjs",
-    "nodemon:nodes:io:start": "nodemon ./node/soundcheckbox/server.mjs",
-    "nodemon:flomons:io:start": "nodemon ./node/flomons/server.mjs",
+    "nodemon:nodes:soundcheckbox:start": "nodemon ./node/soundcheckbox/server.mjs",
+    "nodemon:nodes:flomons:start": "nodemon ./node/flomons/server.mjs",
     "scss": "gulp",
     "level-transcoder": "gulp level-transcoder",
     "abstract-iterator": "gulp abstract-iterator",
