@@ -15,13 +15,13 @@
     // node({IPFS, OrbitDB})
 
     //TODO тестирую хуки
-    import { node } from '/service/WCNode/src/default/index.mjs'
+    import { node } from '/service/WCNode/src/fs/index.mjs'
     node(document)
         .then(async api => {
-            // await api.idbfs()
-            await api.click()
-            await api.click()
-            await api.click()
+            await api.idbfs()
+            // await api.click()
+            // await api.click()
+            // await api.click()
     })
 
 </script>

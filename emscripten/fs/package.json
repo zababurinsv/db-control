@@ -1,0 +1,34 @@
+{
+  "name": "@orbit/idbfs",
+  "version": "1.0.0",
+  "description": "File System",
+  "main": "index.html",
+  "directories": {
+    "doc": "file system"
+  },
+  "config": {
+    "PW": "xxxx"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "./build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zababurinsv/contract-deals.git"
+  },
+  "keywords": [
+    "game"
+  ],
+  "author": "Zababurin Sergey",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/zababurinsv/contract-deals/issues"
+  },
+  "homepage": "https://github.com/zababurinsv/contract-deals#readme",
+  "nodemonConfig": {
+    "ignore": [
+      "node_modules/*"
+    ]
+  }
+}
