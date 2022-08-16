@@ -11,6 +11,7 @@
     type: MVP
     scope:
     - /
+    - /soundcheckbox.github.io.git
   - namespace: presets
     type: MVP
     scope:

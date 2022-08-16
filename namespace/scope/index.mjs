@@ -27,13 +27,13 @@ app.use((req, res, next) => {
 });
 
 for(let item of config) {
-    console.log(`${item.namespace} :`, {
-        'index': path.join(__page, `${item.namespace}${item.dir}`),
-        'assets': path.join(__page, `${item.namespace}${item.dir}/assets`),
-        'manifest': path.join(__page, `${item.namespace}${item.dir}/manifest`),
-        'path': `/${item.namespace !== 'io'? item.namespace: ''}`
-    });
     for(let page of item.scope) {
+        console.log(`${item.namespace} :`, {
+            'index': path.join(__page, `${item.namespace}${page}`),
+            'assets': path.join(__page, `${item.namespace}${page}/assets`),
+            'manifest': path.join(__page, `${item.namespace}${page}/manifest`),
+            'path': `/${item.namespace !== 'io'? item.namespace: ''}`
+        });
         app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}`)));
         app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}/assets`)));
         app.use(`/${item.namespace !== 'io'? item.namespace: ''}`, express.static(path.join(__page, `${item.namespace}${page}/modules`)));

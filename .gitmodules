@@ -16,3 +16,6 @@
 [submodule "node/empera"]
 	path = node/empera
 	url = https://gitlab.com/terafoundation/tera2.git
+[submodule "namespace/scope/soundcheckbox/admin/design"]
+	path = namespace/scope/soundcheckbox/admin/design
+	url = https://github.com/NadyaRakhmanova/admin-design.git
