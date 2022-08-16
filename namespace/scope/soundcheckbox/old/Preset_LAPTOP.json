@@ -1,0 +1,54 @@
+{
+	"name" : "LAPTOP", 
+	"model_src" : "LAPTOP.json",
+	"X" : 0,
+	"Y" : 0,
+	"turn" : 0,
+	"Title" : "Laptop", 
+	"Comment" : "", 
+	"input_list": [],
+	"output_list": [],
+	"gear_list": [],
+	"children" : [
+		{
+			"name" : "DI 48v", 
+			"model_src" : "DI_48VNORM.json",
+			"X" : 1,
+			"Y" : -0.5,
+			"turn" : 0,
+			"Title" : "DI Clark dn 100 or simular", 
+			"Comment" : "", 
+			"input_list": [
+				{
+					"Source" : "PC_LEFT",
+					"Type" : "DI",
+					"ChName" : "PC_L",
+					"Comment" : ""
+				}
+			],
+			"output_list": [],
+			"gear_list": [],
+			"children" : []
+		},
+		{
+			"name" : "DI 48v", 
+			"model_src" : "DI_48VNORM.json",
+			"X" : 1,
+			"Y" : 0.5,
+			"turn" : 0,
+			"Title" : "DI Clark dn 100 or simular", 
+			"Comment" : "", 
+			"input_list": [
+				{
+					"Source" : "PC_RIGHT",
+					"Type" : "DI",
+					"ChName" : "PC_R",
+					"Comment" : ""
+				}
+			],
+			"output_list": [],
+			"gear_list": [],
+			"children" : []
+		}
+	]
+}
