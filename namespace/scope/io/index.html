@@ -12,14 +12,13 @@
     // import OrbitDB from '/service/ReactNode/controlCenter/database/modules/orbit-db/dist/index.js'
     // import IPFS from '/service/ReactNode/controlCenter/database/modules/ipfs/dist/index.js'
     // import node from '/modules/controlCenter/index.mjs'
-    // node(IPFS, OrbitDB})
+    // node({IPFS, OrbitDB})
 
     //TODO тестирую хуки
-    import service from '/service/WCNode/src/default/index.mjs'
-    import { node } from '/service/WCNode/node/default/index.mjs'
-
-    node(service, document)
+    import { node } from '/service/WCNode/src/default/index.mjs'
+    node(document)
         .then(async api => {
+            // await api.idbfs()
             await api.click()
             await api.click()
             await api.click()
