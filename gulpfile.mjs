@@ -2,24 +2,42 @@ import gulp from 'gulp';
 const require = createRequire(import.meta.url);
 const pkg = require("./package.json");
 import { createRequire } from "module";
-
-import { exec } from 'child_process'
+import { exec } from 'child_process';
 import autoprefixer from "gulp-autoprefixer";
-import sass from "sass";
+import dartSass from "sass";
+import gulpSass from 'gulp-sass';
 import commonjs from '@rollup/plugin-commonjs';
 import json from '@rollup/plugin-json';
 import * as rollup from 'rollup'
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
+import fs from "fs";
+import path from "path";
+import YAML from 'yaml';
+import mergeStream from "merge-stream";
+const __dirname = path.join(path.dirname(process.argv[1]), '../../');
+const file = fs.readFileSync(path.join(__dirname, `config.io.yml`), 'utf8');
+const config = YAML.parse(file);
+const sass = gulpSass(dartSass);
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 gulp.task('scss', function () {
-    return gulp.src([`.${pkg.config.gulp.scope}/**/*.scss`])
+    return gulp.src([`/home/sergey/Desktop/newkind/db-control/namespace/scope/**/*.scss`])
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(autoprefixer({
             cascade: false
         }))
-        .pipe(gulp.dest(`.${pkg.config.gulp.scope}`));
+        .pipe(gulp.dest(`/home/sergey/Desktop/newkind/db-control/namespace/scope`));
 });
+
+gulp.task('watch',  () => {
+    gulp.watch([`/home/sergey/Desktop/newkind/db-control/namespace/scope/**/*.scss`], gulp.series('scss'))
+});
+
+gulp.task('watch:namespace:scss', gulp.series('scss', 'watch'))
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 gulp.task('build', (cb) => {
     exec('yarn parcel:module', (err, stdout, stderr) => {
@@ -28,13 +46,6 @@ gulp.task('build', (cb) => {
         cb(err);
     });
 })
-
-gulp.task('watch',  () => {
-    gulp.watch([`.${pkg.config.gulp.scope}/**/*.scss`], gulp.series('scss'))
-    gulp.watch([`.${pkg.config.gulp.scope}/**/*`], gulp.series('build'))
-});
-
-gulp.task('default', gulp.series('scss','build',  'watch'))
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -3903,4 +3914,3 @@ gulp.task('ipfs-core-utils/src/files/normalise-input', gulp.series('sync--ipfs-c
 gulp.task('ipfs-core-utils/src/with-timeout-option', gulp.series('sync--ipfs-core-utils/src/with-timeout-option-module'))
 gulp.task('ipfs-core-utils/src/to-cid-and-path', gulp.series('sync--ipfs-core-utils/src/to-cid-and-path-module'))
 gulp.task('ipfs-core-all', gulp.series('sync--ipfs-core-all-module'))
-

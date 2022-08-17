@@ -1,19 +1,19 @@
-import path from 'path'
-import fs from 'fs'
-import YAML from 'yaml'
+import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 const __page = path.join(dirname(fileURLToPath(import.meta.url)), '/');
 const __dirname = path.join(path.dirname(process.argv[1]), '../');
-import cors from 'cors'
-import express from 'express'
-import notFound from '../config/page_not_found/index.mjs'
-import corsOptions from '../config/cors/index.mjs'
+import cors from 'cors';
+import express from 'express';
+import notFound from '../config/page_not_found/index.mjs';
+import corsOptions from '../config/cors/index.mjs';
+import YAML from 'yaml';
+const file = fs.readFileSync(path.join(__dirname, `config.io.yml`), 'utf8');
+const config = YAML.parse(file);
+
 const app = express.Router();
 app.use(await cors({ credentials: true }));
-
-const file = fs.readFileSync(path.join(__dirname, `config.io.yml`), 'utf8')
-const config = YAML.parse(file)
 
 console.log('======== config ========', {
     'page': __page,

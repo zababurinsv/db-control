@@ -3,7 +3,7 @@
     type: MVP
     scope:
     - /
-  - namespace: ipfs
+  - namespace: raft
     type: MVP
     scope:
     - /

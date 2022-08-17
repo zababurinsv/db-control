@@ -11,9 +11,9 @@ import corsOptions from './config/cors/index.mjs';
 import shouldCompress from './config/compression/index.mjs';
 import scope from './scope/index.mjs';
 
-const app = express()
-app.use(await express.json())
-app.use(await compression({ filter: shouldCompress }))
+const app = express();
+app.use(await express.json());
+app.use(await compression({ filter: shouldCompress }));
 app.use(await cors({ credentials: true }));
 
 const queue = new Enqueue({

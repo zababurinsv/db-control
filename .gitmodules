@@ -19,3 +19,9 @@
 [submodule "namespace/scope/soundcheckbox/admin/design"]
 	path = namespace/scope/soundcheckbox/admin/design
 	url = https://github.com/NadyaRakhmanova/admin-design.git
+[submodule "namespace/scope/raft"]
+	path = namespace/scope/raft
+	url = https://github.com/zababurinsv/raftscope.git
+[submodule "service/WCNode/src/raft"]
+	path = service/WCNode/src/raft
+	url = https://github.com/zababurin/skiff-algorithm.git
