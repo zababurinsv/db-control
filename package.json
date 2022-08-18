@@ -172,7 +172,6 @@
     "encoding-down": "gulp encoding-down",
     "level-codec": "gulp level-codec",
     "passthrough": "gulp passthrough",
-    "transform": "gulp transform",
     "readable-stream/writable": "gulp readable-stream/writable",
     "readable-stream/readable": "gulp readable-stream/readable",
     "readable-stream/duplex": "gulp readable-stream/duplex",
@@ -287,7 +286,9 @@
     "ipfs-core-utils/src/with-timeout-option": "gulp ipfs-core-utils/src/with-timeout-option",
     "ipfs-core-utils/src/to-cid-and-path": "gulp ipfs-core-utils/src/to-cid-and-path",
     "ipfs-core-all": "gulp ipfs-core-all",
-    "secp256k1": "gulp secp256k1"
+    "secp256k1": "gulp secp256k1",
+    "merkletools": "gulp  merkletools",
+    "transform": "gulp transform"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",

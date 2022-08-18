@@ -2139,7 +2139,7 @@ gulp.task('sync--passthrough-module', async () => {
 
 gulp.task('sync--transform-module', async () => {
     const bundle = await rollup.rollup({
-        input: './src/database/readable-stream/transform.js',
+        input: './service/ReactNode/controlCenter/database/modules/readable-stream/transform.js',
         plugins: [
             json(),
             commonjs(),
@@ -2148,7 +2148,7 @@ gulp.task('sync--transform-module', async () => {
     return await bundle.write({
         sourcemap: false,
         format: 'es',
-        file: './src/database/readable-stream/dist/transform.js'
+        file: './service/ReactNode/controlCenter/database/modules/readable-stream/dist/transform.js'
     });
 });
 
@@ -3669,6 +3669,23 @@ gulp.task('sync--ipfs-core-all-module', async () => {
     });
 });
 
+gulp.task('sync--merkletools-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './modules/merkle-tools/merkletools.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './modules/merkle-tools/dist/index.js',
+    });
+});
+
+
+
 gulp.task('libp2p-crypto', gulp.series('sync--libp2p-crypto--build-module'))
 gulp.task('level', gulp.series('sync--level-module'))
 gulp.task('levelup', gulp.series('sync--levelup-module'))
@@ -3914,3 +3931,5 @@ gulp.task('ipfs-core-utils/src/files/normalise-input', gulp.series('sync--ipfs-c
 gulp.task('ipfs-core-utils/src/with-timeout-option', gulp.series('sync--ipfs-core-utils/src/with-timeout-option-module'))
 gulp.task('ipfs-core-utils/src/to-cid-and-path', gulp.series('sync--ipfs-core-utils/src/to-cid-and-path-module'))
 gulp.task('ipfs-core-all', gulp.series('sync--ipfs-core-all-module'))
+
+gulp.task('merkletools', gulp.series('sync--merkletools-module'))
