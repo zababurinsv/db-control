@@ -7,6 +7,10 @@
     type: MVP
     scope:
     - /
+  - namespace: merkleTools
+    type: MVP
+    scope:
+        - /
   - namespace: soundcheckbox
     type: MVP
     scope:
