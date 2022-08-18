@@ -3,7 +3,7 @@
     type: MVP
     scope:
     - /
-  - namespace: raft
+  - namespace: database
     type: MVP
     scope:
     - /
@@ -16,30 +16,30 @@
     scope:
     - /
     - /soundcheckbox.github.io.git
-  - namespace: presets
-    type: MVP
-    scope:
-    -
-  - namespace: save
-    type: MVP
-    scope:
-    - /
+#  - namespace: presets
+#    type: MVP
+#    scope:
+#    -
+#  - namespace: save
+#    type: MVP
+#    scope:
+#    - /
   - namespace: interface
     type: MVP
     scope:
     - /
-  - namespace: group
-    type: MVP
-    scope:
-    - /
-  - namespace: img
-    type: MVP
-    scope:
-    - /
-  - namespace: soundStorage
-    type: MVP
-    scope:
-    - /
+#  - namespace: group
+#    type: MVP
+#    scope:
+#    - /
+#  - namespace: img
+#    type: MVP
+#    scope:
+#    - /
+#  - namespace: soundStorage
+#    type: MVP
+#    scope:
+#    - /
   - namespace: blockchain
     type: MVP
     scope:

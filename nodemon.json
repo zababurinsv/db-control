@@ -14,7 +14,8 @@
     "io/",
     "./server.mjs",
     "./node",
-    "./config.yml",
+    "./config.io.yml",
+    "./config.node.yml",
     "frontend/src/modules/blockchain/"
   ],
   "ext": "mjs json",
