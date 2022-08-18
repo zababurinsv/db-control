@@ -2094,7 +2094,7 @@ gulp.task('sync--readable-stream/readable-module', async () => {
 
 gulp.task('sync--readable-stream/writable-module', async () => {
     const bundle = await rollup.rollup({
-        input: './src/database/readable-stream/writable-browser.js',
+        input: './service/ReactNode/controlCenter/database/modules/readable-stream/writable.js',
         plugins: [
             json(),
             commonjs(),
@@ -2103,13 +2103,13 @@ gulp.task('sync--readable-stream/writable-module', async () => {
     return await bundle.write({
         sourcemap: false,
         format: 'es',
-        file: './src/database/readable-stream/dist/writable.js'
+        file: './service/ReactNode/controlCenter/database/modules/readable-stream/dist/writable.js'
     });
 });
 
 gulp.task('sync--readable-stream/duplex-module', async () => {
     const bundle = await rollup.rollup({
-        input: './src/database/readable-stream/duplex-browser.js',
+        input: './service/ReactNode/controlCenter/database/modules/readable-stream/duplex.js',
         plugins: [
             json(),
             commonjs(),
@@ -2118,13 +2118,13 @@ gulp.task('sync--readable-stream/duplex-module', async () => {
     return await bundle.write({
         sourcemap: false,
         format: 'es',
-        file: './src/database/readable-stream/dist/duplex.js'
+        file: './service/ReactNode/controlCenter/database/modules/readable-stream/dist/duplex.js'
     });
 });
 
 gulp.task('sync--passthrough-module', async () => {
     const bundle = await rollup.rollup({
-        input: './src/database/readable-stream/passthrough.js',
+        input: './service/ReactNode/controlCenter/database/modules/readable-stream/PassThrough.js',
         plugins: [
             json(),
             commonjs(),
@@ -2133,7 +2133,7 @@ gulp.task('sync--passthrough-module', async () => {
     return await bundle.write({
         sourcemap: false,
         format: 'es',
-        file: './src/database/readable-stream/dist/passthrough.js'
+        file: './service/ReactNode/controlCenter/database/modules/readable-stream/dist/passthrough.js'
     });
 });
 
@@ -2149,6 +2149,21 @@ gulp.task('sync--transform-module', async () => {
         sourcemap: false,
         format: 'es',
         file: './service/ReactNode/controlCenter/database/modules/readable-stream/dist/transform.js'
+    });
+});
+
+gulp.task('sync--readable-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './service/ReactNode/controlCenter/database/modules/readable-stream/readable.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './service/ReactNode/controlCenter/database/modules/readable-stream/dist/index.js'
     });
 });
 
@@ -3820,11 +3835,6 @@ gulp.task('prr', gulp.series('sync--prr-module'))
 gulp.task('catering', gulp.series('sync--catering-module'))
 gulp.task('assert', gulp.series('sync--assert-module'))
 gulp.task('object-assign', gulp.series('sync--object-assign-module'))
-gulp.task('passthrough', gulp.series('sync--passthrough-module'))
-gulp.task('transform', gulp.series('sync--transform-module'))
-gulp.task('readable-stream/writable', gulp.series('sync--readable-stream/writable-module'))
-gulp.task('readable-stream/readable', gulp.series('sync--readable-stream/readable-module'))
-gulp.task('readable-stream/duplex', gulp.series('sync--readable-stream/duplex-module'))
 gulp.task('uint8arrays/concat', gulp.series('sync--uint8arrays/concat-module'))
 gulp.task('uint8arrays/to-string', gulp.series('sync--uint8arrays/to-string-module'))
 gulp.task('uint8arrays/equals', gulp.series('sync--uint8arrays/equals-module'))
@@ -3933,3 +3943,9 @@ gulp.task('ipfs-core-utils/src/to-cid-and-path', gulp.series('sync--ipfs-core-ut
 gulp.task('ipfs-core-all', gulp.series('sync--ipfs-core-all-module'))
 
 gulp.task('merkletools', gulp.series('sync--merkletools-module'))
+
+gulp.task('readable', gulp.series('sync--readable-module'))
+gulp.task('passthrough', gulp.series('sync--passthrough-module'))
+gulp.task('transform', gulp.series('sync--transform-module'))
+gulp.task('readable-stream/writable', gulp.series('sync--readable-stream/writable-module'))
+gulp.task('readable-stream/duplex', gulp.series('sync--readable-stream/duplex-module'))

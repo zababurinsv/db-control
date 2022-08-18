@@ -171,10 +171,6 @@
     "object-assign": "gulp object-assign",
     "encoding-down": "gulp encoding-down",
     "level-codec": "gulp level-codec",
-    "passthrough": "gulp passthrough",
-    "readable-stream/writable": "gulp readable-stream/writable",
-    "readable-stream/readable": "gulp readable-stream/readable",
-    "readable-stream/duplex": "gulp readable-stream/duplex",
     "uint8arrays/concat": "gulp uint8arrays/concat",
     "uint8arrays/to-string": "gulp uint8arrays/to-string",
     "uint8arrays/equals": "gulp uint8arrays/equals",
@@ -288,7 +284,11 @@
     "ipfs-core-all": "gulp ipfs-core-all",
     "secp256k1": "gulp secp256k1",
     "merkletools": "gulp  merkletools",
-    "transform": "gulp transform"
+    "transform": "gulp transform",
+    "readable-stream/readable": "gulp readable",
+    "readable-stream/passthrough": "gulp passthrough",
+    "readable-stream/writable": "gulp readable-stream/writable",
+    "readable-stream/duplex": "gulp readable-stream/duplex"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
