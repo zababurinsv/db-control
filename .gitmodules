@@ -24,7 +24,7 @@
 	url = https://github.com/zababurinsv/raftscope.git
 [submodule "modules/merkle-tools"]
 	path = modules/merkle-tools
-	url = https://github.com/Tierion/merkle-tools.git
+	url = https://github.com/zababurinsv/merkle-tools.git
 [submodule "modules/tests"]
 	path = modules/tests
 	url = https://github.com/zababurinsv/newkind-tests.git
