@@ -28,3 +28,6 @@
 [submodule "modules/consensus"]
 	path = modules/consensus
 	url = https://github.com/zababurinsv/consensusjs.git
+[submodule "tests/database/orbit-db-test-utils"]
+	path = tests/database/orbit-db-test-utils
+	url = https://github.com/zababurinsv/orbit-db-test-utils.git
