@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FileSystem</title>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+<!--<script src="./ipfs/index.min.js" defer></script>-->
+<script type="module">
+   import service from '/service/WCNode/src/fs/index.mjs'
+   (async () => {
+    const api = await service()
+    const idbfs = await api.idbfs()
+    idbfs.info()
+       // idbfs.set.file('test', {test:'test2'})
+       // idbfs.save()
+       console.log('ddddd', await idbfs.get.file('test'))
+   })()
+</script>
+</body>
+</html>

@@ -95,11 +95,11 @@ export let IDBFS = (object) => {
                         }
                     })
                 },
-                file: (path = `${object.dirShared}${object.dirData}`, file, encoding = "utf8") => {
+                file: (file, path = `${object.dirShared}${object.dirData}`, encoding = "utf8") => {
                     return new Promise(async (resolve, reject) => {
                         try {
                             let readFile = await object.fs.idbfs.readFile(`${path}/${file}`, { encoding: encoding })
-                            console.log(readFile)
+                            console.log('=== get file =========', readFile)
                             resolve(readFile)
                         } catch (e) {
                             console.error('error',e)

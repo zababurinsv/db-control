@@ -6,19 +6,16 @@ export const hooks = (() => {
     let hooks = [], currentHook = 0, isNextTick = false// array of hooks, and an iterator!
     return {
         async init(Component, self = false) {
-            const Comp = await Component(self) // run effects
-            currentHook = 0 // reset for next render
+            const Comp = await Component(self)
+            currentHook = 0
             return Comp
         },
         async render(Component) {
-            const Comp = await Component() // run effects
-            currentHook = 0 // reset for next render
-            return isNextTick ? (isNextTick = false, await Comp.update()) : Comp
-        },
-        async update(Component, state) {
-            const Comp = await Component() // run effects
-            currentHook = 0 // reset for next render
-            return Comp
+            const Comp = {
+                state: await Component()
+            };
+            currentHook = 0;
+            return isNextTick ? (isNextTick = false, (await Comp.state.update())) : Comp;
         },
         async useEffect(callback, depArray) {
             const hasNoDeps = !Array.isArray(depArray)

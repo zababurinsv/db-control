@@ -10,7 +10,11 @@
   - namespace: merkleTools
     type: MVP
     scope:
-        - /
+    - /
+  - namespace: consensus
+    type: MVP
+    scope:
+    - /
   - namespace: soundcheckbox
     type: MVP
     scope:
@@ -24,7 +28,7 @@
 #    type: MVP
 #    scope:
 #    - /
-  - namespace: interface
+  - namespace: fileSystem
     type: MVP
     scope:
     - /

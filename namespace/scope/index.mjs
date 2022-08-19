@@ -41,15 +41,9 @@ for(let item of config) {
     }
 }
 
-// const dirs = fs.readdirSync(`${__dirname}/src`, { withFileTypes: true })
-//     .filter(d => d.isDirectory())
-//     .map(d => d.name);
-
-app.use('/src', express.static(__dirname + 'src'));
 app.use('/modules', express.static(__dirname + 'modules'));
 app.use('/service', express.static(__dirname + 'service'));
-
-
+app.use('/worker', express.static(__dirname + 'worker'));
 
 app.options(`/*`, await cors(corsOptions))
 app.get(`/*`, async (req, res) => {

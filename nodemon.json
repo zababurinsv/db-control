@@ -16,7 +16,9 @@
     "./node",
     "./config.io.yml",
     "./config.node.yml",
-    "frontend/src/modules/blockchain/"
+    "./namespace/scope/index.mjs",
+    "./namespace/server.mjs",
+    "./namespace/index.mjs"
   ],
   "ext": "mjs json",
   "delay": 2100

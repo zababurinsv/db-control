@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Consensus</title>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+<script type="module">
+    import App from '/modules/consensus/index.js'
+    let app = new App()
+    app.on("debug", (data) => {//debug event
+        console.log("[" + new Date().toLocaleTimeString() + "]", "< " + data.level + " >", data.module, data.text);
+    });
+
+    app.start('pos');
+    const validator_1 = new app.VALIDATOR({
+        id: 'Alice',
+        volume: 23
+    })
+    const validator_2 = new app.VALIDATOR({
+        id: 'Bob',
+        volume: 13
+    })
+    const peer_1 = new app.PEER({
+        id: 'Cooper'
+    })
+    const peer_2 = new app.PEER({
+        id: 'Diana'
+    })
+
+    const RoundMapper = new app.ROUNDMANAGER()
+    console.log('validator', {
+        validator_1: validator_1,
+        validator_2: validator_2,
+        peer_1: peer_1,
+        peer_2: peer_2,
+        RoundMapper: RoundMapper
+    })
+    console.log('APP', RoundMapper.getValidatorsList())
+</script>
+</body>
+</html>
