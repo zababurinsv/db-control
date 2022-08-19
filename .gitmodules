@@ -19,9 +19,6 @@
 [submodule "namespace/scope/soundcheckbox/admin/design"]
 	path = namespace/scope/soundcheckbox/admin/design
 	url = https://github.com/NadyaRakhmanova/admin-design.git
-[submodule "namespace/scope/raft"]
-	path = namespace/scope/raft
-	url = https://github.com/zababurinsv/raftscope.git
 [submodule "modules/merkle-tools"]
 	path = modules/merkle-tools
 	url = https://github.com/zababurinsv/merkle-tools.git
