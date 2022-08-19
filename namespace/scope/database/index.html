@@ -10,25 +10,32 @@
 <div id="root"></div>
 <!--<script src="./ipfs/index.min.js" defer></script>-->
 <script type="module">
-    import OrbitDB from '/modules/orbit-db/dist/index.js'
-    import IPFS from '/modules/ipfs-core/dist/index.all.js'
-    import {initIPFS, initOrbitDB} from '/index.js'
+    //TODO подключение тестов
+    import { test } from '/modules/tests/frontend/src/index.mjs'
+    (async () => {
+        test('/tests/database/index.tasts.js', true).catch(e => {console.log('error devtool', e)})
+    })()
+
+    //TODO подключение базы данных и ipfs
+    // import OrbitDB from '/modules/orbit-db/dist/index.js'
+    // import IPFS from '/modules/ipfs-core/dist/index.all.js'
+    // import {initIPFS, initOrbitDB} from '/index.js'
     // import io from '/modules/orbit-db-io/dist/index.js'
-    initIPFS({IPFS: IPFS})
-        .then(ipfs => {
-            initOrbitDB({ipfs: ipfs, OrbitDB: OrbitDB})
-                .then(async orbitdb => {
-                    const db = await orbitdb.open('/orbitdb/zdpuAvrbqb2WoJ32oZ6EguJPEi5DKGnWwQZv4mm9jrtZjyZrj/hello')
-                    console.log('=============', db)
-                    // io.read(ipfs, '/orbitdb/zdpuB3ZeZBLhiT5zUgfZkbpunwHb5RS5wdiBZUgPQ3BLCa61C/aaaввы')
-                })
-                .catch(e => {
-                    console.log('=== ERROR orbitdb ===', e)
-                })
-        })
-        .catch(e => {
-          console.log('=== ERROR === ipfs', e)
-        })
+    // initIPFS({IPFS: IPFS})
+    //     .then(ipfs => {
+    //         initOrbitDB({ipfs: ipfs, OrbitDB: OrbitDB})
+    //             .then(async orbitdb => {
+    //                 const db = await orbitdb.open('/orbitdb/zdpuAvrbqb2WoJ32oZ6EguJPEi5DKGnWwQZv4mm9jrtZjyZrj/hello')
+    //                 console.log('=============', db)
+    //                 io.read(ipfs, '/orbitdb/zdpuB3ZeZBLhiT5zUgfZkbpunwHb5RS5wdiBZUgPQ3BLCa61C/aaaввы')
+                // })
+                // .catch(e => {
+                //     console.log('=== ERROR orbitdb ===', e)
+                // })
+        // })
+        // .catch(e => {
+        //   console.log('=== ERROR === ipfs', e)
+        // })
 </script>
 </body>
 </html>
