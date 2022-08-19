@@ -42,6 +42,7 @@
     "nodemon:nodes:soundcheckbox:start": "nodemon ./node/soundcheckbox/server.mjs",
     "nodemon:nodes:flomons:start": "nodemon ./node/flomons/server.mjs",
     "gulp:watch": "gulp watch:namespace:scss",
+    "build:readme": "jsdoc2md --configure jsdoc.json --source frontend/index.mjs > md_api.md && cat ./md_info.md ./md_api.md > ./README.md",
     "level-transcoder": "gulp level-transcoder",
     "abstract-iterator": "gulp abstract-iterator",
     "abstract-error": "gulp abstract-error",

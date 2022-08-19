@@ -115,9 +115,11 @@ export default async (global) => {
         global.DEBUG_TRAFFIC = 1;
 
 
-    global.JINN_EXTERN = {GetCurrentBlockNumByTime:function () {
+    global.JINN_EXTERN = {
+        GetCurrentBlockNumByTime:function () {
             return 0;
-    }};
+        }
+    };
 
     if(global.DELTA_CURRENT_TIME === undefined)
         global.DELTA_CURRENT_TIME = 0;

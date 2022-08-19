@@ -41,6 +41,7 @@ for(let item of config) {
     }
 }
 
+app.use('/node', express.static(__dirname + 'node'));
 app.use('/modules', express.static(__dirname + 'modules'));
 app.use('/service', express.static(__dirname + 'service'));
 app.use('/worker', express.static(__dirname + 'worker'));
