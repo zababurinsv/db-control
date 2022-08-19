@@ -52,3 +52,6 @@
 [submodule "node/mongo"]
 	path = node/mongo
 	url = https://github.com/zababurinsv/server-mongo-cjs.git
+[submodule "node/feed"]
+	path = node/feed
+	url = https://github.com/zababurinsv/server-feed-cjs.git

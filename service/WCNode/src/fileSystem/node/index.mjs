@@ -52,26 +52,28 @@ const service = async (self) => {
         }
 
         await useEffect(async () => {
-            console.log('==== init module ====')
+            console.log('==== init module ====');
         }, []);
 
         await useEffect(async () => {
-            console.log('==== health ====', health)
+            console.log('==== health ====', health);
         }, [health]);
 
         await useEffect(async () => {
             console.log('==== idbfs ====')
-            setFs(true)
+            if(idbfs) {
+                setFs(true)
+            }
         }, [idbfs])
 
         await useEffect(async () => {
-            console.log('==== api set ====')
+            console.log('==== api set ====', isFs)
         }, [isFs])
 
         await useEffect(async () => {
             console.log('==== error ====', error)
         }, [error])
-
+        console.log('========', isFs)
         return {
             async health() {
               setHealth(health + 1)
@@ -85,6 +87,13 @@ const service = async (self) => {
                    setError(e)
                    return await render(service)
                 }
+            },
+            async terminate() {
+                //TODO надо сделать правильное уничтожение web worker - а
+                console.log('======== terminate service==========')
+                setIdbfs(null)
+                setFs(false)
+                return await render(service)
             },
             api: isFs ? {
                 create: {
@@ -142,9 +151,6 @@ const service = async (self) => {
                 return {
                     state: (await render(service)).state
                 }
-            },
-            terminate() {
-                console.log('======== terminate service==========')
             }
         }
     } catch (e) {

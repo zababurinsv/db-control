@@ -8,6 +8,10 @@ export default async (self = document) => {
     idbfs: async () => {
       state = (await state.idbfs()).state
       return state.api
+    },
+    terminate: async () => {
+      state = (await state.terminate()).state
+      return true
     }
   }
 }

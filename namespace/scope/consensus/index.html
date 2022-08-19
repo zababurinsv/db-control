@@ -87,9 +87,8 @@
     <script type="text/javascript" src="./assets/model-network.js"></script>
     <script type="text/javascript" src="./assets/model-node.js"></script>
     <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-serialize.js"></script>
-    <script type="text/javascript" src="./assets/model-environment.js"></script>
     <script type="text/javascript" src="/node/tera/Source/HTML/JS/diagram.js"></script>
-
+    <script type="text/javascript" src="./assets/model-environment.js"></script>
 </head>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 
@@ -228,8 +227,9 @@
             coord.y = (coord.y-glDeltaScreenY)/glScale;
 
             // ToLog("Add new node: "+JSON.stringify(coord));
-
-            var Node=MODEL.NewNode(MODEL.NodeCount);
+            var Node = MODEL.NewNode(MODEL.NodeCount);
+            console.log('ssssss', Node)
+            debugger
             Node.Norm=1;
             Node.x_norm=coord.x;
             Node.y_norm=coord.y;
@@ -357,7 +357,7 @@
             let Name = Arr[i];
             let Item = document.getElementById(Name);
             if(Item) {
-                console.log('=== localStorage.getItem ====', prefix+Name)
+                // console.log('=== localStorage.getItem ====', prefix+Name)
                 let Value = localStorage.getItem(prefix+Name);
                 if(Value !== undefined && Value !== null) {
                     if(Item.type === "checkbox") {
@@ -372,7 +372,7 @@
 
     function InitNodes() {
         MODEL = CreateModel(MaxNode, 1);
-        console.log('=== InitNodes => MODEL ===', MODEL)
+        // console.log('=== InitNodes => MODEL ===', MODEL)
     }
 
     function Draw(){
@@ -395,11 +395,11 @@
     function Draw2D() {
         var StrType="Polar";
 
-
-        var Arr=MODEL.NetNodeArr;
+        console.log('MODEL.NetNodeArr', MODEL.NetNodeArr)
+        var Arr = MODEL.NetNodeArr;
         if(!Arr.length)
             return;
-        var MaxCount=Math.min(Arr.length,MaxCell2D);
+        var MaxCount = Math.min(Arr.length, MaxCell2D);
 
 
         var obj = $("idMap");
@@ -751,7 +751,7 @@
     }
 
     function MainWorkLoop() {
-        console.log('=== MainWorkLoop ===')
+        // console.log('=== MainWorkLoop ===')
 
         let Time1 = Date.now();
         MainWorkLoopNext();
@@ -770,7 +770,7 @@
     }
 
     function MainWorkLoopNext() {
-        console.log('=== MainWorkLoopNext ===')
+        // console.log('=== MainWorkLoopNext ===')
         //Точка входа: исполнение асинхронной части (тика программы) и отрисовка
         if(!MODEL) {
             return;
@@ -797,6 +797,7 @@
         global.glUsePackMaxHash = API.idUsePackMaxHash.checked;
 
         MaxNode = parseInt(API.idNodeCount.value, 10);
+        console.log('SET NODE COUNT')
         MODEL.MaxNodeCount = MaxNode;
         if(MaxNode < 1) {
             MaxNode = 1;
@@ -809,11 +810,11 @@
         API.idWorkNum.innerText = Str;
 
         let NodeCount = MODEL.NodeCount;
-        console.log('==== CurBlockNum ====', Str)
+        // console.log('==== CurBlockNum ====', Str)
         if(CurBlockNum !== PrevCurBlockNum && NodeCount) {
             Str = MODEL.GetInfoString();
             Str = Str.replace(/[\n]/g, "<BR>");
-            console.log('CurBlockNum !== PrevCurBlockNum, === Str ====', Str)
+            // console.log('CurBlockNum !== PrevCurBlockNum, === Str ====', Str)
             SetStatus("<b>Node stats:</b><BR>"+Str);
             JINN_STAT.Clear();
             PrevCurBlockNum = CurBlockNum;
@@ -821,10 +822,11 @@
 
         glWorkNum++;
         if(NodeCount && typeof glKeccakCount === "number") {
-            glKeccakCountAvg=Math.floor(10 * glKeccakCount / glWorkNum / NodeCount);
+            glKeccakCountAvg = Math.floor(10 * glKeccakCount / glWorkNum / NodeCount);
         }
 
         var AddCount = Math.max(10, Math.floor(MaxNode / 10));
+        console.log('=== AddCount ===', AddCount)
         MODEL.AddNode(AddCount, MaxNode);
 
         var DeltaAdd = 1;
@@ -836,12 +838,11 @@
 
         if(API.idDeleteNode.checked) {
             if(glWorkNum >= 10 && glWorkNum % 50 === 0) {
-                debugger
                 MODEL.AddNodeHole(DeltaAdd, MaxNode);
                 MODEL.DeleteNode(DeltaDelete, MaxNode);
             }
         }
-
+        console.log('MODEL.NodeCount', MODEL.NodeCount)
         if(MODEL.NodeCount) {
             MODEL.DoRun();
         }
@@ -852,6 +853,7 @@
     }
 
     function FindInHot(Node,IDStr) {
+
         var Arr=Node.LevelArr;
         for(var i=0;i<Arr.length;i++)
         {
@@ -867,14 +869,11 @@
         InitNodes();
         MainWorkLoop();
 
-
-
         $("idMap").onwheel  = ZoomMap;
         $("idMap").ondblclick = OnDblClick;
         $("idMap").oncontextmenu = function (event) {
             event.preventDefault();
         };
-
 
         window.addEventListener('mousedown',function (event) {
             SetMouse(event,"down");

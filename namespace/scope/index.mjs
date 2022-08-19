@@ -45,6 +45,7 @@ app.use('/node', express.static(__dirname + 'node'));
 app.use('/modules', express.static(__dirname + 'modules'));
 app.use('/service', express.static(__dirname + 'service'));
 app.use('/worker', express.static(__dirname + 'worker'));
+app.use('/tests', express.static(__dirname + 'tests'));
 
 app.options(`/*`, await cors(corsOptions))
 app.get(`/*`, async (req, res) => {

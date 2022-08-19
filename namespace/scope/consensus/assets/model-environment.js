@@ -95,24 +95,24 @@ function CTeraEnvironment(Count)
 
     };
 
-    Env.AddNode=function(Count)
-    {
+    Env.AddNode=function(Count) {
         //сплошное заполнение
         if(Env.NetNodeArr.length<Env.MaxNodeCount)
         {
             for(var i=0;i<Count;i++)
             {
-                if(Env.NetNodeArr.length>=Env.MaxNodeCount)
+                if(Env.NetNodeArr.length>=Env.MaxNodeCount) {
                     break;
+                }
                 Env.NewNode(Env.NetNodeArr.length);
             }
         }
     };
 
-    Env.AddNodeHole=function (Count)
-    {
-        if(!Count)
+    Env.AddNodeHole = function (Count) {
+        if(!Count) {
             return;
+        }
 
         //режим заполнения дырок
         for(var i=1;i<Env.NetNodeArr.length;i++)
@@ -133,8 +133,7 @@ function CTeraEnvironment(Count)
         }
     };
 
-    Env.NewNode=function(Num)
-    {
+    Env.NewNode=function(Num) {
         var Node={Num:Num};
         global.CreateNodeEngine(Node);
 
@@ -148,8 +147,7 @@ function CTeraEnvironment(Count)
     };
 
 
-    Env.DeleteNode=function (Count)
-    {
+    Env.DeleteNode=function (Count) {
         var Arr=[];
         for(var Num=0;Num<Env.NetNodeArr.length;Num++)
         {
@@ -174,8 +172,7 @@ function CTeraEnvironment(Count)
         }
     };
 
-    Env.CloseNode=function(Node)
-    {
+    Env.CloseNode=function(Node) {
         //ToLog("Close "+Node.Name);
         for(var i=0;i<Node.ConnectArray.length;i++)
         {
@@ -192,8 +189,7 @@ function CTeraEnvironment(Count)
 
     };
 
-    Env.GetNodeByAddr=function(IDStr)
-    {
+    Env.GetNodeByAddr=function(IDStr) {
 
         var ItemNode=Env.NetNodeMap[IDStr];
         if(!ItemNode)
@@ -214,14 +210,12 @@ function CTeraEnvironment(Count)
 
 
     Env.TickCount=0;
-    Env.NextTickBlockNum=function()
-    {
+    Env.NextTickBlockNum = function() {
         Env.TickCount++;
         Env.CurrentBlockNum=JINN_CONST.START_BLOCK_NUM+Math.floor(Env.TickCount/10);
     };
 
-    Env.NextTickBlockNum0=function()
-    {
+    Env.NextTickBlockNum0 = function() {
         var Time=Date.now();
         if(Env.CurrentBlockNum===undefined)//init
         {
@@ -241,8 +235,7 @@ function CTeraEnvironment(Count)
     };
 
 
-    Env.GetCurrentBlockNumByTime=function()
-    {
+    Env.GetCurrentBlockNumByTime = function() {
         return Env.CurrentBlockNum;
     };
 
