@@ -49,3 +49,6 @@
 [submodule "node/account"]
 	path = node/account
 	url = https://github.com/zababurinsv/server-account-cjs.git
+[submodule "node/mongo"]
+	path = node/mongo
+	url = https://github.com/zababurinsv/server-mongo-cjs.git
