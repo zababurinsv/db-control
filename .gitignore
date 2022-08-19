@@ -9,7 +9,6 @@ cmake-build-debug
 trash/
 logs
 *.log
-node/
 .idea/
 palette/
 server/
