@@ -13,8 +13,8 @@
 [submodule "namespace/scope/NadyaRakhmanova.github.io"]
 	path = namespace/scope/NadyaRakhmanova.github.io
 	url = https://github.com/NadyaRakhmanova/NadyaRakhmanova.github.io.git
-[submodule "node/empera"]
-	path = node/empera
+[submodule "node/tera"]
+	path = node/tera
 	url = https://gitlab.com/terafoundation/tera2.git
 [submodule "namespace/scope/soundcheckbox/admin/design"]
 	path = namespace/scope/soundcheckbox/admin/design
