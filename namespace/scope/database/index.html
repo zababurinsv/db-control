@@ -3,17 +3,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>IPFS</title>
+    <title>Database</title>
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
-<!--<script src="./ipfs/index.min.js" defer></script>-->
 <script type="module">
     //TODO подключение тестов
     import { test } from '/modules/tests/frontend/src/index.mjs'
+
     (async () => {
-        test('/tests/database/index.tasts.js', true).catch(e => {console.log('error devtool', e)})
+        try {
+           await test('/tests/database/index.tests.js', true)
+        } catch (e) {
+            console.log('ERROR', e)
+        }
     })()
 
     //TODO подключение базы данных и ipfs

@@ -1,5 +1,5 @@
 'use strict'
-// const rmrf = require('rimraf')
+
 import buffer from '/service/ReactNode/controlCenter/database/modules/safe-buffer/dist/index.js';
 import mapSeries from "/service/ReactNode/controlCenter/database/modules/p-map-series/dist/index.js";
 import path from "/service/ReactNode/controlCenter/database/modules/path/dist/index.js";
@@ -19,7 +19,6 @@ export default () => {
       let ipfsd, ipfs, orbitdb1, address
 
       before(async () => {
-        // rmrf.sync(dbPath)
         ipfsd = await startIpfs(API, config.daemon1)
         ipfs = ipfsd.api
         orbitdb1 = await OrbitDB.createInstance(ipfs, { directory: path.join(dbPath, '1') })
