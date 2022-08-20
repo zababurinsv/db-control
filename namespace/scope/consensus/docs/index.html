@@ -133,30 +133,37 @@
 
 </div>
 </body>
-
 <script>
     var glIdArr=["idDeleteNode","idTxCount","idUseTicket","idNodeCount","idUseSplitter","idUseBlockCache","idUsePackMaxHash","idBlockPerSec","idMinLatency","idShowDiagram","idTestMode1","idTestMode2","idTestMode3","idRndTx"];
     global.DEBUG_ID=0
+    //global.DEBUG_ID="HOT";
+
     var glWorking=1;
     var glWorkNum=0;
     var MaxNode=2;//69;
+
     var MaxCell2D=69;
+
+
+
     var MODEL;
     var glDeltaScreenX=0;
     var glDeltaScreenY=0;
+    function InitNodes()
+    {
+        MODEL=CreateModel(MaxNode,1);
+    }
+    function Start(Mode)
+    {
+        glWorking=Mode;
+    }
     var PrevCurBlockNum=0;
     var glKeccakCountAvg=0;
 
-    function InitNodes() {
-        MODEL=CreateModel(MaxNode,1);
-    }
-
-    function Start(Mode) {
-        glWorking=Mode;
-    }
-
-    function MainWorkLoop() {
+    function MainWorkLoop()
+    {
         //setInterval(MainWorkLoopNext,100);return;
+
         var Time1=Date.now();
         MainWorkLoopNext();
         var Delta=Date.now()-Time1;
@@ -173,21 +180,23 @@
         setTimeout(MainWorkLoop,Period);
     }
 
-    function MainWorkLoopNext() {
+    function MainWorkLoopNext()
+    {
+        debugger
         //Точка входа: исполнение асинхронной части (тика программы) и отрисовка
-        if(!MODEL) {
+        if(!MODEL)
             return;
-        }
 
-        if(!glWorking) {
+        if(!glWorking)
             return;
-        }
-
         global.glUseSplitter=$("idUseSplitter").checked;
         global.glTestMode1=$("idTestMode1").checked;
         global.glTestMode2=$("idTestMode2").checked;
         global.glTestMode3=$("idTestMode3").checked;
         global.glRndTx=$("idRndTx").checked;
+
+
+
 
         if(+$("idTxCount").value<0)
             $("idTxCount").value=0;
@@ -212,7 +221,8 @@
         $("idWorkNum").innerText=Str;
 
         var NodeCount=MODEL.NodeCount;
-        if(CurBlockNum!==PrevCurBlockNum && NodeCount) {
+        if(CurBlockNum!==PrevCurBlockNum && NodeCount)
+        {
             Str=MODEL.GetInfoString();
             Str=Str.replace(/[\n]/g, "<BR>");
             SetStatus("<b>Node stats:</b><BR>"+Str);
@@ -222,9 +232,8 @@
         }
 
         glWorkNum++;
-        if(NodeCount && typeof glKeccakCount==="number") {
+        if(NodeCount && typeof glKeccakCount==="number")
             glKeccakCountAvg=Math.floor(10*glKeccakCount/glWorkNum/NodeCount);
-        }
 
         var AddCount=Math.max(10,Math.floor(MaxNode/10));
         MODEL.AddNode(AddCount,MaxNode);
@@ -234,38 +243,34 @@
         if(MODEL.NodeCount<4*MaxNode/5)
             DeltaAdd=DeltaAdd*2;
 
-        if($("idDeleteNode").checked) {
+        if($("idDeleteNode").checked)
             if(glWorkNum>=10 && glWorkNum%50===0)
             {
                 MODEL.AddNodeHole(DeltaAdd,MaxNode);
                 MODEL.DeleteNode(DeltaDelete,MaxNode);
             }
-        }
 
-
-        if(MODEL.NodeCount) {
+        if(MODEL.NodeCount)
             MODEL.DoRun();
-        }
 
-
-        if(glWorkNum%2===0) {
+        if(glWorkNum%2===0)
             Draw();
-        }
+
+
     }
 
     var WasDrawTimeOut=0;
-
-    function Draw(){
+    function Draw()
+    {
         //return;
-        if(WasDrawTimeOut) {
+        if(WasDrawTimeOut)
             return;
-        }
-
         WasDrawTimeOut=1;
         setTimeout(DrawScreen,50);
     }
 
-    function DrawScreen() {
+    function DrawScreen()
+    {
         WasDrawTimeOut=0;
 
         var StrType="Polar";
@@ -273,7 +278,8 @@
     }
 
 
-    function Draw2D() {
+    function Draw2D()
+    {
         var StrType="Polar";
 
 
@@ -444,7 +450,8 @@
     }
 
 
-    function DrawNode(Node,Block,ctx) {
+    function DrawNode(Node,Block,ctx)
+    {
         ctx.lineWidth=2;
 
         ctx.fillStyle="#181c43";
@@ -522,7 +529,6 @@
         }
         return 0;
     }
-
     function DrawNodeLink(Node,ctx)
     {
         if(Node.Del)
@@ -610,7 +616,7 @@
             return;
         }
 
-        // ToLog("-------------------- "+Node.Name+" --------------------");
+        ToLog("-------------------- "+Node.Name+" --------------------");
 
 
         ArrDataToLog(Node,"DB",function (BlockNum)
@@ -649,20 +655,20 @@
 
         if(0)
         {
-            // ToLog("------------------------------------Childs: "+Node.ConnectArray.length);
+            ToLog("------------------------------------Childs: "+Node.ConnectArray.length);
             var Arr=Node.LevelArr;
-            // ToLog("***HOTS***"+Arr.length);
+            ToLog("***HOTS***"+Arr.length);
             for(var i=0;i<Arr.length;i++)
             {
                 var Child=Arr[i];
                 if(Child)
                 {
-                    // ToLog(""+i+" : "+Child.ID);
+                    ToLog(""+i+" : "+Child.ID);
                 }
             }
 
             Arr=Node.GetTopTreeScoreArr(100);
-            // ToLog("***Tree***"+Arr.length);
+            ToLog("***Tree***"+Arr.length);
             for(var i=0;i<Arr.length;i++)
             {
                 var Child=Arr[i];
@@ -675,7 +681,7 @@
                     var StrHotDeny=" HotDeny:"+(Child.DenyHotStart?(Date.now()-Child.DenyHotStart)/1000+" s":"no");
                     var StrScore=" Score: "+GetNum(Child.Score);
 
-                    // ToLog(""+Child.ID+StrActive+StrHot+StrHotStart+StrHotDeny+StrScore);//" WAS:"+GetNum(Child.WasStartHot1)+"-"+GetNum(Child.WasStartHot2)
+                    ToLog(""+Child.ID+StrActive+StrHot+StrHotStart+StrHotDeny+StrScore);//" WAS:"+GetNum(Child.WasStartHot1)+"-"+GetNum(Child.WasStartHot2)
                 }
             }
         }
@@ -739,8 +745,8 @@
             }
         }
 
-        // ToLog(Text);
-        // ToLog(Arr);
+        ToLog(Text);
+        ToLog(Arr);
     }
 
     //Action
@@ -805,6 +811,7 @@
             glMouseClick=glMoveMouse;
         }
     }
+
 
 
     function DoNormalizationXY()
@@ -915,7 +922,7 @@
         var y=SumY/Count;
 
         var rad2=GetRadius();
-        // ToLog("x2="+rad2.x+" y2="+rad2.y+" Count="+Count+" SumX="+SumX)
+        ToLog("x2="+rad2.x+" y2="+rad2.y+" Count="+Count+" SumX="+SumX)
 
         for(var i=0;i<MaxCount;i++)
         {
@@ -975,11 +982,16 @@
         var x1=MaxX/2*glScale;
         var y1=MaxY/2*glScale;
 
+        //glScale += event.deltaY * -0.001;
+
         var Mult=1+event.deltaY * -0.001;
         glScale*=Mult;
 
         if(glScale<0.01)
             glScale=0.01;
+
+        //ToLog("glScale="+glScale+" event.deltaY="+event.deltaY)
+
 
         var x2=MaxX/2*glScale;
         var y2=MaxY/2*glScale;
@@ -992,13 +1004,24 @@
         Draw();
     }
 
+
     //Send
     var glSendValue=0;
-    function OnDblClick(event) {
+    function OnDblClick(event)
+    {
+        //event.preventDefault();
+        //return;
+
         var Node=FindCurrentNode();
         if(Node)
         {
             Node.ClearDataBase();
+//            console.clear();
+//            global.DEBUG_ID=Node.ID;
+
+//            glSendValue++;
+//            ToLog("Send test to "+Node.Name);
+//            Node.SendTest(glSendValue);
         }
         else
         {
@@ -1009,7 +1032,7 @@
             coord.x = (coord.x-glDeltaScreenX)/glScale;
             coord.y = (coord.y-glDeltaScreenY)/glScale;
 
-            // ToLog("Add new node: "+JSON.stringify(coord));
+            ToLog("Add new node: "+JSON.stringify(coord));
 
             var Node=MODEL.NewNode(MODEL.NodeCount);
             Node.Norm=1;
@@ -1289,7 +1312,8 @@
         DrawDiagramMy("MaxHash","idMaxHash",arr,arrX,"#313690",10);
     }
 
-    function DrawDiagramMy(name,id,arr,arrX,red,KPrecision,MouseText) {
+    function DrawDiagramMy(name,id,arr,arrX,red,KPrecision,MouseText)
+    {
         var Item=DiagramMapId[id];
         if(!Item)
         {

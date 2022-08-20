@@ -1,0 +1,1014 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Consensus</title>
+    <style>
+        .bar
+        {
+            position: absolute;
+            right: 1px;
+            width: 140px;
+            height: calc(100vh - 50px);
+            border: 1px solid black;
+            color: white;
+            background-color: #181c57;
+        }
+
+        .nodemap
+        {
+            width: calc(100% - 140px);
+            height: calc(100vh - 55px);
+            min-width:100px;
+            min-height: 100px;
+            border: 1px solid black;
+            margin-top: 2px;
+        }
+
+
+        #idMaxHash
+        {
+            position: absolute;
+            z-index: 100;
+            left: 10px;
+            bottom: 16px;
+
+        }
+
+    </style>
+    <script>
+        if(typeof global!=="object")
+            global=window;
+    </script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/extlib/sha3.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/extlib/RBTree.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/extlib/terabuf.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/lib/cache-block.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/lib/time-sync.js"></script>
+    <script type="text/javascript" src="./assets/model-lib.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/index.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-log.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-stat.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-base.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-row.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-item.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-chain.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/cache-db.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-cache-body.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-cache-block.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-block-db.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-item.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-handshake.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-speed.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-score.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-addr.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-hot.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-session.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-ticket.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-err.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-priority.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-control.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-resend.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-block.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-block-mining.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-consensus-chain.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-consensus.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-consensus-boost.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-net-cache.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-startup-loader.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-timing.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-time-sync.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-filter.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-net.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-sharding.js"></script>
+    <script type="text/javascript" src="./assets/model-network.js"></script>
+    <script type="text/javascript" src="./assets/model-node.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-serialize.js"></script>
+    <script type="text/javascript" src="/node/tera/Source/HTML/JS/diagram.js"></script>
+    <script type="text/javascript" src="./assets/model-environment.js"></script>
+</head>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+
+<body>
+<DIV align2='center'>
+    <b>MODEL</b>
+    <button onclick="Start(1)">Run</button>
+    <button onclick="Start(0)">Stop</button>
+    Nodes:<input type="number" value="5" id="idNodeCount" style="width: 50px;" oninput="SaveValues()">
+    MaxTx:<input type="number" value="1" id="idTxCount" style="width: 50px;" oninput="SaveValues()">
+
+    <!--<button onclick="DoNormalizationXY()">Norm</button>-->
+
+    Latency:<input type="number" value="10" id="idMinLatency" style="width: 50px;" oninput="SaveValues()">
+    <input type="range" min="1" max="10" id="idBlockPerSec" value="1" oninput="SaveValues()">
+
+    <span id="idWorkNum"></span>
+
+
+    <!--command bar-->
+    <DIV class="bar">
+        <DIV align="center"><BR><B>MODE:</B></DIV><BR>
+        <input type="checkbox" id="idShowDiagram" onchange="SaveValues()">Diagram<BR>
+        <input type="checkbox" id="idUseSplitter" onchange="SaveValues()">Split<BR>
+        <input type="checkbox" id="idDeleteNode" onchange="SaveValues()">Recreates<BR>
+        <input type="checkbox" id="idUseTicket" checked onchange="SaveValues()">Tickets<BR>
+        <input type="checkbox" id="idUseBlockCache" checked onchange="SaveValues()">Cache<BR>
+        <input type="checkbox" id="idUsePackMaxHash" checked onchange="SaveValues()">Use pack MH<BR>
+
+        <input type="checkbox" id="idTestMode1" onchange="SaveValues()">Mode 1<BR>
+        <input type="checkbox" id="idTestMode2" onchange="SaveValues()">Mode 2<BR>
+        <input type="checkbox" id="idTestMode3" onchange="SaveValues()">Mode 3<BR>
+        <input type="checkbox" id="idRndTx" onchange="SaveValues()">Rnd tx<BR>
+        <BR>
+        <DIV id="idStatus"></DIV>
+    </DIV>
+
+    <canvas class="nodemap" id='idMap' ></canvas>
+
+    <canvas  class="DIAGRAM" width='600' height='150' id='idMaxHash'></canvas>
+
+</div>
+</body>
+
+<script type="module">
+    let glIdArr=["idDeleteNode","idTxCount","idUseTicket","idNodeCount","idUseSplitter","idUseBlockCache","idUsePackMaxHash","idBlockPerSec","idMinLatency","idShowDiagram","idTestMode1","idTestMode2","idTestMode3","idRndTx"];
+    global.DEBUG_ID = 0
+    let glWorking = 1;
+    let glWorkNum = 0;
+    let MaxNode = 2;//69;
+    let MaxCell2D = 69;
+    let MODEL;
+    let glDeltaScreenX = 0;
+    let glDeltaScreenY = 0;
+    let PrevCurBlockNum = 0;
+    let glKeccakCountAvg = 0;
+    //for draw
+    let WasDrawTimeOut = 0;
+    let glScale = 1;
+    let LMouseOn=false;
+    let LMouseOn2=false;
+    let glCurrentNode;
+    let glCurrentViewNode;
+    let glMoveMouse;
+    let glMouseClick;
+
+    function $(id){
+        return document.getElementById(id);
+    }
+
+    function SetStatus(Str) {
+        var id = $("idStatus");
+        id.innerHTML = Str;
+    }
+
+    let API = {
+        idBlockPerSec: document.querySelector('#idBlockPerSec'),
+        idUseSplitter: document.querySelector('#idUseSplitter'),
+        idTestMode1: document.querySelector('#idTestMode1'),
+        idTestMode2: document.querySelector('#idTestMode2'),
+        idTestMode3: document.querySelector('#idTestMode3'),
+        idRndTx: document.querySelector('#idRndTx'),
+        idTxCount: document.querySelector('#idTxCount'),
+        idMinLatency: document.querySelector('#idMinLatency'),
+        idUseTicket: document.querySelector('#idUseTicket'),
+        idUseBlockCache: document.querySelector('#idUseBlockCache'),
+        idUsePackMaxHash: document.querySelector('#idUsePackMaxHash'),
+        idNodeCount: document.querySelector('#idNodeCount'),
+        idWorkNum: document.querySelector('#idWorkNum'),
+        idDeleteNode: document.querySelector('#idDeleteNode')
+    }
+
+    //Log info
+    function DoLogNodeInfo(Node) {
+        if(!Node)
+        {
+            if(typeof global.DEBUG_ID==="number")
+                global.DEBUG_ID=0;
+            return;
+        }
+
+        ToLog("-------------------- "+Node.Name+" --------------------");
+
+
+        ArrDataToLog(Node,"DB",function (BlockNum)
+        {
+            var Block=Node.GetBlockDB(BlockNum);
+            Node.CheckLoadBody(Block);
+            return Block.TxData;
+        });
+
+        //if(0)
+        ArrDataToLog(Node,"POW",function (BlockNum)
+        {
+            var Arr=[];
+            var Store=Node.GetLiderArrAtNum(BlockNum);
+            var LiderArr=Store.LiderArr;
+            for(var n=0;n<LiderArr.length;n++)
+            {
+                var NodeStatus=LiderArr[n];
+
+                //var Value="M:"+NodeStatus.Miner+" "+NodeStatus.Power;
+                var Value=NodeStatus.Power;
+                if(NodeStatus.LoadNum)
+                    Value=""+Value+"<-H:"+NodeStatus.LoadNum;
+                else
+                if(NodeStatus.LoadTreeNum)
+                    Value=""+Value+"<-B:"+NodeStatus.LoadTreeNum;
+
+                Arr.push(Value);
+            }
+            return Arr;
+        });
+
+
+
+
+
+        if(0)
+        {
+            // ToLog("------------------------------------Childs: "+Node.ConnectArray.length);
+            var Arr=Node.LevelArr;
+            // ToLog("***HOTS***"+Arr.length);
+            for(var i=0;i<Arr.length;i++)
+            {
+                var Child=Arr[i];
+                if(Child)
+                {
+                    // ToLog(""+i+" : "+Child.ID);
+                }
+            }
+
+            Arr=Node.GetTopTreeScoreArr(100);
+            ToLog("***Tree***"+Arr.length);
+            for(var i=0;i<Arr.length;i++)
+            {
+                var Child=Arr[i];
+                if(Child)// && Child.IsOpen())
+                {
+                    //var ChildNode=MODEL.GetNodeByAddr(Child.IDStr)
+                    var StrActive=" Active: "+(Child.IsOpen()?"1":0);
+                    var StrHot=" Hot: "+(Child.IsHot()?"1":0);
+                    var StrHotStart=" HotStart:"+(Child.HotStart?(Date.now()-Child.HotStart)/1000+" s":"no");
+                    var StrHotDeny=" HotDeny:"+(Child.DenyHotStart?(Date.now()-Child.DenyHotStart)/1000+" s":"no");
+                    var StrScore=" Score: "+GetNum(Child.Score);
+
+                    ToLog(""+Child.ID+StrActive+StrHot+StrHotStart+StrHotDeny+StrScore);//" WAS:"+GetNum(Child.WasStartHot1)+"-"+GetNum(Child.WasStartHot2)
+                }
+            }
+        }
+    }
+    //Calc
+    function GetLastBlockNum() {
+        var CurBlockNum=JINN_EXTERN.GetCurrentBlockNumByTime();
+        return CurBlockNum-JINN_CONST.STEP_LAST;
+    }
+
+    function ZoomMap(event) {
+        event.preventDefault();
+
+        var obj = $("idMap");
+        var MaxX=obj.width;
+        var MaxY=obj.height;
+
+        var x1=MaxX/2*glScale;
+        var y1=MaxY/2*glScale;
+
+        var Mult=1+event.deltaY * -0.001;
+        glScale*=Mult;
+
+        if(glScale<0.01)
+            glScale=0.01;
+
+        var x2=MaxX/2*glScale;
+        var y2=MaxY/2*glScale;
+        var dx=x2-x1;
+        var dy=y2-y1;
+
+        glDeltaScreenX-=dx;
+        glDeltaScreenY-=dy;
+
+        Draw();
+    }
+
+    function OnDblClick(event) {
+        var Node = FindCurrentNode();
+        if(Node) {
+            Node.ClearDataBase();
+        } else {
+            if(!glScale) {
+                return;
+            }
+            var coord = getMouse(event.srcElement, event);
+            coord.x = (coord.x-glDeltaScreenX)/glScale;
+            coord.y = (coord.y-glDeltaScreenY)/glScale;
+
+            // ToLog("Add new node: "+JSON.stringify(coord));
+            var Node = MODEL.NewNode(MODEL.NodeCount);
+            // console.log('ssssss', Node)
+            debugger
+            Node.Norm=1;
+            Node.x_norm=coord.x;
+            Node.y_norm=coord.y;
+
+        }
+
+    }
+
+    function SetMouse(event,mode) {
+        if(event.srcElement && event.srcElement.className.indexOf("map")>=0)
+        {
+            if(mode==="down")
+                LMouseOn=true;
+            else
+            if(mode==="up")
+                LMouseOn=false;
+
+            event.preventDefault();
+            var obj = event.srcElement;
+            glMoveMouse=getMouse(obj,event);
+            if(LMouseOn===true)
+            {
+                if(LMouseOn2!==LMouseOn)
+                {
+                    if(event.which===1)
+                    {
+                        glCurrentNode=FindCurrentNode();
+                        glCurrentViewNode=glCurrentNode;
+                        // DoLogNodeInfo(glCurrentNode);
+                    }
+                    else
+                    if(event.which===2)
+                    {
+                        glCurrentNode=FindCurrentNode();
+                        DoLogNodeInfo(glCurrentNode);
+
+                        glMouseClick=glMoveMouse;
+                    }
+                    else
+                    if(event.which===3)
+                    {
+                        glCurrentNode=FindCurrentNode();
+                        if(glCurrentNode)
+                            global.DEBUG_ID=glCurrentNode.ID;
+
+
+                    }
+                }
+
+
+                if(event.which===2)
+                    MoveScreen();
+                else
+                if(event.which===1)
+                    MoveNode();
+                Draw();
+            }
+
+            LMouseOn2=LMouseOn;
+            if(!LMouseOn)
+            {
+                glMouseClick=undefined;
+                glCurrentNode=undefined;
+                if(typeof global.DEBUG_ID==="number")
+                    global.DEBUG_ID=0;
+
+            }
+        }
+    }
+
+    function FindCurrentNode() {
+        var Arr=MODEL.NetNodeArr;
+        var MaxCount=Math.min(Arr.length,MaxCell2D);
+        for(var i=0;i<MaxCount;i++)
+        {
+            var Node=Arr[i];
+            if(IsMouseOverNode(Node))
+            {
+                Node.dx=Node.x-glMoveMouse.x;
+                Node.dy=Node.y-glMoveMouse.y;
+                return Node;
+            }
+        }
+
+        return undefined;
+    }
+
+    function MoveNode() {
+        var Node=glCurrentNode;
+        if(Node)
+        {
+            var x_norm=(Node.dx+glMoveMouse.x-glDeltaScreenX)/glScale;
+            var y_norm=(Node.dy+glMoveMouse.y-glDeltaScreenY)/glScale;
+
+            if(Node.x_norm!==x_norm || Node.y_norm!==y_norm)
+            {
+                Node.Norm=1;
+                Node.x_norm=x_norm;
+                Node.y_norm=y_norm;
+            }
+        }
+    }
+
+
+    function SetVisibleBlock(name,bSet) {
+        var Item=$(name);
+        if(bSet && typeof bSet==="string")
+            Item.style.display = bSet;
+        else
+        if(bSet)
+        {
+            Item.style.display = 'block';
+        }
+        else
+        {
+            Item.style.display = 'none';
+        }
+        return Item;
+    }
+
+    function LoadValues() {
+        let Arr = glIdArr;
+        let prefix="Model-";
+        for(let i=0 ; i < Arr.length; i++) {
+            let Name = Arr[i];
+            let Item = document.getElementById(Name);
+            if(Item) {
+                // console.log('=== localStorage.getItem ====', prefix+Name)
+                let Value = localStorage.getItem(prefix+Name);
+                if(Value !== undefined && Value !== null) {
+                    if(Item.type === "checkbox") {
+                        Item.checked = parseInt(Value);
+                    } else {
+                        Item.value = Value;
+                    }
+                }
+            }
+        }
+    }
+
+    function InitNodes() {
+        MODEL = CreateModel(MaxNode, 1);
+        // console.log('=== InitNodes => MODEL ===', MODEL)
+    }
+
+    function Draw(){
+        //return;
+        if(WasDrawTimeOut) {
+            return;
+        }
+
+        WasDrawTimeOut=1;
+        setTimeout(DrawScreen,50);
+    }
+
+    function DrawScreen() {
+        WasDrawTimeOut = 0;
+
+        let StrType = "Polar";
+        Draw2D();
+    }
+
+    function Draw2D() {
+        var StrType="Polar";
+
+        // console.log('MODEL.NetNodeArr', MODEL.NetNodeArr)
+        var Arr = MODEL.NetNodeArr;
+        if(!Arr.length)
+            return;
+        var MaxCount = Math.min(Arr.length, MaxCell2D);
+
+
+        var obj = $("idMap");
+        obj.width=obj.offsetWidth;
+        obj.height=obj.offsetHeight;
+
+
+
+        //SetStatus("=>"+obj.width+":"+obj.height);
+        var MaxX=obj.width;
+        var MaxY=obj.height;
+        var PaddingMap=100;
+        var PaddingNode=30;
+
+        var x=PaddingMap;
+        var y=PaddingMap;
+        var W=400;
+        var R=23;//Math.sqrt(W)/2;
+
+        var phi=0;
+        var radius=2*R+PaddingNode;
+
+        var ArrXY=[];
+        for(var i=0;i<MaxCount;i++)
+        {
+            var Node=Arr[i];
+            Node.r=R;
+
+
+            if(StrType==="Random")
+            {
+                if(!Node.Draw.Random2D)
+                {
+                    var Draw=Node.Draw;
+                    Draw.Random2D=1;
+
+                    Draw.Num=i;
+
+                    var coord2d=[0,0];
+                    FillCoord(Node.IDArr[31],coord2d,3);
+
+                    Draw.x=coord2d[0]*2;
+                    Draw.y=coord2d[1]*2;
+
+                }
+
+                var x,y;
+                for(var Count=0;Count<256;Count++)
+                {
+                    var coord2d=[0,0];
+                    FillCoord(Count,coord2d,4);
+                    x=Node.Draw.x+coord2d[0];
+                    y=Node.Draw.y+coord2d[1];
+
+                    var NumAddr=y*10+x;
+                    if(!ArrXY[NumAddr])
+                    {
+                        ArrXY[NumAddr]=1;
+
+                        //y -= coord2d[1]*0.01;
+
+                        break;
+                    }
+                }
+
+
+
+                Node.x0=x*(MaxX-2*PaddingMap)/14+PaddingMap;
+                Node.y0=y*(MaxY-2*PaddingMap)/14+PaddingMap;
+
+
+            }
+            else if(StrType==="Polar")
+            {
+                Node.x0=MaxX/2+radius*Math.sin(Math.PI*phi/180);
+                Node.y0=MaxY/2+radius*Math.cos(Math.PI*phi/180);
+
+
+                var delta=R+PaddingNode;
+                var dphi2=180*Math.atan(delta/radius)/Math.PI;
+                phi+=dphi2*2;
+                if(phi>=360-dphi2)
+                {
+                    phi=0;
+                    radius+=2*R+PaddingNode;
+                }
+            }
+            else if(StrType==="Decart")
+            {
+                Node.x0=x;
+                Node.y0=y;
+
+
+                x=x+2*R+PaddingNode;
+                if(x>=MaxX-R-PaddingMap)
+                {
+                    x=PaddingMap;
+                    y=y+2*R+PaddingNode;
+                }
+            }
+            else
+            {
+                SetStatus("Error type:"+StrType)
+            }
+
+            if(Node.Norm)
+            {
+                Node.x0=Node.x_norm;
+                Node.y0=Node.y_norm;
+            }
+            else
+            {
+                Node.Norm=1;
+                Node.x_norm=Node.x0;
+                Node.y_norm=Node.y0;
+            }
+
+
+            //glScale + Screen move
+            Node.x=Node.x0*glScale+glDeltaScreenX;
+            Node.y=Node.y0*glScale+glDeltaScreenY;
+
+        }
+
+        //canvas draw
+        var ctx     = obj.getContext('2d');
+        ctx.fillStyle = "#ebebeb";
+        ctx.fillRect(0, 0, obj.width, obj.height);
+
+        ctx.setLineDash([5, 3]);
+
+        for(var i=0;i<MaxCount;i++)
+        {
+            var Node=Arr[i];
+            DrawNodeLink(Node,ctx);
+        }
+
+        ctx.setLineDash([]);
+
+
+
+        MODEL.CalcMaxConsensusHash();
+        var CurBlockNum=GetLastBlockNum();
+
+        for(var i=0;i<MaxCount;i++)
+        {
+            var Node=Arr[i];
+            var Block;
+            if(Node.GetBlockDB)
+                Block=Node.GetBlockDB(CurBlockNum);
+            else
+                Block={BlockNum:0};
+
+
+            DrawNode(Node,Block,ctx);
+        }
+
+        DrawNodeDiagram();
+    }
+
+    function DrawNode(Node,Block,ctx) {
+        ctx.lineWidth=2;
+
+        ctx.fillStyle="#181c43";
+        if(Node.New)
+            ctx.fillStyle="#181c57";
+        ctx.strokeStyle = "#000";
+
+        if(IsMouseOverNode(Node))
+        {
+            ctx.fillStyle="#22267f";
+        }
+
+        if(Node===glCurrentViewNode)
+        {
+            ctx.strokeStyle = "#fffa5f";
+            ctx.lineWidth=4;
+        }
+
+
+
+        ctx.beginPath();
+        ctx.arc(Node.x,Node.y,Node.r,0,2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+
+        if(Node.Del)
+            return;
+
+
+        ctx.fillStyle="#fff";
+        if(Node===glCurrentViewNode)
+            ctx.fillStyle= "#fffa5f";
+        if(Node.Err)
+            ctx.fillStyle= "#ff6511";
+
+        ctx.fillText(Node.Name,Node.x-Node.r,Node.y-4);
+
+        var Str1="";
+        var Str2="";
+
+        if(Block)
+        {
+            //Str1=""+(Block.Hash%10000);
+            Str1=""+(Block.BlockNum%10000);
+            Str2=""+Block.SumPow;
+            //Str2=""+Block.Power;
+        }
+        else
+        {
+            Str1=""+Node.Header1+"-"+Node.Header2;
+            Str2=""+Node.Block1+"-"+Node.Block2;
+        }
+        ctx.fillText(Str1,Node.x-Str1.length*3,Node.y+8);
+        ctx.fillText(Str2,Node.x-Str2.length*3,Node.y+16);
+
+    }
+
+    function DrawNodeLink(Node,ctx)
+    {
+        if(Node.Del)
+            return;
+
+        ctx.lineWidth=1;
+        var StrColor = "#919098";
+        if(IsMouseOverNode(Node))
+        {
+            ctx.lineWidth=3;
+            StrColor = "#47c424";
+        }
+
+        var Arr=Node.LevelArr;
+        for(var i=0;i<Arr.length;i++)
+        {
+            var Child=Arr[i];
+            if(Child && Child.IsOpen())
+            {
+                var ChildNode;
+                if(Child.LinkChild)
+                    ChildNode=Child.LinkChild.Node;
+                else
+                    ChildNode=MODEL.GetNodeByAddr(Child.IDStr);
+                if(ChildNode)
+                {
+                    ctx.strokeStyle = StrColor;
+
+                    if(!Child.IsHot())
+                    {
+                        ctx.strokeStyle = "#c42d2d";
+                        continue;
+                    }
+
+                    if(ChildNode.Del) {
+                        ctx.strokeStyle = "#ff73f0";
+                        ToLog("DELETED LINK: "+ChildNode.Name+" \nIDStr1="+ChildNode.IDStr+"\nIDStr2="+Child.IDStr);
+                    }
+
+
+                    if(!FindInHot(ChildNode,Node.IDStr)) {
+                        ctx.strokeStyle = "#e23131";
+                        continue;
+                    }
+
+
+                    ctx.beginPath();
+                    ctx.moveTo(Node.x,Node.y);
+                    ctx.lineTo(ChildNode.x,ChildNode.y);
+                    // ToLog(""+Node.x+"-"+Child.x);
+                    ctx.stroke();
+                }
+            }
+        }
+    }
+
+    //Action
+    function IsMouseOverNode(Node)
+    {
+        if(glMoveMouse)
+        {
+            var dx=Node.x-glMoveMouse.x;
+            var dy=Node.y-glMoveMouse.y;
+            var dl2=dx*dx+dy*dy;
+            if(dl2<Node.r*Node.r)
+            {
+
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    //Diagrams
+    function DrawNodeDiagram() {
+        if(!window.DrawDiagram) {
+            SetVisibleBlock("idMaxHash",0);
+            return;
+        }
+
+        SetVisibleBlock("idMaxHash",$("idShowDiagram").checked);
+        if(!$("idShowDiagram").checked)
+            return;
+
+        var arr=[],arrX=[];
+        var CurBlockNum=JINN_EXTERN.GetCurrentBlockNumByTime();
+        var StartNum=Math.max(20,CurBlockNum-100);
+        for(var Num=StartNum;Num<=CurBlockNum;Num++)
+        {
+            var Value;
+            if(glCurrentViewNode)
+            {
+                Value=glCurrentViewNode.GetMaxHashTickNum(Num);
+            }
+            else
+            {
+                Value=GetMaxHashTickNum(Num);
+            }
+
+
+            if(!Value)
+                continue;
+
+
+            arrX.push(Num);
+            arr.push(Value);
+        }
+
+        DrawDiagramMy("MaxHash","idMaxHash",arr,arrX,"#313690",10);
+    }
+
+    function DrawDiagramMy(name,id,arr,arrX,red,KPrecision,MouseText) {
+        var Item=DiagramMapId[id];
+        if(!Item)
+        {
+            Item={name:name,id:id,red:red,KPrecision:KPrecision};
+            Item.CountNameX=10;
+            Item.mouseX=550;
+            Item.fillStyle="#FFF";
+            Item.line=1;
+            Item.steptime=1;
+
+            DiagramMapId[id]=Item;
+            DiagramMap[name]=Item;
+        }
+        Item.arr=arr;
+        Item.arrX=arrX;
+        Item.MouseText=MouseText;
+
+        DrawDiagram(Item);
+    }
+
+    function MainWorkLoop() {
+        // console.log('=== MainWorkLoop ===')
+
+        let Time1 = Date.now();
+        MainWorkLoopNext();
+        let Delta = Date.now()-Time1;
+        let Period = JINN_CONST.CONSENSUS_PERIOD_TIME / 10;
+
+        JINN_CONST.MULT_TIME_PERIOD = 1 / API.idBlockPerSec.value;
+        Period = Period / API.idBlockPerSec.value ;
+        Period -= Delta;
+
+        if(Period < 5) {
+            Period = 5;
+        }
+
+        setTimeout(MainWorkLoop, Period);
+    }
+
+    function MainWorkLoopNext() {
+        // console.log('=== MainWorkLoopNext ===')
+        //Точка входа: исполнение асинхронной части (тика программы) и отрисовка
+        if(!MODEL) {
+            return;
+        }
+
+        if(!glWorking) {
+            return;
+        }
+
+        global.glUseSplitter = API.idUseSplitter.checked;
+        global.glTestMode1 = API.idTestMode1.checked;
+        global.glTestMode2 = API.idTestMode2.checked;
+        global.glTestMode3 = API.idTestMode3.checked;
+        global.glRndTx = API.idRndTx.checked;
+
+        if(+API.idTxCount.value < 0) {
+            API.idTxCount.value = 0;
+        }
+
+        JINN_CONST.MAX_TRANSACTION_COUNT = parseInt(API.idTxCount.value, 10);
+        global.glMinLatency = parseInt(API.idMinLatency.value, 10);
+        global.glUseTicket = API.idUseTicket.checked;
+        global.glUseBlockCache = API.idUseBlockCache.checked;
+        global.glUsePackMaxHash = API.idUsePackMaxHash.checked;
+
+        MaxNode = parseInt(API.idNodeCount.value, 10);
+        // console.log('SET COUNT NODE COUNT')
+        MODEL.MaxNodeCount = MaxNode;
+        if(MaxNode < 1) {
+            MaxNode = 1;
+        }
+
+        global.CREATE_TX_PER_NODE = Math.floor(0.999 + JINN_CONST.MAX_TRANSACTION_COUNT / MaxNode);
+
+        let CurBlockNum = JINN_EXTERN.GetCurrentBlockNumByTime();
+        //TODO отсчет идет с 0 индекса
+        // console.log('-------- CurBlockNum --------', CurBlockNum)
+        let Str = "Lid:" + JINN_CONST.MAX_LEADER_COUNT + " Block:" + CurBlockNum + " Tik:" + glWorkNum;
+        API.idWorkNum.innerText = Str;
+
+        let NodeCount = MODEL.NodeCount;
+        // console.log('==== CurBlockNum ====', Str)
+        if(CurBlockNum !== PrevCurBlockNum && NodeCount) {
+            Str = MODEL.GetInfoString();
+            Str = Str.replace(/[\n]/g, "<BR>");
+            // console.log('CurBlockNum !== PrevCurBlockNum, === Str ====', Str)
+            SetStatus("<b>Node stats:</b><BR>"+Str);
+            JINN_STAT.Clear();
+            PrevCurBlockNum = CurBlockNum;
+        }
+
+        glWorkNum++;
+        if(NodeCount && typeof glKeccakCount === "number") {
+            glKeccakCountAvg = Math.floor(10 * glKeccakCount / glWorkNum / NodeCount);
+        }
+
+        var AddCount = Math.max(10, Math.floor(MaxNode / 10));
+        // console.log('=== AddCount ===', AddCount)
+        MODEL.AddNode(AddCount, MaxNode);
+
+        var DeltaAdd = 1;
+        var DeltaDelete = DeltaAdd;
+        if(MODEL.NodeCount < 4 * MaxNode / 5) {
+            DeltaAdd=DeltaAdd*2;
+        }
+
+
+        if(API.idDeleteNode.checked) {
+            if(glWorkNum >= 10 && glWorkNum % 50 === 0) {
+                MODEL.AddNodeHole(DeltaAdd, MaxNode);
+                MODEL.DeleteNode(DeltaDelete, MaxNode);
+            }
+        }
+        // console.log('MODEL.NodeCount', MODEL.NodeCount)
+        if(MODEL.NodeCount) {
+            MODEL.DoRun();
+        }
+
+        if(glWorkNum%2===0) {
+            Draw();
+        }
+    }
+
+    function FindInHot(Node,IDStr) {
+
+        var Arr=Node.LevelArr;
+        for(var i=0;i<Arr.length;i++)
+        {
+            var Child=Arr[i];
+            if(Child && Child.IDStr===IDStr)
+                return 1;
+        }
+        return 0;
+    }
+
+    window.onload = function () {
+        LoadValues();
+        InitNodes();
+        MainWorkLoop();
+
+        $("idMap").onwheel  = ZoomMap;
+        $("idMap").ondblclick = OnDblClick;
+        $("idMap").oncontextmenu = function (event) {
+            event.preventDefault();
+        };
+
+        window.addEventListener('mousedown',function (event) {
+            SetMouse(event,"down");
+        }, false);
+
+        window.addEventListener('mouseup',function (event) {
+            SetMouse(event,"up");
+        }, false);
+
+        window.onmousemove = function(event) {
+            SetMouse(event);
+
+            if(window.SetDiagramMouseX) {
+                SetDiagramMouseX(event);
+            }
+        }
+
+        if(window.InitDiagramByArr) {
+            InitDiagramByArr([]);
+        }
+
+        DrawNodeDiagram();
+    }
+    // import App from '/modules/consensus/index.js'
+    // let app = new App()
+    //
+    // app.on("debug", (data) => {//debug event
+    //     console.log("[" + new Date().toLocaleTimeString() + "]", "< " + data.level + " >", data.module, data.text);
+    // });
+    //
+    // app.start('pos');
+    // const validator_1 = new app.VALIDATOR({
+    //     id: 'Alice',
+    //     volume: 23
+    // })
+    // const validator_2 = new app.VALIDATOR({
+    //     id: 'Bob',
+    //     volume: 13
+    // })
+    // const peer_1 = new app.PEER({
+    //     id: 'Cooper'
+    // })
+    // const peer_2 = new app.PEER({
+    //     id: 'Diana'
+    // })
+    //
+    // const RoundMapper = new app.ROUNDMANAGER()
+    // console.log('validator', {
+    //     validator_1: validator_1,
+    //     validator_2: validator_2,
+    //     peer_1: peer_1,
+    //     peer_2: peer_2,
+    //     RoundMapper: RoundMapper
+    // })
+    // console.log('APP', RoundMapper.getValidatorsList())
+</script>
+</html>
