@@ -39,5 +39,4 @@ export default `
  * @param checkLeaks
  * @returns {Promise<unknown>}
  */
-
 `

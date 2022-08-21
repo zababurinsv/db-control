@@ -10,6 +10,10 @@
 
 </body>
 <script type="module">
+    import { test }  from '/modules/tests/frontend/src/index.mjs'
 
+    (async () => {
+        test('/tests/index.tests.js', true).catch(e => {console.log('error devtool', e)})
+    })()
 </script>
 </html>

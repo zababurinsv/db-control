@@ -28,8 +28,8 @@ app.use(proxy(node.api, {
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use('/modules', express.static(__dirname + 'modules'));
-app.use('/tests', express.static(__dirname + 'tests'));
+app.use('/modules', express.static(__dirname + '/modules'));
+app.use('/tests', express.static(__dirname + '/tests'));
 
 app.options(`/*`, await cors(corsOptions))
 app.get(`/*`, async (req, res) => {
