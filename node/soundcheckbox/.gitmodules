@@ -1,0 +1,6 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/soundcheckbox/api.git
+[submodule "config"]
+	path = config
+	url = https://github.com/zababurinsv/config.git

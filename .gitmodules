@@ -55,3 +55,6 @@
 [submodule "node/feed"]
 	path = node/feed
 	url = https://github.com/zababurinsv/server-feed-cjs.git
+[submodule "namespace/config"]
+	path = namespace/config
+	url = https://github.com/zababurinsv/config.git

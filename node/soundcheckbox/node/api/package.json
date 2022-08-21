@@ -1,0 +1,32 @@
+{
+  "name": "soundcheckbox-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soundcheckbox/node.git"
+  },
+  "author": "Zababurin Sergei",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/soundcheckbox/node/issues"
+  },
+  "homepage": "https://github.com/soundcheckbox/node#readme",
+  "devDependencies": {
+    "express-jsdoc-swagger": "^1.8.0",
+    "express-oas-validator": "^3.0.0",
+    "nodemon": "^2.0.19",
+    "swagger-jsdoc": "^6.2.5"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.18.1",
+    "express-http-proxy": "^1.6.3",
+    "swagger-ui-express": "^4.5.0"
+  }
+}

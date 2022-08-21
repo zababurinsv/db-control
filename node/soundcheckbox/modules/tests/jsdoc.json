@@ -1,0 +1,95 @@
+{
+  "plugins": [
+    "plugins/markdown",
+    "plugins/summarize"
+  ],
+  "recurseDepth": 10,
+  "source": {
+    "include": [
+      "frontend/"
+    ],
+    "includePattern": ".+\\.(js(doc|x)?|mjs)$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": true
+  },
+  "templates": {
+    "search": true,
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": false
+    },
+    "scripts": [],
+    "favicon": "",
+    "css": []
+  },
+  "menu":{
+    "Admin Documentation": {
+      "href":"https://zababurinsv.github.io/admin/",
+      "target":"_blank",
+      "class":"menu-item",
+      "id":"repository"
+    }
+  },
+  "opts": {
+    "template": "./jsdoc/docdash/",
+    "encoding": "utf8",
+    "destination": "./docs",
+    "recurse": true
+  },
+  "docdash": {
+    "static": true,         // Display the static members inside the navbar
+    "sort": true,           // Sort the methods in the navbar
+    "sectionOrder": [               // Order the main section in the navbar (default order shown here)
+      "Classes",
+      "Modules",
+      "Externals",
+      "Events",
+      "Namespaces",
+      "Mixins",
+      "Tutorials",
+      "Interfaces"
+    ],
+    "disqus": "",                   // Shortname for your disqus (subdomain during site creation)
+    "openGraph": {                  // Open Graph options (mostly for Facebook and other sites to easily extract meta information)
+      "title": "",                // Title of the website
+      "type": "website",          // Type of the website
+      "image": "",                // Main image/logo
+      "site_name": "",            // Site name
+      "url": ""                   // Main canonical URL for the main page of the site
+    },
+    "meta": {                       // Meta information options (mostly for search engines that have not indexed your site yet)
+      "title": "",                // Also will be used as postfix to actualy page title, prefixed with object/document name
+      "description": "",          // Description of overal contents of your website
+      "keyword": ""               // Keywords for search engines
+    },
+    "search": true,         // Display seach box above navigation which allows to search/filter navigation items
+    "collapse": true,       // Collapse navigation by default except current object's navigation of the current page
+    "wrap": true,           // Wrap long navigation names instead of trimming them
+    "typedefs":true,       // Include typedefs in menu
+    "navLevel": 3,          // depth level to show in navbar, starting at 0 (false or -1 to disable)
+    "private": false,        // set to false to not show @private in navbar
+    "removeQuotes":"trim",// Remove single and double quotes, trim removes only surrounding ones
+    "scripts": [],                  // Array of external (or relative local copied using templates.default.staticFiles.include) js or css files to inject into HTML,
+    "menu": {                       // Adding additional menu items after Home
+      "Admin": {        // Menu item name
+        "href":"https://zababurinsv.github.io/admin/", //the rest of HTML properties to add to manu item
+        "target":"_blank",
+        "class":"menu-item",
+        "id":"website_link"
+      }
+    },
+    "scopeInOutputPath": true, // Add scope from package file (if present) to the output path, true by default.
+    "nameInOutputPath": true, // Add name from package file to the output path, true by default.
+    "versionInOutputPath": true // Add package version to the output path, true by default.
+  }
+}
