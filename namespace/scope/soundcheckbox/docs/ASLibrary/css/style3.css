@@ -204,7 +204,7 @@ form {
 }
 
 .users-table, .riders-table {
-    margin-top: 15px;
+    margin-top: 0;
     border: 1px solid #F1F1F1;
 }
 
