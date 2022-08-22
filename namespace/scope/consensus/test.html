@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Consensus</title>
+
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/extlib/sha3.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/extlib/RBTree.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/extlib/terabuf.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/lib/cache-block.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/lib/time-sync.js"></script>-->
+<!--    <script type="text/javascript" src="./assets/model-lib.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/index.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-log.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-stat.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-base.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-row.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-item.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-chain.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/cache-db.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-cache-body.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/db/jinn-db-cache-block.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-block-db.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-item.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-handshake.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-speed.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-score.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-addr.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-connect-hot.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-session.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-ticket.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-err.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-priority.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-control.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-tx-resend.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-block.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-block-mining.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-consensus-chain.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-consensus.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-consensus-boost.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-net-cache.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-startup-loader.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-timing.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-time-sync.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-filter.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-net.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-sharding.js"></script>-->
+<!--    <script type="text/javascript" src="./assets/model-network.js"></script>-->
+<!--    <script type="text/javascript" src="./assets/model-node.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/jinn/src/jinn-serialize.js"></script>-->
+<!--    <script type="text/javascript" src="./assets/model-environment.js"></script>-->
+<!--    <script type="text/javascript" src="/node/tera/Source/HTML/JS/diagram.js"></script>-->
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+<script type="module">
+    import init from '/modules/blockchain/init.mjs';
+    import environment from './assets/model-environment.mjs';
+    import jinn from '/modules/blockchain/jinn/src/index.mjs';
+    import jinnDbBase from '/modules/blockchain/jinn/src/db/jinn-db-base.mjs';
+    import library from '/modules/blockchain/core/library.mjs'
+    import node from './assets/model-node.mjs'
+    import jinnConnectAddr from '/modules/blockchain/jinn/src/jinn-connect-addr.mjs'
+    (async () => {
+        let global = {}
+        global = await init(global)
+        global = await library(global)
+        global = await jinnDbBase(global)
+        global = await jinn(global)
+        global = await node(global)
+        global = await environment(global)
+        global = await jinnConnectAddr(global)
+        let MODEL;
+        // var glDeltaScreenX = 0;
+        // var glDeltaScreenY = 0;
+        function InitNodes() {
+            MODEL = global.CreateModel(5,1);
+        }
+
+        InitNodes()
+        MODEL.AddNode(5);
+
+        for (let node of MODEL.NetNodeArr) {
+            console.log('!!!!!!!!!!!!!!!!!!!! === global ===', node)
+        }
+
+    })()
+</script>
+</body>
+</html>

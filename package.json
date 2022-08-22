@@ -39,7 +39,9 @@
   "scripts": {
     "rollup:service:ReactNode:ControlCenter:build": "rollup -c rollup-esm.config.js --watch",
     "nodemon:namespace:start": "nodemon ./namespace/index.mjs",
-    "nodemon:node:soundcheckbox:start": "nodemon ./node/soundcheckbox/index.mjs",
+    "nodemon:node:soundcheckbox:start": "yarn --cwd node/soundcheckbox dev",
+    "nodemon:node:soundcheckbox:api:start": "yarn --cwd node/soundcheckbox/node/api dev",
+    "build": "yarn --cwd frontend build",
     "gulp:watch": "gulp watch:namespace:scss",
     "build:readme": "jsdoc2md --configure jsdoc.json --source frontend/index.mjs > md_api.md && cat ./md_info.md ./md_api.md > ./README.md",
     "level-transcoder": "gulp level-transcoder",

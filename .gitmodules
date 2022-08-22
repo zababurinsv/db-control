@@ -58,3 +58,27 @@
 [submodule "namespace/config"]
 	path = namespace/config
 	url = https://github.com/zababurinsv/config.git
+[submodule "namespace/scope/soundcheckbox/events"]
+	path = namespace/scope/soundcheckbox/events
+	url = https://github.com/soundcheckbox/events.git
+[submodule "namespace/scope/soundcheckbox/profile"]
+	path = namespace/scope/soundcheckbox/profile
+	url = https://github.com/soundcheckbox/profile.git
+[submodule "namespace/scope/soundcheckbox/pub"]
+	path = namespace/scope/soundcheckbox/pub
+	url = https://github.com/soundcheckbox/pub.git
+[submodule "namespace/scope/soundcheckbox/riders"]
+	path = namespace/scope/soundcheckbox/riders
+	url = https://github.com/soundcheckbox/riders.git
+[submodule "namespace/scope/soundcheckbox/editor"]
+	path = namespace/scope/soundcheckbox/editor
+	url = https://github.com/soundcheckbox/editor.git
+[submodule "namespace/scope/soundcheckbox/presets"]
+	path = namespace/scope/soundcheckbox/presets
+	url = https://github.com/soundcheckbox/presets.git
+[submodule "namespace/scope/soundcheckbox/save"]
+	path = namespace/scope/soundcheckbox/save
+	url = https://github.com/soundcheckbox/save.git
+[submodule "namespace/scope/soundcheckbox/lang"]
+	path = namespace/scope/soundcheckbox/lang
+	url = https://github.com/soundcheckbox/lang.git

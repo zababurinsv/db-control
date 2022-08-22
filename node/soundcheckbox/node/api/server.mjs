@@ -9,6 +9,9 @@ import posts from "./routes/api/posts.mjs";
 
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 connectDB();
 
 app.use(await cors({ credentials: true }));

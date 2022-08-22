@@ -20,22 +20,20 @@ router.post(
     'Please enter a password with 6 or more characters'
   ).isLength({ min: 6 }),
   async (req, res) => {
-    console.log('----------------1--------------', req.body)
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    console.log('------------------2------------', req.body)
+
     const { name, email, password } = req.body;
 
     try {
       let user = await User.findOne({ email });
-
+      console.log('AUTHTORIZATION', user, req.body)
       if (user) {
         return res
-          .status(400)
-          .json({ errors: [{ msg: 'User already exists' }] });
+          .status(200).json({ errors: [{ msg: 'User already exists' }] });
       }
 
       const avatar = normalize(
@@ -71,12 +69,16 @@ router.post(
         config.get('jwtSecret'),
         { expiresIn: '5 days' },
         (err, token) => {
-          if (err) throw err;
+          if (err) {
+            console.log('!!!!!!!!!!! ERROR !!!!!!!!!!!!')
+            throw err;
+          }
+          console.log('!!!!!!!!!!!!!!!!!!!!!!!')
           res.json({ token });
         }
       );
     } catch (err) {
-      console.error(err.message);
+      console.error('ERROR', err.message);
       res.status(500).send('Server error');
     }
   }

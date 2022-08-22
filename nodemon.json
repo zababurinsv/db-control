@@ -19,7 +19,8 @@
     "./namespace/server.mjs",
     "./namespace/index.mjs",
     "./node/soundcheckbox/swagger/",
-    "./node/soundcheckbox/server.mjs"
+    "./node/soundcheckbox/server.mjs",
+    "./node/soundcheckbox/node/api"
   ],
   "ext": "mjs json",
   "delay": 2100

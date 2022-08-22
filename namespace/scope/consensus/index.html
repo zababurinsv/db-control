@@ -57,7 +57,6 @@
 <script type="text/javascript" src="./assets/model-environment.js"></script>
 <script type="text/javascript" src="/node/tera/Source/HTML/JS/diagram.js"></script>
 
-
 <script>
     var glIdArr=["idDeleteNode","idTxCount","idUseTicket","idNodeCount","idUseSplitter","idUseBlockCache","idUsePackMaxHash","idBlockPerSec","idMinLatency","idShowDiagram","idTestMode1","idTestMode2","idTestMode3","idRndTx"];
     global.DEBUG_ID=0
@@ -76,6 +75,7 @@
     var glDeltaScreenY=0;
     function InitNodes()
     {
+        debugger
         MODEL=CreateModel(MaxNode,1);
     }
     function Start(Mode)

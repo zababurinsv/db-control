@@ -1,0 +1,217 @@
+
+
+.grid
+{
+    border-collapse: collapse;
+    border-spacing: 1px;
+    width: 100%;
+ }
+.grid th {
+    color: var(--colorHGrid);
+    background-color: var(--colorBHGrid);/*#222A3A;*/
+
+    border: 1px solid #536278;
+
+    height: 30px;
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 400;
+    white-space: nowrap;
+
+}
+
+.grid td
+{
+    color: var(--colorGrid);
+    background-color: var(--colorBGrid);
+
+    border: 1px solid #536278;
+
+    padding: 5px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+
+    padding-left: 2px;
+    padding-right: 2px;
+    word-break: break-all;
+
+}
+
+
+.grid .num button {
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+
+
+
+
+/*----------------*/
+
+.grid td.hash
+{
+    width: 165px;
+    min-width: 165px;
+    padding: 2px;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.02em;
+    word-break: break-all;
+    font-family: "courier new", "times new roman", monospace;
+}
+.journal td.hash
+{
+}
+.check_grid td.hash
+{
+}
+
+.grid td.pubkey {
+    width: 215px;
+    min-width: 215px;
+    max-width: 215px!important;
+
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.02em;
+    word-break: break-all;
+    font-family: "courier new", "times new roman", monospace;
+}
+
+.grid td.code
+{
+    width: 165px;
+    min-width: 140px;
+    font-family: "courier new", "times new roman", monospace;
+    font-size: 90%;
+    text-align: left;
+    word-break: break-all;
+}
+
+
+
+.grid td.id
+{
+    text-align: right;
+    width: 70px;
+    min-width: 60px;
+    max-width: 100px;
+}
+
+.grid td.block
+{
+    text-align: right;
+    width: 80px;
+    min-width: 80px;
+    max-width: 120px;
+}
+
+.grid td.sum
+{
+    text-align: right;
+    width: 170px;
+    min-width: 170px;
+    max-width: 170px;
+}
+
+
+.grid td.num
+{
+    text-align: right;
+    width: 50px;
+}
+.grid td.snum
+{
+    text-align: center;
+    width: 25px;
+}
+
+.grid td.cur
+{
+    text-align: left;
+    width: 70px;
+    min-width:70px;
+    font-size:smaller;
+}
+
+
+.grid td.txt
+{
+    text-align: left;
+    width: 100px;
+}
+
+.grid td.channel
+{
+    text-align: center;
+    width: 100px;
+}
+
+
+.grid td.name
+{
+    text-align: left;
+    width: 180px;
+    max-width: 250px;
+    min-width: 180px;
+}
+
+
+.grid td.date
+{
+    text-align: center;
+    width: 65px;
+    max-width: 65px;
+    min-width: 65px;
+    font-size: small;
+}
+
+.grid td.verify
+{
+    text-align: right;
+    width: 20px;
+}
+
+.grid td.desc {
+}
+
+.desc
+{
+    width: 250px;
+    min-width: 150px;
+    max-height: 80px;
+    overflow-y:scroll;
+    text-align: left;
+}
+
+
+.olink
+{
+    cursor: pointer;
+    text-decoration: none;
+}
+.olink:hover
+{
+    font-weight: bold;
+    color: #cb763a;
+}
+
+.openblock
+{
+    cursor: pointer;
+    background-color: transparent;
+    text-decoration: underline;
+    padding:0 2px 0 0;
+}
+.openblock:hover
+{
+    font-weight: bold;
+    color: #cb763a;
+}
+
+

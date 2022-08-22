@@ -12,16 +12,19 @@ const node = config.get('node');
 const pathNode = config.get('path');
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 app.use(await cors({ credentials: true }));
 app.use((req, res, next) => {
     console.log(`path: ${req.path}`);
     next();
 });
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(proxy(node.api, {
+    limit: '5mb',
     filter: function(req) {
+        console.log('======= >', req.body)
         return pathNode.api.some(path =>  path === req.path)
     }
 }));
@@ -30,6 +33,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/modules', express.static(__dirname + '/modules'));
 app.use('/tests', express.static(__dirname + '/tests'));
+
 
 app.options(`/*`, await cors(corsOptions))
 app.get(`/*`, async (req, res) => {
