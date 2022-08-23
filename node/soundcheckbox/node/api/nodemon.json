@@ -11,7 +11,12 @@
     "typings"
   ],
   "watch": [
-    "./server.mjs"
+    "./server.mjs",
+    "./routes",
+    "./models",
+    "./middleware",
+    "./index.mjs",
+    "./config/default.json"
   ],
   "ext": "mjs json",
   "delay": 2100

@@ -18,4 +18,3 @@ GLSL_OUT vec4 GLSL_OUT_FRAG_COLOR;
 void main(void) {
     GLSL_OUT_FRAG_COLOR = vec4(1.0);
 }
-

@@ -82,3 +82,6 @@
 [submodule "namespace/scope/soundcheckbox/lang"]
 	path = namespace/scope/soundcheckbox/lang
 	url = https://github.com/soundcheckbox/lang.git
+[submodule "node/blender"]
+	path = node/blender
+	url = https://github.com/soundcheckbox/blender.git
