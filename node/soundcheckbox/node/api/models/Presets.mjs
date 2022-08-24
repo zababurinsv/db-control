@@ -22,6 +22,14 @@ const presets = new Schema({
         type: Schema.Types.Number,
         required: false
     },
+    categories: {
+        type: Schema.Types.String,
+        required: false
+    },
+    tags: {
+        type: Schema.Types.String,
+        required: false
+    },
     order: {
         type: Schema.Types.Number,
     }

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import {check, validationResult} from "express-validator";
 import auth from "../../middleware/auth.mjs";
 import User from "../../models/User.mjs";
-import Schema from "../../models/Presets.mjs";
+import Schema from "../../models/Presets__Categories.mjs";
 // import auth from "../../middleware/auth.mjs";
 import checkObjectId from "../../middleware/checkObjectId.mjs";
 const router = express.Router();
@@ -11,32 +11,28 @@ const router = express.Router();
 // @desc     Create a post
 // @access   Private
 router.post('/', async (req, res) => {
-        // const errors = validationResult(req);
-        // if (!errors.isEmpty()) {
-        //     return res.status(400).json({ errors: errors.array() });
-        // }
-        try {
-            // console.log('=== POST ====',Date.now(),  Riders)
+    // const errors = validationResult(req);
+    // if (!errors.isEmpty()) {
+    //     return res.status(400).json({ errors: errors.array() });
+    // }
+    try {
+        // console.log('=== POST ====',Date.now(),  Riders)
         //     const user = await User.findById(req.user.id).select('-password');
         //
-            const newSchema = new Schema({
-                id: new mongoose.Types.ObjectId,
-                name: 'Alice',
-                JSON: 'model_src',
-                image: 'images',
-                categories: 'name',
-                user_id: 23423,
-                tags: 'asdasd, sdfsdf, asdasd',
-                order: 4566,
-            });
+        const newSchema = new Schema({
+            id: new mongoose.Types.ObjectId,
+            name: 'name',
+            preset_id: 1,
+            category_id: 2
+        });
 
-            const result = await newSchema.save();
+        const result = await newSchema.save();
 
-            res.status(200).json(result);
-        } catch (err) {
-            console.log('error',err.message);
-            res.status(500).send({status:'false', error: err});
-        }
+        res.status(200).json(result);
+    } catch (err) {
+        console.log('error',err.message);
+        res.status(500).send({status:'false', error: err});
+    }
 });
 
 //@route    GET api/posts
@@ -45,6 +41,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const result = await Schema.find().sort({ date: -1 });
+        console.log('result', result)
         res.json(result);
     } catch (err) {
         console.error(err.message);
@@ -105,19 +102,19 @@ router.get('/', async (req, res) => {
 //         const post = await Post.findById(req.params.id);
 //
 //         Check if the post has already been liked
-        // if (post.likes.some((like) => like.user.toString() === req.user.id)) {
-        //     return res.status(400).json({ msg: 'Post already liked' });
-        // }
-        //
-        // post.likes.unshift({ user: req.user.id });
-        //
-        // await post.save();
-        //
-        // return res.json(post.likes);
-    // } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send('Server Error');
-    // }
+// if (post.likes.some((like) => like.user.toString() === req.user.id)) {
+//     return res.status(400).json({ msg: 'Post already liked' });
+// }
+//
+// post.likes.unshift({ user: req.user.id });
+//
+// await post.save();
+//
+// return res.json(post.likes);
+// } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+// }
 // });
 
 // @route    PUT api/posts/unlike/:id
@@ -128,22 +125,22 @@ router.get('/', async (req, res) => {
 //         const post = await Post.findById(req.params.id);
 //
 //         Check if the post has not yet been liked
-        // if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
-        //     return res.status(400).json({ msg: 'Post has not yet been liked' });
-        // }
-        //
-        // remove the like
-        // post.likes = post.likes.filter(
-        //     ({ user }) => user.toString() !== req.user.id
-        // );
-        //
-        // await post.save();
-        //
-        // return res.json(post.likes);
-    // } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send('Server Error');
-    // }
+// if (!post.likes.some((like) => like.user.toString() === req.user.id)) {
+//     return res.status(400).json({ msg: 'Post has not yet been liked' });
+// }
+//
+// remove the like
+// post.likes = post.likes.filter(
+//     ({ user }) => user.toString() !== req.user.id
+// );
+//
+// await post.save();
+//
+// return res.json(post.likes);
+// } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+// }
 // });
 
 // @route    POST api/posts/comment/:id
@@ -190,30 +187,30 @@ router.get('/', async (req, res) => {
 //     try {
 //         const post = await Post.findById(req.params.id);
 
-        // Pull out comment
-        // const comment = post.comments.find(
-        //     (comment) => comment.id === req.params.comment_id
-        // );
-        // Make sure comment exists
-        // if (!comment) {
-        //     return res.status(404).json({ msg: 'Comment does not exist' });
-        // }
-        // Check user
-        // if (comment.user.toString() !== req.user.id) {
-        //     return res.status(401).json({ msg: 'User not authorized' });
-        // }
+// Pull out comment
+// const comment = post.comments.find(
+//     (comment) => comment.id === req.params.comment_id
+// );
+// Make sure comment exists
+// if (!comment) {
+//     return res.status(404).json({ msg: 'Comment does not exist' });
+// }
+// Check user
+// if (comment.user.toString() !== req.user.id) {
+//     return res.status(401).json({ msg: 'User not authorized' });
+// }
 
-        // post.comments = post.comments.filter(
-        //     ({ id }) => id !== req.params.comment_id
-        // );
+// post.comments = post.comments.filter(
+//     ({ id }) => id !== req.params.comment_id
+// );
 
-        // await post.save();
+// await post.save();
 
-        // return res.json(post.comments);
-    // } catch (err) {
-    //     console.error(err.message);
-    //     return res.status(500).send('Server Error');
-    // }
+// return res.json(post.comments);
+// } catch (err) {
+//     console.error(err.message);
+//     return res.status(500).send('Server Error');
+// }
 // });
 
 export default router;

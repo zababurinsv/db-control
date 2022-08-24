@@ -10,6 +10,9 @@ import riders from "./routes/api/riders.mjs";
 import equipment from './routes/api/equipment.mjs';
 import models from './routes/api/models.mjs';
 import presets from './routes/api/presets.mjs';
+import presets__categories from './routes/api/presets__categories.mjs';
+import presets__tags from './routes/api/presets__tags.mjs';
+
 
 const app = express();
 
@@ -32,6 +35,10 @@ app.use('/api/riders', riders);
 app.use('/api/equipment', equipment);
 app.use('/api/models', models);
 app.use('/api/presets', presets);
+app.use('/api/presets/categories', presets__categories);
+app.use('/api/presets/tags', presets__tags);
+
+
 
 app.options(`/*`, await cors(corsOptions))
 app.get(`/*`, async (req, res) => {
