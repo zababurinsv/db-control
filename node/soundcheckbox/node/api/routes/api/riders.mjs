@@ -2,10 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import {check, validationResult} from "express-validator";
 import auth from "../../middleware/auth.mjs";
-import User from "../../models/User.mjs";
-import Riders from "../../models/Riders.mjs";
 // import auth from "../../middleware/auth.mjs";
 import checkObjectId from "../../middleware/checkObjectId.mjs";
+import {User, Riders} from "../../models/mongo/index.mjs";
 const router = express.Router();
 // @route    POST api/posts
 // @desc     Create a post
@@ -16,32 +15,32 @@ router.post('/', async (req, res) => {
         //     return res.status(400).json({ errors: errors.array() });
         // }
         try {
-            console.log('=== POST ====',Date.now(),  Riders)
+            console.log('=== POST ====', Riders)
         //     const user = await User.findById(req.user.id).select('-password');
         //
-            const newRiders = new Riders({
-                id: new mongoose.Types.ObjectId,
-                name: 'riders',
-                JSON: 'JSON',
-                create_date: Date.now(),
-                change_date: Date.now(),
-                published_date: Date.now(),
-                status: 'ok',
-                user_id: 'accepted',
-                title: 'title',
-                version_number: 1,
-                origin_version_id: 1,
-                contact: '+79531437072',
-                phone: '+79531437072',
-                email: 'zababurins@vk.com',
-                band_name: 'band',
-                band_logo: 'dfsef3434f34f3',
-            });
-            console.log('@@@@@@@@@@@', newRiders)
-            const riders = await newRiders.save();
-            console.log('RIDERS', riders)
-            res.status(200).json(riders);
-            // res.status(200).send({status: 'ok'});
+        //     const newRiders = new Riders({
+        //         id: new mongoose.Types.ObjectId,
+        //         name: 'riders',
+        //         JSON: 'JSON',
+        //         create_date: Date.now(),
+        //         change_date: Date.now(),
+        //         published_date: Date.now(),
+        //         status: 'ok',
+        //         user_id: 'accepted',
+        //         title: 'title',
+        //         version_number: 1,
+        //         origin_version_id: 1,
+        //         contact: '+79531437072',
+        //         phone: '+79531437072',
+        //         email: 'zababurins@vk.com',
+        //         band_name: 'band',
+        //         band_logo: 'dfsef3434f34f3',
+        //     });
+        //     console.log('@@@@@@@@@@@', newRiders)
+        //     const riders = await newRiders.save();
+        //     console.log('RIDERS', riders)
+        //     res.status(200).json(riders);
+            res.status(200).send({status: 'ok'});
         } catch (err) {
             console.log('error',err.message);
             res.status(500).send({status:'false', error: err});

@@ -9,7 +9,7 @@ import express from 'express';
 import notFound from '../config/page_not_found/index.mjs';
 import corsOptions from '../config/cors/index.mjs';
 import YAML from 'yaml';
-const file = fs.readFileSync(path.join(__dirname, `config.io.yml`), 'utf8');
+const file = fs.readFileSync(path.join(__dirname, `config.namespace.yml`), 'utf8');
 const config = YAML.parse(file);
 
 const app = express.Router();

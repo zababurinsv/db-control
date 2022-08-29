@@ -4,7 +4,7 @@ import buffer from '/service/ReactNode/controlCenter/database/modules/safe-buffe
 const assert = window['@newkind/tests'].assert;
 const Buffer = buffer.Buffer;
 let api = {}
-describe('File System test api', async function() {
+describe('File System IDBFS api', async function() {
   this.timeout(100000);
 
   before(async () => {

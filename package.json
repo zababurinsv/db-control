@@ -37,6 +37,8 @@
     }
   },
   "scripts": {
+    "parcel:io:build":"parcel  build ./namespace/scope/io/index.html --dist-dir namespace/scope/io/docs",
+    "parcel:fileSystem:build":"parcel build ./namespace/scope/fileSystem/index.html",
     "rollup:service:ReactNode:ControlCenter:build": "rollup -c rollup-esm.config.js --watch",
     "nodemon:namespace:start": "nodemon ./namespace/index.mjs",
     "nodemon:node:soundcheckbox:start": "yarn --cwd node/soundcheckbox dev",
@@ -290,7 +292,8 @@
     "readable-stream/readable": "gulp readable",
     "readable-stream/passthrough": "gulp passthrough",
     "readable-stream/writable": "gulp readable-stream/writable",
-    "readable-stream/duplex": "gulp readable-stream/duplex"
+    "readable-stream/duplex": "gulp readable-stream/duplex",
+    "quill": "gulp quill"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",
@@ -368,7 +371,7 @@
     "gulp-sass": "^5.1.0",
     "merge-stream": "^2.0.0",
     "nodemon": "^2.0.16",
-    "parcel": "^2.6.0",
+    "parcel": "^2.7.0",
     "postcss": "^8.4.14",
     "react": "^18.0.0-rc.3",
     "react-app": "^1.1.2",

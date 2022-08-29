@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import {check, validationResult} from "express-validator";
 import normalize from "normalize-url";
 import config from "config";
-import User from "../../models/User.mjs";
+import {User} from "../../models/mongo/index.mjs";
 
 const router = express.Router();
 // @route    POST api/users

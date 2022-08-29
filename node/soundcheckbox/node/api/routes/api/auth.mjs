@@ -4,7 +4,7 @@ import auth from "../../middleware/auth.mjs";
 import jwt from "jsonwebtoken";
 import config from "config";
 import {check, validationResult} from "express-validator";
-import User from "../../models/User.mjs";
+import { User } from "../../models/mongo/index.mjs";
 const router = express.Router();
 // @route    GET api/auth
 // @desc     Get user by token

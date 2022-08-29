@@ -2,9 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import {check, validationResult} from "express-validator";
 import auth from "../../middleware/auth.mjs";
-import User from "../../models/User.mjs";
-import Schema from "../../models/Models.mjs";
-// import auth from "../../middleware/auth.mjs";
+import {User, Models_3d} from "../../models/mongo/index.mjs";
 import checkObjectId from "../../middleware/checkObjectId.mjs";
 const router = express.Router();
 // @route    POST api/posts
@@ -19,19 +17,19 @@ router.post('/', async (req, res) => {
             // console.log('=== POST ====',Date.now(),  Riders)
         //     const user = await User.findById(req.user.id).select('-password');
         //
-            const newSchema = new Schema({
-                id: new mongoose.Types.ObjectId,
-                name: 'Alice',
-                model_src: 'model_src',
-                image: 'images',
-                user_id: 23423,
-                create_date: Date.now(),
-                change_date: Date.now()
-            });
-
-            const result = await newSchema.save();
-
-            res.status(200).json(result);
+        //     const newSchema = new Schema({
+        //         id: new mongoose.Types.ObjectId,
+        //         name: 'Alice',
+        //         model_src: 'model_src',
+        //         image: 'images',
+        //         user_id: 23423,
+        //         create_date: Date.now(),
+        //         change_date: Date.now()
+        //     });
+        //
+        //     const result = await newSchema.save();
+        //
+        //     res.status(200).json(result);
         } catch (err) {
             console.log('error',err.message);
             res.status(500).send({status:'false', error: err});
@@ -43,7 +41,7 @@ router.post('/', async (req, res) => {
 //@access   Private
 router.get('/', async (req, res) => {
     try {
-        const result = await Schema.find().sort({ date: -1 });
+        const result = await Models_3d.find().sort({ date: -1 });
         res.json(result);
     } catch (err) {
         console.error(err.message);

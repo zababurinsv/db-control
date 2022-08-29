@@ -85,3 +85,9 @@
 [submodule "node/blender"]
 	path = node/blender
 	url = https://github.com/soundcheckbox/blender.git
+[submodule "node/migration"]
+	path = node/migration
+	url = https://github.com/soundcheckbox/migration.git
+[submodule "namespace/scope/presets"]
+	path = namespace/scope/presets
+	url = https://github.com/soundcheckbox/presets.git

@@ -2,8 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import {check, validationResult} from "express-validator";
 import auth from "../../middleware/auth.mjs";
-import User from "../../models/User.mjs";
-import Equipment from "../../models/Equipment.mjs";
+import {User, Equipment} from "../../models/mongo/index.mjs";
 // import auth from "../../middleware/auth.mjs";
 import checkObjectId from "../../middleware/checkObjectId.mjs";
 const router = express.Router();
@@ -18,24 +17,24 @@ router.post('/', async (req, res) => {
     try {
         //     const user = await User.findById(req.user.id).select('-password');
         //
-        const newEquipment = new Equipment({
-            id: new mongoose.Types.ObjectId,
-            name: 'Name',
-            description: 'description',
-            image: 'image',
-            length: 3,
-            width: 34,
-            height: 45,
-            weight: 44,
-            volume: 45,
-            power: 34,
-            user_id: 34,
-            equip_type: 34,
-            equip_category: 45,
-            manufacturer: 34
-        });
-        const equipment = await newEquipment.save();
-        res.status(200).json(equipment);
+        // const newEquipment = new Equipment({
+        //     id: new mongoose.Types.ObjectId,
+        //     name: 'Name',
+        //     description: 'description',
+        //     image: 'image',
+        //     length: 3,
+        //     width: 34,
+        //     height: 45,
+        //     weight: 44,
+        //     volume: 45,
+        //     power: 34,
+        //     user_id: 34,
+        //     equip_type: 34,
+        //     equip_category: 45,
+        //     manufacturer: 34
+        // });
+        // const equipment = await newEquipment.save();
+        res.status(200).json({});
         // res.status(200).send({status: 'ok'});
     } catch (err) {
         console.log('error',err.message);
@@ -46,15 +45,15 @@ router.post('/', async (req, res) => {
 // @route    GET api/posts
 // @desc     Get all posts
 // @access   Private
-// router.get('/', auth, async (req, res) => {
-//     try {
-//         const posts = await Post.find().sort({ date: -1 });
-//         res.json(posts);
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// });
+router.get('/', auth, async (req, res) => {
+    try {
+        const equipment = await Equipment.find().sort({ date: -1 });
+        res.json(equipment);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
 
 // @route    GET api/posts/:id
 // @desc     Get post by ID

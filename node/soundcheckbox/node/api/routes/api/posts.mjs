@@ -1,8 +1,7 @@
 import express from "express";
 import {check, validationResult} from "express-validator";
 import auth from "../../middleware/auth.mjs";
-import Post from "../../models/Post.mjs";
-import User from "../../models/User.mjs";
+import {User, Post} from "../../models/mongo/index.mjs";
 import checkObjectId from "../../middleware/checkObjectId.mjs";
 const router = express.Router();
 // @route    POST api/posts

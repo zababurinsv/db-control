@@ -6,8 +6,8 @@ import swaggerDocument from "./swagger/soundcheckbox.json" assert {type: "json"}
 import proxy from "express-http-proxy";
 import config from 'config';
 import cors from "cors";
-import corsOptions from "../../namespace/config/cors/index.mjs";
-import notFound from "../../namespace/config/page_not_found/index.mjs";
+import corsOptions from "./config/cors/index.mjs";
+
 const node = config.get('node');
 const pathNode = config.get('path');
 const app = express();
@@ -22,9 +22,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(proxy(node.api, {
-    limit: '5mb',
+    limit: '1mb',
     filter: function(req) {
         return pathNode.api.some(path => path === req.path)
+    }
+}));
+
+app.use(proxy(node.dev, {
+    limit: '1mb',
+    filter: function(req) {
+        return pathNode.dev.some(path => path === req.path)
     }
 }));
 

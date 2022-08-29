@@ -6,10 +6,7 @@ import {check, validationResult} from "express-validator";
 // bring in normalize to give us a proper url, regardless of what user entered
 import normalize from "normalize-url";
 import checkObjectId from "../../middleware/checkObjectId.mjs";
-import Profile from "../../models/Profile.mjs";
-import User from "../../models/User.mjs";
-import Post from "../../models/Post.mjs";
-
+import {Post, User, Profile} from "../../models/mongo/index.mjs";
 const router = express.Router();
 // @route    GET api/profile/me
 // @desc     Get current users profile

@@ -16,7 +16,7 @@ import path from "path";
 import YAML from 'yaml';
 import mergeStream from "merge-stream";
 const __dirname = path.join(path.dirname(process.argv[1]), '../../');
-const file = fs.readFileSync(path.join(__dirname, `config.io.yml`), 'utf8');
+const file = fs.readFileSync(path.join(__dirname, `config.namespace.yml`), 'utf8');
 const config = YAML.parse(file);
 const sass = gulpSass(dartSass);
 
@@ -3699,6 +3699,21 @@ gulp.task('sync--merkletools-module', async () => {
     });
 });
 
+gulp.task('sync--quill-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './node/blender/web/projects/soundcheckbox/modules/editor/quill.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './node/blender/web/projects/soundcheckbox/modules/editor/quill.mjs',
+    });
+});
+
 
 
 gulp.task('libp2p-crypto', gulp.series('sync--libp2p-crypto--build-module'))
@@ -3949,3 +3964,5 @@ gulp.task('passthrough', gulp.series('sync--passthrough-module'))
 gulp.task('transform', gulp.series('sync--transform-module'))
 gulp.task('readable-stream/writable', gulp.series('sync--readable-stream/writable-module'))
 gulp.task('readable-stream/duplex', gulp.series('sync--readable-stream/duplex-module'))
+
+gulp.task('quill', gulp.series('sync--quill-module'))

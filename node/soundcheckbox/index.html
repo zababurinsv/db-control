@@ -7,12 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=1.0, user-scalable=no">
 </head>
 <body>
+<div class="presets">
 
+</div>
 </body>
 <script type="module">
     import { test }  from '/modules/tests/frontend/src/index.mjs'
-
+    import presets from '/modules/presets/index.mjs'
     (async () => {
+        const container = document.querySelector('.presets')
+        const keys = Object.keys(presets)
+        for(let key of keys) {
+            const categoryContent = document.createElement('div')
+            const List = document.createElement('ul')
+            categoryContent.textContent = key
+            for(let data of presets[key]) {
+                const item = document.createElement('li')
+                const checkbox = document.createElement('input')
+                item.innerHTML = `${data.menu_presets}`
+                List.appendChild(item)
+            }
+            categoryContent.appendChild(List)
+            container.appendChild(categoryContent)
+        }
         test('/tests/index.tests.js', true).catch(e => {console.log('error devtool', e)})
     })()
 </script>
