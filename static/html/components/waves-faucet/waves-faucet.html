@@ -1,0 +1,39 @@
+<template>
+    <section id="waves-faucet">
+        <div id="wrapper">
+            <figure id="left">
+                <div class="preview"><img src="/static/html/components/waves-faucet/images/faucet.png" alt="promise"></div>
+                <label for="faucet">
+<!--                    <figcaption id="preview">-->
+<!--                        <p>Testnet Address</p>-->
+<!--                        <p>Fill out your Testnet address to receive 10 WAVES</p>-->
+<!--                    </figcaption>-->
+                    <div class="form-container">
+                        <div class="field-container">
+                            <div class="item-name">
+                                <label for="name">Name</label>
+                                <input id="name" maxlength="20" type="text">
+                            </div>
+                            <div class="cardnumber">
+                                <label for="cardnumber">Card Number</label><span style="display: none" id="generatecard"></span>
+                                <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+                            </div>
+                            <div class="row">
+                                <div class="field-container expirationdate">
+                                    <label for="expirationdate">Expiration (mm/yy)</label>
+                                    <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+                                </div>
+                                <div class="field-container securitycode">
+                                    <label for="securitycode">Security Code</label>
+                                    <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                    <input type="text" id="faucet" placeholder="address">-->
+<!--                    <input type="button" id="send" value="send">-->
+                </label>
+            </figure>
+        </div>
+    </section>
+</template>

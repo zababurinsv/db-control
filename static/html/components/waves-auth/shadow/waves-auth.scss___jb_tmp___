@@ -1,0 +1,111 @@
+@import "../../../../../../css/util/media_new";
+@import "../../../../../../css/fonts_new";
+div.register{
+  width: 100%;
+  padding: 1vw;
+  box-sizing: border-box;
+  color: #232f62;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  position: relative;
+  font-family: Roboto, serif;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+  @include fonts(8);
+  border: 0.2vw solid #cccccc;
+  border-radius: 0.4vw;
+  transition: 0.24s;
+  box-shadow: 0.21vw 0.21vw 0.31vw #6e6e6e;
+  background-color: transparent;
+  flex-direction: column;
+  justify-content: space-evenly;
+  &:hover {
+    color: #151515;
+    @include fonts(8);
+    border: 0.2vw solid #151515;
+    //padding: 0.4vw;
+    border-radius: 0.4vw;
+    transition: 0.24s;
+  }
+  div.input{
+    font-family: Roboto, serif;
+    @include fonts(6);
+    box-sizing: border-box;
+    color: #232f62;
+    margin: 1vw;
+    margin-top: 0;
+  }
+  div.account{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
+div#winner{
+  width: 100%;
+  padding: 1vw;
+  box-sizing: border-box;
+  color: #232f62;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  position: relative;
+  font-family: Roboto, serif;
+  margin-bottom: 1vw;
+  margin-top: 1vw;
+  @include fonts(8);
+  border: 0.2vw solid #cccccc;
+  border-radius: 0.4vw;
+  transition: 0.24s;
+  box-shadow: 0.21vw 0.21vw 0.31vw #6e6e6e;
+  background-color: transparent;
+  flex-direction: column;
+  justify-content: space-evenly;
+  &:hover {
+    color: #151515;
+    @include fonts(8);
+    border: 0.2vw solid #151515;
+    //padding: 0.4vw;
+    border-radius: 0.4vw;
+    transition: 0.24s;
+  }
+  div.winner{
+
+    div.info{
+        display: flex;
+        margin: 1vw;
+        button.bidButton, button.sellButton, button.delete, button.change, button.pay{
+          outline: 0;
+          background: -webkit-linear-gradient(top, #fafafa 50%, #e1e1e1 50%);
+          border-radius: 1vw;
+          cursor: pointer;
+          @include fonts(5);
+          position: relative;
+          text-align: center;
+          flex-grow: 1;
+          padding: 1vw;
+          margin: 1vw;
+          width: 37%;
+          &:hover {
+            background: #ddd;
+          }
+        }
+    }
+  }
+  div.input{
+    font-family: Roboto, serif;
+    @include fonts(6);
+    box-sizing: border-box;
+    color: #232f62;
+    margin: 1vw;
+    margin-top: 0;
+  }
+  div.account{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+
+}

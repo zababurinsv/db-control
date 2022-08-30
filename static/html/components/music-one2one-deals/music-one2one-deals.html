@@ -1,0 +1,43 @@
+<template>
+    <div class="item">
+        <fieldset class="contract">
+            <legend class="contract-legend">Smart Contract</legend>
+            <div class="contract-users">
+                <fieldset class="contract-users-customer">
+                    <legend class="contract-users-customer-legend">customer</legend>
+                    <slot name="waves-game-user-customer"></slot>
+                </fieldset>
+                <fieldset class="contract-users-executor">
+                    <legend class="contract-users-executor-legend">executor</legend>
+                    <slot name="waves-game-user-executor"></slot>
+                </fieldset>
+            </div>
+            <div class="contract-account">
+                <fieldset class="contract-account-list">
+                    <legend>Account</legend>
+                    <div class="contract-account-item">
+                        <div class="contract-account-item-io">
+                            <fieldset class="contract-account-item-io_property">
+                                <legend>Faucet</legend>
+                                <slot name="waves-faucet"></slot>
+                            </fieldset>
+                            <fieldset class="contract-account-item-io_deposite">
+                                <legend>Deposite</legend>
+                                <slot name="waves-balance"></slot>
+                            </fieldset>
+                        </div>
+                        <fieldset class="contract-account-item_input">
+                            <legend>Statistic</legend>
+                            <slot name="blockchain-account"></slot>
+                        </fieldset>
+                    </div>
+                    <fieldset class="contract-item">
+                        <legend>Contract</legend>
+                        <slot name="waves-contract"></slot>
+                    </fieldset>
+                </fieldset>
+            </div>
+        </fieldset>
+        <slot name="varan-menu"></slot>
+    </div>
+</template>

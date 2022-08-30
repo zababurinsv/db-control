@@ -1,0 +1,1 @@
+let start=function(t){let s=t.this.querySelector(".preloader");s&&(s.classList.contains("done")||s.classList.add("done"))},stop=function(t){let s=t.this.querySelector(".preloader");s&&(s.classList.contains("done")||s.classList.add("done"))};export default{start:t=>start(t),stop:t=>stop(t)};

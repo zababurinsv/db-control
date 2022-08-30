@@ -1,0 +1,56 @@
+<template>
+    <section>
+        <div class="modal">
+            <div class="modal-content">
+                <div class="header">
+                    <span class="close">x</span>
+                    <span class="txt">Drag to Reposition</span>
+                </div>
+                <div class="wrapper">
+                <section class="c">
+                <div class="c-crop">
+                    <div class="c-crop--main" style="width: 36vw; height: 36vw">
+                        <div class="c-crop--area">
+                            <img class="org" src="">
+                            <div class="c-crop--cut">
+                                <img class="cut" atl="cut-image">
+                                <div class="c-crop--drap" >
+                                    <div class="c-crop--drap_main">
+                                        <div class="c-crop--drap_screen"></div>
+                                        <div class="c-crop--drap_eline line" @click.stop>
+                                            <div class="c-crop--drap_e"></div>
+                                        </div>
+                                        <div class="c-crop--drap_sline line" @click.stop>
+                                            <div class="c-crop--drap_s"></div>
+                                        </div>
+                                        <div class="c-crop--drap_wline line" @click.stop>
+                                            <div class="c-crop--drap_w"></div>
+                                        </div>
+                                        <div class="c-crop--drap_nline line" @click.stop>
+                                            <div class="c-crop--drap_n"></div>
+                                        </div>
+                                        <div class="c-crop--drap_ne" @click.stop></div>
+                                        <div class="c-crop--drap_se" @click.stop></div>
+                                        <div class="c-crop--drap_sw" @click.stop></div>
+                                        <div class="c-crop--drap_nw" @click.stop></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: none" class="c-crop--preview">
+                            <img class="preview" >
+                    </div>
+                    <div class="c-crop--hide_main">
+                        <img id="c-crop--hide_img" src="" alt=""/>
+                    </div>
+                </div>
+                </section>
+                </div>
+                <section class="menu">
+                    <button class="saveImg" type="button"><img src="/static/html/components/varan-crop/images/1check_svg.svg"></button>
+                </section>
+            </div>
+        </div>
+    </section>
+</template>

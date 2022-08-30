@@ -1,0 +1,29 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+h1 {
+  cursor: pointer;
+  border-radius: 0.2vw;
+  //@include fonts(4);
+}
+
+h2 {
+  cursor: pointer;
+  border-radius: 0.2vw;
+  //@include fonts(3);
+}
+
+h3 {
+  cursor: pointer;
+  border-radius: 0.2vw;
+  //@include fonts(2);
+}
+
+p {
+  //@include fonts(1);
+}
+
+div {
+  //@include fonts(3);
+}

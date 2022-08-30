@@ -1,0 +1,61 @@
+<template>
+    <section id="manager-menu">
+        <div id="setup">
+            <div id="configuration">
+                <div class="setup">
+                    <h2>Select your name.</h2>
+                    <div id="player1input" class="player-input">
+                        <label for="player1name">
+                            <div class="preview">
+                                <p class="player1preview">Your Name</p>
+                            </div>
+                            <div class="option">
+                                <input type="text" id="player1name" title="Player name" maxlength="16" placeholder="Your Name" />
+                                <select id="player1color" title="Player color" class="player-select">
+                                    <option style="color: aqua;">Aqua</option>
+                                    <option style="color: black;">Black</option>
+                                    <option style="color: blue;">Blue</option>
+                                    <option style="color: fuchsia;">Fuchsia</option>
+                                    <option style="color: gray;">Gray</option>
+                                    <option style="color: green;">Green</option>
+                                    <option style="color: lime;">Lime</option>
+                                    <option style="color: maroon;">Maroon</option>
+                                    <option style="color: navy;">Navy</option>
+                                    <option style="color: olive;">Olive</option>
+                                    <option style="color: orange;">Orange</option>
+                                    <option style="color: purple;">Purple</option>
+                                    <option selected="selected">Red</option>
+                                    <option style="color: silver;">Silver</option>
+                                    <option style="color: teal;">Teal</option>
+                                    <option style="color: yellow;">Yellow</option>
+                                </select>
+                                <select id="player1ai" title="Choose whether this player is controled by a human or by the computer.">
+                                    <option value="2">TestNet</option>
+                                    <option value="3">MainNet</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+                    <h2>Select number of players.</h2>
+                    <select id="playernumber">
+                        <option selected="selected">2 Player</option>
+                        <option>3 Player</option>
+                        <option>4 Player</option>
+                        <option>5 Player</option>
+                        <option>6 Player</option>
+                        <option>7 Player</option>
+                    </select>
+                    <div class="playGame">
+                        <label for="connectGame">Connect Game</label>
+                        <input id="connectGame" class="game" type="text" placeholder="ID Game"   title="Connect game." />
+                        <input id="playGame" class="game" type="button" value="Start Game"  title="Begin playing." />
+                    </div>
+                </div>
+                <div class="options">
+                    <h2>Players</h2>
+                    <div id="items"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,59 @@
+<template>
+    <section id="manager-control">
+        <div id="control">
+            <table>
+                <tr>
+                    <td>
+                        <div id="menu">
+                            <table id="menutable" cellspacing="0">
+                                <tr>
+                                    <td class="menu-item" id="buy-menu-item">
+                                        <a title="View alerts and buy the property you landed on.">Buy</a>
+                                    </td>
+                                    <td class="menu-item" id="manage-menu-item">
+                                        <a title="View, mortgage, and improve your property. ">Manage</a>
+                                    </td>
+                                    <td class="menu-item" id="trade-menu-item">
+                                        <a title="Exchange property with other players.">Trade</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div id="buy">
+                            <div id="alert"></div>
+                            <div id="landed"></div>
+                        </div>
+                        <div id="manage">
+                            <div id="option">
+                                <div id="buildings" title="Available buildings"></div>
+                                <div class="option">
+                                    <input type="button" value="Buy house" id="buyhousebutton"/>
+                                    <input type="button" value="Mortgage" id="mortgagebutton" />
+                                    <input type="button" value="Sell house" id="sellhousebutton"/>
+                                </div>
+                            </div>
+                            <div id="owned"></div>
+                        </div>
+                    </td>
+                    <td class="quickstats">
+                        <div class="playerLand">
+                            <input type="button" id="nextbutton" title="Roll the dice and move your token accordingly." value="Roll Dice"/>
+                            <input type="button" id="resignbutton" title="If you cannot pay your debt then you must resign from the game." value="Resign" />
+                        </div>
+                        <div class="stateGame">
+                            <div id="quickstats">
+                                <div><span id="pname" >Player 1</span>:</div>
+                                <div><span id="pmoney">$1500</span></div>
+                            </div>
+                            <div class="quickstats">
+                                <div id="die0" title="Die" class="die die-no-img"></div>
+                                <div id="die1" title="Die" class="die die-no-img"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr><tr>
+            </tr>
+            </table>
+        </div>
+    </section>
+</template>

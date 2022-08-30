@@ -1,0 +1,222 @@
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+//@import "./docs/css/interface.scss";
+@mixin h3(){
+  //@include border();
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  text-align: center;
+  font-family: Roboto, serif;
+  //@include fonts(4);
+  text-align-last: left;
+  margin: 0;
+}
+@mixin disabledSelect(){
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                               not supported by any browser */
+}
+@mixin disabledSelectText(){
+  -webkit-user-select: text;   /* Chrome/Safari/Opera */
+  -khtml-user-select: text;    /* Konqueror */
+  -moz-user-select: text;      /* Firefox */
+  -ms-user-select: text;       /* Internet Explorer/Edge */
+  user-select: text;           /* Non-prefixed version, currently
+                               not supported by any browser */
+}
+@mixin padding(){
+  box-sizing: border-box;
+  padding: 1vw;
+}
+
+@mixin border-bottom() {
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  padding: 0.25vw;
+  text-align: center;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+}
+@mixin border() {
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  padding: 0.25vw;
+  text-align: center;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+}
+
+@mixin sectionInput() {
+  box-sizing: border-box;
+  text-align: center;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+:host {
+  width: 100%;
+  margin: auto;
+}
+section{
+  //@include disabledSelectText();
+  //@include display(column, nowrap, space-evenly, center, stretch);
+  div#graph{
+    //@include display(row, nowrap, space-between, center, stretch);
+
+    div.bid_item{
+      //@include display(column, nowrap,stretch, center, stretch);
+      //@include border();
+      border-radius: 0.5vw;
+      width: calc(100vw / 3.5);
+      min-height: calc(100vw / 4);
+      flex-grow: 1;
+      margin: 0.25vw;
+      label{
+        border-top-right-radius: 0.5vw;
+        border-top-left-radius: 0.5vw;
+        //@include border();
+        width: 100%;
+        text-align-last: start;
+        //@include disabledSelect();
+        input{
+          margin-right: 1vw;
+        }
+      }
+      div.content{
+        //@include display(row, nowrap,space-between, center, stretch);
+        flex-grow: 1;
+        background-color: white;
+        div.info{
+          ////@include border();
+          overflow: hidden;
+          padding: 0;
+          p.preview{
+            //@include h3();
+            margin: 0;
+            text-align-last: left;
+            padding-left: 0.5vw;
+          }
+          width: 51%;
+          box-sizing: border-box;
+          //@include display(column, nowrap,stretch, center, stretch);
+
+          div.wrapper{
+            //@include border();
+            width: 100%;
+            height: 100%;
+            div.timestamp_info{
+              display: flex;
+              flex-direction: row;
+              text-overflow: ellipsis;
+              p{
+                text-align: left;
+                text-align-last: left;
+                text-overflow: ellipsis;
+                box-sizing: border-box;
+                padding: 0.25vw;
+              }
+            }
+            button.stat{
+              //@include fonts(3);
+              font-family: Roboto,serif;
+              box-sizing: border-box;
+              background: transparent;
+              border: none;
+              cursor: pointer;
+              margin-bottom: 0.5vw;
+              outline: none;
+              border-radius: 0.25vw;
+              padding: 0.25vw;
+            }
+            div.result{
+              //@include display(row, nowrap,space-between, space-between, stretch);
+              box-sizing: border-box;
+              padding: 0.25vw;
+              div.result-item{
+                background-color: #7694f473;
+                justify-content: space-between;
+                min-width: 2vw;
+                min-height: 2vw;
+                border-radius: 0.5vw;
+              }
+            }
+          }
+        }
+        div.orderbook{
+          flex-grow: 1;
+          //@include display(row, nowrap,space-between, center, stretch);
+
+          div{
+            display: flex;
+            flex-direction: column;
+            align-self: stretch;
+            flex-grow: 1;
+            p{
+              //@include h3();
+              margin: 0;
+              text-align-last: center;
+            }
+            div.bid, div.ask{
+              display: flex;
+              flex-direction: column;
+              //@include border();
+              div.item{
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  div#total{
+    display: flex;
+    height: 30vw;
+    overflow: overlay;
+    border-radius: 0.5vw;
+    width: 100%;
+    white-space: pre-wrap;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+    box-sizing: border-box;
+    padding: 0.25vw;
+    margin: 0.25vw;
+    p{
+      display: flex;
+      min-width: 20vw;
+      box-sizing: border-box;
+      padding: 0.25vw;
+      margin: 1vw;
+      align-self: self-start;
+      box-shadow: inset 0vw 0vw 1vw 0px #5090454a;
+      background-color: #76f4dd21;
+    }
+  }
+}

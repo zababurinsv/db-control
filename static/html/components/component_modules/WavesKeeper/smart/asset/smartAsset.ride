@@ -1,0 +1,58 @@
+let Data = Address(base58'3MsQt334vrC8FeNLzusm8XXky1Y6odcNBS9')
+let EnableBurn = extract(getBoolean(Data,"EnableBurn"))
+let minAmount = extract(getInteger(Data,"value"))
+if (EnableBurn) then
+match tx {
+case Exchange: ExchangeTransaction  => if
+let amount = Exchange.amount
+amount < minAmount
+then false
+else true
+case _ => true
+}
+else
+match (tx) {
+case transfer:TransferTransaction => true
+case Exchange: ExchangeTransaction  => true
+case burn: BurnTransaction => true
+case _ => true
+}
+////////////////////////////////////////
+{
+    "type": 12,
+    "version": 1,
+    "fee": 100000,
+    "data": [
+    {
+        "type": "boolean",
+        "key": "EnableBurn",
+        "value": true
+    }
+]
+}
+////////////////////////////////////////
+{
+    "type": 12,
+    "version": 1,
+    "fee": 100000,
+    "data": [
+    {
+        "type": "boolean",
+        "key": "EnableBurn",
+        "value": false
+    }
+]
+}
+////////////////////////////////////////
+{
+    "type": 12,
+    "version": 1,
+    "fee": 100000,
+    "data": [
+    {
+        "type": "integer",
+        "key": "key",
+        "value": 10
+    }
+]
+}

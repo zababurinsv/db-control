@@ -1,0 +1,39 @@
+
+
+                        <template><!--
+                            --><section id="backend"><!--
+                                --><div class = "preview"><!--
+                                    --><p class = "preview"><!--
+                                        -->Наши педагоги и наставники :<!--
+                                    --></p><!--
+                                --></div><!--
+                                --><section class="main"><!--
+                                    --><div class="timestamp" style="display: none"></div><!--
+                                    --><details class="adminMenu"><!--
+                                        --><summary class="adminContent"><!--
+                                            --><div class ="item"><!--
+                                                --><div class="news"><!--
+                                                    --><h2 class="title"><!--
+                                                        --><input maxlength="60" required type="text" name="title" id="titleItem" value="" placeholder="введите Ф.И.О преподователя"><!--
+                                                    --></h2><!--
+                                                    --><div class="short-content"><!--
+                                                        --><details><!--
+                                                            --><summary class="preview"><!--
+                                                               --><slot name = "moderator"></slot><!--
+                                                            --></summary><!--
+                                                            --><div class="content"><!--
+                                                                --><slot name = "moderatorContent"></slot><!--
+                                                            --></div><!--
+                                                        --></details><!--
+                                                    --></div><!--
+                                                    --><label for="image">Выберите изображение<input required="" type="file" id="image"></label><!--
+                                                --></div><!--
+                                                --><div class="hexagon"><!--
+                                                    --><img  class='moderator' src="/static/html/components/lacerta-moderator/icons/no_image.jpg" alt="moderator"><!--
+                                                --></div><!--
+                                            --></div><!--
+                                      --></summary><!--
+                                   --></details><!--
+                                --></section><!--
+                            --></section><!--
+                        --></template>

@@ -1,0 +1,44 @@
+<template>
+    <section id="table">
+        <div id="tableHeader">
+            <div class="wrapper">
+                <div class="rows_count">Showing</div>
+                <ul class="pagination"></ul>
+                <select class="maxRows">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                <div class="num_rows"></div>
+            </div>
+            <div class="wrapper">
+                <div class="property"></div>
+                <div class="property"></div>
+            </div>
+        </div>
+        <section class="table">
+            <section class="header">
+                <div>
+                    <select class="relation">
+                        <option value="0">Id</option>
+                        <option value="1">Relation</option>
+                        <option value="2">Property</option>
+                    </select>
+                </div>
+                <div><input type="text" class="substrate"  placeholder="Substrate"></div>
+                <div><input type="text" class="property"  placeholder="Property"></div>
+                <div><input type="text" class="property"  placeholder="Relation"></div>
+                <div><input type="text" class="substrate"  placeholder="Substrate"></div>
+                <div>
+                    <select class="relation">
+                        <option value="0">Id</option>
+                        <option value="1">Relation</option>
+                        <option value="2">Property</option>
+                    </select>
+                </div>
+            </section>
+            <section class="tbody"></section>
+        </section>
+    </section>
+</template>

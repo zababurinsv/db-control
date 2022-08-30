@@ -1,0 +1,104 @@
+section#exchange{box-sizing:border-box;padding:1vw}section#exchange div#top-cards aside.grid--cell{border:.2vw solid #7694f4;box-shadow:inset 0vw 0vw 1vw 0 #7694f4}
+
+label,div#save{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+label.folder{
+    flex-direction: row;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+div{
+    text-align: center;
+}
+div#sendToGitHub{
+    flex-direction: column;
+}
+div.folder{
+    width: 100%;
+    align-self: center;
+    box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+    box-sizing: border-box;
+    border: .1vw solid #acb2b5;
+    margin: 0.3vw;
+    justify-content: center;
+    text-align: -webkit-center;
+}
+label.files{
+    flex-direction: row;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+div.files{
+    width: 100%;
+    align-self: center;
+    box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+    box-sizing: border-box;
+    border: .1vw solid #acb2b5;
+    margin: 0.3vw;
+    justify-content: center;
+    text-align: -webkit-center;
+}
+img.files{
+
+    width: 4vw;
+    margin: 1vw;
+}
+div#user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+    box-sizing: border-box;
+    border: .1vw solid #acb2b5;
+    margin: 0.3vw;
+    padding: 1.5vw;
+}
+div.label{
+    text-align: center;
+}
+div.file{
+    text-align: left;
+}
+div.save{
+    white-space: pre-wrap;
+}
+/*button.s-btn__vk{*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    text-align: center;*/
+/*}*/
+/*button#submit-button{*/
+/*    background-color: #7694f4;*/
+/*}*/
+/*button#authtorization{*/
+/*    width: 100%;*/
+/*    align-self: center;*/
+/*    box-shadow: inset 0vw 0vw 1vw 0px #7694f4;*/
+/*    box-sizing: border-box;*/
+/*    border: .1vw solid #acb2b5;*/
+/*    margin: 0.3vw;*/
+/*}*/
+button{
+    width: 100%;
+    align-self: center;
+    box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+    box-sizing: border-box;
+    border: .1vw solid #acb2b5;
+    margin: 0.3vw;
+    justify-content: center;
+}
+section#github{
+    display: flex;
+    flex-direction: column;
+}
+pre#content{
+    white-space: pre-line;
+}

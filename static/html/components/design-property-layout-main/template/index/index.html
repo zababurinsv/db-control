@@ -1,0 +1,29 @@
+<template>
+    <fieldset class="design">
+        <legend>design</legend>
+        <fieldset class="design-property" slot="property">
+            <legend>Property</legend>
+            <label for="psd-download">Download default psd &nbsp<input type="button" id="psd-download" class="design-property-layout_button" value="default psd" /></label>
+        </fieldset>
+        <fieldset class="design-property" slot="components">
+            <legend>Components</legend>
+            <div class="design-relations" >
+                <label for="psd-file">Photoshop file &nbsp<input id="psd-file" type="file" accept=".psd"/></label>
+                <label for="psd-block">Block(Component) &nbsp<input type="text" value="default-component" id="psd-block"  placeholder="Enter block name" name="name"/></label>
+                <label for="psd-render">Render &nbsp<input type="button" id="psd-render" value="PSD file" /></label>
+                <label for="psd-save">Save &nbsp<input type="button" id="psd-save" class="design-property-layout_button" value="Zip archive" /></label>
+            </div>
+        </fieldset>
+        <fieldset class="design-property" slot="relation">
+            <legend>Relation</legend>
+            <div class="design-property-wrapper">
+                <div class="design-ide">
+                    <slot name="page-external"></slot>
+                </div>
+            </div>
+        </fieldset>
+    </fieldset>
+    <div class="design-property-layout">
+        <div class="design-property-layout-main"></div>
+    </div>
+</template>

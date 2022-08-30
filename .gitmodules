@@ -91,3 +91,6 @@
 [submodule "namespace/scope/presets"]
 	path = namespace/scope/presets
 	url = https://github.com/soundcheckbox/presets.git
+[submodule "node/ob"]
+	path = node/ob
+	url = https://github.com/zababurinsv/workspace-ob.git

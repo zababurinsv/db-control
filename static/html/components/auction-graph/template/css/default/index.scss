@@ -1,0 +1,11 @@
+@import "../../../../index.scss";
+
+:host {
+  position: relative;
+  width: 100%;
+}
+
+.auction-graph {
+  display: flex;
+  justify-content: center;
+}

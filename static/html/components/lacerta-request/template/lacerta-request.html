@@ -1,0 +1,39 @@
+<template>
+    <section>
+
+        <div>
+            подать заявление
+        </div>
+        <div class="competition">положение о конкурсе эссе</div>
+        <section class="request">
+            <form class="form">
+                <input type="text" name="parent" id="fio-parent"  required="required" placeholder="ФИО родителя"/>
+                <input type="text" name="child" id="fio-children" required="required" placeholder="ФИО ребёнка"/>
+                <input type="text" name="school" id="school" required="required" placeholder="Учебное заведение и класс"/>
+                <input type="email" name="email" id="email"  required="required" placeholder="Электронная почта"/>
+                <input type="url" name="url" id="vk" required="required" placeholder="Ссылка на страницу Вконтакте (родителя)"/>
+                <input type="tel" name="tel" id="phone" required="required" placeholder="Номер телефона (родителя)"/>
+                <div class="confirmation">
+                    <div class="confirm">
+                        <div class="politics">
+                            <input type="checkbox" name="politics" id="politics" autocomplete="off" required="required"/>
+                            <span></span>
+                            <label for="politics">Согласие на обработку данных</label>
+                        </div>
+                        <div class="politics">
+                            <input type="checkbox" name="politicsPhoto" id="politicsPhoto" autocomplete="off" required="required"/>
+                            <span></span>
+                            <label for="politicsPhoto">Согласие на использование фото/видео для сайта</label>
+                        </div>
+                    </div>
+                     <div class="file">
+                         <label for="file">Прикрепить эссе</label>
+                         <input type="file" id="file" name="file" >
+                     </div>
+                </div>
+            </form>
+        </section>
+    </section>
+</template>
+
+

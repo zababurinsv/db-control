@@ -1,0 +1,54 @@
+<template>
+    <section id="github">
+<!--        <div class="label"><img class="label" src="#"></div>-->
+        <label for="password">
+            <p>Add Token</p>
+            <input id="password" type="password" value="469ef2375fb227724168f49cc182aedfa5dafe31" placeholder="введите токен">
+            <button style="display: none" id="singOutGitHub"> Sing Out GitHub</button>
+            <button  id="authGithub"> Sing In GitHub</button>
+        </label>
+        <label style="display: none" for="repos">
+            <p>Выберете Репозиторий</p>
+            <input id="repos" type="text" value="images" placeholder="Выберете Репозиторий">
+            <button id="repository"> Connect Repository </button>
+        </label>
+        <label style="display: none" for="file">
+            <p>Выберете файл</p>
+            <input id="file" type="text" value="images" placeholder="Выберете Файл">
+            <button class="file"> Connect File </button>
+        </label>
+        <div style="display: none" id="save">
+            <p>Записать в файл</p>
+            <slot name="varan-editor"></slot>
+            <slot name="codemirror-main"></slot>
+<!--            <button class="save"> Save File </button>-->
+        </div>
+        <br>
+        <button style="display: none" id="authorizeButton">Sing In Google</button>
+        <button style="display: none" id="signoutButton">Sing Out Google</button>
+        <label style="display: none" for="GoogleFolder">
+            <p>Folder</p>
+            <input id="GoogleFolder" type="text" value='pictures' placeholder="введите название папки">
+            <button class="GoogleFolder"> Connect Google Folder </button>
+        </label>
+        <div style="display: none" id="sendToGitHub">
+            <p>Разместить на github</p>
+            <button class="sendToGitHub"> Send to github </button>
+        </div>
+        <div id="item">
+            <div id="google">
+                <slot name="directory-list"></slot>
+            </div>
+            <div id="user" style="display: none">
+                <div class="avatar">
+                    <img class="avatar" src="#">
+                </div>
+                <p>repositories</p>
+                <div class="data"></div>
+                <div class="file"></div>
+                <div class="save"></div>
+                <div class="info"></div>
+            </div>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,38 @@
+<template id ="auction-card">
+    <div class = "container">
+        <div id="myModal" class="modal">
+            <div class="modalContent">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+        </div>
+        <section class="section">
+            Список пустой
+        </section>
+            <section class="section">
+                <div class = "item timestamp ">
+                    <label class="details">
+                        <div class="contentAdmin">
+                            <div class = "preview">
+                               <label>Название лота<textarea class = "nameBid"maxlength="120" name="preview"></textarea> </label>
+                            </div>
+                            <div class="images">
+                                <a class="bidAdmin"><label> <input style='display: none' required="" type="file" id="image"> <img  class='imgBidAdmin' src="/static/html/components/varan-card-news/icons/no_image.jpg" alt="bid">
+                                </label></a>
+                            </div>
+                            <div class="timer">
+                                <label>Время жизни лота <input class ="timerValue" type="number"> </label>
+                            </div>
+                            <div class="price">
+                                <label>Стоимость лота <input class = 'priceValue' type="number"> </label>
+                            </div>
+                        </div>
+                    </label>
+                    <section class="editor">
+                                                    <p> <slot name = "cardDescription"></slot></p>
+                                                    <p> <slot name = "cardContent"></slot></p>
+                    </section>
+                </div>
+            </section>
+    </div>
+</template>

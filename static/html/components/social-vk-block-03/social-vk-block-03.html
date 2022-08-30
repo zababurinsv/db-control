@@ -1,0 +1,54 @@
+<template>
+    <section id="page_block">
+        <div class="page_block" id="page_block_submit_post">
+            <div id="submit_post_box" class="submit_post_box clear_fix _submit_post_box" data-from-oid="3156819" data-oid="3156819" data-owner-name="" data-owner-photo="" data-owner-href="" onclick="if(domClosest('article_snippet', event.target)) return;return cancelEvent(event)">
+                <div id="submit_post_error" class="error"></div>
+                <a class="post_field_user_link _post_field_author" href="/zababurin" onclick="if (!checkEvent(event)) return nav.go(this, event); event.cancelBubble = true;">
+                    <img class="post_field_user_image _post_field_image" src="https://sun9-2.userapi.com/c846123/v846123361/1a5e3f/tpJpFOXVRo4.jpg?ava=1">
+                    <img class="post_field_user_image post_field_image_secondary _post_field_image" src="https://sun9-2.userapi.com/c846123/v846123361/1a5e3f/tpJpFOXVRo4.jpg?ava=1">
+                </a>
+                <div class="post_field_wrap _emoji_field_wrap">
+                    <div class="emoji_smile_wrap  _emoji_wrap">
+                        <div class="emoji_smile _emoji_btn" title="Используйте TAB, чтобы быстрее открывать смайлы" onmouseover="return Emoji.show(this, event);" onmouseout="return Emoji.hide(this, event);" onclick="return cancelEvent(event);">
+                            <div class="emoji_smile_icon_vector emoji_smile_icon"></div>
+                        </div>
+                    </div>
+                    <div id="post_field" class="submit_post_field dark submit_post_inited" onkeyup="Wall.postChanged()" onkeydown="onCtrlEnter(event, Wall.sendPost)" onfocus="Wall.showEditPost()" contenteditable="true" role="textbox" aria-multiline="true"></div>
+                    <div class="placeholder"><div class="ph_input"><div class="ph_content">Что у Вас нового?</div></div></div></div>
+
+                <div id="media_preview" class="clear_fix wall_post_media_preview multi_media_preview"><div id="page_pics_preview15" class="page_pics_preview media_preview clear_fix"></div><div id="page_dpics_preview15" class="page_pics_preview post_thumbed_media page_media_sortable media_preview clear_fix"></div><div id="page_docs_preview15" class="page_docs_preview post_thumbed_media page_media_sortable media_preview clear_fix"></div><div id="page_pdocs_preview15" class="page_docs_preview media_preview clear_fix"></div><div id="page_ldocs_preview15" class="page_docs_preview media_preview clear_fix"></div><div id="page_adocs_preview15" class="page_docs_preview media_preview clear_fix"></div><div id="page_mpics_preview15" class="page_pics_preview media_preview clear_fix"></div><div id="page_ppdocs_preview15" class="page_docs_preview media_preview _page_ppdocs_preview clear_fix"></div><div id="page_progress_preview15" class="page_progress_preview media_preview clear_fix"></div></div>
+                <div class="post_actions_btns" id="post_actions_btns"><div class="post_action_btn post_available" id="post_visibility_btn">
+                    <div class="post_action_btn_layout">
+                        <span class="post_action_btn_text" role="button" aria-label="Видно всем">Видно всем</span>
+                        <div class="post_action_tt_content" id="post_visibility_tt_content">
+                            <div class="eltt_fancy_action radiobtn on" id="no_friends_only" role="radio" aria-checked="true" aria-label="Видно всем" onclick="Wall.togglePostFriendsOnly(this, false)">Видно всем</div>
+                            <div class="eltt_fancy_action radiobtn" id="friends_only" role="radio" aria-checked="false" aria-label="Видно друзьям" onclick="Wall.togglePostFriendsOnly(this, true)">Видно друзьям</div>
+                        </div>
+                    </div>
+                </div><div class="post_action_btn has_cross" id="post_postpone_btn15">
+                    <div class="post_action_btn_layout">
+                        <span class="post_action_btn_text" role="button" aria-label="Сейчас">Сейчас</span>
+                        <span class="post_action_image_btn _close" role="button" title="Сбросить"></span>
+                        <div class="post_action_tt_content _postpone" id="post_postpone_tt_content15" onclick="cancelEvent(event)"></div>
+                    </div>
+                </div></div>
+                <div id="submit_post" class="submit_post clear_fix" onclick="if(domClosest('article_snippet', event.target)) return;event.cancelBubble=true;">
+                    <div class="addpost_button_wrap">
+                        <button class="flat_button addpost_button" id="send_post" onclick="wall.sendPost()">Опубликовать</button>
+                    </div>
+                    <div class="post_settings" id="post_settings_btn">
+                        <span onmouseover="Wall.showPostSettings(this);" onclick="Wall.showPostSettings(this, event);" class="addpost_opt checkbox_pic" role="button" tabindex="0" aria-label="Настройки публикации"></span>
+                        <div class="_post_settings_items"><div class="checkbox" id="close_comments" onclick="checkbox(this)">Выключить комментарии</div><div class="checkbox" id="mute_notifications" onclick="checkbox(this)">Не отправлять уведомления</div><a class="Post__copyrightButton" onclick="cur.addMedia[15].copyrightShowBox();">Указать источник</a></div>
+                    </div>
+
+                    <div class="poster__open-btn-wrapper poster " id="page_poster_btn">
+                        <div class="poster__open-btn-layout">
+                            <div class="poster__open-btn poster" onmouseenter="showTooltip(this, { text: getLang('wall_poster_open_tt'), black: 1, shift: [10, 9] })"></div>
+                        </div>
+                    </div>
+                    <div id="page_add_media" class="page_add_media" onclick="Wall.showEditPost()"><div class="media_selector clear_fix"><a class="ms_item ms_item_photo _type_photo" tabindex="0" data-title="Фотография" aria-label="Фотография" role="link"><span class="blind_label">Фотография</span></a><a class="ms_item ms_item_video _type_video" tabindex="0" data-title="Видеозапись" aria-label="Видеозапись" role="link"><span class="blind_label">Видеозапись</span></a><a class="ms_item ms_item_audio _type_audio" tabindex="0" data-title="Аудиозапись" aria-label="Аудиозапись" role="link"><span class="blind_label">Аудиозапись</span></a><a class="ms_item ms_item_article _type_article" tabindex="0" data-title="Статья" aria-label="Статья" role="link"><span class="blind_label">Статья</span></a><div class="ms_items_more_wrap"><a class="ms_item_more" tabindex="0" role="button"><span class="ms_item_more_label">Ещё</span></a><div class="ms_items_more_helper"><div class="ms_items_more _more_items"><a class="ms_item ms_item_doc _type_doc" tabindex="0">Документ</a><a class="ms_item ms_item_map _type_map" tabindex="0">Карта</a><a class="ms_item ms_item_graffiti _type_graffiti" tabindex="0">Граффити</a><a class="ms_item ms_item_market _type_market" tabindex="0">Товар</a><a class="ms_item ms_item_poll _type_poll" tabindex="0">Опрос</a></div></div></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

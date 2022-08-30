@@ -1,0 +1,19 @@
+{
+    "domain": "http://localhost:4334",
+    "development":
+    {
+        "username": "sergey",
+        "password": "1234567890",
+        "database": "sergey",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    },
+    "postgres":
+    {
+        "url": "postgres://sergey:1234567890@127.0.0.1:5432/sergey"
+    },
+    "server":
+    {
+        "port": 443
+    }
+}

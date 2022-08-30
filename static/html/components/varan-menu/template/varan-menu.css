@@ -1,0 +1,15 @@
+section.menu {
+    box-shadow: 0 0 10px rgb(0 0 0 / 17%);
+    border: solid rgb(46 80 14 / 16%);
+}
+
+section.menu .menu-convert, section.menu .menu-save, section.menu .menu-mode, section.menu .menu-delete, section.menu .update {
+    background: -webkit-linear-gradient(top, #4c6e1808 50%, #2bb24b12 50%);
+    border-radius: 0.4vw;
+    border-color: azure;
+}
+
+section.menu .menu-convert:hover, section.menu .menu-save:hover, section.menu .menu-mode:hover, section.menu .menu-delete:hover, section.menu .update:hover {
+    background: #dbe3d88a;
+    border-radius: 0.4vw;
+}

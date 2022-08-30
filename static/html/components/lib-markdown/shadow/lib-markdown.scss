@@ -1,0 +1,248 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+pre {
+    margin: 0;
+}
+
+hr {
+    margin-bottom: 0;
+}
+
+h1 {
+    cursor: pointer;
+    border-radius: 0.2vw;
+}
+
+.markdown__string_html_json_input, .markdown__string_views_json_input { width: 46vw; height: -webkit-fill-available; }
+.markdown__string_html_json_output, .markdown__string_views_json_output { width: auto; height: -webkit-fill-available; }
+
+.aside-menu {
+    height: min-content;
+    &::-webkit-scrollbar { width: 0; }
+    & h1,h2,h3,h4,h5,h6 {
+        cursor: pointer;
+    }
+}
+:host {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 1vw;
+}
+
+.markdown {
+    display: flex;
+    flex-direction: column;
+
+    &__button {
+
+        &_download {
+            cursor: pointer;
+        }
+
+        &_upload {
+            cursor: pointer;
+            text-align: center;
+        }
+    }
+
+    &__self {
+        resize: none;
+        white-space: pre-wrap;
+        min-height: 50vh;
+        padding: 1vw;
+        box-sizing: border-box;
+        border: none;
+        border-left: 0.2vw solid threedface;
+        border-right: 0.2vw solid threedface;
+
+        &_menu {
+            display: grid;
+            grid-template-rows: minmax(40vh, auto);
+            grid-template-columns: 16vw 1fr 16vw;
+            grid-gap: 0.4vw;
+            padding: 0;
+            height: 70vh;
+            margin: 0;
+            border-width: 0.2vw;
+            border-style: solid;
+            border-color: threedface;
+            margin-bottom: 0.4vw;
+            overflow: hidden;
+
+            & > CodeMirror {
+                height: -webkit-fill-available;
+            }
+            &_aside {
+                height: min-content;
+                &::-webkit-scrollbar { width: 0; }
+                h1 {
+                    //@include fonts(6);
+                    cursor: pointer;
+                }
+                h2 {
+                    //@include fonts(5);
+                    cursor: pointer;
+                }
+                h3 {
+                    //@include fonts(4);
+                    cursor: pointer;
+                }
+                h4 {
+                    //@include fonts(3);
+                    cursor: pointer;
+                }
+                h5 {
+                    //@include fonts(2);
+                    cursor: pointer;
+                }
+                h6 {
+                    //@include fonts(1);
+                    cursor: pointer;
+                }
+
+                &_left {
+                    height: 70vh;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    &::-webkit-scrollbar { width: 0; }
+                }
+                &_right {
+                    text-align: right;
+                    box-sizing: border-box;
+                    padding-right: 1vw;
+                    height: 70vh;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    &::-webkit-scrollbar { width: 0; }
+                }
+            }
+            &_aside {
+                height: inherit;
+            }
+
+            &_html {
+                display: block;
+                flex-grow: 1;
+                flex-direction: column;
+            }
+
+            &_views {
+                //@include fonts(4);
+                flex-grow: 1;
+                height: auto;
+                box-sizing: border-box;
+                padding: 0.4vw;
+
+                h1 {
+                    margin: 0.4vw;
+                    cursor: pointer;
+                    border-radius: 0.2vw;
+                }
+            }
+        }
+    }
+    &__string {
+        padding: 0;
+        border-width: 0.2vw;
+        border-style: solid;
+        border-color: threedface;
+        margin: 0;
+        white-space: initial;
+
+        &_menu {
+            white-space: initial;
+            margin: 0.4vw 0;
+
+            &_json {
+                &_code {
+
+                }
+                &_html {
+
+                }
+            }
+        }
+        &_html {
+            white-space: initial;
+
+            &_json {
+                border-bottom: 0.2vw solid threedface;
+                height: auto;
+
+                & > .CodeMirror {
+                    width: 46.5vw;
+                }
+
+                &_output {
+                    resize: none;
+                    border-bottom: none;
+                    border-top: none;
+                    border-right: none;
+                    height: auto;
+                    width: 50%;
+                }
+            }
+        }
+        &_views {
+            &_json {
+                border-bottom: 0.2vw solid threedface;
+                height: auto;
+
+                & > .CodeMirror {
+                    width: 46.5vw;
+                }
+                &_output {
+                    resize: none;
+                    border-bottom: none;
+                    border-top: none;
+                    border-right: none;
+                    height: auto;
+                    width: 50%;
+                }
+            }
+        }
+        &_json {
+            white-space: initial;
+        }
+    }
+    &__jasonelle {
+        padding: 0;
+        border-width: 0.2vw;
+        border-style: solid;
+        border-color: threedface;
+        white-space: initial;
+        display: flex;
+        flex-direction: row;
+        border-bottom: none;
+        margin-top: 1vw;
+
+        &_android {
+            border-bottom: 0.2vw solid threedface;
+            height: 50vh;
+            padding: 0;
+            margin: 0;
+            white-space: initial;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+             &_query {
+                 width: 49%;
+             }
+             & > .CodeMirror {
+                 width: 46.5vw;
+                 height: 50vh;
+             }
+             &_output {
+                 resize: none;
+                 border-bottom: none;
+                 border-top: none;
+                 border-right: none;
+                 height: auto;
+                 width: 50%;
+             }
+        }
+    }
+}

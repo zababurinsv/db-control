@@ -1,0 +1,30 @@
+<template>
+    <section id="login">
+        <div class="telegram"><img style="width: 100%; top: 0;left: 0;" class="telegram" src="/static/html/components/telegram-login/images/telegram.svg"/></div>
+        <div id="message">
+            <div class="head">
+                <h1>Sign in to Telegram</h1>
+            </div>
+            <div class="message">
+                <p>Please confirm your country and</p>
+                <p>enter you phone number</p>
+            </div>
+        </div>
+        <form>
+            <div><slot name="telegram-search"></slot></div>
+            <div id="phoneNumber">
+                <div class="phone">
+                    <div id="code"></div>
+                    <input type="tel" id="phone" placeholder="Phone Number">
+                </div>
+            </div>
+            <input type="checkbox" id="signed" name="signed" value="signed">
+            <label for="signed"><p style="margin: 0 0 0 1vw">keep me signed in</p></label>
+        </form>
+        <input id="verification" placeholder="Code" style="display: none">
+        <div class="buttonNext">
+            <button id="next">Next</button>
+            <div class="loader"></div>
+        </div>
+    </section>
+</template>

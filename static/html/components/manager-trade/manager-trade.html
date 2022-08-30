@@ -1,0 +1,74 @@
+<template>
+    <section id="manager-trade">
+        <div id="trade">
+            <table class="trade">
+                <tr>
+                    <td class="trade-cell">
+                        <div id="trade-leftp-name">
+                            <slot name="player-left"></slot>
+                        </div>
+                    </td>
+                    <td class="trade-cell">
+                        <div id="trade-rightp-name">
+                            <slot name="player-right"></slot>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="trade-cell">
+                        <label for="trade-leftp-money">
+                            <p>Расчёт производится в $:</p>
+                            <div  class="option">
+                                <input id="trade-leftp-money" value="0" title="Enter amount to exchange with the other player." />
+                            </div>
+                        </label>
+                    </td>
+                    <td class="trade-cell">
+                        <label for="trade-rightp-money">
+                            <p>Расчёт производится в $:</p>
+                            <div  class="option">
+                                <input id="trade-rightp-money" value="0" title="Enter amount to exchange with the other player." />
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="trade-leftp-property" class="trade-cell">
+                        <label for="trade-rightp-money">
+                            <p>Товар</p>
+                            <div class="option">
+                                <section><slot name="order-left"></slot></section>
+                            </div>
+                        </label>
+                    </td>
+                    <td id="trade-rightp-property" class="trade-cell">
+                        <label for="trade-rightp-money">
+                            <p>Товар</p>
+                            <div class="option">
+                                <section><slot name="order-right"></slot></section>
+                            </div>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="trade-cell">
+                        <input type="button" id="proposetradebutton" value="Propose Trade"  title="Exchange the money and properties that are checked above." />
+                        <input type="button" id="canceltradebutton" value="Cancel Trade"  	title="Cancel the trade." />
+                        <input type="button" id="accepttradebutton" value="Accept Trade"  	title="Accept the proposed trade." />
+                        <input type="button" id="rejecttradebutton" value="Reject Trade"  	title="Reject the proposed trade." />
+                    </td>
+                </tr>
+                <tr>
+<!--                    <td>-->
+<!--                        <label for="trade-rightp-money">-->
+<!--                            <p>Аукцион</p>-->
+<!--                            <div class="option">-->
+<!--                                <section><slot name="varan-card-news"></slot></section>-->
+<!--                            </div>-->
+<!--                        </label>-->
+<!--                    </td>-->
+                </tr>
+            </table>
+        </div>
+    </section>
+</template>

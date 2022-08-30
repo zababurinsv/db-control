@@ -1,0 +1,1 @@
+document.body.onload=function(){setTimeout(function(){let o=document.body.shadowRoot.querySelector(".preloader");o&&(o.classList.contains("done")||o.classList.add("done"))},3e3)};

@@ -1,0 +1,16 @@
+<template>
+    <div class="waves-contract">
+        <fieldset class="waves-contract-input">
+            <legend>input</legend>
+            <slot name="blockchain-property-input"></slot>
+        </fieldset>
+        <fieldset class="waves-contract-property">
+            <legend>property</legend>
+            <slot name="blockchain-property-data"></slot>
+        </fieldset>
+        <fieldset class="waves-contract-output">
+            <legend>output</legend>
+            <slot name="blockchain-property-output"></slot>
+        </fieldset>
+    </div>
+</template>

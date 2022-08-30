@@ -1,0 +1,81 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+:host{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.item {
+  //@include display(column, nowrap, flex-start, center, stretch);
+  padding: 0.4vw 0.4vw 0;
+
+  .contract {
+    //@include display(row, nowrap, space-evenly, stretch, stretch);
+    border: 0.2vw solid #d9ca6b;
+    border-radius: 0.4vw;
+    height: auto;
+    flex-direction: column;
+    padding: 0 0.4vw 0.4vw;
+
+    &-users {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &-customer {
+        flex-grow: 1;
+        padding: 0.4vw;
+        box-sizing: border-box;
+      }
+
+      &-executor {
+        flex-grow: 1;
+        padding: 0.4vw;
+        box-sizing: border-box;
+      }
+    }
+
+    &-account {
+      &-list {
+        padding: 0 0.4vw 0.4vw;
+      }
+
+      &-item {
+        //@include display(row, nowrap, space-between, stretch, stretch);
+        box-sizing: border-box;
+        flex-grow: 1;
+        padding: 0;
+
+        &-io {
+          width: 32vw;
+          padding: 0;
+
+          &_property {
+            padding: 0.4vw;
+            box-sizing: border-box;
+            flex-grow: 1;
+          }
+
+          &_deposite {
+            min-width: 28vw;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        }
+
+        &_input {
+          padding: 0.4vw;
+          box-sizing: border-box;
+          flex-grow: 1;
+          flex-shrink: 0;
+        }
+      }
+    }
+    &-item {
+      padding: 0 0.4vw 0.4vw;
+    }
+  }
+}
+

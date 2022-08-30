@@ -1,0 +1,10 @@
+<template>
+    <section class="telegram">
+<!--    <div id="head" style="display: flex"><slot name="telegram-head"></slot></div>-->
+        <div id="ton"><slot name="ton-client"></slot></div>
+        <div id="alert"style="display: none"><slot name="telegram-alert"></slot></div>
+        <div id="login"><slot name="telegram-login"></slot></div>
+        <div id="chat"style="display: none"><slot name="telegram-chat"></slot></div>
+        <div id="message"style="display: none"><slot name="telegram-message"></slot></div>
+    </section>
+</template>

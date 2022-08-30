@@ -1,0 +1,43 @@
+<template>
+    <section class="request">
+            <details>
+                <summary>
+                    <p>
+                       Feedback
+                    </p>
+                </summary>
+                <form class="form">
+                    <label for="fio-parent">
+                    <input type="text" name="parent" id="fio-parent"  aria-label ="fio-parent" aria-labelledby="fio-parent"  placeholder=" Ф.И.О. родителя"/></label>
+                    <label for="fio-children">
+                    <input type="text" name="child" id="fio-children" aria-label ="fio-children" aria-labelledby="fio-children" placeholder="Ф.И.О. ребёнка"/></label>
+                    <label for="school">
+                    <input type="text" name="school" id="school"   aria-label ="school" aria-labelledby="school" placeholder="Учебное заведение и класс"/></label>
+                    <label for="email">
+                    <input type="email" name="email" id="email"aria-label ="email"  aria-labelledby="email" placeholder="Электронная почта"/></label>
+                    <label for="vk">
+                    <input type="text" name="url" id="vk" aria-label ="vk"  aria-labelledby="vk" placeholder="Ссылка на страницу ВКонтакте (родителя)"/></label>
+                    <label for="phone">
+                    <input type="tel" name="tel" id="phone" aria-label ="phone" aria-labelledby="phone" placeholder="Номер телефона (родителя)"/></label>
+                    <div class="confirmation">
+                        <div class="confirm">
+                            <div class="politics">
+                                <input  type="checkbox" aria-label ="politics" name="politics" aria-labelledby="politics" id="politics" autocomplete="off" />
+                                <label for="politics">
+                                    <a class="item" href="/static/html/components/lacerta-documents/images/Soglasie_DU.docx" download="соглашение.docx"><p>Согласие на обработку данных и использование</p><p>фото/видео для сайта </p></a>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="file">
+                            <label class="file" for="file">Прикрепить эссе</label>
+                            <input type="file" id="file" name="file" >
+                        </div>
+                    </div>
+                    <label class="request" for="request"><p class="request">Отправить заявку</p></label>
+                    <input  id="request" type="submit">
+                </form>
+            </details>
+    </section>
+</template>
+
+

@@ -1,0 +1,68 @@
+
+.ql-editor, [slot=view]{
+  min-height: 5vw;
+  background-color: whitesmoke;
+  cursor: text;
+}
+
+.wall{
+  white-space: pre-wrap;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-transition: 1s;
+  transition: 1s;
+  box-shadow: 5px 5px 20px #6e6e6e;
+  display: flex;
+  flex-direction: column;
+  &:hover {
+    color: #151515;
+    border: 1px solid #151515;
+    border-radius: 4px;
+    transition: 1s;
+  }
+}
+.varan-editor{
+  display: flex;
+  box-sizing: border-box;
+  padding: 0.1vw;
+  div.container{
+
+    margin: 0;
+    padding: 0;
+    border: none;
+
+    form{
+
+      width: 100%;
+      div.form-group{
+
+        border: none;
+        width: 100%;
+
+        div.ql-toolbar{
+
+          width: 100%;
+        }
+        div.editor{
+          border: none;
+          width: 100%;
+          div.ql-editor{
+            display: flex;
+            border: none;
+            flex-direction: column;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+varan-menu{
+
+  section.menu{
+
+    padding: 0;
+  }
+}

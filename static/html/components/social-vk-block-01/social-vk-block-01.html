@@ -1,0 +1,114 @@
+<template>
+    <section id="page_block">
+        <div class="page_block">
+            <div id="page_info_wrap" class="page_info_wrap "><div class="page_top">
+                <div class="_profile_online profile_online"><div class="profile_online_lv">Online</div> </div>
+                <h2 class="page_name">Сергей  Забабурин</h2>
+                <div class="page_current_info" id="page_current_info"><div id="currinfo_editor" class="page_status_editor clear" onclick="cancelEvent(event)">
+                    <div class="editor">
+                        <div class="page_status_input_wrap _emoji_field_wrap">
+                            <div class="emoji_smile_wrap  _emoji_wrap">
+                                <div class="emoji_smile _emoji_btn" title="Используйте TAB, чтобы быстрее открывать смайлы" onmouseover="return Emoji.show(this, event);" onmouseout="return Emoji.hide(this, event);" onclick="return cancelEvent(event);">
+                                    <div class="emoji_smile_icon"></div>
+                                </div>
+                            </div>
+                            <div class="page_status_input" id="currinfo_input" contenteditable="true" role="textbox"></div>
+                        </div>
+                        <div class="page_status_audio checkbox" id="currinfo_audio" onclick="checkbox(this); Page.audioStatusUpdate('4472b79494ca3f7134');" role="checkbox" aria-checked="false" tabindex="0">Транслировать музыку в статус</div>
+                        <div class="page_status_app checkbox on unshown" id="currinfo_app" onclick="checkbox(this); Profile.appStatusUpdate('4472b79494ca3f7134')" role="checkbox" aria-checked="true" tabindex="0">Показывать приложение в статусе</div>
+                        <button class="flat_button button_small page_status_btn_save" id="currinfo_save">Сохранить</button>
+                    </div>
+                </div>
+                    <div id="currinfo_wrap" onclick="return Page.infoEdit();" tabindex="0" role="button">
+                        <span id="current_info" class="current_info"><span class="my_current_info"><span class="current_text">3PBms4qiVFCGn285kmV1imryrB8ycvvuCGj</span></span></span>
+                    </div>
+                    <div id="currinfo_fake" style="display: none"><span class="my_current_info"><span class="current_text">3PBms4qiVFCGn285kmV1imryrB8ycvvuCGj</span></span></div></div>
+            </div><div class="profile_info profile_info_short" id="profile_short">
+                <div class="clear_fix profile_info_row ">
+                    <div class="label fl_l">День рождения:</div>
+                    <div class="labeled"><a href="/search?c[section]=people&amp;c[bday]=14&amp;c[bmonth]=4">14 апреля</a> <a href="/search?c[section]=people&amp;c[byear]=1984">1984 г.</a></div>
+                </div><div class="clear_fix profile_info_row ">
+                <div class="label fl_l">Город:</div>
+                <div class="labeled"><a href="/search?c[name]=0&amp;c[section]=people&amp;c[country]=1&amp;c[city]=1">Москва</a></div>
+            </div><div class="clear_fix profile_info_row ">
+                <div class="label fl_l">Семейное положение:</div>
+                <div class="labeled"><a href="/search?c[name]=0&amp;c[section]=people&amp;c[status]=1">не женат</a></div>
+            </div><div class="clear_fix profile_info_row ">
+                <div class="label fl_l">Образование:</div>
+                <div class="labeled"><a href="/search?c[name]=0&amp;c[section]=people&amp;c[uni_country]=1&amp;c[uni_city]=95&amp;c[university]=646">ННГК им. Глинки</a><a href="/search?c[name]=0&amp;c[section]=people&amp;c[uni_country]=1&amp;c[uni_city]=95&amp;c[university]=646&amp;c[uni_year]=2012"> '12</a></div>
+            </div><div class="profile_more_info">
+                <a class="profile_more_info_link" onclick="Profile.toggleInfo(this)">
+                    <span class="profile_label_more">Показать подробную информацию</span>
+                    <span class="profile_label_less">Скрыть подробную информацию</span>
+                </a>
+            </div>
+            </div>
+                <div class="profile_info profile_info_full" id="profile_full">
+                    <div class="profile_info_block clear_fix">
+                        <div class="profile_info_header_wrap">
+                            <a class="profile_info_edit" href="/edit">Редактировать</a>
+                            <span class="profile_info_header">Основная информация</span>
+                        </div>
+                        <div class="profile_info">
+                            <div class="clear_fix profile_info_row ">
+                                <div class="label fl_l">Родной город:</div>
+                                <div class="labeled"><a href="/search?c[name]=0&amp;c[section]=people&amp;c[hometown]=%D0%9A%D0%98%D0%A0%D0%9E%D0%92">КИРОВ</a></div>
+                            </div><div class="clear_fix profile_info_row ">
+                            <div class="label fl_l">Языки:</div>
+                            <div class="labeled"><a href="/search?c[name]=0&amp;c[section]=people&amp;c[lang]=-1">Русский</a></div>
+                        </div>
+                        </div>
+                    </div><div class="profile_info_block clear_fix">
+                    <div class="profile_info_header_wrap">
+                        <a class="profile_info_edit" href="/edit?act=education">Редактировать</a>
+                        <span class="profile_info_header">Образование</span>
+                    </div>
+                    <div class="profile_info">
+                        <div class="clear_fix profile_info_row ">
+                            <div class="label fl_l">Вуз:</div>
+                            <div class="labeled"><a href="/search?c[name]=0&amp;c[section]=people&amp;c[uni_country]=1&amp;c[uni_city]=95&amp;c[university]=646">ННГК им. Глинки</a><a href="/search?c[name]=0&amp;c[section]=people&amp;c[uni_country]=1&amp;c[uni_city]=95&amp;c[university]=646&amp;c[uni_year]=2012"> '12</a></div>
+                        </div>
+                    </div>
+                </div><div class="profile_info_block clear_fix">
+                    <div class="profile_info_header_wrap">
+                        <a class="profile_info_edit" href="/edit?act=interests">Редактировать</a>
+                        <span class="profile_info_header">Личная информация</span>
+                    </div>
+                    <div class="profile_info">
+                        <div class="clear_fix profile_info_row ">
+                            <div class="label fl_l"><a href="/groups?id=3156819" class="profile_label_link" onclick="return nav.go(this, event, {noback: false})">Группы:</a></div>
+                            <div class="labeled"><a href="/club100944155">Дизайн</a>, <a href="/club100739738">Программирование</a>, <a href="/club100965950">Materia</a>, <a href="/music_911">Скорая музыкальная помощь Классическая музыка</a>, <a href="/iraarchetmsk">Арчет и знаменосец мск 21.12</a>, <a href="/teamtardis">TEAmTARDIS Сериал Доктор Кто Doctor Who</a>, <a href="/pp_ru">Пиратская партия России</a>, <a href="/club184499389">Композитор Наталия Аникина</a>, <a href="/event189171684">День рождения Екатерины Яшниковой в Москве 22.12</a>, <a href="/marshmallowsmoscow">MARSHMALLOWS</a>, <a href="/sergeevgig">15 декабря поэт сергеев москва</a>, <a href="/tobi0712">7 декабря ТОБИ Денис Биндасов МАРЛИНЫ</a>, <a href="/event188246632">23.11 Кристина Ковалёва и Антон Зубарев A.Dres</a>, <a href="/epampiter">EPAM Saint Petersburg</a>, <a href="/club101428714">Музыка</a></div>
+                        </div><a class="noselect" id="profile_groups_link" href="/groups?id=3156819" onmouseover="ajax.post('al_profile.php', {act: 'groups', id: cur.oid}, {cache: 1})" onclick="return Profile.showGroups(event)">
+                        показать полный список
+                    </a>
+                        <div class="clear_fix miniblock" style="display: none">
+                            <div class="label fl_l">&nbsp;</div>
+                            <div class="labeled" id="profile_all_groups"></div>
+                        </div>
+                    </div>
+                </div>
+                </div></div><div class="counts_module"><a class="page_counter" href="/friends?id=3156819&amp;section=all" onclick="return page.showPageMembers(event, 3156819, 'friends');">
+            <div class="count">381</div>
+            <div class="label">друг</div>
+        </a><a class="page_counter" onclick="return page.showPageMembers(event, 3156819, 'fans');">
+            <div class="count">135</div>
+            <div class="label">подписчиков</div>
+        </a><a class="page_counter" href="/albums3156819?profile=1" onclick="return showAlbums(3156819, {noHistory: true}, event);">
+            <div class="count">732</div>
+            <div class="label">фотографии</div>
+        </a><a class="page_counter" href="/tag3156819" onclick="return showPhotoTags(3156819, {noHistory: true}, event);">
+            <div class="count">30</div>
+            <div class="label">отметок</div>
+        </a><a class="page_counter" href="/videos3156819" onclick="return page.showPageVideos(event, 3156819)">
+            <div class="count">19</div>
+            <div class="label">видеозаписей</div>
+        </a><a class="page_counter" href="/gifts3156819" onclick="return Profile.giftsBox(3156819, event);">
+            <div class="count">28</div>
+            <div class="label">подарков</div>
+        </a><a class="page_counter" href="/audios3156819" onclick="return page.showPageAudios(event, 3156819);">
+            <div class="count">2<span class="num_delim"> </span>209</div>
+            <div class="label">аудиозаписей</div>
+        </a></div>
+        </div>
+    </section>
+</template>

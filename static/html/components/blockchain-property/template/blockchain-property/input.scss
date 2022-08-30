@@ -1,0 +1,26 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+:host{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.bus {
+  //@include display(row, nowrap, space-evenly, center, stretch);
+  flex-grow: 1;
+
+  &-account {
+    flex-grow: 1;
+    //@include display(row, nowrap, space-between, center, stretch);
+
+    &-label {
+      //@include display(column, nowrap, flex-start, center, stretch);
+    }
+
+    &-input {
+      width: 30vw;
+    }
+  }
+}

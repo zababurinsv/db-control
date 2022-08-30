@@ -1,0 +1,163 @@
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+//@import "./docs/css/interface.scss";
+@mixin size(){
+  width: calc(100vw / 11.2);
+  height: auto;
+}
+@mixin border() {
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  padding: 0.25vw;
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+}
+@mixin palyer() {
+
+  label{
+    //@include display(column, nowrap, space-evenly, center, stretch);
+    width: 100%;
+    //align-items: center;
+    //@include fonts(8);
+    font-family: Roboto,serif;
+    margin: 0.25vw;
+    p{
+      //@include border();
+      margin-top: 0;
+    }
+  }
+  div.option{
+    //@include display(row, nowrap, space-evenly, center, stretch);
+    input{
+      flex-grow: 1;
+      //@include fonts(8);
+      //@include border();
+      font-family: Roboto,serif;
+      margin: 0.25vw;
+      cursor: text;
+    }
+    select{
+      flex-grow: 1;
+      //@include fonts(8);
+      //@include border();
+      font-family: Roboto,serif;
+      margin: 0.25vw;
+    }
+    section{
+
+
+    }
+  }
+}
+section#manager-control {
+  //@include border();
+  div#control{
+    width: 100%;
+
+    table{
+      //@include display(column, nowrap, space-evenly, center, stretch);
+      tbody{
+        //@include display(column, nowrap, space-evenly, center, stretch);
+        tr{
+          //@include display(column, nowrap, space-evenly, center, stretch);
+          td{
+            //@include display(column, nowrap, space-evenly, center, stretch);
+            cursor: default;
+            div#menu{
+              //@include display(row, nowrap, space-evenly, center, stretch);
+              table#menutable{
+                //@include display(row, nowrap, space-evenly, center, stretch);
+                width: 100%;
+                tbody{
+                  //@include display(row, nowrap, space-evenly, center, stretch);
+                  width: 100%;
+                  tr{
+                    //@include display(row, nowrap, space-evenly, center, stretch);
+                    width: 100%;
+                    box-sizing: border-box;
+                    padding: 1vw;
+                    //@include fonts(8);
+                    font-family: Roboto,serif;
+                    td.menu-item{
+                      //@include border();
+                      box-sizing: border-box;
+                      padding: 1vw;
+                      margin: 1vw;
+                      a{
+
+
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            div#buy{
+              //@include display(row, nowrap, space-evenly, center, stretch);
+
+            }
+
+            div#manage{
+              //@include display(column, nowrap, space-evenly, center, stretch);
+              width: 100%;
+
+              div#option{
+                //@include display(column, nowrap, space-evenly, center, stretch);
+
+                div.option{
+                  //@include display(row, nowrap, space-evenly, center, stretch);
+                  box-sizing: border-box;
+                  padding: 1vw;
+                  input{
+                    //@include border();
+                    box-sizing: border-box;
+                    padding: 1vw;
+                    margin: 1vw;
+                    //@include fonts(8);
+                    font-family: Roboto,serif;
+                  }
+                }
+              }
+            }
+          }
+          td.quickstats{
+            //@include display(column, nowrap, space-evenly, center, stretch);
+            box-sizing: border-box;
+            padding: 1vw;
+            div.playerLand{
+              //@include display(row, nowrap, space-evenly, center, stretch);
+              box-sizing: border-box;
+              input{
+                //@include border();
+                box-sizing: border-box;
+                padding: 1vw;
+                margin: 1vw;
+                //@include fonts(8);
+                font-family: Roboto,serif;
+              }
+            }
+            div.stateGame{
+              //@include display(column, nowrap, space-evenly, center, stretch);
+              div#quickstats{
+
+                div{
+                  //@include fonts(8);
+                  font-family: Roboto,serif;
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

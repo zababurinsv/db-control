@@ -1,0 +1,1 @@
+import button from"/static/html/components/component_modules/type/module/object-button.mjs";export default(t={_:"default"})=>new Promise(async(o,e)=>{let r={staticProperty:{}};r.staticProperty.class=void 0;try{t._}catch(t){(t=>{e(t)})({_:"type",error:t})}});

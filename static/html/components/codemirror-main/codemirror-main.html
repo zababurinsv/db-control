@@ -1,0 +1,50 @@
+<template>
+    <section id="codemirror-main">
+        <div role="main">
+            <div class="options">
+                <button id="search" role="button">
+                    Find
+                </button>
+                <button id="fnext" role="button">
+                    Find Next
+                </button>
+                <button id="fprev" role="button">
+                    Find Previous
+                </button>
+                <button id="replace" role="button">
+                    Replace
+                </button>
+                <button id="replall" role="button">
+                    Replace all
+                </button>
+                <button id="goto" role="button">
+                    Go to
+                </button>
+                <button id="undo" role="button">
+                    Undo
+                </button>
+                <button id="redo" role="button">
+                    Redo
+                </button>
+            </div>
+            <hr/>
+            <textarea id="code" role="content"></textarea>
+            <hr/>
+            <div class="options">
+                <button id="save" role="button">
+                    Save
+                </button>
+                <button id="getLast" role="button">
+                    Get Last
+                </button>
+                <button id="run" role="button">
+                    Run
+                </button>
+            </div>
+            <hr/>
+            <div class="result">RESULT</div>
+            <textarea id="result" role="content"></textarea>
+            <div id="script"></div>
+        </div>
+    </section>
+</template>

@@ -1,0 +1,202 @@
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+section#account{
+  display: flex;
+  flex-direction: column;
+  div.preview{
+    display: flex;
+    color: #232f62;
+    border: 0.3vw solid #c39ea0;
+    border-radius: 1vw;
+    text-align: center;
+    background-color: #c39ea0;
+    position: relative;
+    //width: 70%;
+    align-self: center;
+    margin: 2vw;
+    flex-direction: column;
+    p.preview{
+      //@include fonts(5);
+      text-transform: uppercase;
+      font-family: BloggerSans,serif;
+      padding: 0.5vw;
+      box-sizing: border-box;
+      margin: auto;
+      //margin-top: 0.4vw;
+    }
+    div.data{
+      div.balance{
+        font-family: Roboto, serif;
+        //@include fonts(5);
+        box-sizing: border-box;
+        color: #232f62;
+        dic.regularBalance{
+          font-family: Roboto, serif;
+          //@include fonts(5);
+          box-sizing: border-box;
+          color: #232f62;
+
+        }
+      }
+      div#multiDomainAccount{
+        //@include fonts(5);
+        box-sizing: border-box;
+        font-family: Roboto, serif;
+      }
+      div.fiat{
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+  }
+  div.container{
+    display: flex;
+    form.account{
+      display: flex;
+      width: 50%;
+      box-sizing: border-box;
+      padding: 1vw;
+      div.account{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-evenly;
+        section.account{
+          display: flex;
+          width: 40%;
+          justify-content: space-evenly;
+          box-sizing: border-box;
+          padding: 0.5vw;
+          flex-direction: column;
+          align-items: stretch;
+          input[type=number]::-webkit-inner-spin-button,
+          input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          input[type="number"] {
+            -moz-appearance: textfield;
+          }
+          input[type="number"]:hover,
+          input[type="number"]:focus {
+            -moz-appearance: number-input;
+          }
+          input[type="number"]::-webkit-outer-spin-button,
+          input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+          input{
+            box-sizing: border-box;
+            font-family: Roboto, serif;
+            //@include fonts(5);
+            padding: 1vw;
+            text-align: center;
+            //margin: 1vw;
+          }
+
+          label.withdraw,label.deposit {
+            //margin: 1vw;
+            padding: 1vw;
+            box-sizing: border-box;
+            color: #232f62;
+            cursor: pointer;
+            //width: 93%;
+            text-align: center;
+            //height: 4vw;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            font-family: Roboto, serif;
+            //@include fonts(5);
+            border: 0.2vw solid #cccccc;
+            border-radius: 0.4vw;
+            transition: 1s;
+            box-shadow: 0.21vw 0.21vw 0.31vw #6e6e6e;
+            background-color: transparent;
+            &:hover {
+              color: #151515;
+              //@include fonts(5);
+              //border: 0.3vw solid #151515;
+              //padding: 0.4vw;
+              border-radius: 0.4vw;
+              //transition: 1s;
+            }
+          }
+        }
+      }
+    }
+
+    section.personal{
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: space-between;
+      width: 100%;
+      div.name, div.info, div.balanceAccount{
+        margin: 1vw;
+        //@include fonts(5);
+        padding: 1vw;
+        box-sizing: border-box;
+        color: #232f62;
+        cursor: pointer;
+        //width: 86%;
+        text-align: center;
+        //height: 4vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        font-family: Roboto, serif;
+        //@include fonts(5);
+        border: 0.2vw solid #cccccc;
+        border-radius: 0.4vw;
+        transition: 1s;
+        box-shadow: 0.21vw 0.21vw 0.31vw #6e6e6e;
+        background-color: transparent;
+        &:hover {
+          color: #151515;
+          //@include fonts(5);
+          //border: 0.3vw solid #151515;
+          //padding: 0.4vw;
+          border-radius: 0.4vw;
+          //transition: 1s;
+        }
+      }
+      select.balanceSelect{
+
+        text-align: -webkit-center;
+        margin-top: 1.5vw;
+        margin-bottom: 1vw;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        padding: 0.5vw;
+        text-align: -moz-center;
+        box-sizing: border-box;
+        color: #232f62;
+        cursor: pointer;
+        //width: 86%;
+        //height: 4vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        font-family: Roboto, serif;
+        //@include fonts(5);
+        border: 0.2vw solid #cccccc;
+        border-radius: 0.4vw;
+        transition: 1s;
+        box-shadow: 0.21vw 0.21vw 0.31vw #6e6e6e;
+        background-color: transparent;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+      }
+    }
+  }
+}

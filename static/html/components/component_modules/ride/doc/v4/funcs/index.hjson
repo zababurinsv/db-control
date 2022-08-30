@@ -1,0 +1,1239 @@
+{
+  funcs: [
+    {
+      name: "sigVerify"
+      params: [ "Address|Alias", "ByteVector" ]
+      doc: "Gets account balance by token ID."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "Token ID." ]
+      complexity: 10
+    }
+    {
+      name: "getBinary"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets an array of bytes by key."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getBinaryValue"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets an array of bytes by key. Throws an exception if there is no data."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getBoolean"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets a boolean value by key."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getBooleanValue"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets a boolean value by key. Throws an exception if there is no data."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getInteger"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets an integer by key."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getIntegerValue"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets an integer by key. Throws an exception if there is no data."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getString"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets a string by key."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "getStringValue"
+      params: [ "Address|Alias", "String" ]
+      doc: "Gets a string by key. Throws an exception if there is no data."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account.", "The key." ]
+      complexity: 10
+    }
+    {
+      name: "wavesBalance"
+      params: [ "Address|Alias" ]
+      doc: "Gets account waves balance details."
+      paramsDoc: [ "[Address](/blockchain/address.md) or [alias](/blockchain/alias.md) of the account." ]
+      complexity: 10
+    }
+     {
+          name: "assetInfo"
+          params: [ "ByteVector" ]
+          doc: "Gets the information about a [token](/blockchain/token.md)."
+          paramsDoc: [ "ID of the [token](/blockchain/token.md)." ]
+          complexity: 15
+        }
+        {
+          name: "blockInfoByHeight"
+          params: [ "Int" ]
+          doc: "Gets the information about a [block](/blockchain/block.md) by the [block height](/blockchain/block-height.md)"
+          paramsDoc: [ "Block height." ]
+          complexity: 5
+        }
+        {
+          name: "calculateAssetId"
+          params: [ "Issue" ]
+          doc: "Calculates ID of asset obtained by invoke script transaction's call of the Issue structure."
+          paramsDoc: [ "Structure of a token issue." ]
+          complexity: 10
+        }
+        {
+          name: "transactionHeightById"
+          params: [ "ByteVector" ]
+          doc: "Gets the [block height](/blockchain/block-height.md) of a transaction."
+          paramsDoc: [ "ID of the transaction." ]
+          complexity: 20
+        }
+        {
+          name: "transferTransactionById"
+          params: [ "ByteVector" ]
+          doc: "Gets the data of a transfer transaction."
+          paramsDoc: [ "ID of the transfer transaction." ]
+          complexity: 60
+        }
+        {
+          name: "transferTransactionFromProto"
+          params: [ "ByteVector" ]
+          doc: "Deserializes transfer transaction: converts protobuf-encoded binary format to a TransferTransaction structure."
+          paramsDoc: [ "Transfer transaction in protobuf-encoded binary format." ]
+          complexity: 5
+        }
+         {
+              name: "drop"
+              params: [ "ByteVector", "Int" ]
+              doc: "Drops the first n bytes of an array of bytes."
+              paramsDoc: [ "The array of bytes.", "The number n." ]
+              complexity: 6
+            }
+            {
+              name: "dropRight"
+              params: [ "ByteVector", "Int" ]
+              doc: "Drops the first n bytes of an array of bytes."
+              paramsDoc: [ "The array of bytes.", "The number n." ]
+              complexity: 6
+            }
+            {
+              name: "size"
+              params: [ "ByteVector" ]
+              doc: "Returns the size of an array of bytes."
+              paramsDoc: [ "The array of bytes." ]
+              complexity: 1
+            }
+            {
+              name: "take"
+              params: [ "ByteVector", "Int" ]
+              doc: "Takes the first n bytes from an array of bytes."
+              paramsDoc: [ "The array of bytes.", "The number n." ]
+              complexity: 6
+            }
+            {
+              name: "takeRight"
+              params: [ "ByteVector", "Int" ]
+              doc: "Takes the last n bytes from an array of bytes."
+              paramsDoc: [ "The array of bytes.", "The number n." ]
+              complexity: 6
+            }
+            {
+                  name: "addressFromPublicKey"
+                  params: [ "ByteVector" ]
+                  doc: "Converts account public key to [address](blockhain/address.md)."
+                  paramsDoc: [ "The public key to convert." ]
+                  complexity: 63
+                }
+                {
+                  name: "addressFromRecipient"
+                  params: [ "Address|Alias" ]
+                  doc: "Extract address or lookup alias"
+                  paramsDoc: [ "Address or alias of the account." ]
+                  complexity: 5
+                }
+                {
+                  name: "parseInt"
+                  params: [ "String" ]
+                  doc: "Converts the string representation of a number to its integer equivalent."
+                  paramsDoc: [ "The string to parse." ]
+                  complexity: 2
+                }
+                {
+                  name: "parseIntValue"
+                  params: [ "String" ]
+                  doc:
+                    '''
+                    Converts the string representation of a number to its integer equivalent.
+                    Raises an exception if the string cannot be parsed.
+                    '''
+                  paramsDoc: [ "The string to parse." ]
+                  complexity: 2
+                }
+                {
+                  name: "toBytes"
+                  params: [ "Boolean" ]
+                  doc: "Converts a boolean to an array of bytes."
+                  paramsDoc: [ "The boolean to convert." ]
+                  complexity: 1
+                }
+                {
+                  name: "toBytes"
+                  params: [ "Int" ]
+                  doc: "Converts an integer to an array of bytes."
+                  paramsDoc: [ "The integer to convert." ]
+                  complexity: 1
+                }
+                {
+                  name: "toBytes"
+                  params: [ "String" ]
+                  doc: "Converts a string to an array of bytes."
+                  paramsDoc: [ "The string to convert." ]
+                  complexity: 8
+                }
+                {
+                  name: "toInt"
+                  params: [ "ByteVector" ]
+                  doc: "Converts an array of bytes to an integer."
+                  paramsDoc: [ "The array of bytes to convert." ]
+                  complexity: 1
+                }
+                {
+                  name: "toInt"
+                  params: [ "ByteVector", "Int" ]
+                  doc: "Converts an array of bytes to an integer starting from a certain index."
+                  paramsDoc: [ "The array of bytes to convert.", "The index to start from." ]
+                  complexity: 1
+                }
+                {
+                  name: "toString"
+                  params: [ "Address" ]
+                  doc: "Convert address bytes to string"
+                  paramsDoc: [ "The address to convert" ]
+                  complexity: 10
+                }
+                {
+                  name: "toString"
+                  params: [ "Boolean" ]
+                  doc: "Converts a boolean to a string."
+                  paramsDoc: [ "The boolean to convert." ]
+                  complexity: 1
+                }
+                {
+                  name: "toString"
+                  params: [ "Int" ]
+                  doc: "Converts an integer to a string."
+                  paramsDoc: [ "The integer to convert." ]
+                  complexity: 1
+                }
+                {
+                  name: "toUtf8String"
+                  params: [ "ByteVector" ]
+                  doc: "Converts an array of bytes to a UTF-8 string."
+                  paramsDoc: [ "The array of bytes to convert." ]
+                  complexity: 7
+                }
+                {
+                      name: "keccak256"
+                      params: [ "ByteVector" ]
+                      doc: "[Keccak-256](https://keccak.team/files/Keccak-submission-3.pdf) hash function."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 200
+                    }
+                    {
+                      name: "keccak256_16Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[Keccak-256](https://keccak.team/files/Keccak-submission-3.pdf) hash function. For array with size <= 16Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 10
+                    }
+                    {
+                      name: "keccak256_32Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[Keccak-256](https://keccak.team/files/Keccak-submission-3.pdf) hash function. For array with size <= 32Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 25
+                    }
+                    {
+                      name: "keccak256_64Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[Keccak-256](https://keccak.team/files/Keccak-submission-3.pdf) hash function. For array with size <= 64Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 50
+                    }
+                    {
+                      name: "keccak256_128Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[Keccak-256](https://keccak.team/files/Keccak-submission-3.pdf) hash function. For array with size <= 128Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 100
+                    }
+                    {
+                      name: "blake2b256"
+                      params: [ "ByteVector" ]
+                      doc: "[BLAKE-256](https://en.wikipedia.org/wiki/BLAKE_%28hash_function%29) hash function."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 200
+                    }
+                    {
+                      name: "blake2b256_16Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[BLAKE-256](https://en.wikipedia.org/wiki/BLAKE_%28hash_function%29) hash function. For array with size <= 16Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 10
+                    }
+                    {
+                      name: "blake2b256_32Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[BLAKE-256](https://en.wikipedia.org/wiki/BLAKE_%28hash_function%29) hash function. For array with size <= 32Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 25
+                    }
+                    {
+                      name: "blake2b256_64Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[BLAKE-256](https://en.wikipedia.org/wiki/BLAKE_%28hash_function%29) hash function. For array with size <= 64Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 50
+                    }
+                    {
+                      name: "blake2b256_128Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[BLAKE-256](https://en.wikipedia.org/wiki/BLAKE_%28hash_function%29) hash function. For array with size <= 128Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 100
+                    }
+                    {
+                      name: "sha256"
+                      params: [ "ByteVector" ]
+                      doc: "[SHA-256](https://en.wikipedia.org/wiki/SHA-2) hash function."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 200
+                    }
+                    {
+                      name: "sha256_16Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[SHA-256](https://en.wikipedia.org/wiki/SHA-2) hash function. For array with size <= 16Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 10
+                    }
+                    {
+                      name: "sha256_32Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[SHA-256](https://en.wikipedia.org/wiki/SHA-2) hash function. For array with size <= 32Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 25
+                    }
+                    {
+                      name: "sha256_64Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[SHA-256](https://en.wikipedia.org/wiki/SHA-2) hash function. For array with size <= 64Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 50
+                    }
+                    {
+                      name: "sha256_128Kb"
+                      params: [ "ByteVector" ]
+                      doc: "[SHA-256](https://en.wikipedia.org/wiki/SHA-2) hash function. For array with size <= 128Kb."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 100
+                    }
+                    {
+                      name: "toBase16String"
+                      params: [ "ByteVector" ]
+                      doc: "Encodes array of bytes to [Base16](https://en.wikipedia.org/wiki/Hexadecimal) string."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 10
+                    }
+                    {
+                      name: "toBase58String"
+                      params: [ "ByteVector" ]
+                      doc: "Encodes array of bytes to [Base58](https://en.wikipedia.org/wiki/Base58) string."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 3
+                    }
+                    {
+                      name: "toBase64String"
+                      params: [ "ByteVector" ]
+                      doc: "Encodes array of bytes to [Base64](https://en.wikipedia.org/wiki/Base64) string."
+                      paramsDoc: [ "The array of bytes to encode." ]
+                      complexity: 35
+                    }
+                    {
+                      name: "fromBase16String"
+                      params: [ "String" ]
+                      doc: "Decodes [Base16](https://en.wikipedia.org/wiki/Hexadecimal) string to an array of bytes."
+                      paramsDoc: [ "The string to decode." ]
+                      complexity: 10
+                    }
+                    {
+                      name: "fromBase58String"
+                      params: [ "String" ]
+                      doc: "Decodes [Base58](https://en.wikipedia.org/wiki/Base58) string to an array of bytes."
+                      paramsDoc: [ "The string to decode." ]
+                      complexity: 1
+                    }
+                    {
+                      name: "fromBase64String"
+                      params: [ "String" ]
+                      doc: "Decodes [Base64](https://en.wikipedia.org/wiki/Base64) string to an array of bytes."
+                      paramsDoc: [ "The string to decode." ]
+                      complexity: 40
+                    }
+                    {
+                      name: "addressFromString"
+                      params: [ "String" ]
+                      doc: "Decodes address from [Base58](https://en.wikipedia.org/wiki/Base58) string."
+                      paramsDoc: [ "The string to decode." ]
+                      complexity: 1
+                    }
+                    {
+                      name: "addressFromStringValue"
+                      params: [ "String" ]
+                      doc:
+                        '''
+                        Decodes address from [Base58](https://en.wikipedia.org/wiki/Base58) string.
+                        Raises an exception if the address cannot be decoded.
+                        '''
+                      paramsDoc: [ "The string to decode." ]
+                      complexity: 1
+                    }
+                    {
+                      name: "ecrecover"
+                      params: [ "ByteVector", "ByteVector" ]
+                      doc: "Recovers the public key from hash of ECDSA-encoded message and signature."
+                      paramsDoc: [ "The hash of encoded message.", "The signature." ]
+                      complexity: 70
+                    }
+                     {
+                          name: "throw"
+                          params: [ ]
+                          doc: "Raises an exception."
+                          paramsDoc: [ ]
+                          complexity: 1
+                        }
+                        {
+                          name: "throw"
+                          params: [ "String" ]
+                          doc: "Raises an exception with a message."
+                          paramsDoc: [ "The exception message." ]
+                          complexity: 1
+                        }
+                         {
+                              name: "getInteger"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Gets integer from a list of data entries by key"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getBoolean"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Gets a boolean value from a list of data entries by key"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getBinary"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Gets a binary value from a list of data entries by key"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+
+                            }
+                        	{
+                              name: "getString"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Gets a string value from a list of data entries by key"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getInteger"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Gets integer from a list of data entries by index"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getBoolean"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Gets a boolean value from a list of data entries by index"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getBinary"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Gets a binary value from a list of data entries by index"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getString"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Gets a string value from a list of data entries by index"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getIntegerValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Find and extract data by key (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getBooleanValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Find and extract data by key (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getBinaryValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Find and extract data by key (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getStringValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "String" ]
+                              doc: "Find and extract data by key (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "key" ]
+                              complexity: 10
+                            }
+                        	{
+                              name: "getIntegerValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Extract data by index (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getBooleanValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Extract data by index (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getBinaryValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Extract data by index (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                        	{
+                              name: "getStringValue"
+                              params: [ "List[BinaryEntry|BooleanEntry|DeleteEntry|IntegerEntry|StringEntry]", "Int" ]
+                              doc: "Extract data by index (fail on error)"
+                              paramsDoc: [ "DataEntry list, usually tx.data", "index" ]
+                              complexity: 4
+                            }
+                            {
+                                  name: "Issue"
+                                  params: [ "String", "String", "Int", "Int", "Boolean", "Script|Unit", "Int" ]
+                                  doc: "Issue action detailed constructor"
+                                  paramsDoc: [ "Token name", "Token description", "Amount of the token", "Number of digits in decimal part", "Reissue ability flag", "Smart asset script (optional)", "Sequential number"]
+                                  complexity: 1
+                                },
+                                {
+                                  name: "Issue"
+                                  params: [ "String", "String", "Int", "Int", "Boolean" ]
+                                  doc: "Issue action simplified constructor"
+                                  paramsDoc: [ "Token name", "Token description", "Amount of the token", "Number of digits in decimal part", "Reissue ability flag" ]
+                                  complexity: 1
+                                }
+                                {
+                                      name: "cons"
+                                      params: [ "A", "List[B]" ]
+                                      doc: "Prepends a new element to the list."
+                                      paramsDoc: [ "The element.", "The list." ]
+                                      complexity: 1
+                                    }
+                                    {
+                                      name: "size"
+                                      params: [ "List[T]" ]
+                                      doc: "Returns the size of a list."
+                                      paramsDoc: [ "The list." ]
+                                      complexity: 2
+                                    }
+                                	{
+                                      name: "getElement"
+                                      params: [ "List[T]", "Int" ]
+                                      doc: "Gets an element from a list by index."
+                                      paramsDoc: [ "The list.", "The index of the element." ]
+                                      complexity: 2
+                                    }
+                                	{
+                                      name: "median"
+                                      params: [ "List[Int]" ]
+                                      doc: "Returns the median of the list."
+                                      paramsDoc: [ "The list of integers." ]
+                                      complexity: 20
+                                    }
+                                	{
+                                      name: "min"
+                                      params: [ "List[Int]" ]
+                                      doc: "Returns the minimum of the list."
+                                      paramsDoc: [ "The list of integers." ]
+                                      complexity: 3
+                                    }
+                                	{
+                                      name: "max"
+                                      params: [ "List[Int]" ]
+                                      doc: "Returns the maximum of the list."
+                                      paramsDoc: [ "The list of integers." ]
+                                      complexity: 3
+                                    }
+                                    {
+                                      name: "indexOf"
+                                      params: [ "List[T]", "T" ]
+                                      doc: "Returns the index of the first occurrence of given value"
+                                      paramsDoc: [ "The list.", "The element." ]
+                                      complexity: 5
+                                    }
+                                    {
+                                      name: "lastIndexOf"
+                                      params: [ "List[T]", "T" ]
+                                      doc: "Returns the index of the last occurrence of given value"
+                                      paramsDoc: [ "The list.", "The element." ]
+                                      complexity: 5
+                                    }
+                                    {
+                                      name: "containsElement"
+                                      params: [ "List[T]", "T" ]
+                                      doc: "Tests whether the list contains a given value as an element"
+                                      paramsDoc: [ "The list.", "The element." ]
+                                      complexity: 5
+                                    }
+                                	{
+                                      name: "makeString"
+                                      params: [ "List[String]", "String" ]
+                                      doc: "Returns all the elements of the list in a string using the separator string."
+                                      paramsDoc: [ "The list of strings.", "The separator" ]
+                                      complexity: 30
+                                    }
+                                	{
+                                      name: "removeByIndex"
+                                      params: [ "List[T]", "Int" ]
+                                      doc: "Removes the element at given index from the list and returns new list."
+                                      paramsDoc: [ "The list.", "The element." ]
+                                      complexity: 7
+                                    }
+                                    {
+                                          name: "pow"
+                                          params: [ "Int", "Int", "Int", "Int", "Int", "Ceiling|Down|Floor|HalfDown|HalfEven|HalfUp|Up" ]
+                                          doc: "Returns a number raised to a power"
+                                          paramsDoc: [
+                                            "The base."
+                                            "The number of decimals of the base."
+                                            "The exponent."
+                                            "The number of decimals of the exponent."
+                                            "The number of decimals of the resulting value."
+                                            "One of the rounding functions. The HalfUp() function may be used as the default value."
+                                          ]
+                                          complexity: 100
+                                        }
+                                    	 {
+                                          name: "log"
+                                          params: [ "Int", "Int", "Int", "Int", "Int", "Ceiling|Down|Floor|HalfDown|HalfEven|HalfUp|Up" ]
+                                          doc: "Returns the logarithm of a number."
+                                          paramsDoc: [
+                                            "The base."
+                                            "The number of decimals of the base."
+                                            "The exponent."
+                                            "The number of decimals of the exponent."
+                                            "The number of decimals of the resulting value."
+                                            '''
+                                            The rounding function.
+                                            The HalfUp() function may be used as the default value.
+                                            '''
+                                          ]
+                                          complexity: 100
+                                        }
+                                    	 {
+                                          name: "fraction"
+                                          params: [ "Int", "Int", "Int" ]
+                                          doc: "Multiply and division with big integer intermediate representation"
+                                          paramsDoc: [ "Multiplier", "Multiplier", "Divisor" ]
+                                          complexity: 1
+                                        }
+                                        {
+                                              name: "*"
+                                              params: [ "Int", "Int" ]
+                                              doc: "Multiply integers."
+                                              paramsDoc: [ "Multiplier", "Multiplier" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "/"
+                                              params: [ "Int", "Int" ]
+                                              doc: "Divide integers."
+                                              paramsDoc: [ "Divisible", "Divisor" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "%"
+                                              params: [ "Int", "Int" ]
+                                              doc: "Calculate modulo."
+                                              paramsDoc: [ "Divisible", "Divisor" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "+"
+                                              params: [ "Int", "Int" ]
+                                              doc: "Sum integers."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "-"
+                                              params: [ "Int", "Int" ]
+                                              doc: "Substitute integers."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "+"
+                                              params: [ "String", "String" ]
+                                              doc: "Concat limited strings."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 20
+                                            }
+                                            {
+                                              name: "+"
+                                              params: [ "ByteVector", "ByteVector" ]
+                                              doc: "Concat limited byte vectors."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 2
+                                            }
+                                            {
+                                              name: "=="
+                                              params: [ "T", "T" ]
+                                              doc: "Check equality."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "!="
+                                              params: [ "T", "T" ]
+                                              doc: "Check inequality."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: ">="
+                                              params: [ "Int", "Int" ]
+                                              doc: "Check if integer greater or equal comparison."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: ">"
+                                              params: [ "Int", "Int" ]
+                                              doc: "Check if integer greater comparison."
+                                              paramsDoc: [ "First value", "Second value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "-"
+                                              params: [ "Int" ]
+                                              doc: "Change integer sign."
+                                              paramsDoc: [ "Value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "!"
+                                              params: [ "Boolean" ]
+                                              doc: "Unary negation."
+                                              paramsDoc: [ "Value" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                              name: "++"
+                                              params: [ "List[A]", "List[B]" ]
+                                              doc: "List Concatenation."
+                                              paramsDoc: [ "First list", "Second list" ]
+                                              complexity: 4
+                                            }
+                                            {
+                                              name: ":+"
+                                              params: [ "List[A]", "B" ]
+                                              doc: "Adding the element to the end of the list."
+                                              paramsDoc: [ "The list", "The element" ]
+                                              complexity: 1
+                                            }
+                                            {
+                                                  name: "value"
+                                                  params: [ "T|Unit" ]
+                                                  doc: "Extract value from option or fail"
+                                                  paramsDoc: [ "Optional value" ]
+                                                  complexity: 2
+                                                }
+                                            	{
+                                                  name: "valueOrElse"
+                                                  params: [ "T|Unit", "T" ]
+                                                  doc: "Returns value from union type argument if it's not unit. Otherwise, returns the second argument."
+                                                  paramsDoc: [ "The argument to return value from.", "Returned if the value of t is unit." ]
+                                                  complexity: 2
+                                                }
+                                            	{
+                                                  name: "valueOrErrorMessage"
+                                                  params: [ "T|Unit", "String" ]
+                                                  doc: "Extract value from option or fail with message"
+                                                  paramsDoc: [ "Optional value", "Error message" ]
+                                                  complexity: 2
+                                                }
+                                                {
+                                                  name: "extract"
+                                                  params: [ "T|Unit" ]
+                                                  doc: "Extract value from option or fail"
+                                                  paramsDoc: [ "Optional value" ]
+                                                  complexity: 13
+                                                }
+                                                {
+                                                  name: "isDefined"
+                                                  params: [ "T|Unit" ]
+                                                  doc: "Checks if a value is not `Unit`"
+                                                  paramsDoc: [ "Optional value" ]
+                                                  complexity: 1
+                                                }
+                                                {
+                                                      name: "contains"
+                                                      params: [ "String", "String" ]
+                                                      doc: "Checks whether the string contains substring"
+                                                      paramsDoc: [ "String to search in.", "String to search for." ]
+                                                      complexity: 3
+                                                    }
+                                                    {
+                                                      name: "drop"
+                                                      params: [ "String", "Int" ]
+                                                      doc: "Drops the first n characters of a string"
+                                                      paramsDoc: [ "The string.", "The number n." ]
+                                                      complexity: 20
+                                                    }
+                                                    {
+                                                      name: "dropRight"
+                                                      params: [ "String", "Int" ]
+                                                      doc: "Drops the last n characters of a string"
+                                                      paramsDoc: [ "The string.", "The number n." ]
+                                                      complexity: 20
+                                                    }
+                                                    {
+                                                      name: "indexOf"
+                                                      params: [ "String", "String" ]
+                                                      doc: "Returns the index of the first occurrence of a substring"
+                                                      paramsDoc: [ "The string.", "The substring." ]
+                                                      complexity: 3
+                                                    }
+                                                    {
+                                                      name: "indexOf"
+                                                      params: [ "String", "String", "Int" ]
+                                                      doc: "Returns the index of the first occurrence of a substring after a certain index"
+                                                      paramsDoc: [ "The string.", "The substring.", "The index." ]
+                                                      complexity: 3
+                                                    }
+                                                    {
+                                                      name: "lastIndexOf"
+                                                      params: [ "String", "String" ]
+                                                      doc: "Returns the index of the last occurrence of a substring"
+                                                      paramsDoc: [ "The string.", "The substring." ]
+                                                      complexity: 3
+                                                    }
+                                                	 {
+                                                      name: "lastIndexOf"
+                                                      params: [ "String", "String", "Int" ]
+                                                      doc: "Returns the index of the last occurrence of a substring after a certain index"
+                                                      paramsDoc: [ "The string.", "The substring.", "The index." ]
+                                                      complexity: 3
+                                                    }
+                                                    {
+                                                      name: "split"
+                                                      params: [ "String", "String" ]
+                                                      doc: "Splits a string delimited by a separator into a list of substrings"
+                                                      paramsDoc: [ "The string.", "The separator." ]
+                                                      complexity: 75
+                                                    }
+                                                    {
+                                                      name: "size"
+                                                      params: [ "String" ]
+                                                      doc: "Returns the size of a string"
+                                                      paramsDoc: [ "The string." ]
+                                                      complexity: 1
+                                                    }
+                                                    {
+                                                      name: "take"
+                                                      params: [ "String", "Int" ]
+                                                      doc: "Takes the first n characters from a string"
+                                                      paramsDoc: [ "The string.", "The number n." ]
+                                                      complexity: 20
+                                                    }
+                                                    {
+                                                      name: "takeRight"
+                                                      params: [ "String", "Int" ]
+                                                      doc: "Takes the last n characters from a string"
+                                                      paramsDoc: [ "The string.", "The number n." ]
+                                                      complexity: 20
+                                                    }
+                                                    {
+                                                          name: "sigVerify"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies a [Curve25519](https://en.wikipedia.org/wiki/Curve25519) signature."
+                                                          paramsDoc: [ "The message.", "The signature.", "The account public key." ]
+                                                          complexity: 200
+                                                        }
+                                                        {
+                                                          name: "sigVerify_8Kb"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies a [Curve25519](https://en.wikipedia.org/wiki/Curve25519) signature. For message size <= 16Kb."
+                                                          paramsDoc: [ "The message.", "The signature.", "The account public key." ]
+                                                          complexity: 47
+                                                        }
+                                                        {
+                                                          name: "sigVerify_16Kb"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies a [Curve25519](https://en.wikipedia.org/wiki/Curve25519) signature. For message size <= 16Kb."
+                                                          paramsDoc: [ "The message.", "The signature.", "The account public key." ]
+                                                          complexity: 57
+                                                        }
+                                                        {
+                                                          name: "sigVerify_32Kb"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies a [Curve25519](https://en.wikipedia.org/wiki/Curve25519) signature. For message size <= 32Kb."
+                                                          paramsDoc: [ "The message.", "The signature.", "The account public key." ]
+                                                          complexity: 70
+                                                        }
+                                                        {
+                                                          name: "sigVerify_64Kb"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies a [Curve25519](https://en.wikipedia.org/wiki/Curve25519) signature. For message size <= 64Kb."
+                                                          paramsDoc: [ "The message.", "The signature.", "The account public key." ]
+                                                          complexity: 102
+                                                        }
+                                                        {
+                                                          name: "sigVerify_128Kb"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies a [Curve25519](https://en.wikipedia.org/wiki/Curve25519) signature. For message size <= 128Kb."
+                                                          paramsDoc: [ "The message.", "The signature.", "The account public key." ]
+                                                          complexity: 172
+                                                        }
+                                                        {
+                                                          name: "rsaVerify"
+                                                          params: [
+                                                            "RsaDigestAlgs"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                          ]
+                                                          doc: "Verifies an [RSA](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29) signature."
+                                                          paramsDoc: [ "The RSA algorithm.", "The message.", "The signature.", "The public key." ]
+                                                          complexity: 1000
+                                                        }
+                                                        {
+                                                          name: "rsaVerify_16Kb"
+                                                          params: [
+                                                            "RsaDigestAlgs"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                          ]
+                                                          doc: "Verifies an [RSA](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29) signature. For message size <= 16Kb."
+                                                          paramsDoc: [ "The RSA algorithm.", "The message.", "The signature.", "The public key." ]
+                                                          complexity: 500
+                                                        }
+                                                        {
+                                                          name: "rsaVerify_32Kb"
+                                                          params: [
+                                                            "RsaDigestAlgs"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                          ]
+                                                          doc: "Verifies an [RSA](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29) signature. For message size <= 32Kb."
+                                                          paramsDoc: [ "The RSA algorithm.", "The message.", "The signature.", "The public key." ]
+                                                          complexity: 550
+                                                        }
+                                                        {
+                                                          name: "rsaVerify_64Kb"
+                                                          params: [
+                                                            "RsaDigestAlgs"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                          ]
+                                                          doc: "Verifies an [RSA](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29) signature. For message size <= 64Kb."
+                                                          paramsDoc: [ "The RSA algorithm.", "The message.", "The signature.", "The public key." ]
+                                                          complexity: 625
+                                                        }
+                                                        {
+                                                          name: "rsaVerify_128Kb"
+                                                          params: [
+                                                            "RsaDigestAlgs"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                            "ByteVector"
+                                                          ]
+                                                          doc: "Verifies an [RSA](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29) signature. For message size <= 128Kb."
+                                                          paramsDoc: [ "The RSA algorithm.", "The message.", "The signature.", "The public key." ]
+                                                          complexity: 750
+                                                        }
+                                                        {
+                                                          name: "groth16Verify"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2700
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_1inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 1 input."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1200
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_2inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 2 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1300
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_3inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 3 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1400
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_4inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 4 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1500
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_5inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 5 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1600
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_6inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 6 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1700
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_7inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 7 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1800
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_8inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 8 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1900
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_9inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 9 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2000
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_10inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 10 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2100
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_11inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 11 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2200
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_12inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 12 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2300
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_13inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 13 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2400
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_14inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 14 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2500
+                                                        }
+                                                        {
+                                                          name: "groth16Verify_15inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 15 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 2600
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1650
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_1inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 1 input."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 800
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_2inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 2 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 850
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_3inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 3 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 950
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_4inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 4 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1000
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_5inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 5 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1050
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_6inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 6 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1100
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_7inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 7 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1150
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_8inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 8 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1200
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_9inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 9 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1250
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_10inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 10 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1300
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_11inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 11 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1350
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_12inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 12 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1400
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_13inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 13 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1450
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_14inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 14 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1550
+                                                        }
+                                                        {
+                                                          name: "bn256Groth16Verify_15inputs"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "[Zero-knowledge proof](https://en.wikipedia.org/wiki/Zero-knowledge_proof) verifier function. With 15 inputs."
+                                                          paramsDoc: [ "Verifying key.", "Proofs.", "Inputs." ]
+                                                          complexity: 1600
+                                                        }
+                                                        {
+                                                          name: "checkMerkleProof"
+                                                          params: [ "ByteVector", "ByteVector", "ByteVector" ]
+                                                          doc: "Verifies if a tree of hashes is part of the [Merkle tree](https://en.wikipedia.org/wiki/Merkle_tree)."
+                                                          paramsDoc: [
+                                                            "The root hash of the Merkle tree."
+                                                            "The array of bytes of the Merkle tree proof."
+                                                            "The tree of hashes."
+                                                          ]
+                                                          complexity: 30
+                                                        }
+                                                        {
+                                                          name: "createMerkleRoot"
+                                                          params: [ "List[ByteVector]", "ByteVector", "Int" ]
+                                                          doc: "Calculates the Merkle root hash for transactions of block."
+                                                          paramsDoc: [
+                                                            "Array of sibling hashes of the Merkle tree."
+                                                            "Hash of transaction."
+                                                            "Index of the transaction in the block."
+                                                          ]
+                                                          complexity: 30
+                                                        }
+  ]
+}

@@ -1,0 +1,116 @@
+@import "../../../../index.scss";
+
+:host {
+  width: 100%;
+}
+
+.auction-aside {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  top: 10vh;
+  right: 0;
+  height: 80vh;
+  z-index: 100;
+  width: 16vw;
+  @include disabledSelect();
+  @include borderShadow();
+}
+
+.auction-aside__aside {
+  background: $--Thunderbird;
+  color: white;
+  writing-mode: vertical-rl;
+  width: 12%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: $--size3;
+}
+
+.auction-aside__center {
+  width: 100%;
+  background: white;
+}
+
+.auction-aside_item {
+  background: $--spanish-green;
+  padding: 0.5vw;
+}
+
+.auction-aside_info {
+  padding-right: 0.6vw;
+}
+
+.auction-aside_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.auction-aside_buy {
+  display: grid;
+  width: 100%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "button rules"
+    "price price";
+}
+
+.auction-aside_info_item {
+  font-size: $--size3;
+  margin-bottom: 0.4vw;
+  color: white;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.auction-aside_button {
+  grid-area: button;
+  align-self: center;
+
+  & > div {
+    position: relative;
+    width: 2vw;
+    height: 2vw;
+    background: red;
+    border-radius: 50%;
+    border: 0.2vw solid white;
+    cursor: pointer;
+
+    &:before {
+      content: '↑';
+      position: absolute;
+      color: white;
+      font-size: $--size5;
+      top: -0.39vw;
+      left: 0.45vw;
+      //-webkit-filter: blur(0.4vw);
+      //filter: blur(0.4vw);
+    }
+  }
+}
+
+.auction-aside_rules {
+  grid-area: rules;
+  align-self: center;
+  text-align: center;
+  color:$--spanish-green;
+}
+
+.auction-aside_rules_button {
+  padding: 0.5vw;
+  background: white;
+  border-radius: $--border-radius;
+  cursor: pointer;
+}
+
+.auction-aside_price {
+  grid-area: price;
+  align-self: end;
+  font-size: $--size3;
+  color: white;
+}

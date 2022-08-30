@@ -1,0 +1,100 @@
+<template>
+    <div class="markdown">
+        <fieldset class="markdown__string_menu">
+            <legend>menu</legend>
+            <button class="markdown__button_download">Скачать MD файл</button>
+            <label class="markdown__button_upload" for="markdown__button_upload">Загрузить MD файл <input type="file" id="markdown__button_upload"></label>
+            <select class="markdown__button_select">
+                <option value="" selected disabled hidden>Choose here</option>
+                <option value="index">index</option>
+                <option value="ionic">ionic</option>
+                <option value="skeleton-effect">skeleton-effect</option>
+                <option value="fs">fs</option>
+                <option value="grid">grid</option>
+                <option value="docs">docs</option>
+            </select>
+            <label class="markdown__button_views" for="markdown__button_views">Change views<input type="checkbox" checked id="markdown__button_views"></label>
+            <label class="markdown__button_update" for="markdown__button_update"><input type="button" value="Save Md" id="markdown__button_update"></label>
+            <label class="markdown__button_query" for="markdown__button_query"><input type="button" value="Get Md" id="markdown__button_query"></label>
+            <label class="markdown__button_update_anil" for="markdown__button_update_anil"><input type="button" value="Anil save md" id="markdown__button_update_anil"></label>
+            <label class="markdown__button_query_anil" for="markdown__button_query_anil"><input type="button" value="Anil get md" id="markdown__button_query_anil"></label>
+            <div class="markdown__button">
+                <label class="markdown__button_delete_value" for="markdown__button_delete_value">delete:<input type="url" id="markdown__button_delete_value" name="md-url"></label>
+                <input class="markdown__button_delete" type="button" value="delete" disabled>
+            </div>
+            <div class="markdown__button">
+                <label class="markdown__button_url_value" for="markdown__button_url_value">add md url:<input type="url" id="markdown__button_url_value" name="md-url" pattern="https://.*" size="30" required></label>
+                <input class="markdown__button_url" type="button" value="get markdown" disabled>
+            </div>
+            <div class="markdown__string_menu_codemirror">
+<!--                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_search" role="button">-->
+<!--                    Find-->
+<!--                </button>-->
+<!--                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_fnext" role="button">-->
+<!--                    Find Next-->
+<!--                </button>-->
+<!--                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_fprev" role="button">-->
+<!--                    Find Previous-->
+<!--                </button>-->
+<!--                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_replace" role="button">-->
+<!--                    Replace-->
+<!--                </button>-->
+<!--                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_replall" role="button">-->
+<!--                    Replace all-->
+<!--                </button>-->
+<!--                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_goto" role="button">-->
+<!--                    Go to-->
+<!--                </button>-->
+                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_undo" role="button">
+                    Undo
+                </button>
+                <button class="markdown__string_menu_codemirror_button markdown__string_menu_codemirror_redo" role="button">
+                    Redo
+                </button>
+            </div>
+        </fieldset>
+        <fieldset class="markdown__self_menu">
+            <aside class="markdown__self_menu_aside_left" class="markdown__self_menu_aside"></aside>
+            <div class="markdown__self_html" style="display: none;"></div>
+            <textarea class="markdown__self" style="display: flex;"></textarea>
+            <aside class="markdown__self_menu_aside_right" class="markdown__self_menu_aside"></aside>
+        </fieldset>
+        <fieldset class="markdown__string_menu">
+            <legend>menu</legend>
+            <label class="markdown__string_menu_change_views" for="markdown__string_menu_change_views">change views<input type="checkbox" checked id="markdown__string_menu_change_views" data-value="json"/></label>
+            <div class="markdown__string_menu_json markdown__string_menu_json_html">
+                <input class="markdown__string_menu_json_html_query" id="query" type="text" value=".[0]">
+                <input class="markdown__string_menu_json_html_run" id="btnRun" type="button" value="Run" disabled>
+            </div>
+            <div class="markdown__string_menu_json markdown__string_menu_json_code">
+                <input class="markdown__string_menu_json_code_query" type="text" value=".[0]">
+                <input class="markdown__string_menu_json_code_run" type="button" value="Run" disabled>
+            </div>
+        </fieldset>
+        <fieldset class="markdown__string">
+            <div class="markdown__string_html"></div>
+            <div class="markdown__string_html_json" style="display: none">
+                <textarea class="markdown__string_html_json_input" id="markdown__string_html_json_input"></textarea>
+                <textarea class="markdown__string_html_json_output" id="markdown__string_html_json_output"></textarea>
+            </div>
+            <section id="markdown__string_views"></section>
+            <div class="markdown__string_views_json" style="display: none">
+                <textarea class="markdown__string_views_json_input" id="markdown__string_views_json_input"></textarea>
+                <textarea class="markdown__string_views_json_output" id="markdown__string_views_json_output"></textarea>
+            </div>
+        </fieldset>
+        <fieldset class="markdown__string_menu">
+            <legend>menu</legend>
+            <div class="markdown__string_menu_json markdown__string_menu_json_code">
+                <input class="markdown__jasonelle_android_query" type="text" value=.["$jason"].head.styles>
+                <input class="markdown__jasonelle_android_run" type="button" value="Run" disabled>
+            </div>
+        </fieldset>
+        <fieldset class="markdown__jasonelle">
+            <div class="markdown__jasonelle_android">
+                <textarea class="markdown__jasonelle_android_input" id="markdown__string_android_input" style="display: none"></textarea>
+                <textarea class="markdown__jasonelle_android_output" id="markdown__string_android_output"></textarea>
+            </div>
+        </fieldset>
+    </div>
+</template>

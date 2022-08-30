@@ -1,0 +1,1 @@
+(async()=>{bundle.default({input:"object"},null,async function(n,t){})})();export default()=>{};

@@ -1,0 +1,1 @@
+export default()=>new Promise(function(e,o){[...document.querySelectorAll("template")].forEach(e=>{console.log("----------\x3e>"),e.parentNode.attachShadow({mode:"open"});let o=document.importNode(e.content,!0);e.parentNode.shadowRoot.appendChild(o),e.remove()}),e({hydrate:"true"})});

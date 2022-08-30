@@ -1,0 +1,265 @@
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+//@import "./docs/css/interface.scss";
+
+@mixin borderClean() {
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  padding: 0.25vw;
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+}
+
+@mixin border() {
+  //width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  //@include fonts(8);
+  font-family: Roboto,serif;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+  //margin: auto;
+}
+
+@mixin palyer() {
+
+  label{
+  //@include display(column, nowrap, space-evenly, center, stretch);
+    //width: 100%;
+    //align-items: center;
+    //@include fonts(8);
+    font-family: Roboto,serif;
+    margin: 0.25vw;
+    p{
+      //@include borderClean();
+      margin-top: 0;
+    }
+  }
+  div.option{
+    //@include display(row, nowrap, space-evenly, center, stretch);
+    input{
+      flex-grow: 1;
+      //@include fonts(8);
+      //@include borderClean();
+      font-family: Roboto,serif;
+      margin: 0.25vw;
+      cursor: text;
+    }
+    select{
+      flex-grow: 1;
+      //@include fonts(8);
+      //@include borderClean();
+      font-family: Roboto,serif;
+      margin: 0.25vw;
+
+    }
+  }
+}
+:host{
+  width: 100%;
+  margin: auto;
+}
+section#manager-menu{
+  display: flex;
+  box-sizing: border-box;
+  padding: 1vw;
+  margin: 0;
+  div#setup{
+    //@include display(column, nowrap, space-evenly, flex-start, stretch);
+    ////@include border();
+    //padding: 5vw;
+    div#configuration{
+      //@include display(row, nowrap, space-evenly, center, stretch);
+      //padding: 1vw;
+      div.setup{
+        //@include display(column, nowrap, space-evenly, start, flex-start);
+        ////@include border();
+        width: 47.5vw;
+        //padding: 1vw;
+        //width: 60vw;
+        //padding: 5vw;
+        cursor: default;
+        //margin: 1vw;
+        border-radius: 0.5vw;
+        //margin-bottom: 3vw;
+        div#player1input{
+          //@include display(row, nowrap, space-evenly, center, stretch);
+          //@include palyer();
+          border-radius: 0.5vw;
+          //width: 100%;
+          box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+          box-sizing: border-box;
+          padding: 1vw;
+          text-align: center;
+          cursor: pointer;
+          position: relative;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          text-align-last:center;
+          margin-bottom: 1vw;
+          margin-top: 1vw;
+          label[for="player1name"]{
+            background-color: white;
+            border-radius: 0.25vw;
+            div.preview{
+              width: 100%;
+              display: flex;
+              p{
+                margin: 0.25vw;
+                border-radius: 0.25vw;
+                min-height: 3.4vw;
+              }
+            }
+            div.option{
+              input#player1name{
+                border: none;
+                border-radius: 0.25vw;
+                ////@include fonts(3);
+                //font-family: Roboto,serif;
+              }
+              select#player1color{
+                border: none;
+                border-radius: 0.25vw;
+              }
+            }
+          }
+        }
+        h1{
+          margin-top: 0;
+        }
+        select#playernumber{
+          //@include border();
+          width: 100%;
+          margin-bottom: 3.7vw;
+          border: none;
+          border-radius: 0.5vw;
+          padding: 1vw;
+          option{
+            text-align: center;
+            cursor: pointer;
+            text-align-last:center;
+          }
+        }
+        div.playGame{
+          //@include display(column, nowrap, space-evenly, start, stretch);
+          ////@include border();
+
+          //padding: 5vw;
+          cursor: default;
+          //margin-bottom: 3vw;
+          input.game{
+            //@include border();
+            border: none;
+            border-radius: 0.5vw;
+            margin-bottom: 1vw;
+            padding: 1vw;
+            width: 100%;
+          }
+          label[for="connectGame"]{
+            //@include fonts(8);
+            font-family: Roboto,serif;
+            margin-bottom: 1vw;
+          }
+          input#connectGame{
+            //@include fonts(5);
+            cursor: text;
+            margin-bottom: 1vw;
+          }
+          input#playGame{
+            margin-bottom: 0;
+            cursor: pointer;
+          }
+        }
+      }
+      div.options{
+        //@include display(column, nowrap, flex-start, center, stretch);
+        box-sizing: border-box;
+        padding: 0;
+        margin-left: 0.5vw;
+        //@include border();
+        //width: 60vw;
+        //padding: 5vw;
+        cursor: default;
+        //margin: 1vw;
+        border-radius: 0.5vw;
+        h2{
+          margin-top: 1vw;
+          margin-bottom: 1.7vw;
+          //@include fonts(8);
+          font-family: Roboto,serif;
+        }
+        div#items{
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          border-radius: 0.5vw;
+          justify-content:  flex-start;
+          &:last-child{
+            margin-bottom: 0;
+          }
+          div.player-input{
+            //@include display(row, nowrap, space-evenly, center, stretch);
+            //@include palyer();
+            border-radius: 0.5vw;
+            width: 100%;
+            box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+            box-sizing: border-box;
+            padding: 0.2vw;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            text-align-last:center;
+            margin-bottom: 1vw;
+            margin-top: 1vw;
+            label.player-label{
+              background-color: white;
+              border-radius: 0.25vw;
+              div.preview{
+                width: 100%;
+                display: flex;
+                p{
+                  margin: 0.25vw;
+                  border-radius: 0.25vw;
+                }
+              }
+              div.option{
+                input.player-input{
+                  border: none;
+                  border-radius: 0.25vw;
+                }
+                select.player-select{
+                  border: none;
+                  border-radius: 0.25vw;
+                }
+              }
+
+            }
+          }
+          //div#player2input{
+          //  margin-top: 0;
+          //}
+          div#player7input{
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

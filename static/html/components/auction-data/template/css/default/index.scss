@@ -1,0 +1,218 @@
+@import "../../../../index.scss";
+
+:host {
+  position: relative;
+  width: 100%;
+}
+
+.auction-data__active {
+  background: $--Apricot!important;
+}
+
+.auction-data {
+  position: relative;
+  display: grid;
+  grid-template-rows: 4vw 1fr;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-areas:
+    "nav header"
+    "aside table";
+  grid-gap: 0;
+  justify-content: center;
+  width: 95%;
+  margin: 4vw auto;
+  border: $--border solid black;
+  box-sizing: border-box;
+  padding: 1vw;
+  align-content: space-between;
+
+  &__header {
+
+
+    &_button {
+      grid-area: nav;
+      cursor: pointer;
+    }
+
+    &_date {
+      grid-area: header;
+      font-size: $--size3;
+
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      border-radius: 0.2vw;
+      text-align: center;
+      width: 25%;
+      background: $--red-sand;
+      box-sizing: border-box;
+      padding: 0.2vw;
+      margin: 1vw auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  &__nav {
+    grid-area: aside;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    justify-content: flex-start;
+  }
+
+  &__table {
+    grid-area: table;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 2vw 1fr 2vw;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "head"
+    "body"
+    "footer";
+
+    //gap: 1vw;
+    //background: $--Apricot;
+
+    &_header {
+      grid-area: head;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+      //gap: $--gap;
+      //margin-bottom: $--gap;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      &_tr {
+        display: contents;
+      }
+
+      &_td {
+        background: white;
+        padding: 0.2vw;
+        border-right: $--border $--red-sand solid;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &:last-child {
+          border-right: 0;
+        }
+      }
+    }
+
+    &_body {
+      position: relative;
+      overflow: hidden;
+      grid-area: body;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      grid-auto-rows: 1fr;
+      overflow-y: auto;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+
+      &_tr {
+        display: contents;
+      }
+
+      &_td {
+        cursor: pointer;
+        background: white;
+        padding: 0.2vw;
+        border-right: $--border $--red-sand solid;
+        border-top: $--border $--red-sand solid;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &:last-child {
+          border-right: 0;
+        }
+
+        & > span {
+          margin-right: 0.4vw;
+          overflow: hidden;
+        }
+      }
+    }
+
+    &_footer {
+      grid-area: footer;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: $--gap;
+      background: white;
+      padding-top: 0.2vw;
+
+      &_td {
+        border-radius: $--border-radius;
+        border: $--border solid $--red-sand;
+        width: 88%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &:focus {
+          border: solid $--Coral;
+        }
+
+        &:focus-visible {
+          outline: 0.1vw solid $--Coral;
+        }
+      }
+    }
+  }
+}
+
+.empty-box {
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+                    90deg,
+                    rgba(#fff, 0) 0,
+                    rgba(#fff, 0.2) 20%,
+                    rgba(#fff, 0.5) 60%,
+                    rgba(#fff, 0)
+    );
+    animation: shimmer 2s infinite;
+    content: '';
+  }
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(192, 197, 204, 0.66);
+    content: '';
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}

@@ -1,0 +1,55 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+body {
+  font-family: 'Abel', sans-serif;
+}
+
+#logo {
+  border-top: 0.2vw dotted black;
+}
+
+#status {
+  border-top: 0.2vw dotted black;
+  border-bottom: 0.2vw dotted black;
+  padding: 0.4vw 0;
+  text-align: center;
+}
+
+#results {
+  border: 0.2vw dotted black;
+  padding: 0.2vw;
+  overflow: hidden;
+  height: auto;
+}
+
+#output-header > p {
+  margin: 0;
+  font-style: italic;
+}
+
+#output {
+  padding-top: 1vw;
+}
+
+#writerText {
+  padding-top: 0.4vw;
+}
+
+input {
+  padding: 0.4vw;
+}
+
+h2 {
+  margin-bottom: 0.4vw;
+}
+
+h3 {
+  margin-top: 0.6vw;
+  margin-bottom: 0.2vw;
+}
+
+pre {
+  font-size: 0.4vw;
+}

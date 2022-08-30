@@ -1,0 +1,18 @@
+let adminPublicKey = base58'7fT6vCaX5fAkqTzHGBTHyGGsfrFFSm8kUosN71qztfdY'
+match tx {
+  case e:ExchangeTransaction =>
+    let sell = sigVerify(e.sellOrder.bodyBytes, e.sellOrder.proofs[0], e.sellOrder.senderPublicKey)
+    #let buy = sigVerify(e.buyOrder.bodyBytes, e.buyOrder.proofs[0], e.buyOrder.senderPublicKey)
+    if (sell) then {
+        let permit = sigVerify(e.sellOrder.bodyBytes, e.sellOrder.proofs[0], adminPublicKey)
+        if (!permit) then {
+            throw("You can't sell it")
+        } else {
+            true
+        }
+    } else {
+        true
+    }
+  case tx:BurnTransaction => true
+  case _ => throw("You can only buy or burn the token")
+}

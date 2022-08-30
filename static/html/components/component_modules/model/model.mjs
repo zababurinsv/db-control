@@ -1,0 +1,1 @@
+export default(e,t,...o)=>new Promise(function(c,l){bundle.default(e,"export",async function(n,r){let u=e=>{c(e)},a=e=>{console.log("~~~ err router ~~~",e),l(e)};switch(t){case"test":case"culture":(async(e,t,o)=>{try{console.log(`${e.input}[(model)${e[t]}]`),u(e)}catch(e){a(e)}})(e,o[0],o[1],o[2],o[3]);break;default:a(`новая функция ${t}`)}})});

@@ -1,0 +1,14 @@
+@import "../../../../index.scss";
+
+:host {
+  width: 100%;
+}
+
+.auction-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.auction-details__preview_slider {
+  width: 20vw;
+}

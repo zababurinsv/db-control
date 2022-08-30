@@ -1,0 +1,115 @@
+//@import "./docs/css/interface.scss";
+//@import "./docs/css/fonts.scss";
+//@import "./docs/css/media.scss";
+
+
+@mixin borderClean() {
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  padding: 0.25vw;
+  text-align: center;
+  cursor: pointer;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+}
+
+@mixin border() {
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  text-align: center;
+  cursor: pointer;
+  //@include fonts(8);
+  font-family: Roboto,serif;
+  background-color: transparent;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+  //margin: auto;
+}
+
+@mixin palyer() {
+
+  label{
+    //@include display(column, nowrap, space-evenly, center, stretch);
+    width: 100%;
+    //align-items: center;
+    //@include fonts(8);
+    font-family: Roboto,serif;
+    margin: 0.25vw;
+    p{
+      //@include borderClean();
+      margin-top: 0;
+    }
+  }
+  div.option{
+    //@include display(row, nowrap, space-evenly, center, stretch);
+    input{
+      flex-grow: 1;
+      //@include fonts(8);
+      //@include borderClean();
+      font-family: Roboto,serif;
+      margin: 0.25vw;
+      cursor: text;
+    }
+    select, button{
+      flex-grow: 1;
+      //@include fonts(8);
+      //@include borderClean();
+      font-family: Roboto,serif;
+      margin: 0.25vw;
+      border: none;
+    }
+  }
+}
+:host{
+  width: 100%;
+  margin: auto;
+}
+div.player-input{
+  //@include display(row, nowrap, space-evenly, center, stretch);
+  //@include palyer();
+  border-radius: 0.5vw;
+  width: 100%;
+  box-shadow: inset 0vw 0vw 1vw 0px #7694f4;
+  box-sizing: border-box;
+  padding: 0.2vw;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  text-align-last:center;
+  margin: 0;
+  label.player-label{
+    background-color: white;
+    border-radius: 0.25vw;
+    div.preview{
+      width: 100%;
+      display: flex;
+      p{
+        margin: 0.25vw;
+        border-radius: 0.25vw;
+      }
+    }
+    div.option{
+      input.player-input{
+        border: none;
+        border-radius: 0.25vw;
+      }
+      select.player-select, button{
+        border: none;
+        border-radius: 0.25vw;
+      }
+    }
+
+  }
+}

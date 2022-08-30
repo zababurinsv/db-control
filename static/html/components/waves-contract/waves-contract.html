@@ -1,0 +1,40 @@
+<template>
+    <section id="waves-game">
+        <div id="info">
+            <label for="name">
+                <p class="preview">Create Game</p>
+                <input id="name" type="text" placeholder="введите название игры">
+                <div class="description">
+                    <textarea class="description" value="Game Monopoly" placeholder="Description Game"></textarea>
+                    <span id="symbol" >maximum symbols: 256</span>
+                </div>
+                <button  class="name">create game</button>
+            </label>
+        </div>
+        <div id="player">
+            <p class="player"></p>
+            <div id="container">
+                <div id="player-game">
+                    <div class="player-game">
+                        <img class="player" src="">
+                    </div>
+                    <div class="game-info">
+                        <ul class="game-info">
+                            <li class="game-info status">Status</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="player-external">
+                    <ul class="player-game-info">
+                        <li class="player-game-info id">ID</li>
+                        <li class="player-game-info name">Name</li>
+                        <li class="player-game-info date">Date</li>
+                        <li class="player-game-info feeAssetId">Fee Asset Id</li>
+                        <li class="player-game-info issuer">issuer</li>
+                        <li class="player-game-info description">Description</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>

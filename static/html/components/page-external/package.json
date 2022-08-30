@@ -1,0 +1,18 @@
+{
+  "name": "@bundle/external",
+  "version": "1.0.0",
+  "description": "external",
+  "main": "index.js",
+  "author": "Zababurin Sergey",
+  "license": "GPL-3.0-only",
+  "private": true,
+  "scripts": {
+    "dev": "parcel ./page-external.html",
+    "kill": "kill $(lsof -t -i:1234)",
+    "build": "parcel build page-external-m.mjs --no-cache --no-content-hash --no-source-maps"
+  },
+  "devDependencies": {
+    "@parcel/resolver-default": "^2.0.0-alpha.3",
+    "parcel": "2.0.0-beta.2"
+  }
+}

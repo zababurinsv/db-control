@@ -1,0 +1,1 @@
+let date={getDateTime:function(){return(new Date).toLocaleString("ru",{era:"long",year:"numeric",month:"long",day:"numeric",weekday:"long",timezone:"UTC",hour:"numeric",minute:"numeric",second:"numeric"})}},init=function(){return date.getDateTime()};export default{init:()=>init()};

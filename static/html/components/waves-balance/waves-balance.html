@@ -1,0 +1,65 @@
+<template>
+    <section id="account">
+        <div class="preview">
+            <p class="preview">
+                Bank account (!TestNet)
+            </p>
+            <div class ="data">
+                <div class="balance">
+                    Regular Balance
+                    <div class="regularBalance">
+                        0
+                    </div>
+                </div>
+                <div id="multiDomainAccount"></div>
+                <div class="fiat"><slot name="fiat-form"></slot></div>
+            </div>
+        </div>
+        <div  class="container">
+            <form class="account">
+                <div class="account">
+                    <section class="account">
+                        <input  type="number" name="withdraw" id="withdraw" placeholder = 'all'>
+                        <label class="withdraw" for = "withdraw"> Withdraw</label>
+                    </section>
+                    <section class="account">
+                        <input type="number" name="deposit" id="deposit" placeholder = '0'>
+                        <label class="deposit" for = "deposit"> Deposit</label>
+                    </section>
+                </div>
+            </form>
+            <section class="personal">
+                <div class="balanceAccount">0</div>
+                <select class="balanceSelect">
+                    <option>Waves</option>
+                </select>
+            </section>
+        </div>
+    </section>
+    <section id="waves">
+        <div id="wrapper">
+            <label for="scriptAddress">
+                <input id="scriptAddress" placeholder="Script address" type="text">
+            </label>
+            <label for="keeperAddress">
+                <input id="keeperAddress" placeholder="WavesKeeper address" readonly="" type="text">
+            </label>
+            <label for="hasWaves">
+                <input id="hasWaves" placeholder="Waves balance" readonly="" type="text">
+            </label>
+            <label for="keeperStatus">
+                <button style="opacity: 1" disabled="" class="pure-button button-error" id="keeperStatus" type="button">Keeper status</button>
+            </label>
+        </div>
+        <fieldset>
+            <div class="pure-control-group">
+                <input id="withdraw_t" placeholder="Waves amount" type="text">
+                <button id="withdrawBtn" class="pure-button" type="button" disabled="">Withdraw</button>
+            </div>
+            <div class="pure-control-group">
+                <input id="deposit_t" placeholder="Waves amount" type="text">
+                <button id="depositBtn" class="pure-button pure-button-primary" type="button" disabled="">Deposit</button>
+            </div>
+        </fieldset>
+    </section>
+</template>
