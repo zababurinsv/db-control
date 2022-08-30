@@ -31,8 +31,6 @@ function DatabasesView () {
   }
 
   const createDB = (args) => {
-    console.log("Create database...", args)
-    console.assert(false)
     createDatabase(args.name, args.type, args.permissions).then((hash) => {
       console.log("Created", hash)
       fetchDatabases().then((data) => {

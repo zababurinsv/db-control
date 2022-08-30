@@ -8,23 +8,20 @@
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
-<!--<script src="./ipfs/index.min.js" defer></script>-->
 <script type="module">
-    //TODO подключение файловой системы
-   // import service from '/service/WCNode/src/fs/index.mjs'
-   // (async () => {
-   //  const api = await service()
-   //  const idbfs = await api.idbfs()
-   //  idbfs.info()
-   //     idbfs.set.file('test', {test:'test2'})
-   //     idbfs.save()
-   //     console.log('ddddd', await idbfs.get.file('test'))
-   // })()
-    //TODO подключение тестов
     import { test } from '/modules/tests/frontend/src/index.mjs'
-    (async () => {
-        test('/tests/fileSystem/index.test.js', true).catch(e => {console.log('error devtool', e)})
-    })()
+    //TODO подключение файловой системы
+    // import service from '/service/WCNode/src/fs/index.mjs'
+    // (async () => {
+    //  const api = await service()
+    //  const idbfs = await api.idbfs()
+    //  idbfs.info()
+    //     idbfs.set.file('test', {test:'test2'})
+    //     idbfs.save()
+    //     console.log('ddddd', await idbfs.get.file('test'))
+    // })()
+    //TODO подключение тестов
+    test('/tests/fileSystem/index.test.js', true).catch(e => {console.log('error devtool', e)})
 </script>
 </body>
 </html>

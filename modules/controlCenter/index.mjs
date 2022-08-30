@@ -52,26 +52,36 @@ var react_development = {exports: {}};
 	) {
 	  __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(new Error());
 	}
-	          var ReactVersion = '18.2.0';
+	          var ReactVersion = '18.1.0';
+
+	// -----------------------------------------------------------------------------
+
+	var enableScopeAPI = false; // Experimental Create Event Handle API.
+	var enableCacheElement = false;
+	var enableTransitionTracing = false; // No known bugs, but needs performance testing
+
+	var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
+	// stuff. Intended to enable React core members to more easily debug scheduling
+	// issues in DEV builds.
+
+	var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
 
 	// ATTENTION
-	// When adding new symbols to this file,
-	// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-	// The Symbol used to tag the ReactElement-like types.
-	var REACT_ELEMENT_TYPE = Symbol.for('react.element');
-	var REACT_PORTAL_TYPE = Symbol.for('react.portal');
-	var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
-	var REACT_STRICT_MODE_TYPE = Symbol.for('react.strict_mode');
-	var REACT_PROFILER_TYPE = Symbol.for('react.profiler');
-	var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
-	var REACT_CONTEXT_TYPE = Symbol.for('react.context');
-	var REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref');
-	var REACT_SUSPENSE_TYPE = Symbol.for('react.suspense');
-	var REACT_SUSPENSE_LIST_TYPE = Symbol.for('react.suspense_list');
-	var REACT_MEMO_TYPE = Symbol.for('react.memo');
-	var REACT_LAZY_TYPE = Symbol.for('react.lazy');
-	var REACT_OFFSCREEN_TYPE = Symbol.for('react.offscreen');
-	var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
+
+	var REACT_ELEMENT_TYPE =  Symbol.for('react.element');
+	var REACT_PORTAL_TYPE =  Symbol.for('react.portal');
+	var REACT_FRAGMENT_TYPE =  Symbol.for('react.fragment');
+	var REACT_STRICT_MODE_TYPE =  Symbol.for('react.strict_mode');
+	var REACT_PROFILER_TYPE =  Symbol.for('react.profiler');
+	var REACT_PROVIDER_TYPE =  Symbol.for('react.provider');
+	var REACT_CONTEXT_TYPE =  Symbol.for('react.context');
+	var REACT_FORWARD_REF_TYPE =  Symbol.for('react.forward_ref');
+	var REACT_SUSPENSE_TYPE =  Symbol.for('react.suspense');
+	var REACT_SUSPENSE_LIST_TYPE =  Symbol.for('react.suspense_list');
+	var REACT_MEMO_TYPE =  Symbol.for('react.memo');
+	var REACT_LAZY_TYPE =  Symbol.for('react.lazy');
+	var REACT_OFFSCREEN_TYPE =  Symbol.for('react.offscreen');
+	var MAYBE_ITERATOR_SYMBOL =  Symbol.iterator;
 	var FAUX_ITERATOR_SYMBOL = '@@iterator';
 	function getIteratorFn(maybeIterable) {
 	  if (maybeIterable === null || typeof maybeIterable !== 'object') {
@@ -162,18 +172,6 @@ var react_development = {exports: {}};
 	    return stack;
 	  };
 	}
-
-	// -----------------------------------------------------------------------------
-
-	var enableScopeAPI = false; // Experimental Create Event Handle API.
-	var enableCacheElement = false;
-	var enableTransitionTracing = false; // No known bugs, but needs performance testing
-
-	var enableLegacyHidden = false; // Enables unstable_avoidThisFallback feature in Fiber
-	// stuff. Intended to enable React core members to more easily debug scheduling
-	// issues in DEV builds.
-
-	var enableDebugTracing = false; // Track which Fiber(s) schedule render work.
 
 	var ReactSharedInternals = {
 	  ReactCurrentDispatcher: ReactCurrentDispatcher,
@@ -2777,8 +2775,6 @@ var react_development = {exports: {}};
 
 var React = /*@__PURE__*/getDefaultExportFromCjs(react.exports);
 
-var client = {};
-
 var reactDom = {exports: {}};
 
 var reactDom_development = {};
@@ -3840,7 +3836,6 @@ function shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag) 
   }
 
   if (isCustomComponentTag) {
-
     return false;
   }
 
@@ -4155,7 +4150,7 @@ function getValueForProperty(node, name, expected, propertyInfo) {
  * attributes have multiple equivalent values.
  */
 
-function getValueForAttribute(node, name, expected, isCustomComponentTag) {
+function getValueForAttribute(node, name, expected) {
   {
     if (!isAttributeNameSafe(name)) {
       return;
@@ -4195,7 +4190,7 @@ function setValueForProperty(node, name, value, isCustomComponentTag) {
 
   if (shouldRemoveAttribute(name, value, propertyInfo, isCustomComponentTag)) {
     value = null;
-  }
+  } // If the prop isn't in the special list, treat it as a simple attribute.
 
 
   if (isCustomComponentTag || propertyInfo === null) {
@@ -4272,28 +4267,26 @@ function setValueForProperty(node, name, value, isCustomComponentTag) {
 }
 
 // ATTENTION
-// When adding new symbols to this file,
-// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-// The Symbol used to tag the ReactElement-like types.
-var REACT_ELEMENT_TYPE = Symbol.for('react.element');
-var REACT_PORTAL_TYPE = Symbol.for('react.portal');
-var REACT_FRAGMENT_TYPE = Symbol.for('react.fragment');
-var REACT_STRICT_MODE_TYPE = Symbol.for('react.strict_mode');
-var REACT_PROFILER_TYPE = Symbol.for('react.profiler');
-var REACT_PROVIDER_TYPE = Symbol.for('react.provider');
-var REACT_CONTEXT_TYPE = Symbol.for('react.context');
-var REACT_FORWARD_REF_TYPE = Symbol.for('react.forward_ref');
-var REACT_SUSPENSE_TYPE = Symbol.for('react.suspense');
-var REACT_SUSPENSE_LIST_TYPE = Symbol.for('react.suspense_list');
-var REACT_MEMO_TYPE = Symbol.for('react.memo');
-var REACT_LAZY_TYPE = Symbol.for('react.lazy');
-var REACT_SCOPE_TYPE = Symbol.for('react.scope');
-var REACT_DEBUG_TRACING_MODE_TYPE = Symbol.for('react.debug_trace_mode');
-var REACT_OFFSCREEN_TYPE = Symbol.for('react.offscreen');
-var REACT_LEGACY_HIDDEN_TYPE = Symbol.for('react.legacy_hidden');
-var REACT_CACHE_TYPE = Symbol.for('react.cache');
-var REACT_TRACING_MARKER_TYPE = Symbol.for('react.tracing_marker');
-var MAYBE_ITERATOR_SYMBOL = Symbol.iterator;
+
+var REACT_ELEMENT_TYPE =  Symbol.for('react.element');
+var REACT_PORTAL_TYPE =  Symbol.for('react.portal');
+var REACT_FRAGMENT_TYPE =  Symbol.for('react.fragment');
+var REACT_STRICT_MODE_TYPE =  Symbol.for('react.strict_mode');
+var REACT_PROFILER_TYPE =  Symbol.for('react.profiler');
+var REACT_PROVIDER_TYPE =  Symbol.for('react.provider');
+var REACT_CONTEXT_TYPE =  Symbol.for('react.context');
+var REACT_FORWARD_REF_TYPE =  Symbol.for('react.forward_ref');
+var REACT_SUSPENSE_TYPE =  Symbol.for('react.suspense');
+var REACT_SUSPENSE_LIST_TYPE =  Symbol.for('react.suspense_list');
+var REACT_MEMO_TYPE =  Symbol.for('react.memo');
+var REACT_LAZY_TYPE =  Symbol.for('react.lazy');
+var REACT_SCOPE_TYPE =  Symbol.for('react.scope');
+var REACT_DEBUG_TRACING_MODE_TYPE =  Symbol.for('react.debug_trace_mode');
+var REACT_OFFSCREEN_TYPE =  Symbol.for('react.offscreen');
+var REACT_LEGACY_HIDDEN_TYPE =  Symbol.for('react.legacy_hidden');
+var REACT_CACHE_TYPE =  Symbol.for('react.cache');
+var REACT_TRACING_MARKER_TYPE =  Symbol.for('react.tracing_marker');
+var MAYBE_ITERATOR_SYMBOL =  Symbol.iterator;
 var FAUX_ITERATOR_SYMBOL = '@@iterator';
 function getIteratorFn(maybeIterable) {
   if (maybeIterable === null || typeof maybeIterable !== 'object') {
@@ -14589,8 +14582,10 @@ function clearContainer(container) {
   if (container.nodeType === ELEMENT_NODE) {
     container.textContent = '';
   } else if (container.nodeType === DOCUMENT_NODE) {
-    if (container.documentElement) {
-      container.removeChild(container.documentElement);
+    var body = container.body;
+
+    if (body != null) {
+      body.textContent = '';
     }
   }
 } // -------------------
@@ -14625,38 +14620,6 @@ function isSuspenseInstancePending(instance) {
 }
 function isSuspenseInstanceFallback(instance) {
   return instance.data === SUSPENSE_FALLBACK_START_DATA;
-}
-function getSuspenseInstanceFallbackErrorDetails(instance) {
-  var dataset = instance.nextSibling && instance.nextSibling.dataset;
-  var digest, message, stack;
-
-  if (dataset) {
-    digest = dataset.dgst;
-
-    {
-      message = dataset.msg;
-      stack = dataset.stck;
-    }
-  }
-
-  {
-    return {
-      message: message,
-      digest: digest,
-      stack: stack
-    };
-  } // let value = {message: undefined, hash: undefined};
-  // const nextSibling = instance.nextSibling;
-  // if (nextSibling) {
-  //   const dataset = ((nextSibling: any): HTMLTemplateElement).dataset;
-  //   value.message = dataset.msg;
-  //   value.hash = dataset.hash;
-  //   if (true) {
-  //     value.stack = dataset.stack;
-  //   }
-  // }
-  // return value;
-
 }
 function registerSuspenseInstanceRetry(instance, callback) {
   instance._reactRetry = callback;
@@ -15474,682 +15437,6 @@ function flushSyncCallbacks() {
   return null;
 }
 
-// TODO: Use the unified fiber stack module instead of this local one?
-// Intentionally not using it yet to derisk the initial implementation, because
-// the way we push/pop these values is a bit unusual. If there's a mistake, I'd
-// rather the ids be wrong than crash the whole reconciler.
-var forkStack = [];
-var forkStackIndex = 0;
-var treeForkProvider = null;
-var treeForkCount = 0;
-var idStack = [];
-var idStackIndex = 0;
-var treeContextProvider = null;
-var treeContextId = 1;
-var treeContextOverflow = '';
-function isForkedChild(workInProgress) {
-  warnIfNotHydrating();
-  return (workInProgress.flags & Forked) !== NoFlags;
-}
-function getForksAtLevel(workInProgress) {
-  warnIfNotHydrating();
-  return treeForkCount;
-}
-function getTreeId() {
-  var overflow = treeContextOverflow;
-  var idWithLeadingBit = treeContextId;
-  var id = idWithLeadingBit & ~getLeadingBit(idWithLeadingBit);
-  return id.toString(32) + overflow;
-}
-function pushTreeFork(workInProgress, totalChildren) {
-  // This is called right after we reconcile an array (or iterator) of child
-  // fibers, because that's the only place where we know how many children in
-  // the whole set without doing extra work later, or storing addtional
-  // information on the fiber.
-  //
-  // That's why this function is separate from pushTreeId — it's called during
-  // the render phase of the fork parent, not the child, which is where we push
-  // the other context values.
-  //
-  // In the Fizz implementation this is much simpler because the child is
-  // rendered in the same callstack as the parent.
-  //
-  // It might be better to just add a `forks` field to the Fiber type. It would
-  // make this module simpler.
-  warnIfNotHydrating();
-  forkStack[forkStackIndex++] = treeForkCount;
-  forkStack[forkStackIndex++] = treeForkProvider;
-  treeForkProvider = workInProgress;
-  treeForkCount = totalChildren;
-}
-function pushTreeId(workInProgress, totalChildren, index) {
-  warnIfNotHydrating();
-  idStack[idStackIndex++] = treeContextId;
-  idStack[idStackIndex++] = treeContextOverflow;
-  idStack[idStackIndex++] = treeContextProvider;
-  treeContextProvider = workInProgress;
-  var baseIdWithLeadingBit = treeContextId;
-  var baseOverflow = treeContextOverflow; // The leftmost 1 marks the end of the sequence, non-inclusive. It's not part
-  // of the id; we use it to account for leading 0s.
-
-  var baseLength = getBitLength(baseIdWithLeadingBit) - 1;
-  var baseId = baseIdWithLeadingBit & ~(1 << baseLength);
-  var slot = index + 1;
-  var length = getBitLength(totalChildren) + baseLength; // 30 is the max length we can store without overflowing, taking into
-  // consideration the leading 1 we use to mark the end of the sequence.
-
-  if (length > 30) {
-    // We overflowed the bitwise-safe range. Fall back to slower algorithm.
-    // This branch assumes the length of the base id is greater than 5; it won't
-    // work for smaller ids, because you need 5 bits per character.
-    //
-    // We encode the id in multiple steps: first the base id, then the
-    // remaining digits.
-    //
-    // Each 5 bit sequence corresponds to a single base 32 character. So for
-    // example, if the current id is 23 bits long, we can convert 20 of those
-    // bits into a string of 4 characters, with 3 bits left over.
-    //
-    // First calculate how many bits in the base id represent a complete
-    // sequence of characters.
-    var numberOfOverflowBits = baseLength - baseLength % 5; // Then create a bitmask that selects only those bits.
-
-    var newOverflowBits = (1 << numberOfOverflowBits) - 1; // Select the bits, and convert them to a base 32 string.
-
-    var newOverflow = (baseId & newOverflowBits).toString(32); // Now we can remove those bits from the base id.
-
-    var restOfBaseId = baseId >> numberOfOverflowBits;
-    var restOfBaseLength = baseLength - numberOfOverflowBits; // Finally, encode the rest of the bits using the normal algorithm. Because
-    // we made more room, this time it won't overflow.
-
-    var restOfLength = getBitLength(totalChildren) + restOfBaseLength;
-    var restOfNewBits = slot << restOfBaseLength;
-    var id = restOfNewBits | restOfBaseId;
-    var overflow = newOverflow + baseOverflow;
-    treeContextId = 1 << restOfLength | id;
-    treeContextOverflow = overflow;
-  } else {
-    // Normal path
-    var newBits = slot << baseLength;
-
-    var _id = newBits | baseId;
-
-    var _overflow = baseOverflow;
-    treeContextId = 1 << length | _id;
-    treeContextOverflow = _overflow;
-  }
-}
-function pushMaterializedTreeId(workInProgress) {
-  warnIfNotHydrating(); // This component materialized an id. This will affect any ids that appear
-  // in its children.
-
-  var returnFiber = workInProgress.return;
-
-  if (returnFiber !== null) {
-    var numberOfForks = 1;
-    var slotIndex = 0;
-    pushTreeFork(workInProgress, numberOfForks);
-    pushTreeId(workInProgress, numberOfForks, slotIndex);
-  }
-}
-
-function getBitLength(number) {
-  return 32 - clz32(number);
-}
-
-function getLeadingBit(id) {
-  return 1 << getBitLength(id) - 1;
-}
-
-function popTreeContext(workInProgress) {
-  // Restore the previous values.
-  // This is a bit more complicated than other context-like modules in Fiber
-  // because the same Fiber may appear on the stack multiple times and for
-  // different reasons. We have to keep popping until the work-in-progress is
-  // no longer at the top of the stack.
-  while (workInProgress === treeForkProvider) {
-    treeForkProvider = forkStack[--forkStackIndex];
-    forkStack[forkStackIndex] = null;
-    treeForkCount = forkStack[--forkStackIndex];
-    forkStack[forkStackIndex] = null;
-  }
-
-  while (workInProgress === treeContextProvider) {
-    treeContextProvider = idStack[--idStackIndex];
-    idStack[idStackIndex] = null;
-    treeContextOverflow = idStack[--idStackIndex];
-    idStack[idStackIndex] = null;
-    treeContextId = idStack[--idStackIndex];
-    idStack[idStackIndex] = null;
-  }
-}
-function getSuspendedTreeContext() {
-  warnIfNotHydrating();
-
-  if (treeContextProvider !== null) {
-    return {
-      id: treeContextId,
-      overflow: treeContextOverflow
-    };
-  } else {
-    return null;
-  }
-}
-function restoreSuspendedTreeContext(workInProgress, suspendedContext) {
-  warnIfNotHydrating();
-  idStack[idStackIndex++] = treeContextId;
-  idStack[idStackIndex++] = treeContextOverflow;
-  idStack[idStackIndex++] = treeContextProvider;
-  treeContextId = suspendedContext.id;
-  treeContextOverflow = suspendedContext.overflow;
-  treeContextProvider = workInProgress;
-}
-
-function warnIfNotHydrating() {
-  {
-    if (!getIsHydrating()) {
-      error('Expected to be hydrating. This is a bug in React. Please file ' + 'an issue.');
-    }
-  }
-}
-
-// This may have been an insertion or a hydration.
-
-var hydrationParentFiber = null;
-var nextHydratableInstance = null;
-var isHydrating = false; // This flag allows for warning supression when we expect there to be mismatches
-// due to earlier mismatches or a suspended fiber.
-
-var didSuspendOrErrorDEV = false; // Hydration errors that were thrown inside this boundary
-
-var hydrationErrors = null;
-
-function warnIfHydrating() {
-  {
-    if (isHydrating) {
-      error('We should not be hydrating here. This is a bug in React. Please file a bug.');
-    }
-  }
-}
-
-function markDidThrowWhileHydratingDEV() {
-  {
-    didSuspendOrErrorDEV = true;
-  }
-}
-function didSuspendOrErrorWhileHydratingDEV() {
-  {
-    return didSuspendOrErrorDEV;
-  }
-}
-
-function enterHydrationState(fiber) {
-
-  var parentInstance = fiber.stateNode.containerInfo;
-  nextHydratableInstance = getFirstHydratableChildWithinContainer(parentInstance);
-  hydrationParentFiber = fiber;
-  isHydrating = true;
-  hydrationErrors = null;
-  didSuspendOrErrorDEV = false;
-  return true;
-}
-
-function reenterHydrationStateFromDehydratedSuspenseInstance(fiber, suspenseInstance, treeContext) {
-
-  nextHydratableInstance = getFirstHydratableChildWithinSuspenseInstance(suspenseInstance);
-  hydrationParentFiber = fiber;
-  isHydrating = true;
-  hydrationErrors = null;
-  didSuspendOrErrorDEV = false;
-
-  if (treeContext !== null) {
-    restoreSuspendedTreeContext(fiber, treeContext);
-  }
-
-  return true;
-}
-
-function warnUnhydratedInstance(returnFiber, instance) {
-  {
-    switch (returnFiber.tag) {
-      case HostRoot:
-        {
-          didNotHydrateInstanceWithinContainer(returnFiber.stateNode.containerInfo, instance);
-          break;
-        }
-
-      case HostComponent:
-        {
-          var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-          didNotHydrateInstance(returnFiber.type, returnFiber.memoizedProps, returnFiber.stateNode, instance, // TODO: Delete this argument when we remove the legacy root API.
-          isConcurrentMode);
-          break;
-        }
-
-      case SuspenseComponent:
-        {
-          var suspenseState = returnFiber.memoizedState;
-          if (suspenseState.dehydrated !== null) didNotHydrateInstanceWithinSuspenseInstance(suspenseState.dehydrated, instance);
-          break;
-        }
-    }
-  }
-}
-
-function deleteHydratableInstance(returnFiber, instance) {
-  warnUnhydratedInstance(returnFiber, instance);
-  var childToDelete = createFiberFromHostInstanceForDeletion();
-  childToDelete.stateNode = instance;
-  childToDelete.return = returnFiber;
-  var deletions = returnFiber.deletions;
-
-  if (deletions === null) {
-    returnFiber.deletions = [childToDelete];
-    returnFiber.flags |= ChildDeletion;
-  } else {
-    deletions.push(childToDelete);
-  }
-}
-
-function warnNonhydratedInstance(returnFiber, fiber) {
-  {
-    if (didSuspendOrErrorDEV) {
-      // Inside a boundary that already suspended. We're currently rendering the
-      // siblings of a suspended node. The mismatch may be due to the missing
-      // data, so it's probably a false positive.
-      return;
-    }
-
-    switch (returnFiber.tag) {
-      case HostRoot:
-        {
-          var parentContainer = returnFiber.stateNode.containerInfo;
-
-          switch (fiber.tag) {
-            case HostComponent:
-              var type = fiber.type;
-              fiber.pendingProps;
-              didNotFindHydratableInstanceWithinContainer(parentContainer, type);
-              break;
-
-            case HostText:
-              var text = fiber.pendingProps;
-              didNotFindHydratableTextInstanceWithinContainer(parentContainer, text);
-              break;
-          }
-
-          break;
-        }
-
-      case HostComponent:
-        {
-          var parentType = returnFiber.type;
-          var parentProps = returnFiber.memoizedProps;
-          var parentInstance = returnFiber.stateNode;
-
-          switch (fiber.tag) {
-            case HostComponent:
-              {
-                var _type = fiber.type;
-                var _props = fiber.pendingProps;
-                var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-                didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type, _props, // TODO: Delete this argument when we remove the legacy root API.
-                isConcurrentMode);
-                break;
-              }
-
-            case HostText:
-              {
-                var _text = fiber.pendingProps;
-
-                var _isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-
-                didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, _text, // TODO: Delete this argument when we remove the legacy root API.
-                _isConcurrentMode);
-                break;
-              }
-          }
-
-          break;
-        }
-
-      case SuspenseComponent:
-        {
-          var suspenseState = returnFiber.memoizedState;
-          var _parentInstance = suspenseState.dehydrated;
-          if (_parentInstance !== null) switch (fiber.tag) {
-            case HostComponent:
-              var _type2 = fiber.type;
-              fiber.pendingProps;
-              didNotFindHydratableInstanceWithinSuspenseInstance(_parentInstance, _type2);
-              break;
-
-            case HostText:
-              var _text2 = fiber.pendingProps;
-              didNotFindHydratableTextInstanceWithinSuspenseInstance(_parentInstance, _text2);
-              break;
-          }
-          break;
-        }
-
-      default:
-        return;
-    }
-  }
-}
-
-function insertNonHydratedInstance(returnFiber, fiber) {
-  fiber.flags = fiber.flags & ~Hydrating | Placement;
-  warnNonhydratedInstance(returnFiber, fiber);
-}
-
-function tryHydrate(fiber, nextInstance) {
-  switch (fiber.tag) {
-    case HostComponent:
-      {
-        var type = fiber.type;
-        fiber.pendingProps;
-        var instance = canHydrateInstance(nextInstance, type);
-
-        if (instance !== null) {
-          fiber.stateNode = instance;
-          hydrationParentFiber = fiber;
-          nextHydratableInstance = getFirstHydratableChild(instance);
-          return true;
-        }
-
-        return false;
-      }
-
-    case HostText:
-      {
-        var text = fiber.pendingProps;
-        var textInstance = canHydrateTextInstance(nextInstance, text);
-
-        if (textInstance !== null) {
-          fiber.stateNode = textInstance;
-          hydrationParentFiber = fiber; // Text Instances don't have children so there's nothing to hydrate.
-
-          nextHydratableInstance = null;
-          return true;
-        }
-
-        return false;
-      }
-
-    case SuspenseComponent:
-      {
-        var suspenseInstance = canHydrateSuspenseInstance(nextInstance);
-
-        if (suspenseInstance !== null) {
-          var suspenseState = {
-            dehydrated: suspenseInstance,
-            treeContext: getSuspendedTreeContext(),
-            retryLane: OffscreenLane
-          };
-          fiber.memoizedState = suspenseState; // Store the dehydrated fragment as a child fiber.
-          // This simplifies the code for getHostSibling and deleting nodes,
-          // since it doesn't have to consider all Suspense boundaries and
-          // check if they're dehydrated ones or not.
-
-          var dehydratedFragment = createFiberFromDehydratedFragment(suspenseInstance);
-          dehydratedFragment.return = fiber;
-          fiber.child = dehydratedFragment;
-          hydrationParentFiber = fiber; // While a Suspense Instance does have children, we won't step into
-          // it during the first pass. Instead, we'll reenter it later.
-
-          nextHydratableInstance = null;
-          return true;
-        }
-
-        return false;
-      }
-
-    default:
-      return false;
-  }
-}
-
-function shouldClientRenderOnMismatch(fiber) {
-  return (fiber.mode & ConcurrentMode) !== NoMode && (fiber.flags & DidCapture) === NoFlags;
-}
-
-function throwOnHydrationMismatch(fiber) {
-  throw new Error('Hydration failed because the initial UI does not match what was ' + 'rendered on the server.');
-}
-
-function tryToClaimNextHydratableInstance(fiber) {
-  if (!isHydrating) {
-    return;
-  }
-
-  var nextInstance = nextHydratableInstance;
-
-  if (!nextInstance) {
-    if (shouldClientRenderOnMismatch(fiber)) {
-      warnNonhydratedInstance(hydrationParentFiber, fiber);
-      throwOnHydrationMismatch();
-    } // Nothing to hydrate. Make it an insertion.
-
-
-    insertNonHydratedInstance(hydrationParentFiber, fiber);
-    isHydrating = false;
-    hydrationParentFiber = fiber;
-    return;
-  }
-
-  var firstAttemptedInstance = nextInstance;
-
-  if (!tryHydrate(fiber, nextInstance)) {
-    if (shouldClientRenderOnMismatch(fiber)) {
-      warnNonhydratedInstance(hydrationParentFiber, fiber);
-      throwOnHydrationMismatch();
-    } // If we can't hydrate this instance let's try the next one.
-    // We use this as a heuristic. It's based on intuition and not data so it
-    // might be flawed or unnecessary.
-
-
-    nextInstance = getNextHydratableSibling(firstAttemptedInstance);
-    var prevHydrationParentFiber = hydrationParentFiber;
-
-    if (!nextInstance || !tryHydrate(fiber, nextInstance)) {
-      // Nothing to hydrate. Make it an insertion.
-      insertNonHydratedInstance(hydrationParentFiber, fiber);
-      isHydrating = false;
-      hydrationParentFiber = fiber;
-      return;
-    } // We matched the next one, we'll now assume that the first one was
-    // superfluous and we'll delete it. Since we can't eagerly delete it
-    // we'll have to schedule a deletion. To do that, this node needs a dummy
-    // fiber associated with it.
-
-
-    deleteHydratableInstance(prevHydrationParentFiber, firstAttemptedInstance);
-  }
-}
-
-function prepareToHydrateHostInstance(fiber, rootContainerInstance, hostContext) {
-
-  var instance = fiber.stateNode;
-  var shouldWarnIfMismatchDev = !didSuspendOrErrorDEV;
-  var updatePayload = hydrateInstance(instance, fiber.type, fiber.memoizedProps, rootContainerInstance, hostContext, fiber, shouldWarnIfMismatchDev); // TODO: Type this specific to this type of component.
-
-  fiber.updateQueue = updatePayload; // If the update payload indicates that there is a change or if there
-  // is a new ref we mark this as an update.
-
-  if (updatePayload !== null) {
-    return true;
-  }
-
-  return false;
-}
-
-function prepareToHydrateHostTextInstance(fiber) {
-
-  var textInstance = fiber.stateNode;
-  var textContent = fiber.memoizedProps;
-  var shouldUpdate = hydrateTextInstance(textInstance, textContent, fiber);
-
-  if (shouldUpdate) {
-    // We assume that prepareToHydrateHostTextInstance is called in a context where the
-    // hydration parent is the parent host component of this host text.
-    var returnFiber = hydrationParentFiber;
-
-    if (returnFiber !== null) {
-      switch (returnFiber.tag) {
-        case HostRoot:
-          {
-            var parentContainer = returnFiber.stateNode.containerInfo;
-            var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
-            didNotMatchHydratedContainerTextInstance(parentContainer, textInstance, textContent, // TODO: Delete this argument when we remove the legacy root API.
-            isConcurrentMode);
-            break;
-          }
-
-        case HostComponent:
-          {
-            var parentType = returnFiber.type;
-            var parentProps = returnFiber.memoizedProps;
-            var parentInstance = returnFiber.stateNode;
-
-            var _isConcurrentMode2 = (returnFiber.mode & ConcurrentMode) !== NoMode;
-
-            didNotMatchHydratedTextInstance(parentType, parentProps, parentInstance, textInstance, textContent, // TODO: Delete this argument when we remove the legacy root API.
-            _isConcurrentMode2);
-            break;
-          }
-      }
-    }
-  }
-
-  return shouldUpdate;
-}
-
-function prepareToHydrateHostSuspenseInstance(fiber) {
-
-  var suspenseState = fiber.memoizedState;
-  var suspenseInstance = suspenseState !== null ? suspenseState.dehydrated : null;
-
-  if (!suspenseInstance) {
-    throw new Error('Expected to have a hydrated suspense instance. ' + 'This error is likely caused by a bug in React. Please file an issue.');
-  }
-
-  hydrateSuspenseInstance(suspenseInstance, fiber);
-}
-
-function skipPastDehydratedSuspenseInstance(fiber) {
-
-  var suspenseState = fiber.memoizedState;
-  var suspenseInstance = suspenseState !== null ? suspenseState.dehydrated : null;
-
-  if (!suspenseInstance) {
-    throw new Error('Expected to have a hydrated suspense instance. ' + 'This error is likely caused by a bug in React. Please file an issue.');
-  }
-
-  return getNextHydratableInstanceAfterSuspenseInstance(suspenseInstance);
-}
-
-function popToNextHostParent(fiber) {
-  var parent = fiber.return;
-
-  while (parent !== null && parent.tag !== HostComponent && parent.tag !== HostRoot && parent.tag !== SuspenseComponent) {
-    parent = parent.return;
-  }
-
-  hydrationParentFiber = parent;
-}
-
-function popHydrationState(fiber) {
-
-  if (fiber !== hydrationParentFiber) {
-    // We're deeper than the current hydration context, inside an inserted
-    // tree.
-    return false;
-  }
-
-  if (!isHydrating) {
-    // If we're not currently hydrating but we're in a hydration context, then
-    // we were an insertion and now need to pop up reenter hydration of our
-    // siblings.
-    popToNextHostParent(fiber);
-    isHydrating = true;
-    return false;
-  } // If we have any remaining hydratable nodes, we need to delete them now.
-  // We only do this deeper than head and body since they tend to have random
-  // other nodes in them. We also ignore components with pure text content in
-  // side of them. We also don't delete anything inside the root container.
-
-
-  if (fiber.tag !== HostRoot && (fiber.tag !== HostComponent || shouldDeleteUnhydratedTailInstances(fiber.type) && !shouldSetTextContent(fiber.type, fiber.memoizedProps))) {
-    var nextInstance = nextHydratableInstance;
-
-    if (nextInstance) {
-      if (shouldClientRenderOnMismatch(fiber)) {
-        warnIfUnhydratedTailNodes(fiber);
-        throwOnHydrationMismatch();
-      } else {
-        while (nextInstance) {
-          deleteHydratableInstance(fiber, nextInstance);
-          nextInstance = getNextHydratableSibling(nextInstance);
-        }
-      }
-    }
-  }
-
-  popToNextHostParent(fiber);
-
-  if (fiber.tag === SuspenseComponent) {
-    nextHydratableInstance = skipPastDehydratedSuspenseInstance(fiber);
-  } else {
-    nextHydratableInstance = hydrationParentFiber ? getNextHydratableSibling(fiber.stateNode) : null;
-  }
-
-  return true;
-}
-
-function hasUnhydratedTailNodes() {
-  return isHydrating && nextHydratableInstance !== null;
-}
-
-function warnIfUnhydratedTailNodes(fiber) {
-  var nextInstance = nextHydratableInstance;
-
-  while (nextInstance) {
-    warnUnhydratedInstance(fiber, nextInstance);
-    nextInstance = getNextHydratableSibling(nextInstance);
-  }
-}
-
-function resetHydrationState() {
-
-  hydrationParentFiber = null;
-  nextHydratableInstance = null;
-  isHydrating = false;
-  didSuspendOrErrorDEV = false;
-}
-
-function upgradeHydrationErrorsToRecoverable() {
-  if (hydrationErrors !== null) {
-    // Successfully completed a forced client render. The errors that occurred
-    // during the hydration attempt are now recovered. We will log them in
-    // commit phase, once the entire tree has finished.
-    queueRecoverableErrors(hydrationErrors);
-    hydrationErrors = null;
-  }
-}
-
-function getIsHydrating() {
-  return isHydrating;
-}
-
-function queueHydrationError(error) {
-  if (hydrationErrors === null) {
-    hydrationErrors = [error];
-  } else {
-    hydrationErrors.push(error);
-  }
-}
-
 var ReactCurrentBatchConfig$1 = ReactSharedInternals.ReactCurrentBatchConfig;
 var NoTransition = null;
 function requestCurrentTransition() {
@@ -16695,27 +15982,30 @@ function readContext(context) {
   return value;
 }
 
+// An array of all update queues that received updates during the current
 // render. When this render exits, either because it finishes or because it is
 // interrupted, the interleaved updates will be transferred onto the main part
 // of the queue.
-
-var concurrentQueues = null;
-function pushConcurrentUpdateQueue(queue) {
-  if (concurrentQueues === null) {
-    concurrentQueues = [queue];
+var interleavedQueues = null;
+function pushInterleavedQueue(queue) {
+  if (interleavedQueues === null) {
+    interleavedQueues = [queue];
   } else {
-    concurrentQueues.push(queue);
+    interleavedQueues.push(queue);
   }
 }
-function finishQueueingConcurrentUpdates() {
+function hasInterleavedUpdates() {
+  return interleavedQueues !== null;
+}
+function enqueueInterleavedUpdates() {
   // Transfer the interleaved updates onto the main queue. Each queue has a
   // `pending` field and an `interleaved` field. When they are not null, they
   // point to the last node in a circular linked list. We need to append the
   // interleaved list to the end of the pending list by joining them into a
   // single, circular list.
-  if (concurrentQueues !== null) {
-    for (var i = 0; i < concurrentQueues.length; i++) {
-      var queue = concurrentQueues[i];
+  if (interleavedQueues !== null) {
+    for (var i = 0; i < interleavedQueues.length; i++) {
+      var queue = interleavedQueues[i];
       var lastInterleavedUpdate = queue.interleaved;
 
       if (lastInterleavedUpdate !== null) {
@@ -16733,108 +16023,7 @@ function finishQueueingConcurrentUpdates() {
       }
     }
 
-    concurrentQueues = null;
-  }
-}
-function enqueueConcurrentHookUpdate(fiber, queue, update, lane) {
-  var interleaved = queue.interleaved;
-
-  if (interleaved === null) {
-    // This is the first update. Create a circular list.
-    update.next = update; // At the end of the current render, this queue's interleaved updates will
-    // be transferred to the pending queue.
-
-    pushConcurrentUpdateQueue(queue);
-  } else {
-    update.next = interleaved.next;
-    interleaved.next = update;
-  }
-
-  queue.interleaved = update;
-  return markUpdateLaneFromFiberToRoot(fiber, lane);
-}
-function enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update, lane) {
-  var interleaved = queue.interleaved;
-
-  if (interleaved === null) {
-    // This is the first update. Create a circular list.
-    update.next = update; // At the end of the current render, this queue's interleaved updates will
-    // be transferred to the pending queue.
-
-    pushConcurrentUpdateQueue(queue);
-  } else {
-    update.next = interleaved.next;
-    interleaved.next = update;
-  }
-
-  queue.interleaved = update;
-}
-function enqueueConcurrentClassUpdate(fiber, queue, update, lane) {
-  var interleaved = queue.interleaved;
-
-  if (interleaved === null) {
-    // This is the first update. Create a circular list.
-    update.next = update; // At the end of the current render, this queue's interleaved updates will
-    // be transferred to the pending queue.
-
-    pushConcurrentUpdateQueue(queue);
-  } else {
-    update.next = interleaved.next;
-    interleaved.next = update;
-  }
-
-  queue.interleaved = update;
-  return markUpdateLaneFromFiberToRoot(fiber, lane);
-}
-function enqueueConcurrentRenderForLane(fiber, lane) {
-  return markUpdateLaneFromFiberToRoot(fiber, lane);
-} // Calling this function outside this module should only be done for backwards
-// compatibility and should always be accompanied by a warning.
-
-var unsafe_markUpdateLaneFromFiberToRoot = markUpdateLaneFromFiberToRoot;
-
-function markUpdateLaneFromFiberToRoot(sourceFiber, lane) {
-  // Update the source fiber's lanes
-  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
-  var alternate = sourceFiber.alternate;
-
-  if (alternate !== null) {
-    alternate.lanes = mergeLanes(alternate.lanes, lane);
-  }
-
-  {
-    if (alternate === null && (sourceFiber.flags & (Placement | Hydrating)) !== NoFlags) {
-      warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
-    }
-  } // Walk the parent path to the root and update the child lanes.
-
-
-  var node = sourceFiber;
-  var parent = sourceFiber.return;
-
-  while (parent !== null) {
-    parent.childLanes = mergeLanes(parent.childLanes, lane);
-    alternate = parent.alternate;
-
-    if (alternate !== null) {
-      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
-    } else {
-      {
-        if ((parent.flags & (Placement | Hydrating)) !== NoFlags) {
-          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
-        }
-      }
-    }
-
-    node = parent;
-    parent = parent.return;
-  }
-
-  if (node.tag === HostRoot) {
-    var root = node.stateNode;
-    return root;
-  } else {
-    return null;
+    interleavedQueues = null;
   }
 }
 
@@ -16900,22 +16089,27 @@ function enqueueUpdate(fiber, update, lane) {
 
   if (updateQueue === null) {
     // Only occurs if the fiber has been unmounted.
-    return null;
+    return;
   }
 
   var sharedQueue = updateQueue.shared;
 
-  {
-    if (currentlyProcessingQueue === sharedQueue && !didWarnUpdateInsideUpdate) {
-      error('An update (setState, replaceState, or forceUpdate) was scheduled ' + 'from inside an update function. Update functions should be pure, ' + 'with zero side-effects. Consider using componentDidUpdate or a ' + 'callback.');
+  if (isInterleavedUpdate(fiber)) {
+    var interleaved = sharedQueue.interleaved;
 
-      didWarnUpdateInsideUpdate = true;
+    if (interleaved === null) {
+      // This is the first update. Create a circular list.
+      update.next = update; // At the end of the current render, this queue's interleaved updates will
+      // be transferred to the pending queue.
+
+      pushInterleavedQueue(sharedQueue);
+    } else {
+      update.next = interleaved.next;
+      interleaved.next = update;
     }
-  }
 
-  if (isUnsafeClassRenderPhaseUpdate()) {
-    // This is an unsafe render phase update. Add directly to the update
-    // queue so we can process it immediately during the current render.
+    sharedQueue.interleaved = update;
+  } else {
     var pending = sharedQueue.pending;
 
     if (pending === null) {
@@ -16926,14 +16120,15 @@ function enqueueUpdate(fiber, update, lane) {
       pending.next = update;
     }
 
-    sharedQueue.pending = update; // Update the childLanes even though we're most likely already rendering
-    // this fiber. This is for backwards compatibility in the case where you
-    // update a different component during render phase than the one that is
-    // currently renderings (a pattern that is accompanied by a warning).
+    sharedQueue.pending = update;
+  }
 
-    return unsafe_markUpdateLaneFromFiberToRoot(fiber, lane);
-  } else {
-    return enqueueConcurrentClassUpdate(fiber, sharedQueue, update, lane);
+  {
+    if (currentlyProcessingQueue === sharedQueue && !didWarnUpdateInsideUpdate) {
+      error('An update (setState, replaceState, or forceUpdate) was scheduled ' + 'from inside an update function. Update functions should be pure, ' + 'with zero side-effects. Consider using componentDidUpdate or a ' + 'callback.');
+
+      didWarnUpdateInsideUpdate = true;
+    }
   }
 }
 function entangleTransitions(root, fiber, lane) {
@@ -17472,10 +16667,10 @@ var classComponentUpdater = {
       update.callback = callback;
     }
 
-    var root = enqueueUpdate(fiber, update, lane);
+    enqueueUpdate(fiber, update);
+    var root = scheduleUpdateOnFiber(fiber, lane, eventTime);
 
     if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
       entangleTransitions(root, fiber, lane);
     }
 
@@ -17499,10 +16694,10 @@ var classComponentUpdater = {
       update.callback = callback;
     }
 
-    var root = enqueueUpdate(fiber, update, lane);
+    enqueueUpdate(fiber, update);
+    var root = scheduleUpdateOnFiber(fiber, lane, eventTime);
 
     if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
       entangleTransitions(root, fiber, lane);
     }
 
@@ -17525,10 +16720,10 @@ var classComponentUpdater = {
       update.callback = callback;
     }
 
-    var root = enqueueUpdate(fiber, update, lane);
+    enqueueUpdate(fiber, update);
+    var root = scheduleUpdateOnFiber(fiber, lane, eventTime);
 
     if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
       entangleTransitions(root, fiber, lane);
     }
 
@@ -18159,6 +17354,677 @@ function updateClassInstance(current, workInProgress, ctor, newProps, renderLane
   instance.state = newState;
   instance.context = nextContext;
   return shouldUpdate;
+}
+
+// TODO: Use the unified fiber stack module instead of this local one?
+// Intentionally not using it yet to derisk the initial implementation, because
+// the way we push/pop these values is a bit unusual. If there's a mistake, I'd
+// rather the ids be wrong than crash the whole reconciler.
+var forkStack = [];
+var forkStackIndex = 0;
+var treeForkProvider = null;
+var treeForkCount = 0;
+var idStack = [];
+var idStackIndex = 0;
+var treeContextProvider = null;
+var treeContextId = 1;
+var treeContextOverflow = '';
+function isForkedChild(workInProgress) {
+  warnIfNotHydrating();
+  return (workInProgress.flags & Forked) !== NoFlags;
+}
+function getForksAtLevel(workInProgress) {
+  warnIfNotHydrating();
+  return treeForkCount;
+}
+function getTreeId() {
+  var overflow = treeContextOverflow;
+  var idWithLeadingBit = treeContextId;
+  var id = idWithLeadingBit & ~getLeadingBit(idWithLeadingBit);
+  return id.toString(32) + overflow;
+}
+function pushTreeFork(workInProgress, totalChildren) {
+  // This is called right after we reconcile an array (or iterator) of child
+  // fibers, because that's the only place where we know how many children in
+  // the whole set without doing extra work later, or storing addtional
+  // information on the fiber.
+  //
+  // That's why this function is separate from pushTreeId — it's called during
+  // the render phase of the fork parent, not the child, which is where we push
+  // the other context values.
+  //
+  // In the Fizz implementation this is much simpler because the child is
+  // rendered in the same callstack as the parent.
+  //
+  // It might be better to just add a `forks` field to the Fiber type. It would
+  // make this module simpler.
+  warnIfNotHydrating();
+  forkStack[forkStackIndex++] = treeForkCount;
+  forkStack[forkStackIndex++] = treeForkProvider;
+  treeForkProvider = workInProgress;
+  treeForkCount = totalChildren;
+}
+function pushTreeId(workInProgress, totalChildren, index) {
+  warnIfNotHydrating();
+  idStack[idStackIndex++] = treeContextId;
+  idStack[idStackIndex++] = treeContextOverflow;
+  idStack[idStackIndex++] = treeContextProvider;
+  treeContextProvider = workInProgress;
+  var baseIdWithLeadingBit = treeContextId;
+  var baseOverflow = treeContextOverflow; // The leftmost 1 marks the end of the sequence, non-inclusive. It's not part
+  // of the id; we use it to account for leading 0s.
+
+  var baseLength = getBitLength(baseIdWithLeadingBit) - 1;
+  var baseId = baseIdWithLeadingBit & ~(1 << baseLength);
+  var slot = index + 1;
+  var length = getBitLength(totalChildren) + baseLength; // 30 is the max length we can store without overflowing, taking into
+  // consideration the leading 1 we use to mark the end of the sequence.
+
+  if (length > 30) {
+    // We overflowed the bitwise-safe range. Fall back to slower algorithm.
+    // This branch assumes the length of the base id is greater than 5; it won't
+    // work for smaller ids, because you need 5 bits per character.
+    //
+    // We encode the id in multiple steps: first the base id, then the
+    // remaining digits.
+    //
+    // Each 5 bit sequence corresponds to a single base 32 character. So for
+    // example, if the current id is 23 bits long, we can convert 20 of those
+    // bits into a string of 4 characters, with 3 bits left over.
+    //
+    // First calculate how many bits in the base id represent a complete
+    // sequence of characters.
+    var numberOfOverflowBits = baseLength - baseLength % 5; // Then create a bitmask that selects only those bits.
+
+    var newOverflowBits = (1 << numberOfOverflowBits) - 1; // Select the bits, and convert them to a base 32 string.
+
+    var newOverflow = (baseId & newOverflowBits).toString(32); // Now we can remove those bits from the base id.
+
+    var restOfBaseId = baseId >> numberOfOverflowBits;
+    var restOfBaseLength = baseLength - numberOfOverflowBits; // Finally, encode the rest of the bits using the normal algorithm. Because
+    // we made more room, this time it won't overflow.
+
+    var restOfLength = getBitLength(totalChildren) + restOfBaseLength;
+    var restOfNewBits = slot << restOfBaseLength;
+    var id = restOfNewBits | restOfBaseId;
+    var overflow = newOverflow + baseOverflow;
+    treeContextId = 1 << restOfLength | id;
+    treeContextOverflow = overflow;
+  } else {
+    // Normal path
+    var newBits = slot << baseLength;
+
+    var _id = newBits | baseId;
+
+    var _overflow = baseOverflow;
+    treeContextId = 1 << length | _id;
+    treeContextOverflow = _overflow;
+  }
+}
+function pushMaterializedTreeId(workInProgress) {
+  warnIfNotHydrating(); // This component materialized an id. This will affect any ids that appear
+  // in its children.
+
+  var returnFiber = workInProgress.return;
+
+  if (returnFiber !== null) {
+    var numberOfForks = 1;
+    var slotIndex = 0;
+    pushTreeFork(workInProgress, numberOfForks);
+    pushTreeId(workInProgress, numberOfForks, slotIndex);
+  }
+}
+
+function getBitLength(number) {
+  return 32 - clz32(number);
+}
+
+function getLeadingBit(id) {
+  return 1 << getBitLength(id) - 1;
+}
+
+function popTreeContext(workInProgress) {
+  // Restore the previous values.
+  // This is a bit more complicated than other context-like modules in Fiber
+  // because the same Fiber may appear on the stack multiple times and for
+  // different reasons. We have to keep popping until the work-in-progress is
+  // no longer at the top of the stack.
+  while (workInProgress === treeForkProvider) {
+    treeForkProvider = forkStack[--forkStackIndex];
+    forkStack[forkStackIndex] = null;
+    treeForkCount = forkStack[--forkStackIndex];
+    forkStack[forkStackIndex] = null;
+  }
+
+  while (workInProgress === treeContextProvider) {
+    treeContextProvider = idStack[--idStackIndex];
+    idStack[idStackIndex] = null;
+    treeContextOverflow = idStack[--idStackIndex];
+    idStack[idStackIndex] = null;
+    treeContextId = idStack[--idStackIndex];
+    idStack[idStackIndex] = null;
+  }
+}
+function getSuspendedTreeContext() {
+  warnIfNotHydrating();
+
+  if (treeContextProvider !== null) {
+    return {
+      id: treeContextId,
+      overflow: treeContextOverflow
+    };
+  } else {
+    return null;
+  }
+}
+function restoreSuspendedTreeContext(workInProgress, suspendedContext) {
+  warnIfNotHydrating();
+  idStack[idStackIndex++] = treeContextId;
+  idStack[idStackIndex++] = treeContextOverflow;
+  idStack[idStackIndex++] = treeContextProvider;
+  treeContextId = suspendedContext.id;
+  treeContextOverflow = suspendedContext.overflow;
+  treeContextProvider = workInProgress;
+}
+
+function warnIfNotHydrating() {
+  {
+    if (!getIsHydrating()) {
+      error('Expected to be hydrating. This is a bug in React. Please file ' + 'an issue.');
+    }
+  }
+}
+
+// This may have been an insertion or a hydration.
+
+var hydrationParentFiber = null;
+var nextHydratableInstance = null;
+var isHydrating = false; // This flag allows for warning supression when we expect there to be mismatches
+// due to earlier mismatches or a suspended fiber.
+
+var didSuspendOrErrorDEV = false; // Hydration errors that were thrown inside this boundary
+
+var hydrationErrors = null;
+
+function warnIfHydrating() {
+  {
+    if (isHydrating) {
+      error('We should not be hydrating here. This is a bug in React. Please file a bug.');
+    }
+  }
+}
+
+function markDidThrowWhileHydratingDEV() {
+  {
+    didSuspendOrErrorDEV = true;
+  }
+}
+
+function enterHydrationState(fiber) {
+
+  var parentInstance = fiber.stateNode.containerInfo;
+  nextHydratableInstance = getFirstHydratableChildWithinContainer(parentInstance);
+  hydrationParentFiber = fiber;
+  isHydrating = true;
+  hydrationErrors = null;
+  didSuspendOrErrorDEV = false;
+  return true;
+}
+
+function reenterHydrationStateFromDehydratedSuspenseInstance(fiber, suspenseInstance, treeContext) {
+
+  nextHydratableInstance = getFirstHydratableChildWithinSuspenseInstance(suspenseInstance);
+  hydrationParentFiber = fiber;
+  isHydrating = true;
+  hydrationErrors = null;
+  didSuspendOrErrorDEV = false;
+
+  if (treeContext !== null) {
+    restoreSuspendedTreeContext(fiber, treeContext);
+  }
+
+  return true;
+}
+
+function warnUnhydratedInstance(returnFiber, instance) {
+  {
+    switch (returnFiber.tag) {
+      case HostRoot:
+        {
+          didNotHydrateInstanceWithinContainer(returnFiber.stateNode.containerInfo, instance);
+          break;
+        }
+
+      case HostComponent:
+        {
+          var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
+          didNotHydrateInstance(returnFiber.type, returnFiber.memoizedProps, returnFiber.stateNode, instance, // TODO: Delete this argument when we remove the legacy root API.
+          isConcurrentMode);
+          break;
+        }
+
+      case SuspenseComponent:
+        {
+          var suspenseState = returnFiber.memoizedState;
+          if (suspenseState.dehydrated !== null) didNotHydrateInstanceWithinSuspenseInstance(suspenseState.dehydrated, instance);
+          break;
+        }
+    }
+  }
+}
+
+function deleteHydratableInstance(returnFiber, instance) {
+  warnUnhydratedInstance(returnFiber, instance);
+  var childToDelete = createFiberFromHostInstanceForDeletion();
+  childToDelete.stateNode = instance;
+  childToDelete.return = returnFiber;
+  var deletions = returnFiber.deletions;
+
+  if (deletions === null) {
+    returnFiber.deletions = [childToDelete];
+    returnFiber.flags |= ChildDeletion;
+  } else {
+    deletions.push(childToDelete);
+  }
+}
+
+function warnNonhydratedInstance(returnFiber, fiber) {
+  {
+    if (didSuspendOrErrorDEV) {
+      // Inside a boundary that already suspended. We're currently rendering the
+      // siblings of a suspended node. The mismatch may be due to the missing
+      // data, so it's probably a false positive.
+      return;
+    }
+
+    switch (returnFiber.tag) {
+      case HostRoot:
+        {
+          var parentContainer = returnFiber.stateNode.containerInfo;
+
+          switch (fiber.tag) {
+            case HostComponent:
+              var type = fiber.type;
+              fiber.pendingProps;
+              didNotFindHydratableInstanceWithinContainer(parentContainer, type);
+              break;
+
+            case HostText:
+              var text = fiber.pendingProps;
+              didNotFindHydratableTextInstanceWithinContainer(parentContainer, text);
+              break;
+          }
+
+          break;
+        }
+
+      case HostComponent:
+        {
+          var parentType = returnFiber.type;
+          var parentProps = returnFiber.memoizedProps;
+          var parentInstance = returnFiber.stateNode;
+
+          switch (fiber.tag) {
+            case HostComponent:
+              {
+                var _type = fiber.type;
+                var _props = fiber.pendingProps;
+                var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
+                didNotFindHydratableInstance(parentType, parentProps, parentInstance, _type, _props, // TODO: Delete this argument when we remove the legacy root API.
+                isConcurrentMode);
+                break;
+              }
+
+            case HostText:
+              {
+                var _text = fiber.pendingProps;
+
+                var _isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
+
+                didNotFindHydratableTextInstance(parentType, parentProps, parentInstance, _text, // TODO: Delete this argument when we remove the legacy root API.
+                _isConcurrentMode);
+                break;
+              }
+          }
+
+          break;
+        }
+
+      case SuspenseComponent:
+        {
+          var suspenseState = returnFiber.memoizedState;
+          var _parentInstance = suspenseState.dehydrated;
+          if (_parentInstance !== null) switch (fiber.tag) {
+            case HostComponent:
+              var _type2 = fiber.type;
+              fiber.pendingProps;
+              didNotFindHydratableInstanceWithinSuspenseInstance(_parentInstance, _type2);
+              break;
+
+            case HostText:
+              var _text2 = fiber.pendingProps;
+              didNotFindHydratableTextInstanceWithinSuspenseInstance(_parentInstance, _text2);
+              break;
+          }
+          break;
+        }
+
+      default:
+        return;
+    }
+  }
+}
+
+function insertNonHydratedInstance(returnFiber, fiber) {
+  fiber.flags = fiber.flags & ~Hydrating | Placement;
+  warnNonhydratedInstance(returnFiber, fiber);
+}
+
+function tryHydrate(fiber, nextInstance) {
+  switch (fiber.tag) {
+    case HostComponent:
+      {
+        var type = fiber.type;
+        fiber.pendingProps;
+        var instance = canHydrateInstance(nextInstance, type);
+
+        if (instance !== null) {
+          fiber.stateNode = instance;
+          hydrationParentFiber = fiber;
+          nextHydratableInstance = getFirstHydratableChild(instance);
+          return true;
+        }
+
+        return false;
+      }
+
+    case HostText:
+      {
+        var text = fiber.pendingProps;
+        var textInstance = canHydrateTextInstance(nextInstance, text);
+
+        if (textInstance !== null) {
+          fiber.stateNode = textInstance;
+          hydrationParentFiber = fiber; // Text Instances don't have children so there's nothing to hydrate.
+
+          nextHydratableInstance = null;
+          return true;
+        }
+
+        return false;
+      }
+
+    case SuspenseComponent:
+      {
+        var suspenseInstance = canHydrateSuspenseInstance(nextInstance);
+
+        if (suspenseInstance !== null) {
+          var suspenseState = {
+            dehydrated: suspenseInstance,
+            treeContext: getSuspendedTreeContext(),
+            retryLane: OffscreenLane
+          };
+          fiber.memoizedState = suspenseState; // Store the dehydrated fragment as a child fiber.
+          // This simplifies the code for getHostSibling and deleting nodes,
+          // since it doesn't have to consider all Suspense boundaries and
+          // check if they're dehydrated ones or not.
+
+          var dehydratedFragment = createFiberFromDehydratedFragment(suspenseInstance);
+          dehydratedFragment.return = fiber;
+          fiber.child = dehydratedFragment;
+          hydrationParentFiber = fiber; // While a Suspense Instance does have children, we won't step into
+          // it during the first pass. Instead, we'll reenter it later.
+
+          nextHydratableInstance = null;
+          return true;
+        }
+
+        return false;
+      }
+
+    default:
+      return false;
+  }
+}
+
+function shouldClientRenderOnMismatch(fiber) {
+  return (fiber.mode & ConcurrentMode) !== NoMode && (fiber.flags & DidCapture) === NoFlags;
+}
+
+function throwOnHydrationMismatch(fiber) {
+  throw new Error('Hydration failed because the initial UI does not match what was ' + 'rendered on the server.');
+}
+
+function tryToClaimNextHydratableInstance(fiber) {
+  if (!isHydrating) {
+    return;
+  }
+
+  var nextInstance = nextHydratableInstance;
+
+  if (!nextInstance) {
+    if (shouldClientRenderOnMismatch(fiber)) {
+      warnNonhydratedInstance(hydrationParentFiber, fiber);
+      throwOnHydrationMismatch();
+    } // Nothing to hydrate. Make it an insertion.
+
+
+    insertNonHydratedInstance(hydrationParentFiber, fiber);
+    isHydrating = false;
+    hydrationParentFiber = fiber;
+    return;
+  }
+
+  var firstAttemptedInstance = nextInstance;
+
+  if (!tryHydrate(fiber, nextInstance)) {
+    if (shouldClientRenderOnMismatch(fiber)) {
+      warnNonhydratedInstance(hydrationParentFiber, fiber);
+      throwOnHydrationMismatch();
+    } // If we can't hydrate this instance let's try the next one.
+    // We use this as a heuristic. It's based on intuition and not data so it
+    // might be flawed or unnecessary.
+
+
+    nextInstance = getNextHydratableSibling(firstAttemptedInstance);
+    var prevHydrationParentFiber = hydrationParentFiber;
+
+    if (!nextInstance || !tryHydrate(fiber, nextInstance)) {
+      // Nothing to hydrate. Make it an insertion.
+      insertNonHydratedInstance(hydrationParentFiber, fiber);
+      isHydrating = false;
+      hydrationParentFiber = fiber;
+      return;
+    } // We matched the next one, we'll now assume that the first one was
+    // superfluous and we'll delete it. Since we can't eagerly delete it
+    // we'll have to schedule a deletion. To do that, this node needs a dummy
+    // fiber associated with it.
+
+
+    deleteHydratableInstance(prevHydrationParentFiber, firstAttemptedInstance);
+  }
+}
+
+function prepareToHydrateHostInstance(fiber, rootContainerInstance, hostContext) {
+
+  var instance = fiber.stateNode;
+  var shouldWarnIfMismatchDev = !didSuspendOrErrorDEV;
+  var updatePayload = hydrateInstance(instance, fiber.type, fiber.memoizedProps, rootContainerInstance, hostContext, fiber, shouldWarnIfMismatchDev); // TODO: Type this specific to this type of component.
+
+  fiber.updateQueue = updatePayload; // If the update payload indicates that there is a change or if there
+  // is a new ref we mark this as an update.
+
+  if (updatePayload !== null) {
+    return true;
+  }
+
+  return false;
+}
+
+function prepareToHydrateHostTextInstance(fiber) {
+
+  var textInstance = fiber.stateNode;
+  var textContent = fiber.memoizedProps;
+  var shouldUpdate = hydrateTextInstance(textInstance, textContent, fiber);
+
+  if (shouldUpdate) {
+    // We assume that prepareToHydrateHostTextInstance is called in a context where the
+    // hydration parent is the parent host component of this host text.
+    var returnFiber = hydrationParentFiber;
+
+    if (returnFiber !== null) {
+      switch (returnFiber.tag) {
+        case HostRoot:
+          {
+            var parentContainer = returnFiber.stateNode.containerInfo;
+            var isConcurrentMode = (returnFiber.mode & ConcurrentMode) !== NoMode;
+            didNotMatchHydratedContainerTextInstance(parentContainer, textInstance, textContent, // TODO: Delete this argument when we remove the legacy root API.
+            isConcurrentMode);
+            break;
+          }
+
+        case HostComponent:
+          {
+            var parentType = returnFiber.type;
+            var parentProps = returnFiber.memoizedProps;
+            var parentInstance = returnFiber.stateNode;
+
+            var _isConcurrentMode2 = (returnFiber.mode & ConcurrentMode) !== NoMode;
+
+            didNotMatchHydratedTextInstance(parentType, parentProps, parentInstance, textInstance, textContent, // TODO: Delete this argument when we remove the legacy root API.
+            _isConcurrentMode2);
+            break;
+          }
+      }
+    }
+  }
+
+  return shouldUpdate;
+}
+
+function prepareToHydrateHostSuspenseInstance(fiber) {
+
+  var suspenseState = fiber.memoizedState;
+  var suspenseInstance = suspenseState !== null ? suspenseState.dehydrated : null;
+
+  if (!suspenseInstance) {
+    throw new Error('Expected to have a hydrated suspense instance. ' + 'This error is likely caused by a bug in React. Please file an issue.');
+  }
+
+  hydrateSuspenseInstance(suspenseInstance, fiber);
+}
+
+function skipPastDehydratedSuspenseInstance(fiber) {
+
+  var suspenseState = fiber.memoizedState;
+  var suspenseInstance = suspenseState !== null ? suspenseState.dehydrated : null;
+
+  if (!suspenseInstance) {
+    throw new Error('Expected to have a hydrated suspense instance. ' + 'This error is likely caused by a bug in React. Please file an issue.');
+  }
+
+  return getNextHydratableInstanceAfterSuspenseInstance(suspenseInstance);
+}
+
+function popToNextHostParent(fiber) {
+  var parent = fiber.return;
+
+  while (parent !== null && parent.tag !== HostComponent && parent.tag !== HostRoot && parent.tag !== SuspenseComponent) {
+    parent = parent.return;
+  }
+
+  hydrationParentFiber = parent;
+}
+
+function popHydrationState(fiber) {
+
+  if (fiber !== hydrationParentFiber) {
+    // We're deeper than the current hydration context, inside an inserted
+    // tree.
+    return false;
+  }
+
+  if (!isHydrating) {
+    // If we're not currently hydrating but we're in a hydration context, then
+    // we were an insertion and now need to pop up reenter hydration of our
+    // siblings.
+    popToNextHostParent(fiber);
+    isHydrating = true;
+    return false;
+  } // If we have any remaining hydratable nodes, we need to delete them now.
+  // We only do this deeper than head and body since they tend to have random
+  // other nodes in them. We also ignore components with pure text content in
+  // side of them. We also don't delete anything inside the root container.
+
+
+  if (fiber.tag !== HostRoot && (fiber.tag !== HostComponent || shouldDeleteUnhydratedTailInstances(fiber.type) && !shouldSetTextContent(fiber.type, fiber.memoizedProps))) {
+    var nextInstance = nextHydratableInstance;
+
+    if (nextInstance) {
+      if (shouldClientRenderOnMismatch(fiber)) {
+        warnIfUnhydratedTailNodes(fiber);
+        throwOnHydrationMismatch();
+      } else {
+        while (nextInstance) {
+          deleteHydratableInstance(fiber, nextInstance);
+          nextInstance = getNextHydratableSibling(nextInstance);
+        }
+      }
+    }
+  }
+
+  popToNextHostParent(fiber);
+
+  if (fiber.tag === SuspenseComponent) {
+    nextHydratableInstance = skipPastDehydratedSuspenseInstance(fiber);
+  } else {
+    nextHydratableInstance = hydrationParentFiber ? getNextHydratableSibling(fiber.stateNode) : null;
+  }
+
+  return true;
+}
+
+function hasUnhydratedTailNodes() {
+  return isHydrating && nextHydratableInstance !== null;
+}
+
+function warnIfUnhydratedTailNodes(fiber) {
+  var nextInstance = nextHydratableInstance;
+
+  while (nextInstance) {
+    warnUnhydratedInstance(fiber, nextInstance);
+    nextInstance = getNextHydratableSibling(nextInstance);
+  }
+}
+
+function resetHydrationState() {
+
+  hydrationParentFiber = null;
+  nextHydratableInstance = null;
+  isHydrating = false;
+  didSuspendOrErrorDEV = false;
+}
+
+function upgradeHydrationErrorsToRecoverable() {
+  if (hydrationErrors !== null) {
+    // Successfully completed a forced client render. The errors that occurred
+    // during the hydration attempt are now recovered. We will log them in
+    // commit phase, once the entire tree has finished.
+    queueRecoverableErrors(hydrationErrors);
+    hydrationErrors = null;
+  }
+}
+
+function getIsHydrating() {
+  return isHydrating;
+}
+
+function queueHydrationError(error) {
+  if (hydrationErrors === null) {
+    hydrationErrors = [error];
+  } else {
+    hydrationErrors.push(error);
+  }
 }
 
 var didWarnAboutMaps;
@@ -20382,11 +20248,7 @@ function checkIfSnapshotChanged(inst) {
 }
 
 function forceStoreRerender(fiber) {
-  var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-  if (root !== null) {
-    scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-  }
+  scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
 }
 
 function mountState(initialState) {
@@ -20856,11 +20718,11 @@ function dispatchReducerAction(fiber, queue, action) {
   if (isRenderPhaseUpdate(fiber)) {
     enqueueRenderPhaseUpdate(queue, update);
   } else {
-    var root = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+    enqueueUpdate$1(fiber, queue, update);
+    var eventTime = requestEventTime();
+    var root = scheduleUpdateOnFiber(fiber, lane, eventTime);
 
     if (root !== null) {
-      var eventTime = requestEventTime();
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
       entangleTransitionUpdate(root, queue, lane);
     }
   }
@@ -20887,6 +20749,7 @@ function dispatchSetState(fiber, queue, action) {
   if (isRenderPhaseUpdate(fiber)) {
     enqueueRenderPhaseUpdate(queue, update);
   } else {
+    enqueueUpdate$1(fiber, queue, update);
     var alternate = fiber.alternate;
 
     if (fiber.lanes === NoLanes && (alternate === null || alternate.lanes === NoLanes)) {
@@ -20918,8 +20781,6 @@ function dispatchSetState(fiber, queue, action) {
             // It's still possible that we'll need to rebase this update later,
             // if the component re-renders for a different reason and by that
             // time the reducer has changed.
-            // TODO: Do we still need to entangle transitions in this case?
-            enqueueConcurrentHookUpdateAndEagerlyBailout(fiber, queue, update, lane);
             return;
           }
         } catch (error) {// Suppress the error. It will throw again in the render phase.
@@ -20931,11 +20792,10 @@ function dispatchSetState(fiber, queue, action) {
       }
     }
 
-    var root = enqueueConcurrentHookUpdate(fiber, queue, update, lane);
+    var eventTime = requestEventTime();
+    var root = scheduleUpdateOnFiber(fiber, lane, eventTime);
 
     if (root !== null) {
-      var eventTime = requestEventTime();
-      scheduleUpdateOnFiber(root, fiber, lane, eventTime);
       entangleTransitionUpdate(root, queue, lane);
     }
   }
@@ -20964,8 +20824,38 @@ function enqueueRenderPhaseUpdate(queue, update) {
   }
 
   queue.pending = update;
-} // TODO: Move to ReactFiberConcurrentUpdates?
+}
 
+function enqueueUpdate$1(fiber, queue, update, lane) {
+  if (isInterleavedUpdate(fiber)) {
+    var interleaved = queue.interleaved;
+
+    if (interleaved === null) {
+      // This is the first update. Create a circular list.
+      update.next = update; // At the end of the current render, this queue's interleaved updates will
+      // be transferred to the pending queue.
+
+      pushInterleavedQueue(queue);
+    } else {
+      update.next = interleaved.next;
+      interleaved.next = update;
+    }
+
+    queue.interleaved = update;
+  } else {
+    var pending = queue.pending;
+
+    if (pending === null) {
+      // This is the first update. Create a circular list.
+      update.next = update;
+    } else {
+      update.next = pending.next;
+      pending.next = update;
+    }
+
+    queue.pending = update;
+  }
+}
 
 function entangleTransitionUpdate(root, queue, lane) {
   if (isTransitionLane(lane)) {
@@ -22018,22 +21908,13 @@ function transferActualDuration(fiber) {
   }
 }
 
-function createCapturedValueAtFiber(value, source) {
+function createCapturedValue(value, source) {
   // If the value is an error, call this function immediately after it is thrown
   // so the stack is accurate.
   return {
     value: value,
     source: source,
-    stack: getStackByFiberInDevAndProd(source),
-    digest: null
-  };
-}
-function createCapturedValue(value, digest, stack) {
-  return {
-    value: value,
-    source: null,
-    stack: stack != null ? stack : null,
-    digest: digest != null ? digest : null
+    stack: getStackByFiberInDevAndProd(source)
   };
 }
 
@@ -22344,7 +22225,7 @@ function markSuspenseBoundaryShouldCapture(suspenseBoundary, returnFiber, source
           // prevent a bail out.
           var update = createUpdate(NoTimestamp, SyncLane);
           update.tag = ForceUpdate;
-          enqueueUpdate(sourceFiber, update, SyncLane);
+          enqueueUpdate(sourceFiber, update);
         }
       } // The source fiber did not complete. Mark it with Sync priority to
       // indicate that it still has pending work.
@@ -22484,17 +22365,17 @@ function throwException(root, returnFiber, sourceFiber, value, rootRenderLanes) 
         markSuspenseBoundaryShouldCapture(_suspenseBoundary, returnFiber, sourceFiber, root, rootRenderLanes); // Even though the user may not be affected by this error, we should
         // still log it so it can be fixed.
 
-        queueHydrationError(createCapturedValueAtFiber(value, sourceFiber));
+        queueHydrationError(value);
         return;
       }
     }
-  }
-
-  value = createCapturedValueAtFiber(value, sourceFiber);
-  renderDidError(value); // We didn't find a boundary that could handle this type of exception. Start
+  } // We didn't find a boundary that could handle this type of exception. Start
   // over and traverse parent path again, this time treating the exception
   // as an error.
 
+
+  renderDidError(value);
+  value = createCapturedValue(value, sourceFiber);
   var workInProgress = returnFiber;
 
   do {
@@ -22540,6 +22421,918 @@ function getSuspendedCache() {
   {
     return null;
   } // This function is called when a Suspense boundary suspends. It returns the
+}
+
+function markUpdate(workInProgress) {
+  // Tag the fiber with an update effect. This turns a Placement into
+  // a PlacementAndUpdate.
+  workInProgress.flags |= Update;
+}
+
+function markRef(workInProgress) {
+  workInProgress.flags |= Ref;
+
+  {
+    workInProgress.flags |= RefStatic;
+  }
+}
+
+var appendAllChildren;
+var updateHostContainer;
+var updateHostComponent;
+var updateHostText;
+
+{
+  // Mutation mode
+  appendAllChildren = function (parent, workInProgress, needsVisibilityToggle, isHidden) {
+    // We only have the top Fiber that was created but we need recurse down its
+    // children to find all the terminal nodes.
+    var node = workInProgress.child;
+
+    while (node !== null) {
+      if (node.tag === HostComponent || node.tag === HostText) {
+        appendInitialChild(parent, node.stateNode);
+      } else if (node.tag === HostPortal) ; else if (node.child !== null) {
+        node.child.return = node;
+        node = node.child;
+        continue;
+      }
+
+      if (node === workInProgress) {
+        return;
+      }
+
+      while (node.sibling === null) {
+        if (node.return === null || node.return === workInProgress) {
+          return;
+        }
+
+        node = node.return;
+      }
+
+      node.sibling.return = node.return;
+      node = node.sibling;
+    }
+  };
+
+  updateHostContainer = function (current, workInProgress) {// Noop
+  };
+
+  updateHostComponent = function (current, workInProgress, type, newProps, rootContainerInstance) {
+    // If we have an alternate, that means this is an update and we need to
+    // schedule a side-effect to do the updates.
+    var oldProps = current.memoizedProps;
+
+    if (oldProps === newProps) {
+      // In mutation mode, this is sufficient for a bailout because
+      // we won't touch this node even if children changed.
+      return;
+    } // If we get updated because one of our children updated, we don't
+    // have newProps so we'll have to reuse them.
+    // TODO: Split the update API as separate for the props vs. children.
+    // Even better would be if children weren't special cased at all tho.
+
+
+    var instance = workInProgress.stateNode;
+    var currentHostContext = getHostContext(); // TODO: Experiencing an error where oldProps is null. Suggests a host
+    // component is hitting the resume path. Figure out why. Possibly
+    // related to `hidden`.
+
+    var updatePayload = prepareUpdate(instance, type, oldProps, newProps, rootContainerInstance, currentHostContext); // TODO: Type this specific to this type of component.
+
+    workInProgress.updateQueue = updatePayload; // If the update payload indicates that there is a change or if there
+    // is a new ref we mark this as an update. All the work is done in commitWork.
+
+    if (updatePayload) {
+      markUpdate(workInProgress);
+    }
+  };
+
+  updateHostText = function (current, workInProgress, oldText, newText) {
+    // If the text differs, mark it as an update. All the work in done in commitWork.
+    if (oldText !== newText) {
+      markUpdate(workInProgress);
+    }
+  };
+}
+
+function cutOffTailIfNeeded(renderState, hasRenderedATailFallback) {
+  if (getIsHydrating()) {
+    // If we're hydrating, we should consume as many items as we can
+    // so we don't leave any behind.
+    return;
+  }
+
+  switch (renderState.tailMode) {
+    case 'hidden':
+      {
+        // Any insertions at the end of the tail list after this point
+        // should be invisible. If there are already mounted boundaries
+        // anything before them are not considered for collapsing.
+        // Therefore we need to go through the whole tail to find if
+        // there are any.
+        var tailNode = renderState.tail;
+        var lastTailNode = null;
+
+        while (tailNode !== null) {
+          if (tailNode.alternate !== null) {
+            lastTailNode = tailNode;
+          }
+
+          tailNode = tailNode.sibling;
+        } // Next we're simply going to delete all insertions after the
+        // last rendered item.
+
+
+        if (lastTailNode === null) {
+          // All remaining items in the tail are insertions.
+          renderState.tail = null;
+        } else {
+          // Detach the insertion after the last node that was already
+          // inserted.
+          lastTailNode.sibling = null;
+        }
+
+        break;
+      }
+
+    case 'collapsed':
+      {
+        // Any insertions at the end of the tail list after this point
+        // should be invisible. If there are already mounted boundaries
+        // anything before them are not considered for collapsing.
+        // Therefore we need to go through the whole tail to find if
+        // there are any.
+        var _tailNode = renderState.tail;
+        var _lastTailNode = null;
+
+        while (_tailNode !== null) {
+          if (_tailNode.alternate !== null) {
+            _lastTailNode = _tailNode;
+          }
+
+          _tailNode = _tailNode.sibling;
+        } // Next we're simply going to delete all insertions after the
+        // last rendered item.
+
+
+        if (_lastTailNode === null) {
+          // All remaining items in the tail are insertions.
+          if (!hasRenderedATailFallback && renderState.tail !== null) {
+            // We suspended during the head. We want to show at least one
+            // row at the tail. So we'll keep on and cut off the rest.
+            renderState.tail.sibling = null;
+          } else {
+            renderState.tail = null;
+          }
+        } else {
+          // Detach the insertion after the last node that was already
+          // inserted.
+          _lastTailNode.sibling = null;
+        }
+
+        break;
+      }
+  }
+}
+
+function bubbleProperties(completedWork) {
+  var didBailout = completedWork.alternate !== null && completedWork.alternate.child === completedWork.child;
+  var newChildLanes = NoLanes;
+  var subtreeFlags = NoFlags;
+
+  if (!didBailout) {
+    // Bubble up the earliest expiration time.
+    if ( (completedWork.mode & ProfileMode) !== NoMode) {
+      // In profiling mode, resetChildExpirationTime is also used to reset
+      // profiler durations.
+      var actualDuration = completedWork.actualDuration;
+      var treeBaseDuration = completedWork.selfBaseDuration;
+      var child = completedWork.child;
+
+      while (child !== null) {
+        newChildLanes = mergeLanes(newChildLanes, mergeLanes(child.lanes, child.childLanes));
+        subtreeFlags |= child.subtreeFlags;
+        subtreeFlags |= child.flags; // When a fiber is cloned, its actualDuration is reset to 0. This value will
+        // only be updated if work is done on the fiber (i.e. it doesn't bailout).
+        // When work is done, it should bubble to the parent's actualDuration. If
+        // the fiber has not been cloned though, (meaning no work was done), then
+        // this value will reflect the amount of time spent working on a previous
+        // render. In that case it should not bubble. We determine whether it was
+        // cloned by comparing the child pointer.
+
+        actualDuration += child.actualDuration;
+        treeBaseDuration += child.treeBaseDuration;
+        child = child.sibling;
+      }
+
+      completedWork.actualDuration = actualDuration;
+      completedWork.treeBaseDuration = treeBaseDuration;
+    } else {
+      var _child = completedWork.child;
+
+      while (_child !== null) {
+        newChildLanes = mergeLanes(newChildLanes, mergeLanes(_child.lanes, _child.childLanes));
+        subtreeFlags |= _child.subtreeFlags;
+        subtreeFlags |= _child.flags; // Update the return pointer so the tree is consistent. This is a code
+        // smell because it assumes the commit phase is never concurrent with
+        // the render phase. Will address during refactor to alternate model.
+
+        _child.return = completedWork;
+        _child = _child.sibling;
+      }
+    }
+
+    completedWork.subtreeFlags |= subtreeFlags;
+  } else {
+    // Bubble up the earliest expiration time.
+    if ( (completedWork.mode & ProfileMode) !== NoMode) {
+      // In profiling mode, resetChildExpirationTime is also used to reset
+      // profiler durations.
+      var _treeBaseDuration = completedWork.selfBaseDuration;
+      var _child2 = completedWork.child;
+
+      while (_child2 !== null) {
+        newChildLanes = mergeLanes(newChildLanes, mergeLanes(_child2.lanes, _child2.childLanes)); // "Static" flags share the lifetime of the fiber/hook they belong to,
+        // so we should bubble those up even during a bailout. All the other
+        // flags have a lifetime only of a single render + commit, so we should
+        // ignore them.
+
+        subtreeFlags |= _child2.subtreeFlags & StaticMask;
+        subtreeFlags |= _child2.flags & StaticMask;
+        _treeBaseDuration += _child2.treeBaseDuration;
+        _child2 = _child2.sibling;
+      }
+
+      completedWork.treeBaseDuration = _treeBaseDuration;
+    } else {
+      var _child3 = completedWork.child;
+
+      while (_child3 !== null) {
+        newChildLanes = mergeLanes(newChildLanes, mergeLanes(_child3.lanes, _child3.childLanes)); // "Static" flags share the lifetime of the fiber/hook they belong to,
+        // so we should bubble those up even during a bailout. All the other
+        // flags have a lifetime only of a single render + commit, so we should
+        // ignore them.
+
+        subtreeFlags |= _child3.subtreeFlags & StaticMask;
+        subtreeFlags |= _child3.flags & StaticMask; // Update the return pointer so the tree is consistent. This is a code
+        // smell because it assumes the commit phase is never concurrent with
+        // the render phase. Will address during refactor to alternate model.
+
+        _child3.return = completedWork;
+        _child3 = _child3.sibling;
+      }
+    }
+
+    completedWork.subtreeFlags |= subtreeFlags;
+  }
+
+  completedWork.childLanes = newChildLanes;
+  return didBailout;
+}
+
+function completeWork(current, workInProgress, renderLanes) {
+  var newProps = workInProgress.pendingProps; // Note: This intentionally doesn't check if we're hydrating because comparing
+  // to the current tree provider fiber is just as fast and less error-prone.
+  // Ideally we would have a special version of the work loop only
+  // for hydration.
+
+  popTreeContext(workInProgress);
+
+  switch (workInProgress.tag) {
+    case IndeterminateComponent:
+    case LazyComponent:
+    case SimpleMemoComponent:
+    case FunctionComponent:
+    case ForwardRef:
+    case Fragment:
+    case Mode:
+    case Profiler:
+    case ContextConsumer:
+    case MemoComponent:
+      bubbleProperties(workInProgress);
+      return null;
+
+    case ClassComponent:
+      {
+        var Component = workInProgress.type;
+
+        if (isContextProvider(Component)) {
+          popContext(workInProgress);
+        }
+
+        bubbleProperties(workInProgress);
+        return null;
+      }
+
+    case HostRoot:
+      {
+        var fiberRoot = workInProgress.stateNode;
+        popHostContainer(workInProgress);
+        popTopLevelContextObject(workInProgress);
+        resetWorkInProgressVersions();
+
+        if (fiberRoot.pendingContext) {
+          fiberRoot.context = fiberRoot.pendingContext;
+          fiberRoot.pendingContext = null;
+        }
+
+        if (current === null || current.child === null) {
+          // If we hydrated, pop so that we can delete any remaining children
+          // that weren't hydrated.
+          var wasHydrated = popHydrationState(workInProgress);
+
+          if (wasHydrated) {
+            // If we hydrated, then we'll need to schedule an update for
+            // the commit side-effects on the root.
+            markUpdate(workInProgress);
+          } else {
+            if (current !== null) {
+              var prevState = current.memoizedState;
+
+              if ( // Check if this is a client root
+              !prevState.isDehydrated || // Check if we reverted to client rendering (e.g. due to an error)
+              (workInProgress.flags & ForceClientRender) !== NoFlags) {
+                // Schedule an effect to clear this container at the start of the
+                // next commit. This handles the case of React rendering into a
+                // container with previous children. It's also safe to do for
+                // updates too, because current.child would only be null if the
+                // previous render was null (so the container would already
+                // be empty).
+                workInProgress.flags |= Snapshot; // If this was a forced client render, there may have been
+                // recoverable errors during first hydration attempt. If so, add
+                // them to a queue so we can log them in the commit phase.
+
+                upgradeHydrationErrorsToRecoverable();
+              }
+            }
+          }
+        }
+
+        updateHostContainer(current, workInProgress);
+        bubbleProperties(workInProgress);
+
+        return null;
+      }
+
+    case HostComponent:
+      {
+        popHostContext(workInProgress);
+        var rootContainerInstance = getRootHostContainer();
+        var type = workInProgress.type;
+
+        if (current !== null && workInProgress.stateNode != null) {
+          updateHostComponent(current, workInProgress, type, newProps, rootContainerInstance);
+
+          if (current.ref !== workInProgress.ref) {
+            markRef(workInProgress);
+          }
+        } else {
+          if (!newProps) {
+            if (workInProgress.stateNode === null) {
+              throw new Error('We must have new props for new mounts. This error is likely ' + 'caused by a bug in React. Please file an issue.');
+            } // This can happen when we abort work.
+
+
+            bubbleProperties(workInProgress);
+            return null;
+          }
+
+          var currentHostContext = getHostContext(); // TODO: Move createInstance to beginWork and keep it on a context
+          // "stack" as the parent. Then append children as we go in beginWork
+          // or completeWork depending on whether we want to add them top->down or
+          // bottom->up. Top->down is faster in IE11.
+
+          var _wasHydrated = popHydrationState(workInProgress);
+
+          if (_wasHydrated) {
+            // TODO: Move this and createInstance step into the beginPhase
+            // to consolidate.
+            if (prepareToHydrateHostInstance(workInProgress, rootContainerInstance, currentHostContext)) {
+              // If changes to the hydrated node need to be applied at the
+              // commit-phase we mark this as such.
+              markUpdate(workInProgress);
+            }
+          } else {
+            var instance = createInstance(type, newProps, rootContainerInstance, currentHostContext, workInProgress);
+            appendAllChildren(instance, workInProgress, false, false);
+            workInProgress.stateNode = instance; // Certain renderers require commit-time effects for initial mount.
+            // (eg DOM renderer supports auto-focus for certain elements).
+            // Make sure such renderers get scheduled for later work.
+
+            if (finalizeInitialChildren(instance, type, newProps, rootContainerInstance)) {
+              markUpdate(workInProgress);
+            }
+          }
+
+          if (workInProgress.ref !== null) {
+            // If there is a ref on a host node we need to schedule a callback
+            markRef(workInProgress);
+          }
+        }
+
+        bubbleProperties(workInProgress);
+        return null;
+      }
+
+    case HostText:
+      {
+        var newText = newProps;
+
+        if (current && workInProgress.stateNode != null) {
+          var oldText = current.memoizedProps; // If we have an alternate, that means this is an update and we need
+          // to schedule a side-effect to do the updates.
+
+          updateHostText(current, workInProgress, oldText, newText);
+        } else {
+          if (typeof newText !== 'string') {
+            if (workInProgress.stateNode === null) {
+              throw new Error('We must have new props for new mounts. This error is likely ' + 'caused by a bug in React. Please file an issue.');
+            } // This can happen when we abort work.
+
+          }
+
+          var _rootContainerInstance = getRootHostContainer();
+
+          var _currentHostContext = getHostContext();
+
+          var _wasHydrated2 = popHydrationState(workInProgress);
+
+          if (_wasHydrated2) {
+            if (prepareToHydrateHostTextInstance(workInProgress)) {
+              markUpdate(workInProgress);
+            }
+          } else {
+            workInProgress.stateNode = createTextInstance(newText, _rootContainerInstance, _currentHostContext, workInProgress);
+          }
+        }
+
+        bubbleProperties(workInProgress);
+        return null;
+      }
+
+    case SuspenseComponent:
+      {
+        popSuspenseContext(workInProgress);
+        var nextState = workInProgress.memoizedState;
+
+        if (hasUnhydratedTailNodes() && (workInProgress.mode & ConcurrentMode) !== NoMode && (workInProgress.flags & DidCapture) === NoFlags) {
+          warnIfUnhydratedTailNodes(workInProgress);
+          resetHydrationState();
+          workInProgress.flags |= ForceClientRender | Incomplete | ShouldCapture;
+          return workInProgress;
+        }
+
+        if (nextState !== null && nextState.dehydrated !== null) {
+          // We might be inside a hydration state the first time we're picking up this
+          // Suspense boundary, and also after we've reentered it for further hydration.
+          var _wasHydrated3 = popHydrationState(workInProgress);
+
+          if (current === null) {
+            if (!_wasHydrated3) {
+              throw new Error('A dehydrated suspense component was completed without a hydrated node. ' + 'This is probably a bug in React.');
+            }
+
+            prepareToHydrateHostSuspenseInstance(workInProgress);
+            bubbleProperties(workInProgress);
+
+            {
+              if ((workInProgress.mode & ProfileMode) !== NoMode) {
+                var isTimedOutSuspense = nextState !== null;
+
+                if (isTimedOutSuspense) {
+                  // Don't count time spent in a timed out Suspense subtree as part of the base duration.
+                  var primaryChildFragment = workInProgress.child;
+
+                  if (primaryChildFragment !== null) {
+                    // $FlowFixMe Flow doesn't support type casting in combination with the -= operator
+                    workInProgress.treeBaseDuration -= primaryChildFragment.treeBaseDuration;
+                  }
+                }
+              }
+            }
+
+            return null;
+          } else {
+            // We might have reentered this boundary to hydrate it. If so, we need to reset the hydration
+            // state since we're now exiting out of it. popHydrationState doesn't do that for us.
+            resetHydrationState();
+
+            if ((workInProgress.flags & DidCapture) === NoFlags) {
+              // This boundary did not suspend so it's now hydrated and unsuspended.
+              workInProgress.memoizedState = null;
+            } // If nothing suspended, we need to schedule an effect to mark this boundary
+            // as having hydrated so events know that they're free to be invoked.
+            // It's also a signal to replay events and the suspense callback.
+            // If something suspended, schedule an effect to attach retry listeners.
+            // So we might as well always mark this.
+
+
+            workInProgress.flags |= Update;
+            bubbleProperties(workInProgress);
+
+            {
+              if ((workInProgress.mode & ProfileMode) !== NoMode) {
+                var _isTimedOutSuspense = nextState !== null;
+
+                if (_isTimedOutSuspense) {
+                  // Don't count time spent in a timed out Suspense subtree as part of the base duration.
+                  var _primaryChildFragment = workInProgress.child;
+
+                  if (_primaryChildFragment !== null) {
+                    // $FlowFixMe Flow doesn't support type casting in combination with the -= operator
+                    workInProgress.treeBaseDuration -= _primaryChildFragment.treeBaseDuration;
+                  }
+                }
+              }
+            }
+
+            return null;
+          }
+        } // Successfully completed this tree. If this was a forced client render,
+        // there may have been recoverable errors during first hydration
+        // attempt. If so, add them to a queue so we can log them in the
+        // commit phase.
+
+
+        upgradeHydrationErrorsToRecoverable();
+
+        if ((workInProgress.flags & DidCapture) !== NoFlags) {
+          // Something suspended. Re-render with the fallback children.
+          workInProgress.lanes = renderLanes; // Do not reset the effect list.
+
+          if ( (workInProgress.mode & ProfileMode) !== NoMode) {
+            transferActualDuration(workInProgress);
+          } // Don't bubble properties in this case.
+
+
+          return workInProgress;
+        }
+
+        var nextDidTimeout = nextState !== null;
+        var prevDidTimeout = false;
+
+        if (current === null) {
+          popHydrationState(workInProgress);
+        } else {
+          var _prevState = current.memoizedState;
+          prevDidTimeout = _prevState !== null;
+        }
+        // a passive effect, which is when we process the transitions
+
+
+        if (nextDidTimeout !== prevDidTimeout) {
+          // an effect to toggle the subtree's visibility. When we switch from
+          // fallback -> primary, the inner Offscreen fiber schedules this effect
+          // as part of its normal complete phase. But when we switch from
+          // primary -> fallback, the inner Offscreen fiber does not have a complete
+          // phase. So we need to schedule its effect here.
+          //
+          // We also use this flag to connect/disconnect the effects, but the same
+          // logic applies: when re-connecting, the Offscreen fiber's complete
+          // phase will handle scheduling the effect. It's only when the fallback
+          // is active that we have to do anything special.
+
+
+          if (nextDidTimeout) {
+            var _offscreenFiber2 = workInProgress.child;
+            _offscreenFiber2.flags |= Visibility; // TODO: This will still suspend a synchronous tree if anything
+            // in the concurrent tree already suspended during this render.
+            // This is a known bug.
+
+            if ((workInProgress.mode & ConcurrentMode) !== NoMode) {
+              // TODO: Move this back to throwException because this is too late
+              // if this is a large tree which is common for initial loads. We
+              // don't know if we should restart a render or not until we get
+              // this marker, and this is too late.
+              // If this render already had a ping or lower pri updates,
+              // and this is the first time we know we're going to suspend we
+              // should be able to immediately restart from within throwException.
+              var hasInvisibleChildContext = current === null && (workInProgress.memoizedProps.unstable_avoidThisFallback !== true || !enableSuspenseAvoidThisFallback);
+
+              if (hasInvisibleChildContext || hasSuspenseContext(suspenseStackCursor.current, InvisibleParentSuspenseContext)) {
+                // If this was in an invisible tree or a new render, then showing
+                // this boundary is ok.
+                renderDidSuspend();
+              } else {
+                // Otherwise, we're going to have to hide content so we should
+                // suspend for longer if possible.
+                renderDidSuspendDelayIfPossible();
+              }
+            }
+          }
+        }
+
+        var wakeables = workInProgress.updateQueue;
+
+        if (wakeables !== null) {
+          // Schedule an effect to attach a retry listener to the promise.
+          // TODO: Move to passive phase
+          workInProgress.flags |= Update;
+        }
+
+        bubbleProperties(workInProgress);
+
+        {
+          if ((workInProgress.mode & ProfileMode) !== NoMode) {
+            if (nextDidTimeout) {
+              // Don't count time spent in a timed out Suspense subtree as part of the base duration.
+              var _primaryChildFragment2 = workInProgress.child;
+
+              if (_primaryChildFragment2 !== null) {
+                // $FlowFixMe Flow doesn't support type casting in combination with the -= operator
+                workInProgress.treeBaseDuration -= _primaryChildFragment2.treeBaseDuration;
+              }
+            }
+          }
+        }
+
+        return null;
+      }
+
+    case HostPortal:
+      popHostContainer(workInProgress);
+      updateHostContainer(current, workInProgress);
+
+      if (current === null) {
+        preparePortalMount(workInProgress.stateNode.containerInfo);
+      }
+
+      bubbleProperties(workInProgress);
+      return null;
+
+    case ContextProvider:
+      // Pop provider fiber
+      var context = workInProgress.type._context;
+      popProvider(context, workInProgress);
+      bubbleProperties(workInProgress);
+      return null;
+
+    case IncompleteClassComponent:
+      {
+        // Same as class component case. I put it down here so that the tags are
+        // sequential to ensure this switch is compiled to a jump table.
+        var _Component = workInProgress.type;
+
+        if (isContextProvider(_Component)) {
+          popContext(workInProgress);
+        }
+
+        bubbleProperties(workInProgress);
+        return null;
+      }
+
+    case SuspenseListComponent:
+      {
+        popSuspenseContext(workInProgress);
+        var renderState = workInProgress.memoizedState;
+
+        if (renderState === null) {
+          // We're running in the default, "independent" mode.
+          // We don't do anything in this mode.
+          bubbleProperties(workInProgress);
+          return null;
+        }
+
+        var didSuspendAlready = (workInProgress.flags & DidCapture) !== NoFlags;
+        var renderedTail = renderState.rendering;
+
+        if (renderedTail === null) {
+          // We just rendered the head.
+          if (!didSuspendAlready) {
+            // This is the first pass. We need to figure out if anything is still
+            // suspended in the rendered set.
+            // If new content unsuspended, but there's still some content that
+            // didn't. Then we need to do a second pass that forces everything
+            // to keep showing their fallbacks.
+            // We might be suspended if something in this render pass suspended, or
+            // something in the previous committed pass suspended. Otherwise,
+            // there's no chance so we can skip the expensive call to
+            // findFirstSuspended.
+            var cannotBeSuspended = renderHasNotSuspendedYet() && (current === null || (current.flags & DidCapture) === NoFlags);
+
+            if (!cannotBeSuspended) {
+              var row = workInProgress.child;
+
+              while (row !== null) {
+                var suspended = findFirstSuspended(row);
+
+                if (suspended !== null) {
+                  didSuspendAlready = true;
+                  workInProgress.flags |= DidCapture;
+                  cutOffTailIfNeeded(renderState, false); // If this is a newly suspended tree, it might not get committed as
+                  // part of the second pass. In that case nothing will subscribe to
+                  // its thenables. Instead, we'll transfer its thenables to the
+                  // SuspenseList so that it can retry if they resolve.
+                  // There might be multiple of these in the list but since we're
+                  // going to wait for all of them anyway, it doesn't really matter
+                  // which ones gets to ping. In theory we could get clever and keep
+                  // track of how many dependencies remain but it gets tricky because
+                  // in the meantime, we can add/remove/change items and dependencies.
+                  // We might bail out of the loop before finding any but that
+                  // doesn't matter since that means that the other boundaries that
+                  // we did find already has their listeners attached.
+
+                  var newThenables = suspended.updateQueue;
+
+                  if (newThenables !== null) {
+                    workInProgress.updateQueue = newThenables;
+                    workInProgress.flags |= Update;
+                  } // Rerender the whole list, but this time, we'll force fallbacks
+                  // to stay in place.
+                  // Reset the effect flags before doing the second pass since that's now invalid.
+                  // Reset the child fibers to their original state.
+
+
+                  workInProgress.subtreeFlags = NoFlags;
+                  resetChildFibers(workInProgress, renderLanes); // Set up the Suspense Context to force suspense and immediately
+                  // rerender the children.
+
+                  pushSuspenseContext(workInProgress, setShallowSuspenseContext(suspenseStackCursor.current, ForceSuspenseFallback)); // Don't bubble properties in this case.
+
+                  return workInProgress.child;
+                }
+
+                row = row.sibling;
+              }
+            }
+
+            if (renderState.tail !== null && now() > getRenderTargetTime()) {
+              // We have already passed our CPU deadline but we still have rows
+              // left in the tail. We'll just give up further attempts to render
+              // the main content and only render fallbacks.
+              workInProgress.flags |= DidCapture;
+              didSuspendAlready = true;
+              cutOffTailIfNeeded(renderState, false); // Since nothing actually suspended, there will nothing to ping this
+              // to get it started back up to attempt the next item. While in terms
+              // of priority this work has the same priority as this current render,
+              // it's not part of the same transition once the transition has
+              // committed. If it's sync, we still want to yield so that it can be
+              // painted. Conceptually, this is really the same as pinging.
+              // We can use any RetryLane even if it's the one currently rendering
+              // since we're leaving it behind on this node.
+
+              workInProgress.lanes = SomeRetryLane;
+            }
+          } else {
+            cutOffTailIfNeeded(renderState, false);
+          } // Next we're going to render the tail.
+
+        } else {
+          // Append the rendered row to the child list.
+          if (!didSuspendAlready) {
+            var _suspended = findFirstSuspended(renderedTail);
+
+            if (_suspended !== null) {
+              workInProgress.flags |= DidCapture;
+              didSuspendAlready = true; // Ensure we transfer the update queue to the parent so that it doesn't
+              // get lost if this row ends up dropped during a second pass.
+
+              var _newThenables = _suspended.updateQueue;
+
+              if (_newThenables !== null) {
+                workInProgress.updateQueue = _newThenables;
+                workInProgress.flags |= Update;
+              }
+
+              cutOffTailIfNeeded(renderState, true); // This might have been modified.
+
+              if (renderState.tail === null && renderState.tailMode === 'hidden' && !renderedTail.alternate && !getIsHydrating() // We don't cut it if we're hydrating.
+              ) {
+                  // We're done.
+                  bubbleProperties(workInProgress);
+                  return null;
+                }
+            } else if ( // The time it took to render last row is greater than the remaining
+            // time we have to render. So rendering one more row would likely
+            // exceed it.
+            now() * 2 - renderState.renderingStartTime > getRenderTargetTime() && renderLanes !== OffscreenLane) {
+              // We have now passed our CPU deadline and we'll just give up further
+              // attempts to render the main content and only render fallbacks.
+              // The assumption is that this is usually faster.
+              workInProgress.flags |= DidCapture;
+              didSuspendAlready = true;
+              cutOffTailIfNeeded(renderState, false); // Since nothing actually suspended, there will nothing to ping this
+              // to get it started back up to attempt the next item. While in terms
+              // of priority this work has the same priority as this current render,
+              // it's not part of the same transition once the transition has
+              // committed. If it's sync, we still want to yield so that it can be
+              // painted. Conceptually, this is really the same as pinging.
+              // We can use any RetryLane even if it's the one currently rendering
+              // since we're leaving it behind on this node.
+
+              workInProgress.lanes = SomeRetryLane;
+            }
+          }
+
+          if (renderState.isBackwards) {
+            // The effect list of the backwards tail will have been added
+            // to the end. This breaks the guarantee that life-cycles fire in
+            // sibling order but that isn't a strong guarantee promised by React.
+            // Especially since these might also just pop in during future commits.
+            // Append to the beginning of the list.
+            renderedTail.sibling = workInProgress.child;
+            workInProgress.child = renderedTail;
+          } else {
+            var previousSibling = renderState.last;
+
+            if (previousSibling !== null) {
+              previousSibling.sibling = renderedTail;
+            } else {
+              workInProgress.child = renderedTail;
+            }
+
+            renderState.last = renderedTail;
+          }
+        }
+
+        if (renderState.tail !== null) {
+          // We still have tail rows to render.
+          // Pop a row.
+          var next = renderState.tail;
+          renderState.rendering = next;
+          renderState.tail = next.sibling;
+          renderState.renderingStartTime = now();
+          next.sibling = null; // Restore the context.
+          // TODO: We can probably just avoid popping it instead and only
+          // setting it the first time we go from not suspended to suspended.
+
+          var suspenseContext = suspenseStackCursor.current;
+
+          if (didSuspendAlready) {
+            suspenseContext = setShallowSuspenseContext(suspenseContext, ForceSuspenseFallback);
+          } else {
+            suspenseContext = setDefaultShallowSuspenseContext(suspenseContext);
+          }
+
+          pushSuspenseContext(workInProgress, suspenseContext); // Do a pass over the next row.
+          // Don't bubble properties in this case.
+
+          return next;
+        }
+
+        bubbleProperties(workInProgress);
+        return null;
+      }
+
+    case ScopeComponent:
+      {
+
+        break;
+      }
+
+    case OffscreenComponent:
+    case LegacyHiddenComponent:
+      {
+        popRenderLanes(workInProgress);
+        var _nextState = workInProgress.memoizedState;
+        var nextIsHidden = _nextState !== null;
+
+        if (current !== null) {
+          var _prevState2 = current.memoizedState;
+          var prevIsHidden = _prevState2 !== null;
+
+          if (prevIsHidden !== nextIsHidden && ( // LegacyHidden doesn't do any hiding — it only pre-renders.
+          !enableLegacyHidden )) {
+            workInProgress.flags |= Visibility;
+          }
+        }
+
+        if (!nextIsHidden || (workInProgress.mode & ConcurrentMode) === NoMode) {
+          bubbleProperties(workInProgress);
+        } else {
+          // Don't bubble properties for hidden children unless we're rendering
+          // at offscreen priority.
+          if (includesSomeLane(subtreeRenderLanes, OffscreenLane)) {
+            bubbleProperties(workInProgress);
+
+            {
+              // Check if there was an insertion or update in the hidden subtree.
+              // If so, we need to hide those nodes in the commit phase, so
+              // schedule a visibility effect.
+              if ( workInProgress.subtreeFlags & (Placement | Update)) {
+                workInProgress.flags |= Visibility;
+              }
+            }
+          }
+        }
+        return null;
+      }
+
+    case CacheComponent:
+      {
+
+        return null;
+      }
+
+    case TracingMarkerComponent:
+      {
+
+        return null;
+      }
+  }
+
+  throw new Error("Unknown unit of work tag (" + workInProgress.tag + "). This error is likely caused by a bug in " + 'React. Please file an issue.');
 }
 
 var ReactCurrentOwner$1 = ReactSharedInternals.ReactCurrentOwner;
@@ -22911,9 +23704,11 @@ function updateOffscreenComponent(current, workInProgress, renderLanes) {
     pushRenderLanes(workInProgress, _subtreeRenderLanes);
   }
 
-  reconcileChildren(current, workInProgress, nextChildren, renderLanes);
-  return workInProgress.child;
-} // Note: These happen to have identical begin phases, for now. We shouldn't hold
+  {
+    reconcileChildren(current, workInProgress, nextChildren, renderLanes);
+    return workInProgress.child;
+  }
+}
 
 function updateFragment(current, workInProgress, renderLanes) {
   var nextChildren = workInProgress.pendingProps;
@@ -22946,7 +23741,7 @@ function updateProfiler(current, workInProgress, renderLanes) {
   return workInProgress.child;
 }
 
-function markRef(current, workInProgress) {
+function markRef$1(current, workInProgress) {
   var ref = workInProgress.ref;
 
   if (current === null && ref !== null || current !== null && current.ref !== ref) {
@@ -23054,7 +23849,7 @@ function updateClassComponent(current, workInProgress, Component, nextProps, ren
           var lane = pickArbitraryLane(renderLanes);
           workInProgress.lanes = mergeLanes(workInProgress.lanes, lane); // Schedule the error boundary to re-render using updated state
 
-          var update = createClassErrorUpdate(workInProgress, createCapturedValueAtFiber(error$1, workInProgress), lane);
+          var update = createClassErrorUpdate(workInProgress, createCapturedValue(error$1, workInProgress), lane);
           enqueueCapturedUpdate(workInProgress, update);
           break;
         }
@@ -23089,7 +23884,17 @@ function updateClassComponent(current, workInProgress, Component, nextProps, ren
   var shouldUpdate;
 
   if (instance === null) {
-    resetSuspendedCurrentOnMountInLegacyMode(current, workInProgress); // In the initial pass we might need to construct the instance.
+    if (current !== null) {
+      // A class component without an instance only mounts if it suspended
+      // inside a non-concurrent tree, in an inconsistent state. We want to
+      // treat it like a new mount, even though an empty version of it already
+      // committed. Disconnect the alternate pointers.
+      current.alternate = null;
+      workInProgress.alternate = null; // Since this is conceptually a new fiber, schedule a Placement effect
+
+      workInProgress.flags |= Placement;
+    } // In the initial pass we might need to construct the instance.
+
 
     constructClassInstance(workInProgress, Component, nextProps);
     mountClassInstance(workInProgress, Component, nextProps, renderLanes);
@@ -23120,7 +23925,7 @@ function updateClassComponent(current, workInProgress, Component, nextProps, ren
 
 function finishClassComponent(current, workInProgress, Component, shouldUpdate, hasContext, renderLanes) {
   // Refs should update even if shouldComponentUpdate returns false
-  markRef(current, workInProgress);
+  markRef$1(current, workInProgress);
   var didCaptureError = (workInProgress.flags & DidCapture) !== NoFlags;
 
   if (!shouldUpdate && !didCaptureError) {
@@ -23252,10 +24057,10 @@ function updateHostRoot(current, workInProgress, renderLanes) {
     if (workInProgress.flags & ForceClientRender) {
       // Something errored during a previous attempt to hydrate the shell, so we
       // forced a client render.
-      var recoverableError = createCapturedValueAtFiber(new Error('There was an error while hydrating. Because the error happened outside ' + 'of a Suspense boundary, the entire root will switch to ' + 'client rendering.'), workInProgress);
+      var recoverableError = new Error('There was an error while hydrating. Because the error happened outside ' + 'of a Suspense boundary, the entire root will switch to ' + 'client rendering.');
       return mountHostRootWithoutHydrating(current, workInProgress, nextChildren, renderLanes, recoverableError);
     } else if (nextChildren !== prevChildren) {
-      var _recoverableError = createCapturedValueAtFiber(new Error('This root received an early update, before anything was able ' + 'hydrate. Switched the entire root to client rendering.'), workInProgress);
+      var _recoverableError = new Error('This root received an early update, before anything was able ' + 'hydrate. Switched the entire root to client rendering.');
 
       return mountHostRootWithoutHydrating(current, workInProgress, nextChildren, renderLanes, _recoverableError);
     } else {
@@ -23301,7 +24106,7 @@ function mountHostRootWithoutHydrating(current, workInProgress, nextChildren, re
   return workInProgress.child;
 }
 
-function updateHostComponent(current, workInProgress, renderLanes) {
+function updateHostComponent$1(current, workInProgress, renderLanes) {
   pushHostContext(workInProgress);
 
   if (current === null) {
@@ -23326,12 +24131,12 @@ function updateHostComponent(current, workInProgress, renderLanes) {
     workInProgress.flags |= ContentReset;
   }
 
-  markRef(current, workInProgress);
+  markRef$1(current, workInProgress);
   reconcileChildren(current, workInProgress, nextChildren, renderLanes);
   return workInProgress.child;
 }
 
-function updateHostText(current, workInProgress) {
+function updateHostText$1(current, workInProgress) {
   if (current === null) {
     tryToClaimNextHydratableInstance(workInProgress);
   } // Nothing to do here. This is terminal. We'll do the completion step
@@ -23342,7 +24147,17 @@ function updateHostText(current, workInProgress) {
 }
 
 function mountLazyComponent(_current, workInProgress, elementType, renderLanes) {
-  resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress);
+  if (_current !== null) {
+    // A lazy component only mounts if it suspended inside a non-
+    // concurrent tree, in an inconsistent state. We want to treat it like
+    // a new mount, even though an empty version of it already committed.
+    // Disconnect the alternate pointers.
+    _current.alternate = null;
+    workInProgress.alternate = null; // Since this is conceptually a new fiber, schedule a Placement effect
+
+    workInProgress.flags |= Placement;
+  }
+
   var props = workInProgress.pendingProps;
   var lazyComponent = elementType;
   var payload = lazyComponent._payload;
@@ -23420,7 +24235,17 @@ function mountLazyComponent(_current, workInProgress, elementType, renderLanes) 
 }
 
 function mountIncompleteClassComponent(_current, workInProgress, Component, nextProps, renderLanes) {
-  resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress); // Promote the fiber to a class and try rendering again.
+  if (_current !== null) {
+    // An incomplete component only mounts if it suspended inside a non-
+    // concurrent tree, in an inconsistent state. We want to treat it like
+    // a new mount, even though an empty version of it already committed.
+    // Disconnect the alternate pointers.
+    _current.alternate = null;
+    workInProgress.alternate = null; // Since this is conceptually a new fiber, schedule a Placement effect
+
+    workInProgress.flags |= Placement;
+  } // Promote the fiber to a class and try rendering again.
+
 
   workInProgress.tag = ClassComponent; // The rest of this function is a fork of `updateClassComponent`
   // Push context providers early to prevent context stack mismatches.
@@ -23443,7 +24268,17 @@ function mountIncompleteClassComponent(_current, workInProgress, Component, next
 }
 
 function mountIndeterminateComponent(_current, workInProgress, Component, renderLanes) {
-  resetSuspendedCurrentOnMountInLegacyMode(_current, workInProgress);
+  if (_current !== null) {
+    // An indeterminate component only mounts if it suspended inside a non-
+    // concurrent tree, in an inconsistent state. We want to treat it like
+    // a new mount, even though an empty version of it already committed.
+    // Disconnect the alternate pointers.
+    _current.alternate = null;
+    workInProgress.alternate = null; // Since this is conceptually a new fiber, schedule a Placement effect
+
+    workInProgress.flags |= Placement;
+  }
+
   var props = workInProgress.pendingProps;
   var context;
 
@@ -23729,7 +24564,6 @@ function updateSuspenseComponent(current, workInProgress, renderLanes) {
 
   if (current === null) {
     // Initial mount
-    // Special path for hydration
     // If we're currently hydrating, try to hydrate this boundary.
     tryToClaimNextHydratableInstance(workInProgress); // This could've been a dehydrated suspense component.
 
@@ -23758,35 +24592,92 @@ function updateSuspenseComponent(current, workInProgress, renderLanes) {
     }
   } else {
     // This is an update.
-    // Special path for hydration
+    // If the current fiber has a SuspenseState, that means it's already showing
+    // a fallback.
     var prevState = current.memoizedState;
 
     if (prevState !== null) {
+      // The current tree is already showing a fallback
+      // Special path for hydration
       var _dehydrated = prevState.dehydrated;
 
       if (_dehydrated !== null) {
-        return updateDehydratedSuspenseComponent(current, workInProgress, didSuspend, nextProps, _dehydrated, prevState, renderLanes);
+        if (!didSuspend) {
+          return updateDehydratedSuspenseComponent(current, workInProgress, _dehydrated, prevState, renderLanes);
+        } else if (workInProgress.flags & ForceClientRender) {
+          // Something errored during hydration. Try again without hydrating.
+          workInProgress.flags &= ~ForceClientRender;
+          return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, new Error('There was an error while hydrating this Suspense boundary. ' + 'Switched to client rendering.'));
+        } else if (workInProgress.memoizedState !== null) {
+          // Something suspended and we should still be in dehydrated mode.
+          // Leave the existing child in place.
+          workInProgress.child = current.child; // The dehydrated completion pass expects this flag to be there
+          // but the normal suspense pass doesn't.
+
+          workInProgress.flags |= DidCapture;
+          return null;
+        } else {
+          // Suspended but we should no longer be in dehydrated mode.
+          // Therefore we now have to render the fallback.
+          var _nextPrimaryChildren = nextProps.children;
+          var _nextFallbackChildren = nextProps.fallback;
+          var fallbackChildFragment = mountSuspenseFallbackAfterRetryWithoutHydrating(current, workInProgress, _nextPrimaryChildren, _nextFallbackChildren, renderLanes);
+          var _primaryChildFragment2 = workInProgress.child;
+          _primaryChildFragment2.memoizedState = mountSuspenseOffscreenState(renderLanes);
+          workInProgress.memoizedState = SUSPENDED_MARKER;
+          return fallbackChildFragment;
+        }
       }
-    }
 
-    if (showFallback) {
-      var _nextFallbackChildren = nextProps.fallback;
-      var _nextPrimaryChildren = nextProps.children;
-      var fallbackChildFragment = updateSuspenseFallbackChildren(current, workInProgress, _nextPrimaryChildren, _nextFallbackChildren, renderLanes);
-      var _primaryChildFragment2 = workInProgress.child;
-      var prevOffscreenState = current.child.memoizedState;
-      _primaryChildFragment2.memoizedState = prevOffscreenState === null ? mountSuspenseOffscreenState(renderLanes) : updateSuspenseOffscreenState(prevOffscreenState, renderLanes);
+      if (showFallback) {
+        var _nextFallbackChildren2 = nextProps.fallback;
+        var _nextPrimaryChildren2 = nextProps.children;
 
-      _primaryChildFragment2.childLanes = getRemainingWorkInPrimaryTree(current, renderLanes);
-      workInProgress.memoizedState = SUSPENDED_MARKER;
-      return fallbackChildFragment;
+        var _fallbackChildFragment = updateSuspenseFallbackChildren(current, workInProgress, _nextPrimaryChildren2, _nextFallbackChildren2, renderLanes);
+
+        var _primaryChildFragment3 = workInProgress.child;
+        var prevOffscreenState = current.child.memoizedState;
+        _primaryChildFragment3.memoizedState = prevOffscreenState === null ? mountSuspenseOffscreenState(renderLanes) : updateSuspenseOffscreenState(prevOffscreenState, renderLanes);
+
+        _primaryChildFragment3.childLanes = getRemainingWorkInPrimaryTree(current, renderLanes);
+        workInProgress.memoizedState = SUSPENDED_MARKER;
+        return _fallbackChildFragment;
+      } else {
+        var _nextPrimaryChildren3 = nextProps.children;
+
+        var _primaryChildFragment4 = updateSuspensePrimaryChildren(current, workInProgress, _nextPrimaryChildren3, renderLanes);
+
+        workInProgress.memoizedState = null;
+        return _primaryChildFragment4;
+      }
     } else {
-      var _nextPrimaryChildren2 = nextProps.children;
+      // The current tree is not already showing a fallback.
+      if (showFallback) {
+        // Timed out.
+        var _nextFallbackChildren3 = nextProps.fallback;
+        var _nextPrimaryChildren4 = nextProps.children;
 
-      var _primaryChildFragment3 = updateSuspensePrimaryChildren(current, workInProgress, _nextPrimaryChildren2, renderLanes);
+        var _fallbackChildFragment2 = updateSuspenseFallbackChildren(current, workInProgress, _nextPrimaryChildren4, _nextFallbackChildren3, renderLanes);
 
-      workInProgress.memoizedState = null;
-      return _primaryChildFragment3;
+        var _primaryChildFragment5 = workInProgress.child;
+        var _prevOffscreenState = current.child.memoizedState;
+        _primaryChildFragment5.memoizedState = _prevOffscreenState === null ? mountSuspenseOffscreenState(renderLanes) : updateSuspenseOffscreenState(_prevOffscreenState, renderLanes);
+        _primaryChildFragment5.childLanes = getRemainingWorkInPrimaryTree(current, renderLanes);
+        // fallback children.
+
+
+        workInProgress.memoizedState = SUSPENDED_MARKER;
+        return _fallbackChildFragment2;
+      } else {
+        // Still haven't timed out. Continue rendering the children, like we
+        // normally do.
+        var _nextPrimaryChildren5 = nextProps.children;
+
+        var _primaryChildFragment6 = updateSuspensePrimaryChildren(current, workInProgress, _nextPrimaryChildren5, renderLanes);
+
+        workInProgress.memoizedState = null;
+        return _primaryChildFragment6;
+      }
     }
   }
 }
@@ -23920,16 +24811,17 @@ function updateSuspenseFallbackChildren(current, workInProgress, primaryChildren
       primaryChildFragment.actualStartTime = -1;
       primaryChildFragment.selfBaseDuration = currentPrimaryChildFragment.selfBaseDuration;
       primaryChildFragment.treeBaseDuration = currentPrimaryChildFragment.treeBaseDuration;
-    } // The fallback fiber was added as a deletion during the first pass.
+    }
     // However, since we're going to remain on the fallback, we no longer want
     // to delete it.
 
 
     workInProgress.deletions = null;
   } else {
-    primaryChildFragment = updateWorkInProgressOffscreenFiber(currentPrimaryChildFragment, primaryChildProps); // Since we're reusing a current tree, we need to reuse the flags, too.
+    primaryChildFragment = updateWorkInProgressOffscreenFiber(currentPrimaryChildFragment, primaryChildProps);
     // (We don't do this in legacy mode, because in legacy mode we don't re-use
     // the current tree; see previous branch.)
+
 
     primaryChildFragment.subtreeFlags = currentPrimaryChildFragment.subtreeFlags & StaticMask;
   }
@@ -24033,141 +24925,89 @@ function mountDehydratedSuspenseComponent(workInProgress, suspenseInstance, rend
   return null;
 }
 
-function updateDehydratedSuspenseComponent(current, workInProgress, didSuspend, nextProps, suspenseInstance, suspenseState, renderLanes) {
-  if (!didSuspend) {
-    // This is the first render pass. Attempt to hydrate.
-    // We should never be hydrating at this point because it is the first pass,
-    // but after we've already committed once.
-    warnIfHydrating();
+function updateDehydratedSuspenseComponent(current, workInProgress, suspenseInstance, suspenseState, renderLanes) {
+  // We should never be hydrating at this point because it is the first pass,
+  // but after we've already committed once.
+  warnIfHydrating();
 
-    if ((workInProgress.mode & ConcurrentMode) === NoMode) {
-      return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, // TODO: When we delete legacy mode, we should make this error argument
-      // required — every concurrent mode path that causes hydration to
-      // de-opt to client rendering should have an error message.
-      null);
-    }
+  if ((workInProgress.mode & ConcurrentMode) === NoMode) {
+    return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, // TODO: When we delete legacy mode, we should make this error argument
+    // required — every concurrent mode path that causes hydration to
+    // de-opt to client rendering should have an error message.
+    null);
+  }
 
-    if (isSuspenseInstanceFallback(suspenseInstance)) {
-      // This boundary is in a permanent fallback state. In this case, we'll never
-      // get an update and we'll never be able to hydrate the final content. Let's just try the
-      // client side render instead.
-      var digest, message, stack;
+  if (isSuspenseInstanceFallback(suspenseInstance)) {
+    // This boundary is in a permanent fallback state. In this case, we'll never
+    // get an update and we'll never be able to hydrate the final content. Let's just try the
+    // client side render instead.
+    return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, // TODO: The server should serialize the error message so we can log it
+    // here on the client. Or, in production, a hash/id that corresponds to
+    // the error.
+    new Error('The server could not finish this Suspense boundary, likely ' + 'due to an error during server rendering. Switched to ' + 'client rendering.'));
+  }
+  // any context has changed, we need to treat is as if the input might have changed.
 
-      {
-        var _getSuspenseInstanceF = getSuspenseInstanceFallbackErrorDetails(suspenseInstance);
 
-        digest = _getSuspenseInstanceF.digest;
-        message = _getSuspenseInstanceF.message;
-        stack = _getSuspenseInstanceF.stack;
+  var hasContextChanged = includesSomeLane(renderLanes, current.childLanes);
+
+  if (didReceiveUpdate || hasContextChanged) {
+    // This boundary has changed since the first render. This means that we are now unable to
+    // hydrate it. We might still be able to hydrate it using a higher priority lane.
+    var root = getWorkInProgressRoot();
+
+    if (root !== null) {
+      var attemptHydrationAtLane = getBumpedLaneForHydration(root, renderLanes);
+
+      if (attemptHydrationAtLane !== NoLane && attemptHydrationAtLane !== suspenseState.retryLane) {
+        // Intentionally mutating since this render will get interrupted. This
+        // is one of the very rare times where we mutate the current tree
+        // during the render phase.
+        suspenseState.retryLane = attemptHydrationAtLane; // TODO: Ideally this would inherit the event time of the current render
+
+        var eventTime = NoTimestamp;
+        scheduleUpdateOnFiber(current, attemptHydrationAtLane, eventTime);
       }
-
-      var error;
-
-      if (message) {
-        // eslint-disable-next-line react-internal/prod-error-codes
-        error = new Error(message);
-      } else {
-        error = new Error('The server could not finish this Suspense boundary, likely ' + 'due to an error during server rendering. Switched to ' + 'client rendering.');
-      }
-
-      var capturedValue = createCapturedValue(error, digest, stack);
-      return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, capturedValue);
-    }
-    // any context has changed, we need to treat is as if the input might have changed.
+    } // If we have scheduled higher pri work above, this will probably just abort the render
+    // since we now have higher priority work, but in case it doesn't, we need to prepare to
+    // render something, if we time out. Even if that requires us to delete everything and
+    // skip hydration.
+    // Delay having to do this as long as the suspense timeout allows us.
 
 
-    var hasContextChanged = includesSomeLane(renderLanes, current.childLanes);
+    renderDidSuspendDelayIfPossible();
+    return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, new Error('This Suspense boundary received an update before it finished ' + 'hydrating. This caused the boundary to switch to client rendering. ' + 'The usual way to fix this is to wrap the original update ' + 'in startTransition.'));
+  } else if (isSuspenseInstancePending(suspenseInstance)) {
+    // This component is still pending more data from the server, so we can't hydrate its
+    // content. We treat it as if this component suspended itself. It might seem as if
+    // we could just try to render it client-side instead. However, this will perform a
+    // lot of unnecessary work and is unlikely to complete since it often will suspend
+    // on missing data anyway. Additionally, the server might be able to render more
+    // than we can on the client yet. In that case we'd end up with more fallback states
+    // on the client than if we just leave it alone. If the server times out or errors
+    // these should update this boundary to the permanent Fallback state instead.
+    // Mark it as having captured (i.e. suspended).
+    workInProgress.flags |= DidCapture; // Leave the child in place. I.e. the dehydrated fragment.
 
-    if (didReceiveUpdate || hasContextChanged) {
-      // This boundary has changed since the first render. This means that we are now unable to
-      // hydrate it. We might still be able to hydrate it using a higher priority lane.
-      var root = getWorkInProgressRoot();
+    workInProgress.child = current.child; // Register a callback to retry this boundary once the server has sent the result.
 
-      if (root !== null) {
-        var attemptHydrationAtLane = getBumpedLaneForHydration(root, renderLanes);
-
-        if (attemptHydrationAtLane !== NoLane && attemptHydrationAtLane !== suspenseState.retryLane) {
-          // Intentionally mutating since this render will get interrupted. This
-          // is one of the very rare times where we mutate the current tree
-          // during the render phase.
-          suspenseState.retryLane = attemptHydrationAtLane; // TODO: Ideally this would inherit the event time of the current render
-
-          var eventTime = NoTimestamp;
-          enqueueConcurrentRenderForLane(current, attemptHydrationAtLane);
-          scheduleUpdateOnFiber(root, current, attemptHydrationAtLane, eventTime);
-        }
-      } // If we have scheduled higher pri work above, this will probably just abort the render
-      // since we now have higher priority work, but in case it doesn't, we need to prepare to
-      // render something, if we time out. Even if that requires us to delete everything and
-      // skip hydration.
-      // Delay having to do this as long as the suspense timeout allows us.
-
-
-      renderDidSuspendDelayIfPossible();
-
-      var _capturedValue = createCapturedValue(new Error('This Suspense boundary received an update before it finished ' + 'hydrating. This caused the boundary to switch to client rendering. ' + 'The usual way to fix this is to wrap the original update ' + 'in startTransition.'));
-
-      return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, _capturedValue);
-    } else if (isSuspenseInstancePending(suspenseInstance)) {
-      // This component is still pending more data from the server, so we can't hydrate its
-      // content. We treat it as if this component suspended itself. It might seem as if
-      // we could just try to render it client-side instead. However, this will perform a
-      // lot of unnecessary work and is unlikely to complete since it often will suspend
-      // on missing data anyway. Additionally, the server might be able to render more
-      // than we can on the client yet. In that case we'd end up with more fallback states
-      // on the client than if we just leave it alone. If the server times out or errors
-      // these should update this boundary to the permanent Fallback state instead.
-      // Mark it as having captured (i.e. suspended).
-      workInProgress.flags |= DidCapture; // Leave the child in place. I.e. the dehydrated fragment.
-
-      workInProgress.child = current.child; // Register a callback to retry this boundary once the server has sent the result.
-
-      var retry = retryDehydratedSuspenseBoundary.bind(null, current);
-      registerSuspenseInstanceRetry(suspenseInstance, retry);
-      return null;
-    } else {
-      // This is the first attempt.
-      reenterHydrationStateFromDehydratedSuspenseInstance(workInProgress, suspenseInstance, suspenseState.treeContext);
-      var primaryChildren = nextProps.children;
-      var primaryChildFragment = mountSuspensePrimaryChildren(workInProgress, primaryChildren); // Mark the children as hydrating. This is a fast path to know whether this
-      // tree is part of a hydrating tree. This is used to determine if a child
-      // node has fully mounted yet, and for scheduling event replaying.
-      // Conceptually this is similar to Placement in that a new subtree is
-      // inserted into the React tree here. It just happens to not need DOM
-      // mutations because it already exists.
-
-      primaryChildFragment.flags |= Hydrating;
-      return primaryChildFragment;
-    }
+    var retry = retryDehydratedSuspenseBoundary.bind(null, current);
+    registerSuspenseInstanceRetry(suspenseInstance, retry);
+    return null;
   } else {
-    // This is the second render pass. We already attempted to hydrated, but
-    // something either suspended or errored.
-    if (workInProgress.flags & ForceClientRender) {
-      // Something errored during hydration. Try again without hydrating.
-      workInProgress.flags &= ~ForceClientRender;
+    // This is the first attempt.
+    reenterHydrationStateFromDehydratedSuspenseInstance(workInProgress, suspenseInstance, suspenseState.treeContext);
+    var nextProps = workInProgress.pendingProps;
+    var primaryChildren = nextProps.children;
+    var primaryChildFragment = mountSuspensePrimaryChildren(workInProgress, primaryChildren); // Mark the children as hydrating. This is a fast path to know whether this
+    // tree is part of a hydrating tree. This is used to determine if a child
+    // node has fully mounted yet, and for scheduling event replaying.
+    // Conceptually this is similar to Placement in that a new subtree is
+    // inserted into the React tree here. It just happens to not need DOM
+    // mutations because it already exists.
 
-      var _capturedValue2 = createCapturedValue(new Error('There was an error while hydrating this Suspense boundary. ' + 'Switched to client rendering.'));
-
-      return retrySuspenseComponentWithoutHydrating(current, workInProgress, renderLanes, _capturedValue2);
-    } else if (workInProgress.memoizedState !== null) {
-      // Something suspended and we should still be in dehydrated mode.
-      // Leave the existing child in place.
-      workInProgress.child = current.child; // The dehydrated completion pass expects this flag to be there
-      // but the normal suspense pass doesn't.
-
-      workInProgress.flags |= DidCapture;
-      return null;
-    } else {
-      // Suspended but we should no longer be in dehydrated mode.
-      // Therefore we now have to render the fallback.
-      var nextPrimaryChildren = nextProps.children;
-      var nextFallbackChildren = nextProps.fallback;
-      var fallbackChildFragment = mountSuspenseFallbackAfterRetryWithoutHydrating(current, workInProgress, nextPrimaryChildren, nextFallbackChildren, renderLanes);
-      var _primaryChildFragment4 = workInProgress.child;
-      _primaryChildFragment4.memoizedState = mountSuspenseOffscreenState(renderLanes);
-      workInProgress.memoizedState = SUSPENDED_MARKER;
-      return fallbackChildFragment;
-    }
+    primaryChildFragment.flags |= Hydrating;
+    return primaryChildFragment;
   }
 }
 
@@ -24628,21 +25468,6 @@ function markWorkInProgressReceivedUpdate() {
   didReceiveUpdate = true;
 }
 
-function resetSuspendedCurrentOnMountInLegacyMode(current, workInProgress) {
-  if ((workInProgress.mode & ConcurrentMode) === NoMode) {
-    if (current !== null) {
-      // A lazy component only mounts if it suspended inside a non-
-      // concurrent tree, in an inconsistent state. We want to treat it like
-      // a new mount, even though an empty version of it already committed.
-      // Disconnect the alternate pointers.
-      current.alternate = null;
-      workInProgress.alternate = null; // Since this is conceptually a new fiber, schedule a Placement effect
-
-      workInProgress.flags |= Placement;
-    }
-  }
-}
-
 function bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes) {
   if (current !== null) {
     // Reuse previous dependencies
@@ -25021,10 +25846,10 @@ function beginWork(current, workInProgress, renderLanes) {
       return updateHostRoot(current, workInProgress, renderLanes);
 
     case HostComponent:
-      return updateHostComponent(current, workInProgress, renderLanes);
+      return updateHostComponent$1(current, workInProgress, renderLanes);
 
     case HostText:
-      return updateHostText(current, workInProgress);
+      return updateHostText$1(current, workInProgress);
 
     case SuspenseComponent:
       return updateSuspenseComponent(current, workInProgress, renderLanes);
@@ -25108,936 +25933,6 @@ function beginWork(current, workInProgress, renderLanes) {
     case OffscreenComponent:
       {
         return updateOffscreenComponent(current, workInProgress, renderLanes);
-      }
-  }
-
-  throw new Error("Unknown unit of work tag (" + workInProgress.tag + "). This error is likely caused by a bug in " + 'React. Please file an issue.');
-}
-
-function markUpdate(workInProgress) {
-  // Tag the fiber with an update effect. This turns a Placement into
-  // a PlacementAndUpdate.
-  workInProgress.flags |= Update;
-}
-
-function markRef$1(workInProgress) {
-  workInProgress.flags |= Ref;
-
-  {
-    workInProgress.flags |= RefStatic;
-  }
-}
-
-var appendAllChildren;
-var updateHostContainer;
-var updateHostComponent$1;
-var updateHostText$1;
-
-{
-  // Mutation mode
-  appendAllChildren = function (parent, workInProgress, needsVisibilityToggle, isHidden) {
-    // We only have the top Fiber that was created but we need recurse down its
-    // children to find all the terminal nodes.
-    var node = workInProgress.child;
-
-    while (node !== null) {
-      if (node.tag === HostComponent || node.tag === HostText) {
-        appendInitialChild(parent, node.stateNode);
-      } else if (node.tag === HostPortal) ; else if (node.child !== null) {
-        node.child.return = node;
-        node = node.child;
-        continue;
-      }
-
-      if (node === workInProgress) {
-        return;
-      }
-
-      while (node.sibling === null) {
-        if (node.return === null || node.return === workInProgress) {
-          return;
-        }
-
-        node = node.return;
-      }
-
-      node.sibling.return = node.return;
-      node = node.sibling;
-    }
-  };
-
-  updateHostContainer = function (current, workInProgress) {// Noop
-  };
-
-  updateHostComponent$1 = function (current, workInProgress, type, newProps, rootContainerInstance) {
-    // If we have an alternate, that means this is an update and we need to
-    // schedule a side-effect to do the updates.
-    var oldProps = current.memoizedProps;
-
-    if (oldProps === newProps) {
-      // In mutation mode, this is sufficient for a bailout because
-      // we won't touch this node even if children changed.
-      return;
-    } // If we get updated because one of our children updated, we don't
-    // have newProps so we'll have to reuse them.
-    // TODO: Split the update API as separate for the props vs. children.
-    // Even better would be if children weren't special cased at all tho.
-
-
-    var instance = workInProgress.stateNode;
-    var currentHostContext = getHostContext(); // TODO: Experiencing an error where oldProps is null. Suggests a host
-    // component is hitting the resume path. Figure out why. Possibly
-    // related to `hidden`.
-
-    var updatePayload = prepareUpdate(instance, type, oldProps, newProps, rootContainerInstance, currentHostContext); // TODO: Type this specific to this type of component.
-
-    workInProgress.updateQueue = updatePayload; // If the update payload indicates that there is a change or if there
-    // is a new ref we mark this as an update. All the work is done in commitWork.
-
-    if (updatePayload) {
-      markUpdate(workInProgress);
-    }
-  };
-
-  updateHostText$1 = function (current, workInProgress, oldText, newText) {
-    // If the text differs, mark it as an update. All the work in done in commitWork.
-    if (oldText !== newText) {
-      markUpdate(workInProgress);
-    }
-  };
-}
-
-function cutOffTailIfNeeded(renderState, hasRenderedATailFallback) {
-  if (getIsHydrating()) {
-    // If we're hydrating, we should consume as many items as we can
-    // so we don't leave any behind.
-    return;
-  }
-
-  switch (renderState.tailMode) {
-    case 'hidden':
-      {
-        // Any insertions at the end of the tail list after this point
-        // should be invisible. If there are already mounted boundaries
-        // anything before them are not considered for collapsing.
-        // Therefore we need to go through the whole tail to find if
-        // there are any.
-        var tailNode = renderState.tail;
-        var lastTailNode = null;
-
-        while (tailNode !== null) {
-          if (tailNode.alternate !== null) {
-            lastTailNode = tailNode;
-          }
-
-          tailNode = tailNode.sibling;
-        } // Next we're simply going to delete all insertions after the
-        // last rendered item.
-
-
-        if (lastTailNode === null) {
-          // All remaining items in the tail are insertions.
-          renderState.tail = null;
-        } else {
-          // Detach the insertion after the last node that was already
-          // inserted.
-          lastTailNode.sibling = null;
-        }
-
-        break;
-      }
-
-    case 'collapsed':
-      {
-        // Any insertions at the end of the tail list after this point
-        // should be invisible. If there are already mounted boundaries
-        // anything before them are not considered for collapsing.
-        // Therefore we need to go through the whole tail to find if
-        // there are any.
-        var _tailNode = renderState.tail;
-        var _lastTailNode = null;
-
-        while (_tailNode !== null) {
-          if (_tailNode.alternate !== null) {
-            _lastTailNode = _tailNode;
-          }
-
-          _tailNode = _tailNode.sibling;
-        } // Next we're simply going to delete all insertions after the
-        // last rendered item.
-
-
-        if (_lastTailNode === null) {
-          // All remaining items in the tail are insertions.
-          if (!hasRenderedATailFallback && renderState.tail !== null) {
-            // We suspended during the head. We want to show at least one
-            // row at the tail. So we'll keep on and cut off the rest.
-            renderState.tail.sibling = null;
-          } else {
-            renderState.tail = null;
-          }
-        } else {
-          // Detach the insertion after the last node that was already
-          // inserted.
-          _lastTailNode.sibling = null;
-        }
-
-        break;
-      }
-  }
-}
-
-function bubbleProperties(completedWork) {
-  var didBailout = completedWork.alternate !== null && completedWork.alternate.child === completedWork.child;
-  var newChildLanes = NoLanes;
-  var subtreeFlags = NoFlags;
-
-  if (!didBailout) {
-    // Bubble up the earliest expiration time.
-    if ( (completedWork.mode & ProfileMode) !== NoMode) {
-      // In profiling mode, resetChildExpirationTime is also used to reset
-      // profiler durations.
-      var actualDuration = completedWork.actualDuration;
-      var treeBaseDuration = completedWork.selfBaseDuration;
-      var child = completedWork.child;
-
-      while (child !== null) {
-        newChildLanes = mergeLanes(newChildLanes, mergeLanes(child.lanes, child.childLanes));
-        subtreeFlags |= child.subtreeFlags;
-        subtreeFlags |= child.flags; // When a fiber is cloned, its actualDuration is reset to 0. This value will
-        // only be updated if work is done on the fiber (i.e. it doesn't bailout).
-        // When work is done, it should bubble to the parent's actualDuration. If
-        // the fiber has not been cloned though, (meaning no work was done), then
-        // this value will reflect the amount of time spent working on a previous
-        // render. In that case it should not bubble. We determine whether it was
-        // cloned by comparing the child pointer.
-
-        actualDuration += child.actualDuration;
-        treeBaseDuration += child.treeBaseDuration;
-        child = child.sibling;
-      }
-
-      completedWork.actualDuration = actualDuration;
-      completedWork.treeBaseDuration = treeBaseDuration;
-    } else {
-      var _child = completedWork.child;
-
-      while (_child !== null) {
-        newChildLanes = mergeLanes(newChildLanes, mergeLanes(_child.lanes, _child.childLanes));
-        subtreeFlags |= _child.subtreeFlags;
-        subtreeFlags |= _child.flags; // Update the return pointer so the tree is consistent. This is a code
-        // smell because it assumes the commit phase is never concurrent with
-        // the render phase. Will address during refactor to alternate model.
-
-        _child.return = completedWork;
-        _child = _child.sibling;
-      }
-    }
-
-    completedWork.subtreeFlags |= subtreeFlags;
-  } else {
-    // Bubble up the earliest expiration time.
-    if ( (completedWork.mode & ProfileMode) !== NoMode) {
-      // In profiling mode, resetChildExpirationTime is also used to reset
-      // profiler durations.
-      var _treeBaseDuration = completedWork.selfBaseDuration;
-      var _child2 = completedWork.child;
-
-      while (_child2 !== null) {
-        newChildLanes = mergeLanes(newChildLanes, mergeLanes(_child2.lanes, _child2.childLanes)); // "Static" flags share the lifetime of the fiber/hook they belong to,
-        // so we should bubble those up even during a bailout. All the other
-        // flags have a lifetime only of a single render + commit, so we should
-        // ignore them.
-
-        subtreeFlags |= _child2.subtreeFlags & StaticMask;
-        subtreeFlags |= _child2.flags & StaticMask;
-        _treeBaseDuration += _child2.treeBaseDuration;
-        _child2 = _child2.sibling;
-      }
-
-      completedWork.treeBaseDuration = _treeBaseDuration;
-    } else {
-      var _child3 = completedWork.child;
-
-      while (_child3 !== null) {
-        newChildLanes = mergeLanes(newChildLanes, mergeLanes(_child3.lanes, _child3.childLanes)); // "Static" flags share the lifetime of the fiber/hook they belong to,
-        // so we should bubble those up even during a bailout. All the other
-        // flags have a lifetime only of a single render + commit, so we should
-        // ignore them.
-
-        subtreeFlags |= _child3.subtreeFlags & StaticMask;
-        subtreeFlags |= _child3.flags & StaticMask; // Update the return pointer so the tree is consistent. This is a code
-        // smell because it assumes the commit phase is never concurrent with
-        // the render phase. Will address during refactor to alternate model.
-
-        _child3.return = completedWork;
-        _child3 = _child3.sibling;
-      }
-    }
-
-    completedWork.subtreeFlags |= subtreeFlags;
-  }
-
-  completedWork.childLanes = newChildLanes;
-  return didBailout;
-}
-
-function completeDehydratedSuspenseBoundary(current, workInProgress, nextState) {
-  if (hasUnhydratedTailNodes() && (workInProgress.mode & ConcurrentMode) !== NoMode && (workInProgress.flags & DidCapture) === NoFlags) {
-    warnIfUnhydratedTailNodes(workInProgress);
-    resetHydrationState();
-    workInProgress.flags |= ForceClientRender | Incomplete | ShouldCapture;
-    return false;
-  }
-
-  var wasHydrated = popHydrationState(workInProgress);
-
-  if (nextState !== null && nextState.dehydrated !== null) {
-    // We might be inside a hydration state the first time we're picking up this
-    // Suspense boundary, and also after we've reentered it for further hydration.
-    if (current === null) {
-      if (!wasHydrated) {
-        throw new Error('A dehydrated suspense component was completed without a hydrated node. ' + 'This is probably a bug in React.');
-      }
-
-      prepareToHydrateHostSuspenseInstance(workInProgress);
-      bubbleProperties(workInProgress);
-
-      {
-        if ((workInProgress.mode & ProfileMode) !== NoMode) {
-          var isTimedOutSuspense = nextState !== null;
-
-          if (isTimedOutSuspense) {
-            // Don't count time spent in a timed out Suspense subtree as part of the base duration.
-            var primaryChildFragment = workInProgress.child;
-
-            if (primaryChildFragment !== null) {
-              // $FlowFixMe Flow doesn't support type casting in combination with the -= operator
-              workInProgress.treeBaseDuration -= primaryChildFragment.treeBaseDuration;
-            }
-          }
-        }
-      }
-
-      return false;
-    } else {
-      // We might have reentered this boundary to hydrate it. If so, we need to reset the hydration
-      // state since we're now exiting out of it. popHydrationState doesn't do that for us.
-      resetHydrationState();
-
-      if ((workInProgress.flags & DidCapture) === NoFlags) {
-        // This boundary did not suspend so it's now hydrated and unsuspended.
-        workInProgress.memoizedState = null;
-      } // If nothing suspended, we need to schedule an effect to mark this boundary
-      // as having hydrated so events know that they're free to be invoked.
-      // It's also a signal to replay events and the suspense callback.
-      // If something suspended, schedule an effect to attach retry listeners.
-      // So we might as well always mark this.
-
-
-      workInProgress.flags |= Update;
-      bubbleProperties(workInProgress);
-
-      {
-        if ((workInProgress.mode & ProfileMode) !== NoMode) {
-          var _isTimedOutSuspense = nextState !== null;
-
-          if (_isTimedOutSuspense) {
-            // Don't count time spent in a timed out Suspense subtree as part of the base duration.
-            var _primaryChildFragment = workInProgress.child;
-
-            if (_primaryChildFragment !== null) {
-              // $FlowFixMe Flow doesn't support type casting in combination with the -= operator
-              workInProgress.treeBaseDuration -= _primaryChildFragment.treeBaseDuration;
-            }
-          }
-        }
-      }
-
-      return false;
-    }
-  } else {
-    // Successfully completed this tree. If this was a forced client render,
-    // there may have been recoverable errors during first hydration
-    // attempt. If so, add them to a queue so we can log them in the
-    // commit phase.
-    upgradeHydrationErrorsToRecoverable(); // Fall through to normal Suspense path
-
-    return true;
-  }
-}
-
-function completeWork(current, workInProgress, renderLanes) {
-  var newProps = workInProgress.pendingProps; // Note: This intentionally doesn't check if we're hydrating because comparing
-  // to the current tree provider fiber is just as fast and less error-prone.
-  // Ideally we would have a special version of the work loop only
-  // for hydration.
-
-  popTreeContext(workInProgress);
-
-  switch (workInProgress.tag) {
-    case IndeterminateComponent:
-    case LazyComponent:
-    case SimpleMemoComponent:
-    case FunctionComponent:
-    case ForwardRef:
-    case Fragment:
-    case Mode:
-    case Profiler:
-    case ContextConsumer:
-    case MemoComponent:
-      bubbleProperties(workInProgress);
-      return null;
-
-    case ClassComponent:
-      {
-        var Component = workInProgress.type;
-
-        if (isContextProvider(Component)) {
-          popContext(workInProgress);
-        }
-
-        bubbleProperties(workInProgress);
-        return null;
-      }
-
-    case HostRoot:
-      {
-        var fiberRoot = workInProgress.stateNode;
-        popHostContainer(workInProgress);
-        popTopLevelContextObject(workInProgress);
-        resetWorkInProgressVersions();
-
-        if (fiberRoot.pendingContext) {
-          fiberRoot.context = fiberRoot.pendingContext;
-          fiberRoot.pendingContext = null;
-        }
-
-        if (current === null || current.child === null) {
-          // If we hydrated, pop so that we can delete any remaining children
-          // that weren't hydrated.
-          var wasHydrated = popHydrationState(workInProgress);
-
-          if (wasHydrated) {
-            // If we hydrated, then we'll need to schedule an update for
-            // the commit side-effects on the root.
-            markUpdate(workInProgress);
-          } else {
-            if (current !== null) {
-              var prevState = current.memoizedState;
-
-              if ( // Check if this is a client root
-              !prevState.isDehydrated || // Check if we reverted to client rendering (e.g. due to an error)
-              (workInProgress.flags & ForceClientRender) !== NoFlags) {
-                // Schedule an effect to clear this container at the start of the
-                // next commit. This handles the case of React rendering into a
-                // container with previous children. It's also safe to do for
-                // updates too, because current.child would only be null if the
-                // previous render was null (so the container would already
-                // be empty).
-                workInProgress.flags |= Snapshot; // If this was a forced client render, there may have been
-                // recoverable errors during first hydration attempt. If so, add
-                // them to a queue so we can log them in the commit phase.
-
-                upgradeHydrationErrorsToRecoverable();
-              }
-            }
-          }
-        }
-
-        updateHostContainer(current, workInProgress);
-        bubbleProperties(workInProgress);
-
-        return null;
-      }
-
-    case HostComponent:
-      {
-        popHostContext(workInProgress);
-        var rootContainerInstance = getRootHostContainer();
-        var type = workInProgress.type;
-
-        if (current !== null && workInProgress.stateNode != null) {
-          updateHostComponent$1(current, workInProgress, type, newProps, rootContainerInstance);
-
-          if (current.ref !== workInProgress.ref) {
-            markRef$1(workInProgress);
-          }
-        } else {
-          if (!newProps) {
-            if (workInProgress.stateNode === null) {
-              throw new Error('We must have new props for new mounts. This error is likely ' + 'caused by a bug in React. Please file an issue.');
-            } // This can happen when we abort work.
-
-
-            bubbleProperties(workInProgress);
-            return null;
-          }
-
-          var currentHostContext = getHostContext(); // TODO: Move createInstance to beginWork and keep it on a context
-          // "stack" as the parent. Then append children as we go in beginWork
-          // or completeWork depending on whether we want to add them top->down or
-          // bottom->up. Top->down is faster in IE11.
-
-          var _wasHydrated = popHydrationState(workInProgress);
-
-          if (_wasHydrated) {
-            // TODO: Move this and createInstance step into the beginPhase
-            // to consolidate.
-            if (prepareToHydrateHostInstance(workInProgress, rootContainerInstance, currentHostContext)) {
-              // If changes to the hydrated node need to be applied at the
-              // commit-phase we mark this as such.
-              markUpdate(workInProgress);
-            }
-          } else {
-            var instance = createInstance(type, newProps, rootContainerInstance, currentHostContext, workInProgress);
-            appendAllChildren(instance, workInProgress, false, false);
-            workInProgress.stateNode = instance; // Certain renderers require commit-time effects for initial mount.
-            // (eg DOM renderer supports auto-focus for certain elements).
-            // Make sure such renderers get scheduled for later work.
-
-            if (finalizeInitialChildren(instance, type, newProps, rootContainerInstance)) {
-              markUpdate(workInProgress);
-            }
-          }
-
-          if (workInProgress.ref !== null) {
-            // If there is a ref on a host node we need to schedule a callback
-            markRef$1(workInProgress);
-          }
-        }
-
-        bubbleProperties(workInProgress);
-        return null;
-      }
-
-    case HostText:
-      {
-        var newText = newProps;
-
-        if (current && workInProgress.stateNode != null) {
-          var oldText = current.memoizedProps; // If we have an alternate, that means this is an update and we need
-          // to schedule a side-effect to do the updates.
-
-          updateHostText$1(current, workInProgress, oldText, newText);
-        } else {
-          if (typeof newText !== 'string') {
-            if (workInProgress.stateNode === null) {
-              throw new Error('We must have new props for new mounts. This error is likely ' + 'caused by a bug in React. Please file an issue.');
-            } // This can happen when we abort work.
-
-          }
-
-          var _rootContainerInstance = getRootHostContainer();
-
-          var _currentHostContext = getHostContext();
-
-          var _wasHydrated2 = popHydrationState(workInProgress);
-
-          if (_wasHydrated2) {
-            if (prepareToHydrateHostTextInstance(workInProgress)) {
-              markUpdate(workInProgress);
-            }
-          } else {
-            workInProgress.stateNode = createTextInstance(newText, _rootContainerInstance, _currentHostContext, workInProgress);
-          }
-        }
-
-        bubbleProperties(workInProgress);
-        return null;
-      }
-
-    case SuspenseComponent:
-      {
-        popSuspenseContext(workInProgress);
-        var nextState = workInProgress.memoizedState; // Special path for dehydrated boundaries. We may eventually move this
-        // to its own fiber type so that we can add other kinds of hydration
-        // boundaries that aren't associated with a Suspense tree. In anticipation
-        // of such a refactor, all the hydration logic is contained in
-        // this branch.
-
-        if (current === null || current.memoizedState !== null && current.memoizedState.dehydrated !== null) {
-          var fallthroughToNormalSuspensePath = completeDehydratedSuspenseBoundary(current, workInProgress, nextState);
-
-          if (!fallthroughToNormalSuspensePath) {
-            if (workInProgress.flags & ShouldCapture) {
-              // Special case. There were remaining unhydrated nodes. We treat
-              // this as a mismatch. Revert to client rendering.
-              return workInProgress;
-            } else {
-              // Did not finish hydrating, either because this is the initial
-              // render or because something suspended.
-              return null;
-            }
-          } // Continue with the normal Suspense path.
-
-        }
-
-        if ((workInProgress.flags & DidCapture) !== NoFlags) {
-          // Something suspended. Re-render with the fallback children.
-          workInProgress.lanes = renderLanes; // Do not reset the effect list.
-
-          if ( (workInProgress.mode & ProfileMode) !== NoMode) {
-            transferActualDuration(workInProgress);
-          } // Don't bubble properties in this case.
-
-
-          return workInProgress;
-        }
-
-        var nextDidTimeout = nextState !== null;
-        var prevDidTimeout = current !== null && current.memoizedState !== null;
-        // a passive effect, which is when we process the transitions
-
-
-        if (nextDidTimeout !== prevDidTimeout) {
-          // an effect to toggle the subtree's visibility. When we switch from
-          // fallback -> primary, the inner Offscreen fiber schedules this effect
-          // as part of its normal complete phase. But when we switch from
-          // primary -> fallback, the inner Offscreen fiber does not have a complete
-          // phase. So we need to schedule its effect here.
-          //
-          // We also use this flag to connect/disconnect the effects, but the same
-          // logic applies: when re-connecting, the Offscreen fiber's complete
-          // phase will handle scheduling the effect. It's only when the fallback
-          // is active that we have to do anything special.
-
-
-          if (nextDidTimeout) {
-            var _offscreenFiber2 = workInProgress.child;
-            _offscreenFiber2.flags |= Visibility; // TODO: This will still suspend a synchronous tree if anything
-            // in the concurrent tree already suspended during this render.
-            // This is a known bug.
-
-            if ((workInProgress.mode & ConcurrentMode) !== NoMode) {
-              // TODO: Move this back to throwException because this is too late
-              // if this is a large tree which is common for initial loads. We
-              // don't know if we should restart a render or not until we get
-              // this marker, and this is too late.
-              // If this render already had a ping or lower pri updates,
-              // and this is the first time we know we're going to suspend we
-              // should be able to immediately restart from within throwException.
-              var hasInvisibleChildContext = current === null && (workInProgress.memoizedProps.unstable_avoidThisFallback !== true || !enableSuspenseAvoidThisFallback);
-
-              if (hasInvisibleChildContext || hasSuspenseContext(suspenseStackCursor.current, InvisibleParentSuspenseContext)) {
-                // If this was in an invisible tree or a new render, then showing
-                // this boundary is ok.
-                renderDidSuspend();
-              } else {
-                // Otherwise, we're going to have to hide content so we should
-                // suspend for longer if possible.
-                renderDidSuspendDelayIfPossible();
-              }
-            }
-          }
-        }
-
-        var wakeables = workInProgress.updateQueue;
-
-        if (wakeables !== null) {
-          // Schedule an effect to attach a retry listener to the promise.
-          // TODO: Move to passive phase
-          workInProgress.flags |= Update;
-        }
-
-        bubbleProperties(workInProgress);
-
-        {
-          if ((workInProgress.mode & ProfileMode) !== NoMode) {
-            if (nextDidTimeout) {
-              // Don't count time spent in a timed out Suspense subtree as part of the base duration.
-              var primaryChildFragment = workInProgress.child;
-
-              if (primaryChildFragment !== null) {
-                // $FlowFixMe Flow doesn't support type casting in combination with the -= operator
-                workInProgress.treeBaseDuration -= primaryChildFragment.treeBaseDuration;
-              }
-            }
-          }
-        }
-
-        return null;
-      }
-
-    case HostPortal:
-      popHostContainer(workInProgress);
-      updateHostContainer(current, workInProgress);
-
-      if (current === null) {
-        preparePortalMount(workInProgress.stateNode.containerInfo);
-      }
-
-      bubbleProperties(workInProgress);
-      return null;
-
-    case ContextProvider:
-      // Pop provider fiber
-      var context = workInProgress.type._context;
-      popProvider(context, workInProgress);
-      bubbleProperties(workInProgress);
-      return null;
-
-    case IncompleteClassComponent:
-      {
-        // Same as class component case. I put it down here so that the tags are
-        // sequential to ensure this switch is compiled to a jump table.
-        var _Component = workInProgress.type;
-
-        if (isContextProvider(_Component)) {
-          popContext(workInProgress);
-        }
-
-        bubbleProperties(workInProgress);
-        return null;
-      }
-
-    case SuspenseListComponent:
-      {
-        popSuspenseContext(workInProgress);
-        var renderState = workInProgress.memoizedState;
-
-        if (renderState === null) {
-          // We're running in the default, "independent" mode.
-          // We don't do anything in this mode.
-          bubbleProperties(workInProgress);
-          return null;
-        }
-
-        var didSuspendAlready = (workInProgress.flags & DidCapture) !== NoFlags;
-        var renderedTail = renderState.rendering;
-
-        if (renderedTail === null) {
-          // We just rendered the head.
-          if (!didSuspendAlready) {
-            // This is the first pass. We need to figure out if anything is still
-            // suspended in the rendered set.
-            // If new content unsuspended, but there's still some content that
-            // didn't. Then we need to do a second pass that forces everything
-            // to keep showing their fallbacks.
-            // We might be suspended if something in this render pass suspended, or
-            // something in the previous committed pass suspended. Otherwise,
-            // there's no chance so we can skip the expensive call to
-            // findFirstSuspended.
-            var cannotBeSuspended = renderHasNotSuspendedYet() && (current === null || (current.flags & DidCapture) === NoFlags);
-
-            if (!cannotBeSuspended) {
-              var row = workInProgress.child;
-
-              while (row !== null) {
-                var suspended = findFirstSuspended(row);
-
-                if (suspended !== null) {
-                  didSuspendAlready = true;
-                  workInProgress.flags |= DidCapture;
-                  cutOffTailIfNeeded(renderState, false); // If this is a newly suspended tree, it might not get committed as
-                  // part of the second pass. In that case nothing will subscribe to
-                  // its thenables. Instead, we'll transfer its thenables to the
-                  // SuspenseList so that it can retry if they resolve.
-                  // There might be multiple of these in the list but since we're
-                  // going to wait for all of them anyway, it doesn't really matter
-                  // which ones gets to ping. In theory we could get clever and keep
-                  // track of how many dependencies remain but it gets tricky because
-                  // in the meantime, we can add/remove/change items and dependencies.
-                  // We might bail out of the loop before finding any but that
-                  // doesn't matter since that means that the other boundaries that
-                  // we did find already has their listeners attached.
-
-                  var newThenables = suspended.updateQueue;
-
-                  if (newThenables !== null) {
-                    workInProgress.updateQueue = newThenables;
-                    workInProgress.flags |= Update;
-                  } // Rerender the whole list, but this time, we'll force fallbacks
-                  // to stay in place.
-                  // Reset the effect flags before doing the second pass since that's now invalid.
-                  // Reset the child fibers to their original state.
-
-
-                  workInProgress.subtreeFlags = NoFlags;
-                  resetChildFibers(workInProgress, renderLanes); // Set up the Suspense Context to force suspense and immediately
-                  // rerender the children.
-
-                  pushSuspenseContext(workInProgress, setShallowSuspenseContext(suspenseStackCursor.current, ForceSuspenseFallback)); // Don't bubble properties in this case.
-
-                  return workInProgress.child;
-                }
-
-                row = row.sibling;
-              }
-            }
-
-            if (renderState.tail !== null && now() > getRenderTargetTime()) {
-              // We have already passed our CPU deadline but we still have rows
-              // left in the tail. We'll just give up further attempts to render
-              // the main content and only render fallbacks.
-              workInProgress.flags |= DidCapture;
-              didSuspendAlready = true;
-              cutOffTailIfNeeded(renderState, false); // Since nothing actually suspended, there will nothing to ping this
-              // to get it started back up to attempt the next item. While in terms
-              // of priority this work has the same priority as this current render,
-              // it's not part of the same transition once the transition has
-              // committed. If it's sync, we still want to yield so that it can be
-              // painted. Conceptually, this is really the same as pinging.
-              // We can use any RetryLane even if it's the one currently rendering
-              // since we're leaving it behind on this node.
-
-              workInProgress.lanes = SomeRetryLane;
-            }
-          } else {
-            cutOffTailIfNeeded(renderState, false);
-          } // Next we're going to render the tail.
-
-        } else {
-          // Append the rendered row to the child list.
-          if (!didSuspendAlready) {
-            var _suspended = findFirstSuspended(renderedTail);
-
-            if (_suspended !== null) {
-              workInProgress.flags |= DidCapture;
-              didSuspendAlready = true; // Ensure we transfer the update queue to the parent so that it doesn't
-              // get lost if this row ends up dropped during a second pass.
-
-              var _newThenables = _suspended.updateQueue;
-
-              if (_newThenables !== null) {
-                workInProgress.updateQueue = _newThenables;
-                workInProgress.flags |= Update;
-              }
-
-              cutOffTailIfNeeded(renderState, true); // This might have been modified.
-
-              if (renderState.tail === null && renderState.tailMode === 'hidden' && !renderedTail.alternate && !getIsHydrating() // We don't cut it if we're hydrating.
-              ) {
-                  // We're done.
-                  bubbleProperties(workInProgress);
-                  return null;
-                }
-            } else if ( // The time it took to render last row is greater than the remaining
-            // time we have to render. So rendering one more row would likely
-            // exceed it.
-            now() * 2 - renderState.renderingStartTime > getRenderTargetTime() && renderLanes !== OffscreenLane) {
-              // We have now passed our CPU deadline and we'll just give up further
-              // attempts to render the main content and only render fallbacks.
-              // The assumption is that this is usually faster.
-              workInProgress.flags |= DidCapture;
-              didSuspendAlready = true;
-              cutOffTailIfNeeded(renderState, false); // Since nothing actually suspended, there will nothing to ping this
-              // to get it started back up to attempt the next item. While in terms
-              // of priority this work has the same priority as this current render,
-              // it's not part of the same transition once the transition has
-              // committed. If it's sync, we still want to yield so that it can be
-              // painted. Conceptually, this is really the same as pinging.
-              // We can use any RetryLane even if it's the one currently rendering
-              // since we're leaving it behind on this node.
-
-              workInProgress.lanes = SomeRetryLane;
-            }
-          }
-
-          if (renderState.isBackwards) {
-            // The effect list of the backwards tail will have been added
-            // to the end. This breaks the guarantee that life-cycles fire in
-            // sibling order but that isn't a strong guarantee promised by React.
-            // Especially since these might also just pop in during future commits.
-            // Append to the beginning of the list.
-            renderedTail.sibling = workInProgress.child;
-            workInProgress.child = renderedTail;
-          } else {
-            var previousSibling = renderState.last;
-
-            if (previousSibling !== null) {
-              previousSibling.sibling = renderedTail;
-            } else {
-              workInProgress.child = renderedTail;
-            }
-
-            renderState.last = renderedTail;
-          }
-        }
-
-        if (renderState.tail !== null) {
-          // We still have tail rows to render.
-          // Pop a row.
-          var next = renderState.tail;
-          renderState.rendering = next;
-          renderState.tail = next.sibling;
-          renderState.renderingStartTime = now();
-          next.sibling = null; // Restore the context.
-          // TODO: We can probably just avoid popping it instead and only
-          // setting it the first time we go from not suspended to suspended.
-
-          var suspenseContext = suspenseStackCursor.current;
-
-          if (didSuspendAlready) {
-            suspenseContext = setShallowSuspenseContext(suspenseContext, ForceSuspenseFallback);
-          } else {
-            suspenseContext = setDefaultShallowSuspenseContext(suspenseContext);
-          }
-
-          pushSuspenseContext(workInProgress, suspenseContext); // Do a pass over the next row.
-          // Don't bubble properties in this case.
-
-          return next;
-        }
-
-        bubbleProperties(workInProgress);
-        return null;
-      }
-
-    case ScopeComponent:
-      {
-
-        break;
-      }
-
-    case OffscreenComponent:
-    case LegacyHiddenComponent:
-      {
-        popRenderLanes(workInProgress);
-        var _nextState = workInProgress.memoizedState;
-        var nextIsHidden = _nextState !== null;
-
-        if (current !== null) {
-          var _prevState = current.memoizedState;
-          var prevIsHidden = _prevState !== null;
-
-          if (prevIsHidden !== nextIsHidden && ( // LegacyHidden doesn't do any hiding — it only pre-renders.
-          !enableLegacyHidden )) {
-            workInProgress.flags |= Visibility;
-          }
-        }
-
-        if (!nextIsHidden || (workInProgress.mode & ConcurrentMode) === NoMode) {
-          bubbleProperties(workInProgress);
-        } else {
-          // Don't bubble properties for hidden children unless we're rendering
-          // at offscreen priority.
-          if (includesSomeLane(subtreeRenderLanes, OffscreenLane)) {
-            bubbleProperties(workInProgress);
-
-            {
-              // Check if there was an insertion or update in the hidden subtree.
-              // If so, we need to hide those nodes in the commit phase, so
-              // schedule a visibility effect.
-              if ( workInProgress.subtreeFlags & (Placement | Update)) {
-                workInProgress.flags |= Visibility;
-              }
-            }
-          }
-        }
-        return null;
-      }
-
-    case CacheComponent:
-      {
-
-        return null;
-      }
-
-    case TracingMarkerComponent:
-      {
-
-        return null;
       }
   }
 
@@ -26890,7 +26785,6 @@ function commitLayoutEffectOnFiber(finishedRoot, current, finishedWork, committe
       case ScopeComponent:
       case OffscreenComponent:
       case LegacyHiddenComponent:
-      case TracingMarkerComponent:
         {
           break;
         }
@@ -27869,12 +27763,8 @@ function commitMutationEffectsOnFiber(finishedWork, root, lanes) {
         var offscreenFiber = finishedWork.child;
 
         if (offscreenFiber.flags & Visibility) {
-          var offscreenInstance = offscreenFiber.stateNode;
           var newState = offscreenFiber.memoizedState;
-          var isHidden = newState !== null; // Track the current state on the Offscreen instance so we can
-          // read it during an event
-
-          offscreenInstance.isHidden = isHidden;
+          var isHidden = newState !== null;
 
           if (isHidden) {
             var wasHidden = offscreenFiber.alternate !== null && offscreenFiber.alternate.memoizedState !== null;
@@ -27919,15 +27809,17 @@ function commitMutationEffectsOnFiber(finishedWork, root, lanes) {
         commitReconciliationEffects(finishedWork);
 
         if (flags & Visibility) {
-          var _offscreenInstance = finishedWork.stateNode;
           var _newState = finishedWork.memoizedState;
 
           var _isHidden = _newState !== null;
 
-          var offscreenBoundary = finishedWork; // Track the current state on the Offscreen instance so we can
-          // read it during an event
+          var offscreenBoundary = finishedWork;
 
-          _offscreenInstance.isHidden = _isHidden;
+          {
+            // TODO: This needs to run whenever there's an insertion or update
+            // inside a hidden Offscreen tree.
+            hideOrUnhideAllChildren(offscreenBoundary, _isHidden);
+          }
 
           {
             if (_isHidden) {
@@ -27944,12 +27836,6 @@ function commitMutationEffectsOnFiber(finishedWork, root, lanes) {
                 }
               }
             }
-          }
-
-          {
-            // TODO: This needs to run whenever there's an insertion or update
-            // inside a hidden Offscreen tree.
-            hideOrUnhideAllChildren(offscreenBoundary, _isHidden);
           }
         }
 
@@ -28863,13 +28749,19 @@ function requestRetryLane(fiber) {
   return claimNextRetryLane();
 }
 
-function scheduleUpdateOnFiber(root, fiber, lane, eventTime) {
+function scheduleUpdateOnFiber(fiber, lane, eventTime) {
   checkForNestedUpdates();
 
   {
     if (isRunningInsertionEffect) {
       error('useInsertionEffect must not schedule updates.');
     }
+  }
+
+  var root = markUpdateLaneFromFiberToRoot(fiber, lane);
+
+  if (root === null) {
+    return null;
   }
 
   {
@@ -28900,6 +28792,7 @@ function scheduleUpdateOnFiber(root, fiber, lane, eventTime) {
     warnIfUpdatesNotWrappedWithActDEV(fiber);
 
     if (root === workInProgressRoot) {
+      // TODO: Consolidate with `isInterleavedUpdate` check
       // Received an update to a tree that's in the middle of rendering. Mark
       // that there was an interleaved update work on this root. Unless the
       // `deferRenderPhaseUpdateToNextBatch` flag is off and this is a render
@@ -28933,6 +28826,8 @@ function scheduleUpdateOnFiber(root, fiber, lane, eventTime) {
       flushSyncCallbacksOnlyInLegacyMode();
     }
   }
+
+  return root;
 }
 function scheduleInitialHydrationOnRoot(root, lane, eventTime) {
   // This is a special fork of scheduleUpdateOnFiber that is only used to
@@ -28948,13 +28843,70 @@ function scheduleInitialHydrationOnRoot(root, lane, eventTime) {
   current.lanes = lane;
   markRootUpdated(root, lane, eventTime);
   ensureRootIsScheduled(root, eventTime);
+} // This is split into a separate function so we can mark a fiber with pending
+// work without treating it as a typical update that originates from an event;
+// e.g. retrying a Suspense boundary isn't an update, but it does schedule work
+// on a fiber.
+
+function markUpdateLaneFromFiberToRoot(sourceFiber, lane) {
+  // Update the source fiber's lanes
+  sourceFiber.lanes = mergeLanes(sourceFiber.lanes, lane);
+  var alternate = sourceFiber.alternate;
+
+  if (alternate !== null) {
+    alternate.lanes = mergeLanes(alternate.lanes, lane);
+  }
+
+  {
+    if (alternate === null && (sourceFiber.flags & (Placement | Hydrating)) !== NoFlags) {
+      warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
+    }
+  } // Walk the parent path to the root and update the child lanes.
+
+
+  var node = sourceFiber;
+  var parent = sourceFiber.return;
+
+  while (parent !== null) {
+    parent.childLanes = mergeLanes(parent.childLanes, lane);
+    alternate = parent.alternate;
+
+    if (alternate !== null) {
+      alternate.childLanes = mergeLanes(alternate.childLanes, lane);
+    } else {
+      {
+        if ((parent.flags & (Placement | Hydrating)) !== NoFlags) {
+          warnAboutUpdateOnNotYetMountedFiberInDEV(sourceFiber);
+        }
+      }
+    }
+
+    node = parent;
+    parent = parent.return;
+  }
+
+  if (node.tag === HostRoot) {
+    var root = node.stateNode;
+    return root;
+  } else {
+    return null;
+  }
 }
-function isUnsafeClassRenderPhaseUpdate(fiber) {
-  // Check if this is a render phase update. Only called by class components,
-  // which special (deprecated) behavior for UNSAFE_componentWillReceive props.
-  return (// TODO: Remove outdated deferRenderPhaseUpdateToNextBatch experiment. We
-    // decided not to enable it.
-     (executionContext & RenderContext) !== NoContext
+
+function isInterleavedUpdate(fiber, lane) {
+  return (// TODO: Optimize slightly by comparing to root that fiber belongs to.
+    // Requires some refactoring. Not a big deal though since it's rare for
+    // concurrent apps to have more than a single root.
+    (workInProgressRoot !== null || // If the interleaved updates queue hasn't been cleared yet, then
+    // we should treat this as an interleaved update, too. This is also a
+    // defensive coding measure in case a new update comes in between when
+    // rendering has finished and when the interleaved updates are transferred
+    // to the main queue.
+    hasInterleavedUpdates()) && (fiber.mode & ConcurrentMode) !== NoMode && ( // If this is a render phase update (i.e. UNSAFE_componentWillReceiveProps),
+    // then don't treat this as an interleaved update. This pattern is
+    // accompanied by a warning but we haven't fully deprecated it yet. We can
+    // remove once the deferRenderPhaseUpdateToNextBatch flag is enabled.
+     (executionContext & RenderContext) === NoContext)
   );
 } // Use this function to schedule a task for a root. There's only one task per
 // root; if a task was already scheduled, we'll check to make sure the priority
@@ -29037,9 +28989,9 @@ function ensureRootIsScheduled(root, currentTime) {
           // https://github.com/facebook/react/issues/22459
           // We don't support running callbacks in the middle of render
           // or commit so we need to check against that.
-          if ((executionContext & (RenderContext | CommitContext)) === NoContext) {
-            // Note that this would still prematurely flush the callbacks
-            // if this happens outside render or commit phase (e.g. in an event).
+          if (executionContext === NoContext) {
+            // It's only safe to do this conditionally because we always
+            // check for pending work before we exit the task.
             flushSyncCallbacks();
           }
         });
@@ -29642,7 +29594,7 @@ function prepareFreshStack(root, lanes) {
   workInProgressRootPingedLanes = NoLanes;
   workInProgressRootConcurrentErrors = null;
   workInProgressRootRecoverableErrors = null;
-  finishQueueingConcurrentUpdates();
+  enqueueInterleavedUpdates();
 
   {
     ReactStrictModeWarnings.discardPendingWarnings();
@@ -30298,12 +30250,7 @@ function commitRootImpl(root, recoverableErrors, transitions, renderPriorityLeve
 
     for (var i = 0; i < recoverableErrors.length; i++) {
       var recoverableError = recoverableErrors[i];
-      var componentStack = recoverableError.stack;
-      var digest = recoverableError.digest;
-      onRecoverableError(recoverableError.value, {
-        componentStack: componentStack,
-        digest: digest
-      });
+      onRecoverableError(recoverableError);
     }
   }
 
@@ -30501,10 +30448,11 @@ function prepareToThrowUncaughtError(error) {
 var onUncaughtError = prepareToThrowUncaughtError;
 
 function captureCommitPhaseErrorOnRoot(rootFiber, sourceFiber, error) {
-  var errorInfo = createCapturedValueAtFiber(error, sourceFiber);
+  var errorInfo = createCapturedValue(error, sourceFiber);
   var update = createRootErrorUpdate(rootFiber, errorInfo, SyncLane);
-  var root = enqueueUpdate(rootFiber, update, SyncLane);
+  enqueueUpdate(rootFiber, update);
   var eventTime = requestEventTime();
+  var root = markUpdateLaneFromFiberToRoot(rootFiber, SyncLane);
 
   if (root !== null) {
     markRootUpdated(root, SyncLane, eventTime);
@@ -30540,10 +30488,11 @@ function captureCommitPhaseError(sourceFiber, nearestMountedAncestor, error$1) {
       var instance = fiber.stateNode;
 
       if (typeof ctor.getDerivedStateFromError === 'function' || typeof instance.componentDidCatch === 'function' && !isAlreadyFailedLegacyErrorBoundary(instance)) {
-        var errorInfo = createCapturedValueAtFiber(error$1, sourceFiber);
+        var errorInfo = createCapturedValue(error$1, sourceFiber);
         var update = createClassErrorUpdate(fiber, errorInfo, SyncLane);
-        var root = enqueueUpdate(fiber, update, SyncLane);
+        enqueueUpdate(fiber, update);
         var eventTime = requestEventTime();
+        var root = markUpdateLaneFromFiberToRoot(fiber, SyncLane);
 
         if (root !== null) {
           markRootUpdated(root, SyncLane, eventTime);
@@ -30613,7 +30562,7 @@ function retryTimedOutBoundary(boundaryFiber, retryLane) {
 
 
   var eventTime = requestEventTime();
-  var root = enqueueConcurrentRenderForLane(boundaryFiber, retryLane);
+  var root = markUpdateLaneFromFiberToRoot(boundaryFiber, retryLane);
 
   if (root !== null) {
     markRootUpdated(root, retryLane, eventTime);
@@ -30753,6 +30702,7 @@ function invokeEffectsInDev(firstChild, fiberFlags, invokeEffectFn) {
 }
 
 var didWarnStateUpdateForNotYetMountedComponent = null;
+
 function warnAboutUpdateOnNotYetMountedFiberInDEV(fiber) {
   {
     if ((executionContext & RenderContext) !== NoContext) {
@@ -30800,6 +30750,7 @@ function warnAboutUpdateOnNotYetMountedFiberInDEV(fiber) {
     }
   }
 }
+
 var beginWork$1;
 
 {
@@ -30816,9 +30767,8 @@ var beginWork$1;
     try {
       return beginWork(current, unitOfWork, lanes);
     } catch (originalError) {
-      if (didSuspendOrErrorWhileHydratingDEV() || originalError !== null && typeof originalError === 'object' && typeof originalError.then === 'function') {
-        // Don't replay promises.
-        // Don't replay errors if we are hydrating and have already suspended or handled an error
+      if (originalError !== null && typeof originalError === 'object' && typeof originalError.then === 'function') {
+        // Don't replay promises. Treat everything else like an error.
         throw originalError;
       } // Keep this code in sync with handleError; any changes here must have
       // corresponding changes there.
@@ -31259,11 +31209,7 @@ function scheduleFibersWithFamiliesRecursively(fiber, updatedFamilies, staleFami
     }
 
     if (needsRemount || needsRender) {
-      var _root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-      if (_root !== null) {
-        scheduleUpdateOnFiber(_root, fiber, SyncLane, NoTimestamp);
-      }
+      scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
     }
 
     if (child !== null && !needsRemount) {
@@ -31905,9 +31851,7 @@ function createFiberFromOffscreen(pendingProps, mode, lanes, key) {
   var fiber = createFiber(OffscreenComponent, pendingProps, key, mode);
   fiber.elementType = REACT_OFFSCREEN_TYPE;
   fiber.lanes = lanes;
-  var primaryChildInstance = {
-    isHidden: false
-  };
+  var primaryChildInstance = {};
   fiber.stateNode = primaryChildInstance;
   return fiber;
 }
@@ -32073,7 +32017,7 @@ identifierPrefix, onRecoverableError, transitionCallbacks) {
   return root;
 }
 
-var ReactVersion = '18.2.0';
+var ReactVersion = '18.1.0';
 
 function createPortal(children, containerInfo, // TODO: figure out the API for cross-renderer implementation.
 implementation) {
@@ -32192,7 +32136,7 @@ callback, containerInfo, tag, hydrationCallbacks, isStrictMode, concurrentUpdate
   var lane = requestUpdateLane(current);
   var update = createUpdate(eventTime, lane);
   update.callback = callback !== undefined && callback !== null ? callback : null;
-  enqueueUpdate(current, update, lane);
+  enqueueUpdate(current, update);
   scheduleInitialHydrationOnRoot(root, lane, eventTime);
   return root;
 }
@@ -32243,10 +32187,10 @@ function updateContainer(element, container, parentComponent, callback) {
     update.callback = callback;
   }
 
-  var root = enqueueUpdate(current$1, update, lane);
+  enqueueUpdate(current$1, update);
+  var root = scheduleUpdateOnFiber(current$1, lane, eventTime);
 
   if (root !== null) {
-    scheduleUpdateOnFiber(root, current$1, lane, eventTime);
     entangleTransitions(root, current$1, lane);
   }
 
@@ -32270,35 +32214,27 @@ function getPublicRootInstance(container) {
 function attemptSynchronousHydration$1(fiber) {
   switch (fiber.tag) {
     case HostRoot:
-      {
-        var root = fiber.stateNode;
+      var root = fiber.stateNode;
 
-        if (isRootDehydrated(root)) {
-          // Flush the first scheduled "update".
-          var lanes = getHighestPriorityPendingLanes(root);
-          flushRoot(root, lanes);
-        }
-
-        break;
+      if (isRootDehydrated(root)) {
+        // Flush the first scheduled "update".
+        var lanes = getHighestPriorityPendingLanes(root);
+        flushRoot(root, lanes);
       }
+
+      break;
 
     case SuspenseComponent:
-      {
-        flushSync(function () {
-          var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
+      var eventTime = requestEventTime();
+      flushSync(function () {
+        return scheduleUpdateOnFiber(fiber, SyncLane, eventTime);
+      }); // If we're still blocked after this, we need to increase
+      // the priority of any promises resolving within this
+      // boundary so that they next attempt also has higher pri.
 
-          if (root !== null) {
-            var eventTime = requestEventTime();
-            scheduleUpdateOnFiber(root, fiber, SyncLane, eventTime);
-          }
-        }); // If we're still blocked after this, we need to increase
-        // the priority of any promises resolving within this
-        // boundary so that they next attempt also has higher pri.
-
-        var retryLane = SyncLane;
-        markRetryLaneIfNotHydrated(fiber, retryLane);
-        break;
-      }
+      var retryLane = SyncLane;
+      markRetryLaneIfNotHydrated(fiber, retryLane);
+      break;
   }
 }
 
@@ -32328,14 +32264,9 @@ function attemptContinuousHydration$1(fiber) {
     return;
   }
 
+  var eventTime = requestEventTime();
   var lane = SelectiveHydrationLane;
-  var root = enqueueConcurrentRenderForLane(fiber, lane);
-
-  if (root !== null) {
-    var eventTime = requestEventTime();
-    scheduleUpdateOnFiber(root, fiber, lane, eventTime);
-  }
-
+  scheduleUpdateOnFiber(fiber, lane, eventTime);
   markRetryLaneIfNotHydrated(fiber, lane);
 }
 function attemptHydrationAtCurrentPriority$1(fiber) {
@@ -32345,14 +32276,9 @@ function attemptHydrationAtCurrentPriority$1(fiber) {
     return;
   }
 
+  var eventTime = requestEventTime();
   var lane = requestUpdateLane(fiber);
-  var root = enqueueConcurrentRenderForLane(fiber, lane);
-
-  if (root !== null) {
-    var eventTime = requestEventTime();
-    scheduleUpdateOnFiber(root, fiber, lane, eventTime);
-  }
-
+  scheduleUpdateOnFiber(fiber, lane, eventTime);
   markRetryLaneIfNotHydrated(fiber, lane);
 }
 function findHostInstanceWithNoPortals(fiber) {
@@ -32498,11 +32424,7 @@ var setSuspenseHandler = null;
       // Shallow cloning props works as a workaround for now to bypass the bailout check.
 
       fiber.memoizedProps = assign({}, fiber.memoizedProps);
-      var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-      if (root !== null) {
-        scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-      }
+      scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
     }
   };
 
@@ -32519,11 +32441,7 @@ var setSuspenseHandler = null;
       // Shallow cloning props works as a workaround for now to bypass the bailout check.
 
       fiber.memoizedProps = assign({}, fiber.memoizedProps);
-      var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-      if (root !== null) {
-        scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-      }
+      scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
     }
   };
 
@@ -32540,11 +32458,7 @@ var setSuspenseHandler = null;
       // Shallow cloning props works as a workaround for now to bypass the bailout check.
 
       fiber.memoizedProps = assign({}, fiber.memoizedProps);
-      var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-      if (root !== null) {
-        scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-      }
+      scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
     }
   }; // Support DevTools props for function components, forwardRef, memo, host components, etc.
 
@@ -32556,11 +32470,7 @@ var setSuspenseHandler = null;
       fiber.alternate.pendingProps = fiber.pendingProps;
     }
 
-    var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-    }
+    scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
   };
 
   overridePropsDeletePath = function (fiber, path) {
@@ -32570,11 +32480,7 @@ var setSuspenseHandler = null;
       fiber.alternate.pendingProps = fiber.pendingProps;
     }
 
-    var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-    }
+    scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
   };
 
   overridePropsRenamePath = function (fiber, oldPath, newPath) {
@@ -32584,19 +32490,11 @@ var setSuspenseHandler = null;
       fiber.alternate.pendingProps = fiber.pendingProps;
     }
 
-    var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-    }
+    scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
   };
 
   scheduleUpdate = function (fiber) {
-    var root = enqueueConcurrentRenderForLane(fiber, SyncLane);
-
-    if (root !== null) {
-      scheduleUpdateOnFiber(root, fiber, SyncLane, NoTimestamp);
-    }
+    scheduleUpdateOnFiber(fiber, SyncLane, NoTimestamp);
   };
 
   setErrorHandler = function (newShouldErrorImpl) {
@@ -33271,7 +33169,7 @@ var createRoot;
 var m$1 = reactDom.exports;
 {
   var i = m$1.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
-  createRoot = client.createRoot = function(c, o) {
+  createRoot = function(c, o) {
     i.usingClientEntryPoint = true;
     try {
       return m$1.createRoot(c, o);
@@ -33279,17 +33177,9 @@ var m$1 = reactDom.exports;
       i.usingClientEntryPoint = false;
     }
   };
-  client.hydrateRoot = function(c, h, o) {
-    i.usingClientEntryPoint = true;
-    try {
-      return m$1.hydrateRoot(c, h, o);
-    } finally {
-      i.usingClientEntryPoint = false;
-    }
-  };
 }
 
-function _defineProperty$y(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -34909,8 +34799,6 @@ try {
   console.log(error);
 }
 
-var StyledStringPlain$1 = StyledStringPlain;
-
 var RGB_REGEXP = /(rgb(?:BG)?)\((\s*\d+\s*)\,(\s*\d+\s*)\,(\s*\d+\s*)\)/,
     STYLE_REGEXP = /(style)\(['"](.+?)['"]\)/;
 var styles$3 = [],
@@ -34943,7 +34831,7 @@ function runStyleOnString(string, style) {
       string = runStyleOnString(string, style);
     });
     return string;
-  } else if (string[style] instanceof StyledStringPlain$1) {
+  } else if (string[style] instanceof StyledStringPlain) {
     return string[style].toString();
   } else if (typeof string[style] === 'function') {
     return string[style]();
@@ -35004,7 +34892,7 @@ compileTemplate.define = function (name, stylesToDefine) {
   COLORS_REGEXP = compileColorsRegExp();
 
   if (Object.defineProperty) {
-    StyledString$1.prototype[name] = {
+    StyledString.prototype[name] = {
       get: function get() {
         this.styles = this.styles.concat(stylesToDefine);
         return this;
@@ -35018,7 +34906,7 @@ compileTemplate.define = function (name, stylesToDefine) {
 
     String.prototype[name] = {
       get: function get() {
-        return new StyledString$1([[this]])[name];
+        return new StyledString([[this]])[name];
       }
     }; // Object.defineProperty(String.prototype, name, {
     // 	get: function () {
@@ -35026,9 +34914,9 @@ compileTemplate.define = function (name, stylesToDefine) {
     // 	}
     // });
 
-    StyledStringPlain$1.prototype[name] = {
+    StyledStringPlain.prototype[name] = {
       get: function get() {
-        return new StyledString$1([[this]])[name];
+        return new StyledString([[this]])[name];
       }
     }; // Object.defineProperty(StyledStringPlain.prototype, name, {
     // 	get: function () {
@@ -35073,8 +34961,6 @@ var StyledString = /*#__PURE__*/function () {
 
   return StyledString;
 }();
-
-var StyledString$1 = StyledString;
 
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
@@ -35325,7 +35211,7 @@ function toOrderedSet(input) {
  */
 
 
-function arrayIncludes$2(list) {
+function arrayIncludes$1(list) {
   return function (element) {
     return list && list.indexOf(element) !== -1;
   };
@@ -35346,7 +35232,7 @@ function _extends$1(Class, Super) {
   var pt = Class.prototype;
 
   if (!(pt instanceof Super)) {
-    var t = function t() {};
+    function t() {}
     t.prototype = Super.prototype;
     t = new t();
     copy(pt, t);
@@ -36167,7 +36053,7 @@ Document.prototype = {
 
               if (!matches) {
                 var nodeClassNamesSet = toOrderedSet(nodeClassNames);
-                matches = classNamesSet.every(arrayIncludes$2(nodeClassNamesSet));
+                matches = classNamesSet.every(arrayIncludes$1(nodeClassNamesSet));
               }
 
               if (matches) {
@@ -36896,28 +36782,6 @@ function __set__(object, key, value) {
 
 try {
   if (Object.defineProperty) {
-    var getTextContent = function getTextContent(node) {
-      switch (node.nodeType) {
-        case ELEMENT_NODE:
-        case DOCUMENT_FRAGMENT_NODE:
-          var buf = [];
-          node = node.firstChild;
-
-          while (node) {
-            if (node.nodeType !== 7 && node.nodeType !== 8) {
-              buf.push(getTextContent(node));
-            }
-
-            node = node.nextSibling;
-          }
-
-          return buf.join('');
-
-        default:
-          return node.nodeValue;
-      }
-    };
-
     Object.defineProperty(LiveNodeList.prototype, 'length', {
       get: function get() {
         _updateLiveList(this);
@@ -36950,6 +36814,28 @@ try {
         }
       }
     });
+
+    function getTextContent(node) {
+      switch (node.nodeType) {
+        case ELEMENT_NODE:
+        case DOCUMENT_FRAGMENT_NODE:
+          var buf = [];
+          node = node.firstChild;
+
+          while (node) {
+            if (node.nodeType !== 7 && node.nodeType !== 8) {
+              buf.push(getTextContent(node));
+            }
+
+            node = node.nextSibling;
+          }
+
+          return buf.join('');
+
+        default:
+          return node.nodeValue;
+      }
+    }
 
     __set__ = function __set__(object, key, value) {
       //console.log(value)
@@ -38449,7 +38335,7 @@ function patchConsoleMethod(methodName) {
     for (var _i = 0, _args = args; _i < _args.length; _i++) {
       var arg = _args[_i];
 
-      if (arg instanceof StyledString$1 || arg instanceof StyledStringPlain$1) {
+      if (arg instanceof StyledString || arg instanceof StyledStringPlain) {
         if (hasLoggedRawItem) {
           throw new Error('Styled strings must be the first log argument');
         }
@@ -38471,8 +38357,8 @@ function patchConsoleLog() {
 
 patchConsoleLog();
 var template = {
-  "default": [{
-    "default": [{
+  default: [{
+    default: [{
       0: "rgb(201,1,1)",
       1: "rgb(201,1,1)"
     }, {
@@ -38535,7 +38421,7 @@ function colors$7() {
     args[_key] = arguments[_key];
   }
 
-  return new StyledString$1(args);
+  return new StyledString(args);
 }
 
 colors$7.define = compileTemplate.define;
@@ -38557,7 +38443,7 @@ Object.keys(rgbs).forEach(function (key) {
   colors$7.define("".concat(key), "rgb(".concat(rgb[0], ", ").concat(rgb[1], ", ").concat(rgb[2], ")"));
 });
 var mapName = [];
-template["default"][0]["default"].forEach(function (item, i) {
+template.default[0].default.forEach(function (item, i) {
   var pathColor = "pathColor".concat(i);
   var idColor = "idColor".concat(i);
 
@@ -38885,7 +38771,6 @@ var _assert = {
     return true;
   }
 };
-var logs = _assert;
 
 var server$1 = {exports: {}};
 
@@ -38900,7 +38785,7 @@ object-assign
 */
 /* eslint-disable no-unused-vars */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
 function toObject(val) {
@@ -38964,7 +38849,7 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
 		from = Object(arguments[s]);
 
 		for (var key in from) {
-			if (hasOwnProperty$2.call(from, key)) {
+			if (hasOwnProperty$1.call(from, key)) {
 				to[key] = from[key];
 			}
 		}
@@ -40735,7 +40620,7 @@ lib.readOnly = readOnly;
 lib.readWrite = readWrite;
 lib.required = required;
 lib.right = right$1;
-lib.root = root$3;
+lib.root = root$2;
 lib.scope = scope;
 lib.target = target;
 lib.valid = valid;
@@ -40779,7 +40664,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function _defineProperty$x(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 /* stylesheet */
 
 
@@ -41080,7 +40965,7 @@ function toRule(spec) {
     return ruleCache[spec.id];
   }
 
-  var ret = _defineProperty$x({}, 'data-css-' + spec.id, hasLabels ? spec.label || '' : '');
+  var ret = _defineProperty({}, 'data-css-' + spec.id, hasLabels ? spec.label || '' : '');
   Object.defineProperty(ret, 'toString', {
     enumerable: false, value: function value() {
       return 'css-' + spec.id;
@@ -41434,7 +41319,7 @@ function select(selector) {
   if (!selector) {
     return style$1(styles);
   }
-  return css(_defineProperty$x({}, selector, styles));
+  return css(_defineProperty({}, selector, styles));
 }
 lib.$ = select;
 
@@ -41443,7 +41328,7 @@ function parent(selector) {
     styles[_key4 - 1] = arguments[_key4];
   }
 
-  return css(_defineProperty$x({}, selector + ' &', styles));
+  return css(_defineProperty({}, selector + ' &', styles));
 }
 
 lib.merge = css;
@@ -41454,7 +41339,7 @@ function media(query) {
     rules[_key5 - 1] = arguments[_key5];
   }
 
-  return css(_defineProperty$x({}, '@media ' + query, rules));
+  return css(_defineProperty({}, '@media ' + query, rules));
 }
 
 function pseudo(selector) {
@@ -41462,7 +41347,7 @@ function pseudo(selector) {
     styles[_key6 - 1] = arguments[_key6];
   }
 
-  return css(_defineProperty$x({}, selector, styles));
+  return css(_defineProperty({}, selector, styles));
 }
 
 // allllll the pseudoclasses
@@ -41579,7 +41464,7 @@ function right$1(x) {
   return pseudo(':right', x);
 }
 
-function root$3(x) {
+function root$2(x) {
   return pseudo(':root', x);
 }
 
@@ -41934,9 +41819,9 @@ var box = {};
 
 var propTypes$2 = {exports: {}};
 
-var reactIs = {exports: {}};
+var reactIs$2 = {exports: {}};
 
-var reactIs_development = {};
+var reactIs_development$2 = {};
 
 /** @license React v16.13.1
  * react-is.development.js
@@ -42086,45 +41971,43 @@ function isSuspense(object) {
   return typeOf(object) === REACT_SUSPENSE_TYPE;
 }
 
-reactIs_development.AsyncMode = AsyncMode;
-reactIs_development.ConcurrentMode = ConcurrentMode;
-reactIs_development.ContextConsumer = ContextConsumer;
-reactIs_development.ContextProvider = ContextProvider;
-reactIs_development.Element = Element;
-reactIs_development.ForwardRef = ForwardRef;
-reactIs_development.Fragment = Fragment;
-reactIs_development.Lazy = Lazy;
-reactIs_development.Memo = Memo;
-reactIs_development.Portal = Portal;
-reactIs_development.Profiler = Profiler;
-reactIs_development.StrictMode = StrictMode;
-reactIs_development.Suspense = Suspense;
-reactIs_development.isAsyncMode = isAsyncMode;
-reactIs_development.isConcurrentMode = isConcurrentMode;
-reactIs_development.isContextConsumer = isContextConsumer;
-reactIs_development.isContextProvider = isContextProvider;
-reactIs_development.isElement = isElement;
-reactIs_development.isForwardRef = isForwardRef;
-reactIs_development.isFragment = isFragment;
-reactIs_development.isLazy = isLazy;
-reactIs_development.isMemo = isMemo;
-reactIs_development.isPortal = isPortal;
-reactIs_development.isProfiler = isProfiler;
-reactIs_development.isStrictMode = isStrictMode;
-reactIs_development.isSuspense = isSuspense;
-reactIs_development.isValidElementType = isValidElementType;
-reactIs_development.typeOf = typeOf;
+reactIs_development$2.AsyncMode = AsyncMode;
+reactIs_development$2.ConcurrentMode = ConcurrentMode;
+reactIs_development$2.ContextConsumer = ContextConsumer;
+reactIs_development$2.ContextProvider = ContextProvider;
+reactIs_development$2.Element = Element;
+reactIs_development$2.ForwardRef = ForwardRef;
+reactIs_development$2.Fragment = Fragment;
+reactIs_development$2.Lazy = Lazy;
+reactIs_development$2.Memo = Memo;
+reactIs_development$2.Portal = Portal;
+reactIs_development$2.Profiler = Profiler;
+reactIs_development$2.StrictMode = StrictMode;
+reactIs_development$2.Suspense = Suspense;
+reactIs_development$2.isAsyncMode = isAsyncMode;
+reactIs_development$2.isConcurrentMode = isConcurrentMode;
+reactIs_development$2.isContextConsumer = isContextConsumer;
+reactIs_development$2.isContextProvider = isContextProvider;
+reactIs_development$2.isElement = isElement;
+reactIs_development$2.isForwardRef = isForwardRef;
+reactIs_development$2.isFragment = isFragment;
+reactIs_development$2.isLazy = isLazy;
+reactIs_development$2.isMemo = isMemo;
+reactIs_development$2.isPortal = isPortal;
+reactIs_development$2.isProfiler = isProfiler;
+reactIs_development$2.isStrictMode = isStrictMode;
+reactIs_development$2.isSuspense = isSuspense;
+reactIs_development$2.isValidElementType = isValidElementType;
+reactIs_development$2.typeOf = typeOf;
   })();
 }
 
 (function (module) {
 
 	{
-	  module.exports = reactIs_development;
+	  module.exports = reactIs_development$2;
 	}
-} (reactIs));
-
-var ReactIs$2 = /*@__PURE__*/getDefaultExportFromCjs(reactIs.exports);
+} (reactIs$2));
 
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -42248,7 +42131,7 @@ var checkPropTypes_1 = checkPropTypes$1;
  * LICENSE file in the root directory of this source tree.
  */
 
-var ReactIs$1 = reactIs.exports;
+var ReactIs$2 = reactIs$2.exports;
 var assign$1 = objectAssign;
 
 var ReactPropTypesSecret = ReactPropTypesSecret_1;
@@ -42527,7 +42410,7 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   function createElementTypeTypeChecker() {
     function validate(props, propName, componentName, location, propFullName) {
       var propValue = props[propName];
-      if (!ReactIs$1.isValidElementType(propValue)) {
+      if (!ReactIs$2.isValidElementType(propValue)) {
         var propType = getPropType(propValue);
         return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement type.'));
       }
@@ -42858,12 +42741,12 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
  */
 
 {
-  var ReactIs = reactIs.exports;
+  var ReactIs$1 = reactIs$2.exports;
 
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  propTypes$2.exports = factoryWithTypeCheckers(ReactIs.isElement, throwOnDirectAccess);
+  propTypes$2.exports = factoryWithTypeCheckers(ReactIs$1.isElement, throwOnDirectAccess);
 }
 
 var enhancers = {};
@@ -42926,7 +42809,7 @@ function addNewValuesOnly(list, values) {
   }
 }
 
-function isObject$3(value) {
+function isObject$2(value) {
   return value instanceof Object && !Array.isArray(value);
 }
 
@@ -42939,7 +42822,7 @@ function createPrefixer(_ref) {
       var value = style[property];
 
       // handle nested objects
-      if (isObject$3(value)) {
+      if (isObject$2(value)) {
         style[property] = prefix(value);
         // handle array values
       } else if (Array.isArray(value)) {
@@ -47728,7 +47611,7 @@ var Alert$2 = {
 
 function ownKeys$1l(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1l(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1l(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1l(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1l(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1l(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1l(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function getColor(theme, _ref) {
   var color = _ref.color,
@@ -48991,7 +48874,7 @@ function get(obj, path, fallback) {
  * @param {unknown} pathOrValue
  */
 
-function getValue$2(theme, pathOrValue) {
+function getValue$1(theme, pathOrValue) {
   return get(theme, pathOrValue, pathOrValue);
 }
 /**
@@ -49016,7 +48899,7 @@ function resolveThemeTokens(theme, obj) {
     if (_typeof$2(raw) === 'object') {
       result[key] = resolveThemeTokens(theme, raw);
     } else {
-      result[key] = getValue$2(theme, raw);
+      result[key] = getValue$1(theme, raw);
     }
   }
 
@@ -49358,7 +49241,7 @@ var FileCard$1 = {
 
 function ownKeys$1k(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1k(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1k(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var colorScales = {
   // Grays / neutrals
@@ -49853,7 +49736,7 @@ var baseStyle$N = {
   },
   _disabled: {
     cursor: 'not-allowed',
-    userSelect: 'none'
+    pointerEvents: 'none'
   }
 };
 var appearances$H = {
@@ -49952,7 +49835,7 @@ var Option$2 = {
 
 function ownKeys$1j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1j(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1j(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function borderProperty$1(theme, _ref) {
   var border = _ref.border,
@@ -50045,7 +49928,7 @@ var Pane$2 = {
 
 function ownKeys$1i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1i(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1i(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var baseStyle$K = {
   fontFamily: function fontFamily(theme, _ref) {
@@ -50497,7 +50380,7 @@ var TagInput$2 = {
 
 function ownKeys$1h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1h(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1h(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var baseStyle$A = {};
 var appearances$v = {};
@@ -50643,7 +50526,7 @@ var components$1 = {
 
 function ownKeys$1g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1g(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1g(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var colorTokens$1 = {
   // Grays / neutrals
@@ -50987,7 +50870,7 @@ var zIndices$1 = {
 
 function ownKeys$1f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1f(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1f(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var tokens$1 = _objectSpread$1f(_objectSpread$1f({
   colors: colors$6,
@@ -51001,7 +50884,7 @@ var tokens$1 = _objectSpread$1f(_objectSpread$1f({
 
 function ownKeys$1e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1e(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1e(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var defaultTheme = _objectSpread$1e(_objectSpread$1e({
   tokens: ogTokens$1
 }, tokens$1), {}, {
@@ -51077,7 +50960,7 @@ function useTheme() {
 
 function ownKeys$1d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1d(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1d(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 /**
  * @typedef {object} StateStyles
  * @property {import('csstype').Properties} [_hover]
@@ -51231,11 +51114,245 @@ function useStyleConfig(componentKey, props, pseudoSelectors, internalStyles) {
   return useGlamorAndBox(styles, pseudoSelectors);
 }
 
+var reactIs$1 = {exports: {}};
+
+var reactIs_development$1 = {};
+
+/** @license React v17.0.2
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+{
+  (function() {
+
+// ATTENTION
+// When adding new symbols to this file,
+// Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
+// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+var REACT_ELEMENT_TYPE = 0xeac7;
+var REACT_PORTAL_TYPE = 0xeaca;
+var REACT_FRAGMENT_TYPE = 0xeacb;
+var REACT_STRICT_MODE_TYPE = 0xeacc;
+var REACT_PROFILER_TYPE = 0xead2;
+var REACT_PROVIDER_TYPE = 0xeacd;
+var REACT_CONTEXT_TYPE = 0xeace;
+var REACT_FORWARD_REF_TYPE = 0xead0;
+var REACT_SUSPENSE_TYPE = 0xead1;
+var REACT_SUSPENSE_LIST_TYPE = 0xead8;
+var REACT_MEMO_TYPE = 0xead3;
+var REACT_LAZY_TYPE = 0xead4;
+var REACT_BLOCK_TYPE = 0xead9;
+var REACT_SERVER_BLOCK_TYPE = 0xeada;
+var REACT_FUNDAMENTAL_TYPE = 0xead5;
+var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
+var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
+
+if (typeof Symbol === 'function' && Symbol.for) {
+  var symbolFor = Symbol.for;
+  REACT_ELEMENT_TYPE = symbolFor('react.element');
+  REACT_PORTAL_TYPE = symbolFor('react.portal');
+  REACT_FRAGMENT_TYPE = symbolFor('react.fragment');
+  REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
+  REACT_PROFILER_TYPE = symbolFor('react.profiler');
+  REACT_PROVIDER_TYPE = symbolFor('react.provider');
+  REACT_CONTEXT_TYPE = symbolFor('react.context');
+  REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
+  REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
+  REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
+  REACT_MEMO_TYPE = symbolFor('react.memo');
+  REACT_LAZY_TYPE = symbolFor('react.lazy');
+  REACT_BLOCK_TYPE = symbolFor('react.block');
+  REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
+  REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
+  symbolFor('react.scope');
+  symbolFor('react.opaque.id');
+  REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
+  symbolFor('react.offscreen');
+  REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
+}
+
+// Filter certain DOM attributes (e.g. src, href) if their values are empty strings.
+
+var enableScopeAPI = false; // Experimental Create Event Handle API.
+
+function isValidElementType(type) {
+  if (typeof type === 'string' || typeof type === 'function') {
+    return true;
+  } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
+
+
+  if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI ) {
+    return true;
+  }
+
+  if (typeof type === 'object' && type !== null) {
+    if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function typeOf(object) {
+  if (typeof object === 'object' && object !== null) {
+    var $$typeof = object.$$typeof;
+
+    switch ($$typeof) {
+      case REACT_ELEMENT_TYPE:
+        var type = object.type;
+
+        switch (type) {
+          case REACT_FRAGMENT_TYPE:
+          case REACT_PROFILER_TYPE:
+          case REACT_STRICT_MODE_TYPE:
+          case REACT_SUSPENSE_TYPE:
+          case REACT_SUSPENSE_LIST_TYPE:
+            return type;
+
+          default:
+            var $$typeofType = type && type.$$typeof;
+
+            switch ($$typeofType) {
+              case REACT_CONTEXT_TYPE:
+              case REACT_FORWARD_REF_TYPE:
+              case REACT_LAZY_TYPE:
+              case REACT_MEMO_TYPE:
+              case REACT_PROVIDER_TYPE:
+                return $$typeofType;
+
+              default:
+                return $$typeof;
+            }
+
+        }
+
+      case REACT_PORTAL_TYPE:
+        return $$typeof;
+    }
+  }
+
+  return undefined;
+}
+var ContextConsumer = REACT_CONTEXT_TYPE;
+var ContextProvider = REACT_PROVIDER_TYPE;
+var Element = REACT_ELEMENT_TYPE;
+var ForwardRef = REACT_FORWARD_REF_TYPE;
+var Fragment = REACT_FRAGMENT_TYPE;
+var Lazy = REACT_LAZY_TYPE;
+var Memo = REACT_MEMO_TYPE;
+var Portal = REACT_PORTAL_TYPE;
+var Profiler = REACT_PROFILER_TYPE;
+var StrictMode = REACT_STRICT_MODE_TYPE;
+var Suspense = REACT_SUSPENSE_TYPE;
+var hasWarnedAboutDeprecatedIsAsyncMode = false;
+var hasWarnedAboutDeprecatedIsConcurrentMode = false; // AsyncMode should be deprecated
+
+function isAsyncMode(object) {
+  {
+    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
+    }
+  }
+
+  return false;
+}
+function isConcurrentMode(object) {
+  {
+    if (!hasWarnedAboutDeprecatedIsConcurrentMode) {
+      hasWarnedAboutDeprecatedIsConcurrentMode = true; // Using console['warn'] to evade Babel and ESLint
+
+      console['warn']('The ReactIs.isConcurrentMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
+    }
+  }
+
+  return false;
+}
+function isContextConsumer(object) {
+  return typeOf(object) === REACT_CONTEXT_TYPE;
+}
+function isContextProvider(object) {
+  return typeOf(object) === REACT_PROVIDER_TYPE;
+}
+function isElement(object) {
+  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+}
+function isForwardRef(object) {
+  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+}
+function isFragment(object) {
+  return typeOf(object) === REACT_FRAGMENT_TYPE;
+}
+function isLazy(object) {
+  return typeOf(object) === REACT_LAZY_TYPE;
+}
+function isMemo(object) {
+  return typeOf(object) === REACT_MEMO_TYPE;
+}
+function isPortal(object) {
+  return typeOf(object) === REACT_PORTAL_TYPE;
+}
+function isProfiler(object) {
+  return typeOf(object) === REACT_PROFILER_TYPE;
+}
+function isStrictMode(object) {
+  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+}
+function isSuspense(object) {
+  return typeOf(object) === REACT_SUSPENSE_TYPE;
+}
+
+reactIs_development$1.ContextConsumer = ContextConsumer;
+reactIs_development$1.ContextProvider = ContextProvider;
+reactIs_development$1.Element = Element;
+reactIs_development$1.ForwardRef = ForwardRef;
+reactIs_development$1.Fragment = Fragment;
+reactIs_development$1.Lazy = Lazy;
+reactIs_development$1.Memo = Memo;
+reactIs_development$1.Portal = Portal;
+reactIs_development$1.Profiler = Profiler;
+reactIs_development$1.StrictMode = StrictMode;
+reactIs_development$1.Suspense = Suspense;
+reactIs_development$1.isAsyncMode = isAsyncMode;
+reactIs_development$1.isConcurrentMode = isConcurrentMode;
+reactIs_development$1.isContextConsumer = isContextConsumer;
+reactIs_development$1.isContextProvider = isContextProvider;
+reactIs_development$1.isElement = isElement;
+reactIs_development$1.isForwardRef = isForwardRef;
+reactIs_development$1.isFragment = isFragment;
+reactIs_development$1.isLazy = isLazy;
+reactIs_development$1.isMemo = isMemo;
+reactIs_development$1.isPortal = isPortal;
+reactIs_development$1.isProfiler = isProfiler;
+reactIs_development$1.isStrictMode = isStrictMode;
+reactIs_development$1.isSuspense = isSuspense;
+reactIs_development$1.isValidElementType = isValidElementType;
+reactIs_development$1.typeOf = typeOf;
+  })();
+}
+
+(function (module) {
+
+	{
+	  module.exports = reactIs_development$1;
+	}
+} (reactIs$1));
+
+var ReactIs = /*@__PURE__*/getDefaultExportFromCjs(reactIs$1.exports);
+
 var _excluded$18 = ["color", "icon", "size", "title"];
 
 function ownKeys$1c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1c(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1c(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 /**
  * This is an internal helper component for rendering custom or Evergreen icons
  * Box props are applied to the outer Box container, and Evergreen icon-specific props are added to the icon element.
@@ -51259,7 +51376,7 @@ var IconWrapper = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.fo
   };
   var iconWithProps = null;
 
-  if (ReactIs$2.isValidElementType(icon)) {
+  if (ReactIs.isValidElementType(icon)) {
     var Component = icon;
     iconWithProps = /*#__PURE__*/React.createElement(Component, _extends$3({
       ref: ref
@@ -51342,7 +51459,7 @@ var _excluded$17 = ["delay", "size"],
 
 function ownKeys$1b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1b(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1b(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var loadingKeyframes = css_1.keyframes('loading', {
   '0%': {
     transform: 'rotate(0)'
@@ -51456,7 +51573,7 @@ var _excluded$16 = ["appearance", "children", "className", "color", "disabled", 
 
 function ownKeys$1a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1a(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1a(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 /* eslint-disable react/prop-types */
 
 var ButtonIcon = /*#__PURE__*/react.exports.memo(function ButtonIcon(_ref) {
@@ -51623,7 +51740,7 @@ var _excluded$15 = ["icon", "iconSize"];
 
 function ownKeys$19(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$19(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$19(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$19(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$19(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$19(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$19(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var IconButton = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function IconButton(props, ref) {
   var icon = props.icon,
       iconSize = props.iconSize,
@@ -52001,7 +52118,7 @@ var _excluded$13 = ["appearance", "children", "className", "disabled", "icon", "
 
 function ownKeys$18(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$18(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$18(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$18(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$18(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$18(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$18(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TextDropdownButton$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function TextDropdownButton(props, ref) {
   props.appearance;
       var children = props.children,
@@ -52073,7 +52190,7 @@ var _excluded$12 = ["activeElevation", "background", "border", "borderBottom", "
 
 function ownKeys$17(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$17(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$17(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$17(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$17(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$17(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$17(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$p = {
   _hover: '&:hover',
   _active: '&:active'
@@ -52173,7 +52290,7 @@ var _excluded$11 = ["className"],
 
 function ownKeys$16(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$16(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$16(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$16(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$16(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$16(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$16(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject$7 = {};
 var Card$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Card(_ref, ref) {
   var className = _ref.className,
@@ -52227,7 +52344,7 @@ var _excluded$10 = ["className", "color", "fontFamily", "size"];
 
 function ownKeys$15(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$15(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$15(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$15(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$15(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$15(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$15(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject$6 = {};
 var Text$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Text(props, ref) {
   var className = props.className,
@@ -52275,7 +52392,7 @@ var _excluded$$ = ["children", "icon", "iconColor", "size"];
 
 function ownKeys$14(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$14(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$14(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$14(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$14(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$14(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$14(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var ListItem = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function ListItem(props, ref) {
   var children = props.children,
       icon = props.icon,
@@ -52334,7 +52451,7 @@ var _excluded$_ = ["children", "className", "size"],
 
 function ownKeys$13(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$13(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$13(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$13(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$13(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$13(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$13(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject$5 = {};
 var internalStyles$q = {
   margin: 0,
@@ -52382,7 +52499,7 @@ OrderedList.propTypes = _objectSpread$13(_objectSpread$13({}, _default.propTypes
 
 function ownKeys$12(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$12(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$12(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$12(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$12(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$12(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$12(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * Cleans an object of undefined values
@@ -52405,7 +52522,7 @@ var _excluded$Z = ["children", "className", "icon", "iconColor", "size"],
 
 function ownKeys$11(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$11(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$11(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$11(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$11(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$11(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$11(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject$4 = {};
 var internalStyles$p = {
   margin: 0,
@@ -52469,7 +52586,7 @@ var _excluded$Y = ["color", "fontFamily", "size"];
 
 function ownKeys$10(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$10(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$10(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$10(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$10(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$10(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$10(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject$3 = {};
 var Paragraph$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Paragraph(props, ref) {
   var _props$color = props.color,
@@ -52515,7 +52632,7 @@ var _excluded$X = ["className", "size"],
 
 function ownKeys$$(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$$(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$$(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$$(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$$(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$$(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$$(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$o = {};
 var internalStyles$o = {};
 var Heading$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Heading(props, ref) {
@@ -52549,7 +52666,7 @@ var _excluded$W = ["appearance", "className"];
 
 function ownKeys$_(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$_(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$_(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$_(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$_(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$_(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$_(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$n = {};
 var internalStyles$n = {};
 var Code$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Code(props, ref) {
@@ -52584,7 +52701,7 @@ Code$1.propTypes = _objectSpread$_(_objectSpread$_({}, Text$1.propTypes), {}, {
 
 function ownKeys$Z(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$Z(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$Z(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$Z(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$Z(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$Z(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$Z(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Pre = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Pre(props, ref) {
   return /*#__PURE__*/React.createElement(Text$1, _extends$3({
     is: "pre",
@@ -52601,7 +52718,7 @@ var _excluded$V = ["className", "size"],
 
 function ownKeys$Y(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$Y(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$Y(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$Y(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$Y(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$Y(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$Y(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$m = {};
 var internalStyles$m = {};
 var Label$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Label(props, ref) {
@@ -52634,7 +52751,7 @@ var _excluded$U = ["className", "color"],
 
 function ownKeys$X(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$X(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$X(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$X(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$X(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$X(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$X(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var internalStyles$l = {
   textDecoration: 'underline'
 };
@@ -52692,7 +52809,7 @@ Link$1.propTypes = _objectSpread$X(_objectSpread$X({}, Text$1.propTypes), {}, {
 
 function ownKeys$W(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$W(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$W(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$W(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$W(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$W(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$W(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Strong = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Strong(props, ref) {
   return /*#__PURE__*/React.createElement(Text$1, _extends$3({
     is: "strong",
@@ -52839,7 +52956,7 @@ var _excluded$T = ["appearance", "children", "className", "hasIcon", "intent", "
 
 function ownKeys$V(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$V(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$V(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$V(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$V(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$V(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$V(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$k = {};
 var internalStyles$k = {
   position: 'relative',
@@ -52956,7 +53073,7 @@ var _excluded$S = ["children", "className", "hasIcon", "intent", "size"],
 
 function ownKeys$U(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$U(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$U(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$U(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$U(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$U(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$U(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$j = {};
 var internalStyles$j = {
   display: 'flex',
@@ -53579,6 +53696,196 @@ function _inheritsLoose(subClass, superClass) {
   subClass.prototype.constructor = subClass;
   _setPrototypeOf(subClass, superClass);
 }
+
+var reactIs = {exports: {}};
+
+var reactIs_development = {};
+
+/** @license React v16.13.1
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+{
+  (function() {
+
+// The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+// (unstable) APIs that have been removed. Can we remove the symbols?
+
+var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+function isValidElementType(type) {
+  return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+  type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+}
+
+function typeOf(object) {
+  if (typeof object === 'object' && object !== null) {
+    var $$typeof = object.$$typeof;
+
+    switch ($$typeof) {
+      case REACT_ELEMENT_TYPE:
+        var type = object.type;
+
+        switch (type) {
+          case REACT_ASYNC_MODE_TYPE:
+          case REACT_CONCURRENT_MODE_TYPE:
+          case REACT_FRAGMENT_TYPE:
+          case REACT_PROFILER_TYPE:
+          case REACT_STRICT_MODE_TYPE:
+          case REACT_SUSPENSE_TYPE:
+            return type;
+
+          default:
+            var $$typeofType = type && type.$$typeof;
+
+            switch ($$typeofType) {
+              case REACT_CONTEXT_TYPE:
+              case REACT_FORWARD_REF_TYPE:
+              case REACT_LAZY_TYPE:
+              case REACT_MEMO_TYPE:
+              case REACT_PROVIDER_TYPE:
+                return $$typeofType;
+
+              default:
+                return $$typeof;
+            }
+
+        }
+
+      case REACT_PORTAL_TYPE:
+        return $$typeof;
+    }
+  }
+
+  return undefined;
+} // AsyncMode is deprecated along with isAsyncMode
+
+var AsyncMode = REACT_ASYNC_MODE_TYPE;
+var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+var ContextConsumer = REACT_CONTEXT_TYPE;
+var ContextProvider = REACT_PROVIDER_TYPE;
+var Element = REACT_ELEMENT_TYPE;
+var ForwardRef = REACT_FORWARD_REF_TYPE;
+var Fragment = REACT_FRAGMENT_TYPE;
+var Lazy = REACT_LAZY_TYPE;
+var Memo = REACT_MEMO_TYPE;
+var Portal = REACT_PORTAL_TYPE;
+var Profiler = REACT_PROFILER_TYPE;
+var StrictMode = REACT_STRICT_MODE_TYPE;
+var Suspense = REACT_SUSPENSE_TYPE;
+var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+function isAsyncMode(object) {
+  {
+    if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+      hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+      console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+    }
+  }
+
+  return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+}
+function isConcurrentMode(object) {
+  return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+}
+function isContextConsumer(object) {
+  return typeOf(object) === REACT_CONTEXT_TYPE;
+}
+function isContextProvider(object) {
+  return typeOf(object) === REACT_PROVIDER_TYPE;
+}
+function isElement(object) {
+  return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+}
+function isForwardRef(object) {
+  return typeOf(object) === REACT_FORWARD_REF_TYPE;
+}
+function isFragment(object) {
+  return typeOf(object) === REACT_FRAGMENT_TYPE;
+}
+function isLazy(object) {
+  return typeOf(object) === REACT_LAZY_TYPE;
+}
+function isMemo(object) {
+  return typeOf(object) === REACT_MEMO_TYPE;
+}
+function isPortal(object) {
+  return typeOf(object) === REACT_PORTAL_TYPE;
+}
+function isProfiler(object) {
+  return typeOf(object) === REACT_PROFILER_TYPE;
+}
+function isStrictMode(object) {
+  return typeOf(object) === REACT_STRICT_MODE_TYPE;
+}
+function isSuspense(object) {
+  return typeOf(object) === REACT_SUSPENSE_TYPE;
+}
+
+reactIs_development.AsyncMode = AsyncMode;
+reactIs_development.ConcurrentMode = ConcurrentMode;
+reactIs_development.ContextConsumer = ContextConsumer;
+reactIs_development.ContextProvider = ContextProvider;
+reactIs_development.Element = Element;
+reactIs_development.ForwardRef = ForwardRef;
+reactIs_development.Fragment = Fragment;
+reactIs_development.Lazy = Lazy;
+reactIs_development.Memo = Memo;
+reactIs_development.Portal = Portal;
+reactIs_development.Profiler = Profiler;
+reactIs_development.StrictMode = StrictMode;
+reactIs_development.Suspense = Suspense;
+reactIs_development.isAsyncMode = isAsyncMode;
+reactIs_development.isConcurrentMode = isConcurrentMode;
+reactIs_development.isContextConsumer = isContextConsumer;
+reactIs_development.isContextProvider = isContextProvider;
+reactIs_development.isElement = isElement;
+reactIs_development.isForwardRef = isForwardRef;
+reactIs_development.isFragment = isFragment;
+reactIs_development.isLazy = isLazy;
+reactIs_development.isMemo = isMemo;
+reactIs_development.isPortal = isPortal;
+reactIs_development.isProfiler = isProfiler;
+reactIs_development.isStrictMode = isStrictMode;
+reactIs_development.isSuspense = isSuspense;
+reactIs_development.isValidElementType = isValidElementType;
+reactIs_development.typeOf = typeOf;
+  })();
+}
+
+(function (module) {
+
+	{
+	  module.exports = reactIs_development;
+	}
+} (reactIs));
 
 function t(t){return "object"==typeof t&&null!=t&&1===t.nodeType}function e(t,e){return (!e||"hidden"!==t)&&"visible"!==t&&"clip"!==t}function n(t,n){if(t.clientHeight<t.scrollHeight||t.clientWidth<t.scrollWidth){var r=getComputedStyle(t,null);return e(r.overflowY,n)||e(r.overflowX,n)||function(t){var e=function(t){if(!t.ownerDocument||!t.ownerDocument.defaultView)return null;try{return t.ownerDocument.defaultView.frameElement}catch(t){return null}}(t);return !!e&&(e.clientHeight<t.scrollHeight||e.clientWidth<t.scrollWidth)}(t)}return !1}function r(t,e,n,r,i,o,l,d){return o<t&&l>e||o>t&&l<e?0:o<=t&&d<=n||l>=e&&d>=n?o-t-r:l>e&&d<n||o<t&&d>n?l-e+i:0}function computeScrollIntoView(e,i){var o=window,l=i.scrollMode,d=i.block,u=i.inline,h=i.boundary,a=i.skipOverflowHiddenElements,c="function"==typeof h?h:function(t){return t!==h};if(!t(e))throw new TypeError("Invalid target");for(var f=document.scrollingElement||document.documentElement,s=[],p=e;t(p)&&c(p);){if((p=p.parentElement)===f){s.push(p);break}null!=p&&p===document.body&&n(p)&&!n(document.documentElement)||null!=p&&n(p,a)&&s.push(p);}for(var m=o.visualViewport?o.visualViewport.width:innerWidth,g=o.visualViewport?o.visualViewport.height:innerHeight,w=window.scrollX||pageXOffset,v=window.scrollY||pageYOffset,W=e.getBoundingClientRect(),b=W.height,H=W.width,y=W.top,E=W.right,M=W.bottom,V=W.left,x="start"===d||"nearest"===d?y:"end"===d?M:y+b/2,I="center"===u?V+H/2:"end"===u?E:V,C=[],T=0;T<s.length;T++){var k=s[T],B=k.getBoundingClientRect(),D=B.height,O=B.width,R=B.top,X=B.right,Y=B.bottom,L=B.left;if("if-needed"===l&&y>=0&&V>=0&&M<=g&&E<=m&&y>=R&&M<=Y&&V>=L&&E<=X)return C;var S=getComputedStyle(k),j=parseInt(S.borderLeftWidth,10),q=parseInt(S.borderTopWidth,10),z=parseInt(S.borderRightWidth,10),A=parseInt(S.borderBottomWidth,10),F=0,G=0,J="offsetWidth"in k?k.offsetWidth-k.clientWidth-j-z:0,K="offsetHeight"in k?k.offsetHeight-k.clientHeight-q-A:0;if(f===k)F="start"===d?x:"end"===d?x-g:"nearest"===d?r(v,v+g,g,q,A,v+x,v+x+b,b):x-g/2,G="start"===u?I:"center"===u?I-m/2:"end"===u?I-m:r(w,w+m,m,j,z,w+I,w+I+H,H),F=Math.max(0,F+v),G=Math.max(0,G+w);else {F="start"===d?x-R-q:"end"===d?x-Y+A+K:"nearest"===d?r(R,Y,D,q,A+K,x,x+b,b):x-(R+D/2)+K/2,G="start"===u?I-L-j:"center"===u?I-(L+O/2)+J/2:"end"===u?I-X+z+J:r(L,X,O,j,z+J,I,I+H,H);var N=k.scrollLeft,P=k.scrollTop;x+=P-(F=Math.max(0,Math.min(P+F,k.scrollHeight-D+K))),I+=N-(G=Math.max(0,Math.min(N+G,k.scrollWidth-O+J)));}C.push({el:k,top:F,left:G});}return C}
 
@@ -61038,7 +61345,7 @@ var FUNC_ERROR_TEXT = 'Expected a function';
 var NAN = 0 / 0;
 
 /** `Object#toString` result references. */
-var symbolTag$1 = '[object Symbol]';
+var symbolTag = '[object Symbol]';
 
 /** Used to match leading and trailing whitespace. */
 var reTrim = /^\s+|\s+$/g;
@@ -61056,26 +61363,26 @@ var reIsOctal = /^0o[0-7]+$/i;
 var freeParseInt = parseInt;
 
 /** Detect free variable `global` from Node.js. */
-var freeGlobal$2 = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+var freeGlobal$1 = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
 
 /** Detect free variable `self`. */
-var freeSelf$2 = typeof self == 'object' && self && self.Object === Object && self;
+var freeSelf$1 = typeof self == 'object' && self && self.Object === Object && self;
 
 /** Used as a reference to the global object. */
-var root$2 = freeGlobal$2 || freeSelf$2 || Function('return this')();
+var root$1 = freeGlobal$1 || freeSelf$1 || Function('return this')();
 
 /** Used for built-in method references. */
-var objectProto$2 = Object.prototype;
+var objectProto$1 = Object.prototype;
 
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-var objectToString$2 = objectProto$2.toString;
+var objectToString$1 = objectProto$1.toString;
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeMax$2 = Math.max,
+var nativeMax$1 = Math.max,
     nativeMin = Math.min;
 
 /**
@@ -61095,7 +61402,7 @@ var nativeMax$2 = Math.max,
  * // => Logs the number of milliseconds it took for the deferred invocation.
  */
 var now = function() {
-  return root$2.Date.now();
+  return root$1.Date.now();
 };
 
 /**
@@ -61168,10 +61475,10 @@ function debounce(func, wait, options) {
     throw new TypeError(FUNC_ERROR_TEXT);
   }
   wait = toNumber(wait) || 0;
-  if (isObject$2(options)) {
+  if (isObject$1(options)) {
     leading = !!options.leading;
     maxing = 'maxWait' in options;
-    maxWait = maxing ? nativeMax$2(toNumber(options.maxWait) || 0, wait) : maxWait;
+    maxWait = maxing ? nativeMax$1(toNumber(options.maxWait) || 0, wait) : maxWait;
     trailing = 'trailing' in options ? !!options.trailing : trailing;
   }
 
@@ -61299,7 +61606,7 @@ function debounce(func, wait, options) {
  * _.isObject(null);
  * // => false
  */
-function isObject$2(value) {
+function isObject$1(value) {
   var type = typeof value;
   return !!value && (type == 'object' || type == 'function');
 }
@@ -61328,7 +61635,7 @@ function isObject$2(value) {
  * _.isObjectLike(null);
  * // => false
  */
-function isObjectLike$2(value) {
+function isObjectLike$1(value) {
   return !!value && typeof value == 'object';
 }
 
@@ -61349,9 +61656,9 @@ function isObjectLike$2(value) {
  * _.isSymbol('abc');
  * // => false
  */
-function isSymbol$1(value) {
+function isSymbol(value) {
   return typeof value == 'symbol' ||
-    (isObjectLike$2(value) && objectToString$2.call(value) == symbolTag$1);
+    (isObjectLike$1(value) && objectToString$1.call(value) == symbolTag);
 }
 
 /**
@@ -61381,12 +61688,12 @@ function toNumber(value) {
   if (typeof value == 'number') {
     return value;
   }
-  if (isSymbol$1(value)) {
+  if (isSymbol(value)) {
     return NAN;
   }
-  if (isObject$2(value)) {
+  if (isObject$1(value)) {
     var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-    value = isObject$2(other) ? (other + '') : other;
+    value = isObject$1(other) ? (other + '') : other;
   }
   if (typeof value != 'string') {
     return value === 0 ? value : +value;
@@ -61445,7 +61752,7 @@ var _excluded$Q = ["getTargetRef", "isShown"];
 
 function ownKeys$T(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$T(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$T(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$T(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$T(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$T(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$T(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyProps$7 = {};
 var Tooltip$1 = /*#__PURE__*/react.exports.memo(function Tooltip(props) {
   var _props$appearance = props.appearance,
@@ -61615,11 +61922,7 @@ Tooltip$1.propTypes = {
   showDelay: propTypes$2.exports.number,
 
   /**
-   * Controls whether the Tooltip is shown or not.
-   * - When `true`, the component is always shown, regardless of the whether the target is hovered.
-   * - When `false`, the component is never shown, regardless of the whether the target is hovered.
-   * - When `undefined`, the component is uncontrolled and the isShown state is handled internally
-   * (i.e. the Tooltip is shown when the target is hovered)
+   * When True, manually show the Tooltip.
    */
   isShown: propTypes$2.exports.bool,
 
@@ -61638,7 +61941,7 @@ var _excluded$P = ["children"];
 
 function ownKeys$S(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$S(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$S(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$S(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$S(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$S(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$S(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var PopoverStateless = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function PopoverStateless(props, ref) {
   var children = props.children,
       rest = _objectWithoutProperties(props, _excluded$P);
@@ -61663,7 +61966,7 @@ var _excluded$O = ["animationDuration", "bringFocusInside", "children", "content
 
 function ownKeys$R(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$R(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$R(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$R(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$R(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$R(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$R(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var noop$h = function noop() {};
 
@@ -61955,11 +62258,7 @@ Popover.propTypes = {
   position: propTypes$2.exports.oneOf([Position.TOP, Position.TOP_LEFT, Position.TOP_RIGHT, Position.BOTTOM, Position.BOTTOM_LEFT, Position.BOTTOM_RIGHT, Position.LEFT, Position.RIGHT]),
 
   /**
-   * Controls whether the Popover is shown or not.
-   * - When `true`, the component is always shown, regardless of the click or hover trigger.
-   * - When `false`, the component is never shown, regardless of the click or hover trigger.
-   * - When `undefined`, the component is uncontrolled and the isShown state is handled internally
-   * (i.e. the Popover is shown based on the click or hover trigger)
+   * When true, the Popover is manually shown.
    */
   isShown: propTypes$2.exports.bool,
 
@@ -62048,7 +62347,7 @@ Popover.propTypes = {
 
 function ownKeys$Q(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$Q(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$Q(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$Q(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$Q(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$Q(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$Q(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Image = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Image(props, ref) {
   return /*#__PURE__*/React.createElement(_default, _extends$3({
     is: "img"
@@ -62086,7 +62385,7 @@ var _excluded$N = ["className", "children", "intent", "appearance", "tabIndex", 
 
 function ownKeys$P(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$P(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$P(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$P(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$P(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$P(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$P(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var noop$g = function noop() {};
 
@@ -62230,16 +62529,6 @@ TableRow$1.propTypes = _objectSpread$P(_objectSpread$P({}, Pane$1.propTypes), {}
    */
   className: propTypes$2.exports.string
 });
-
-/**
- *
- * @param {string} version
- * @returns {number} The major version
- */
-function getMajorVersion(version) {
-  var majorVersion = parseInt(version, 10);
-  return majorVersion;
-}
 
 var animationEasing$6 = {
   deceleration: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
@@ -62428,7 +62717,7 @@ var _excluded$M = ["description", "id"];
 
 function ownKeys$O(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$O(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$O(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$O(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$O(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$O(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$O(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var wrapperClass = css_1({
   maxWidth: 560,
   margin: '0 auto',
@@ -62580,7 +62869,7 @@ ToastManager.propTypes = {
 
 function ownKeys$N(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$N(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$N(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$N(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$N(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$N(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$N(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 /**
  * The Toaster manages the interactions between
  * the ToasterManger and the toast API.
@@ -62591,59 +62880,59 @@ var Toaster = function Toaster() {
 
   _classCallCheck(this, Toaster);
 
-  _defineProperty$y(this, "_bindNotify", function (handler) {
+  _defineProperty$1(this, "_bindNotify", function (handler) {
     _this.notifyHandler = handler;
   });
 
-  _defineProperty$y(this, "_bindRemove", function (handler) {
+  _defineProperty$1(this, "_bindRemove", function (handler) {
     _this.removeHandler = handler;
   });
 
-  _defineProperty$y(this, "_bindGetToasts", function (handler) {
+  _defineProperty$1(this, "_bindGetToasts", function (handler) {
     _this.getToastsHandler = handler;
   });
 
-  _defineProperty$y(this, "_bindCloseAll", function (handler) {
+  _defineProperty$1(this, "_bindCloseAll", function (handler) {
     _this.closeAllHandler = handler;
   });
 
-  _defineProperty$y(this, "getToasts", function () {
+  _defineProperty$1(this, "getToasts", function () {
     return _this.getToastsHandler();
   });
 
-  _defineProperty$y(this, "closeAll", function () {
+  _defineProperty$1(this, "closeAll", function () {
     return _this.closeAllHandler();
   });
 
-  _defineProperty$y(this, "notify", function (title) {
+  _defineProperty$1(this, "notify", function (title) {
     var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _this.notifyHandler(title, _objectSpread$N(_objectSpread$N({}, settings), {}, {
       intent: 'none'
     }));
   });
 
-  _defineProperty$y(this, "success", function (title) {
+  _defineProperty$1(this, "success", function (title) {
     var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _this.notifyHandler(title, _objectSpread$N(_objectSpread$N({}, settings), {}, {
       intent: 'success'
     }));
   });
 
-  _defineProperty$y(this, "warning", function (title) {
+  _defineProperty$1(this, "warning", function (title) {
     var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _this.notifyHandler(title, _objectSpread$N(_objectSpread$N({}, settings), {}, {
       intent: 'warning'
     }));
   });
 
-  _defineProperty$y(this, "danger", function (title) {
+  _defineProperty$1(this, "danger", function (title) {
     var settings = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     return _this.notifyHandler(title, _objectSpread$N(_objectSpread$N({}, settings), {}, {
       intent: 'danger'
     }));
   });
 
-  _defineProperty$y(this, "remove", function (id) {
+  _defineProperty$1(this, "remove", function (id) {
     return _this.removeHandler(id);
   });
 
@@ -62651,31 +62940,12 @@ var Toaster = function Toaster() {
   var container = document.createElement('div');
   container.setAttribute('data-evergreen-toaster-container', '');
   document.body.appendChild(container);
-
-  var toastManager = function toastManager() {
-    return /*#__PURE__*/React.createElement(ToastManager, {
-      bindNotify: _this._bindNotify,
-      bindRemove: _this._bindRemove,
-      bindGetToasts: _this._bindGetToasts,
-      bindCloseAll: _this._bindCloseAll
-    });
-  };
-
-  if (getMajorVersion(ReactDOM.version) >= 18) {
-    try {
-      var _require = client,
-          createRoot = _require.createRoot;
-
-      var root = createRoot(container);
-      root.render(toastManager());
-    } catch (e) {
-      ReactDOM.render(toastManager(), container);
-    }
-
-    return;
-  }
-
-  ReactDOM.render(toastManager(), container);
+  ReactDOM.render( /*#__PURE__*/React.createElement(ToastManager, {
+    bindNotify: this._bindNotify,
+    bindRemove: this._bindRemove,
+    bindGetToasts: this._bindGetToasts,
+    bindCloseAll: this._bindCloseAll
+  }), container);
 };
 
 var toaster = new Toaster();
@@ -62722,7 +62992,7 @@ var _excluded$L = ["children", "appearance", "onClick", "onKeyPress", "onKeyDown
 
 function ownKeys$M(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$M(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$M(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$M(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$M(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$M(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$M(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function executeArrowKeyOverride(override) {
   if (!override) {
@@ -62856,7 +63126,7 @@ var _excluded$K = ["children", "isNumber", "placeholder", "textProps"];
 
 function ownKeys$L(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$L(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$L(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$L(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$L(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$L(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$L(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var ellipsis = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
@@ -62990,7 +63260,7 @@ var _excluded$H = ["children", "itemSize", "position", "renderItem", "isFilterDi
 
 function ownKeys$K(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$K(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$K(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$K(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$K(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$K(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$K(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var fuzzyFilter$1 = function fuzzyFilter(itemToString) {
   if (itemToString) {
@@ -63041,7 +63311,7 @@ var AutocompleteItems = function AutocompleteItems(_ref2) {
       width = _ref2.width;
   itemsFilter = itemsFilter || fuzzyFilter$1(itemToString);
   var items = isFilterDisabled || inputValue.trim() === '' ? originalItems : itemsFilter(originalItems, inputValue);
-  if (items.length <= 0) return null; // Pass the actual DOM ref to downshift, this fixes touch support
+  if (items.length === 0) return null; // Pass the actual DOM ref to downshift, this fixes touch support
 
   var menuProps = getMenuProps();
   return /*#__PURE__*/React.createElement(Pane$1, _extends$3({
@@ -63052,7 +63322,7 @@ var AutocompleteItems = function AutocompleteItems(_ref2) {
   }, /*#__PURE__*/React.createElement(Text$1, {
     size: 300,
     textTransform: "uppercase"
-  }, title)), /*#__PURE__*/React.createElement(VirtualList, {
+  }, title)), items.length > 0 && /*#__PURE__*/React.createElement(VirtualList, {
     width: "100%",
     height: Math.min(items.length * itemSize, popoverMaxHeight),
     itemSize: itemSize,
@@ -63116,9 +63386,10 @@ var Autocomplete = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.f
       setTargetRef = _useState4[1];
 
   react.exports.useEffect(function () {
-    var boundingWidth = targetRef === null || targetRef === void 0 ? void 0 : targetRef.getBoundingClientRect().width;
-    setTargetWidth(boundingWidth);
-  }, [targetRef, setTargetWidth, props.items.length, props.id]);
+    if (targetRef) {
+      setTargetWidth(targetRef.getBoundingClientRect().width);
+    }
+  }, [targetRef]);
   var stateReducer = react.exports.useCallback(function (state, changes) {
     if (Object.prototype.hasOwnProperty.call(changes, 'isOpen') && changes.isOpen) {
       return _objectSpread$K(_objectSpread$K({}, changes), {}, {
@@ -63460,7 +63731,7 @@ var _excluded$F = ["appearance", "className", "color", "isInteractive"],
 
 function ownKeys$J(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$J(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$J(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$J(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$J(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$J(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$J(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$d = {};
 var internalStyles$d = {
   display: 'inline-block',
@@ -63523,7 +63794,7 @@ var _excluded$E = ["fill"],
 
 function ownKeys$I(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$I(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$I(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$I(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$I(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$I(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$I(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var CheckIcon$1 = function CheckIcon(_ref) {
   var _ref$fill = _ref.fill,
@@ -63581,7 +63852,7 @@ var pseudoSelectors$c = {
   _checkedDisabled: '&[disabled]:checked + div, &[type=checkbox][disabled]:indeterminate + div'
 };
 
-var internalStyles$c = _defineProperty$y({
+var internalStyles$c = _defineProperty$1({
   border: '0',
   clip: 'rect(1px, 1px, 1px, 1px)',
   height: '1px',
@@ -63788,7 +64059,7 @@ var _excluded$C = ["appearance", "className", "disabled", "fontFamily", "isInval
 
 function ownKeys$H(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$H(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$H(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$H(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$H(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$H(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$H(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$a = {
   _focus: '&:focus',
   _disabled: '&:disabled',
@@ -63898,7 +64169,7 @@ TextInput.propTypes = _objectSpread$H(_objectSpread$H(_objectSpread$H(_objectSpr
 
 function ownKeys$G(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$G(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$G(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$G(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$G(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$G(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$G(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var FormFieldDescription = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function FormFieldDescription(props, ref) {
   return /*#__PURE__*/React.createElement(Paragraph$1, _extends$3({
     marginTop: 4,
@@ -63913,7 +64184,7 @@ FormFieldDescription.propTypes = _objectSpread$G({}, Paragraph$1.propTypes);
 
 function ownKeys$F(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$F(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$F(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$F(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$F(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$F(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$F(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var FormFieldHint = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function FormFieldHint(props, ref) {
   return /*#__PURE__*/React.createElement(Paragraph$1, _extends$3({
     marginTop: 0,
@@ -63929,7 +64200,7 @@ var _excluded$B = ["children", "isAstrixShown"];
 
 function ownKeys$E(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$E(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$E(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$E(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$E(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$E(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$E(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var FormFieldLabel = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function FormFieldLabel(props, ref) {
   var children = props.children,
       isAstrixShown = props.isAstrixShown,
@@ -63940,9 +64211,9 @@ var FormFieldLabel = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports
     marginBottom: 0
   }, rest, {
     ref: ref
-  }), children, isAstrixShown && /*#__PURE__*/React.createElement(React.Fragment, null, ' ', /*#__PURE__*/React.createElement("span", {
+  }), children, " ", isAstrixShown && /*#__PURE__*/React.createElement("span", {
     title: "This field is required."
-  }, "*")));
+  }, "*"));
 }));
 FormFieldLabel.propTypes = _objectSpread$E(_objectSpread$E({}, Label$1.propTypes), {}, {
   /**
@@ -63955,7 +64226,7 @@ var _excluded$A = ["children"];
 
 function ownKeys$D(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$D(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$D(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$D(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$D(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$D(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$D(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var FormFieldValidationMessage = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function FormFieldValidationMessage(_ref, ref) {
   var children = _ref.children,
       props = _objectWithoutProperties(_ref, _excluded$A);
@@ -63981,7 +64252,7 @@ var _excluded$z = ["hint", "label", "labelFor", "children", "isRequired", "label
 
 function ownKeys$C(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$C(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$C(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$C(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$C(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$C(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$C(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var FormField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function FormField(props, ref) {
   var hint = props.hint,
       label = props.label,
@@ -64005,21 +64276,17 @@ var FormField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forw
   }, /*#__PURE__*/React.createElement(FormFieldLabel, _extends$3({
     htmlFor: labelFor,
     isAstrixShown: isRequired
-  }, labelProps), label), typeof description === 'string' ? /*#__PURE__*/React.createElement(FormFieldDescription, {
-    id: labelFor + '__description'
-  }, description) : description), children, typeof validationMessage === 'string' ? /*#__PURE__*/React.createElement(FormFieldValidationMessage, {
-    marginTop: 8,
-    id: labelFor + '__validation-message'
+  }, labelProps), label), typeof description === 'string' ? /*#__PURE__*/React.createElement(FormFieldDescription, null, description) : description), children, typeof validationMessage === 'string' ? /*#__PURE__*/React.createElement(FormFieldValidationMessage, {
+    marginTop: 8
   }, validationMessage) : validationMessage, typeof hint === 'string' ? /*#__PURE__*/React.createElement(FormFieldHint, {
-    marginTop: 6,
-    id: labelFor + '__hint'
+    marginTop: 6
   }, hint) : hint);
 }));
 FormField.propTypes = _objectSpread$C(_objectSpread$C(_objectSpread$C(_objectSpread$C({
   /**
    * The label used above the input element.
    */
-  label: propTypes$2.exports.node,
+  label: propTypes$2.exports.node.isRequired,
 
   /**
    * Passed on the label as a htmlFor prop.
@@ -64048,49 +64315,11 @@ FormField.propTypes = _objectSpread$C(_objectSpread$C(_objectSpread$C(_objectSpr
   validationMessage: propTypes$2.exports.node
 }, dimensions.propTypes), spacing.propTypes), position.propTypes), layout.propTypes);
 
-/**
- * Generates a token value for `aria-describedby` when the author provides `description`, `hint`, or `validationMessage` strings.
- * @param {String} id
- * @param {Object} helperTextCandidates
- * @param {String | React.ReactNode} [helperTextCandidates.description]
- * @param {String | React.ReactNode} [helperTextCandidates.hint]
- * @param {String | React.ReactNode} [helperTextCandidates.validationMessage]
- * @returns {String | null}
- */
-function generateAriaDescribedBy(id, _ref) {
-  var description = _ref.description,
-      hint = _ref.hint,
-      validationMessage = _ref.validationMessage;
-  var tokens = ''; // Only add each of the following to aria-describedby if
-  // it was provided as a string. When the author provides
-  // a React element, we assume they want to manage aria-describedby themselves.
-  // NB: Token order matches the order that these hint texts appear in the DOM.
-  // If the order of the hint texts changes, this should also change.
-
-  if (typeof description === 'string') {
-    tokens += ' ' + id + '__description';
-  }
-
-  if (typeof validationMessage === 'string') {
-    tokens += ' ' + id + '__validation-message';
-  }
-
-  if (typeof hint === 'string') {
-    tokens += ' ' + id + '__hint';
-  }
-
-  if (tokens.length) {
-    return tokens.trim();
-  }
-
-  return null;
-}
-
 var _excluded$y = ["appearance", "description", "disabled", "hint", "id", "inputHeight", "inputWidth", "isInvalid", "label", "placeholder", "required", "spellCheck", "validationMessage"];
 
 function ownKeys$B(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$B(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$B(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$B(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$B(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$B(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$B(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TextInputField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function TextInputField(props, ref) {
   var id = useId('TextInputField', props.id);
 
@@ -64137,12 +64366,7 @@ var TextInputField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports
     appearance: appearance,
     placeholder: placeholder,
     spellCheck: spellCheck,
-    ref: ref,
-    "aria-describedby": generateAriaDescribedBy(id, {
-      description: description,
-      hint: hint,
-      validationMessage: validationMessage
-    })
+    ref: ref
   }, remainingProps)));
 }));
 TextInputField.propTypes = _objectSpread$B(_objectSpread$B(_objectSpread$B({}, TextInput.propTypes), FormField.propTypes), {}, {
@@ -64192,7 +64416,7 @@ var _excluded$x = ["autocompleteProps", "buttonProps", "height", "initialSelecte
 
 function ownKeys$A(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$A(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$A(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$A(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$A(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$A(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$A(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var Combobox = /*#__PURE__*/react.exports.memo(function Combobox(props) {
   var autocompleteProps = props.autocompleteProps,
       buttonProps = props.buttonProps,
@@ -64364,16 +64588,16 @@ Combobox.propTypes = _objectSpread$A(_objectSpread$A(_objectSpread$A(_objectSpre
 });
 
 var _positions$TOP_LEFT$p;
-var absolutePositions = (_positions$TOP_LEFT$p = {}, _defineProperty$y(_positions$TOP_LEFT$p, Position.TOP_LEFT, {
+var absolutePositions = (_positions$TOP_LEFT$p = {}, _defineProperty$1(_positions$TOP_LEFT$p, Position.TOP_LEFT, {
   top: 50,
   left: 50
-}), _defineProperty$y(_positions$TOP_LEFT$p, Position.TOP_RIGHT, {
+}), _defineProperty$1(_positions$TOP_LEFT$p, Position.TOP_RIGHT, {
   top: 50,
   right: 50
-}), _defineProperty$y(_positions$TOP_LEFT$p, Position.BOTTOM_LEFT, {
+}), _defineProperty$1(_positions$TOP_LEFT$p, Position.BOTTOM_LEFT, {
   bottom: 50,
   left: 50
-}), _defineProperty$y(_positions$TOP_LEFT$p, Position.BOTTOM_RIGHT, {
+}), _defineProperty$1(_positions$TOP_LEFT$p, Position.BOTTOM_RIGHT, {
   bottom: 50,
   right: 50
 }), _positions$TOP_LEFT$p);
@@ -65045,7 +65269,7 @@ var _excluded$u = ["className"];
 
 function ownKeys$z(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$z(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$z(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$z(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$z(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$z(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$z(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var animationEasing$3 = {
   deceleration: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
   acceleration: 'cubic-bezier(0.4, 0.0, 1, 1)'
@@ -66383,7 +66607,7 @@ var arrayToCsv = function arrayToCsv(value) {
  * @param {Function | null | undefined} maybeFunction
  * @returns {maybeFunction is Function}
  */
-var isFunction$2 = function isFunction(maybeFunction) {
+var isFunction$1 = function isFunction(maybeFunction) {
   return typeof maybeFunction === 'function';
 };
 
@@ -67044,7 +67268,7 @@ var FileCard = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwa
   }, name), /*#__PURE__*/React.createElement(Paragraph$1, {
     color: colors.gray700,
     size: 300
-  }, hasValue(description) ? description : humanize.fileSize(sizeInBytes, 0))), isFunction$2(onRemove) && /*#__PURE__*/React.createElement(IconButton, {
+  }, hasValue(description) ? description : humanize.fileSize(sizeInBytes, 0))), isFunction$1(onRemove) && /*#__PURE__*/React.createElement(IconButton, {
     appearance: "minimal",
     disabled: disabled || isLoading,
     icon: TrashIcon,
@@ -67207,36 +67431,36 @@ var getMaxFilesMessage = function getMaxFilesMessage(maxFiles) {
  */
 
 /** Used as the size to enable large array optimizations. */
-var LARGE_ARRAY_SIZE$1 = 200;
+var LARGE_ARRAY_SIZE = 200;
 
 /** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED$1 = '__lodash_hash_undefined__';
+var HASH_UNDEFINED = '__lodash_hash_undefined__';
 
 /** Used as references for various `Number` constants. */
-var MAX_SAFE_INTEGER$1 = 9007199254740991;
+var MAX_SAFE_INTEGER = 9007199254740991;
 
 /** `Object#toString` result references. */
-var argsTag$1 = '[object Arguments]',
-    funcTag$1 = '[object Function]',
-    genTag$1 = '[object GeneratorFunction]';
+var argsTag = '[object Arguments]',
+    funcTag = '[object Function]',
+    genTag = '[object GeneratorFunction]';
 
 /**
  * Used to match `RegExp`
  * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
  */
-var reRegExpChar$1 = /[\\^$.*+?()[\]{}|]/g;
+var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
 
 /** Used to detect host constructors (Safari). */
-var reIsHostCtor$1 = /^\[object .+?Constructor\]$/;
+var reIsHostCtor = /^\[object .+?Constructor\]$/;
 
 /** Detect free variable `global` from Node.js. */
-var freeGlobal$1 = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
 
 /** Detect free variable `self`. */
-var freeSelf$1 = typeof self == 'object' && self && self.Object === Object && self;
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
 
 /** Used as a reference to the global object. */
-var root$1 = freeGlobal$1 || freeSelf$1 || Function('return this')();
+var root = freeGlobal || freeSelf || Function('return this')();
 
 /**
  * A faster alternative to `Function#apply`, this function invokes `func`
@@ -67248,7 +67472,7 @@ var root$1 = freeGlobal$1 || freeSelf$1 || Function('return this')();
  * @param {Array} args The arguments to invoke `func` with.
  * @returns {*} Returns the result of `func`.
  */
-function apply$1(func, thisArg, args) {
+function apply(func, thisArg, args) {
   switch (args.length) {
     case 0: return func.call(thisArg);
     case 1: return func.call(thisArg, args[0]);
@@ -67267,9 +67491,9 @@ function apply$1(func, thisArg, args) {
  * @param {*} target The value to search for.
  * @returns {boolean} Returns `true` if `target` is found, else `false`.
  */
-function arrayIncludes$1(array, value) {
+function arrayIncludes(array, value) {
   var length = array ? array.length : 0;
-  return !!length && baseIndexOf$1(array, value, 0) > -1;
+  return !!length && baseIndexOf(array, value, 0) > -1;
 }
 
 /**
@@ -67281,7 +67505,7 @@ function arrayIncludes$1(array, value) {
  * @param {Function} comparator The comparator invoked per element.
  * @returns {boolean} Returns `true` if `target` is found, else `false`.
  */
-function arrayIncludesWith$1(array, value, comparator) {
+function arrayIncludesWith(array, value, comparator) {
   var index = -1,
       length = array ? array.length : 0;
 
@@ -67302,7 +67526,7 @@ function arrayIncludesWith$1(array, value, comparator) {
  * @param {Function} iteratee The function invoked per iteration.
  * @returns {Array} Returns the new mapped array.
  */
-function arrayMap$1(array, iteratee) {
+function arrayMap(array, iteratee) {
   var index = -1,
       length = array ? array.length : 0,
       result = Array(length);
@@ -67321,7 +67545,7 @@ function arrayMap$1(array, iteratee) {
  * @param {Array} values The values to append.
  * @returns {Array} Returns `array`.
  */
-function arrayPush$1(array, values) {
+function arrayPush(array, values) {
   var index = -1,
       length = values.length,
       offset = array.length;
@@ -67343,7 +67567,7 @@ function arrayPush$1(array, values) {
  * @param {boolean} [fromRight] Specify iterating from right to left.
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
-function baseFindIndex$1(array, predicate, fromIndex, fromRight) {
+function baseFindIndex(array, predicate, fromIndex, fromRight) {
   var length = array.length,
       index = fromIndex + (fromRight ? 1 : -1);
 
@@ -67364,9 +67588,9 @@ function baseFindIndex$1(array, predicate, fromIndex, fromRight) {
  * @param {number} fromIndex The index to search from.
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
-function baseIndexOf$1(array, value, fromIndex) {
+function baseIndexOf(array, value, fromIndex) {
   if (value !== value) {
-    return baseFindIndex$1(array, baseIsNaN$1, fromIndex);
+    return baseFindIndex(array, baseIsNaN, fromIndex);
   }
   var index = fromIndex - 1,
       length = array.length;
@@ -67386,7 +67610,7 @@ function baseIndexOf$1(array, value, fromIndex) {
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
  */
-function baseIsNaN$1(value) {
+function baseIsNaN(value) {
   return value !== value;
 }
 
@@ -67397,7 +67621,7 @@ function baseIsNaN$1(value) {
  * @param {Function} func The function to cap arguments for.
  * @returns {Function} Returns the new capped function.
  */
-function baseUnary$1(func) {
+function baseUnary(func) {
   return function(value) {
     return func(value);
   };
@@ -67411,7 +67635,7 @@ function baseUnary$1(func) {
  * @param {string} key The key of the entry to check.
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
-function cacheHas$1(cache, key) {
+function cacheHas(cache, key) {
   return cache.has(key);
 }
 
@@ -67423,7 +67647,7 @@ function cacheHas$1(cache, key) {
  * @param {string} key The key of the property to get.
  * @returns {*} Returns the property value.
  */
-function getValue$1(object, key) {
+function getValue(object, key) {
   return object == null ? undefined : object[key];
 }
 
@@ -67434,7 +67658,7 @@ function getValue$1(object, key) {
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
  */
-function isHostObject$1(value) {
+function isHostObject(value) {
   // Many host objects are `Object` objects that can coerce to strings
   // despite having improperly defined `toString` methods.
   var result = false;
@@ -67447,50 +67671,50 @@ function isHostObject$1(value) {
 }
 
 /** Used for built-in method references. */
-var arrayProto$1 = Array.prototype,
-    funcProto$1 = Function.prototype,
-    objectProto$1 = Object.prototype;
+var arrayProto = Array.prototype,
+    funcProto = Function.prototype,
+    objectProto = Object.prototype;
 
 /** Used to detect overreaching core-js shims. */
-var coreJsData$1 = root$1['__core-js_shared__'];
+var coreJsData = root['__core-js_shared__'];
 
 /** Used to detect methods masquerading as native. */
-var maskSrcKey$1 = (function() {
-  var uid = /[^.]+$/.exec(coreJsData$1 && coreJsData$1.keys && coreJsData$1.keys.IE_PROTO || '');
+var maskSrcKey = (function() {
+  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
   return uid ? ('Symbol(src)_1.' + uid) : '';
 }());
 
 /** Used to resolve the decompiled source of functions. */
-var funcToString$1 = funcProto$1.toString;
+var funcToString = funcProto.toString;
 
 /** Used to check objects for own properties. */
-var hasOwnProperty$1 = objectProto$1.hasOwnProperty;
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * Used to resolve the
  * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
  * of values.
  */
-var objectToString$1 = objectProto$1.toString;
+var objectToString = objectProto.toString;
 
 /** Used to detect if a method is native. */
-var reIsNative$1 = RegExp('^' +
-  funcToString$1.call(hasOwnProperty$1).replace(reRegExpChar$1, '\\$&')
+var reIsNative = RegExp('^' +
+  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
   .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
 );
 
 /** Built-in value references. */
-var Symbol$2 = root$1.Symbol,
-    propertyIsEnumerable$1 = objectProto$1.propertyIsEnumerable,
-    splice$1 = arrayProto$1.splice,
-    spreadableSymbol$1 = Symbol$2 ? Symbol$2.isConcatSpreadable : undefined;
+var Symbol$1 = root.Symbol,
+    propertyIsEnumerable = objectProto.propertyIsEnumerable,
+    splice = arrayProto.splice,
+    spreadableSymbol = Symbol$1 ? Symbol$1.isConcatSpreadable : undefined;
 
 /* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeMax$1 = Math.max;
+var nativeMax = Math.max;
 
 /* Built-in method references that are verified to be native. */
-var Map$2 = getNative$1(root$1, 'Map'),
-    nativeCreate$1 = getNative$1(Object, 'create');
+var Map$1 = getNative(root, 'Map'),
+    nativeCreate = getNative(Object, 'create');
 
 /**
  * Creates a hash object.
@@ -67499,7 +67723,7 @@ var Map$2 = getNative$1(root$1, 'Map'),
  * @constructor
  * @param {Array} [entries] The key-value pairs to cache.
  */
-function Hash$1(entries) {
+function Hash(entries) {
   var index = -1,
       length = entries ? entries.length : 0;
 
@@ -67517,8 +67741,8 @@ function Hash$1(entries) {
  * @name clear
  * @memberOf Hash
  */
-function hashClear$1() {
-  this.__data__ = nativeCreate$1 ? nativeCreate$1(null) : {};
+function hashClear() {
+  this.__data__ = nativeCreate ? nativeCreate(null) : {};
 }
 
 /**
@@ -67531,7 +67755,7 @@ function hashClear$1() {
  * @param {string} key The key of the value to remove.
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
-function hashDelete$1(key) {
+function hashDelete(key) {
   return this.has(key) && delete this.__data__[key];
 }
 
@@ -67544,13 +67768,13 @@ function hashDelete$1(key) {
  * @param {string} key The key of the value to get.
  * @returns {*} Returns the entry value.
  */
-function hashGet$1(key) {
+function hashGet(key) {
   var data = this.__data__;
-  if (nativeCreate$1) {
+  if (nativeCreate) {
     var result = data[key];
-    return result === HASH_UNDEFINED$1 ? undefined : result;
+    return result === HASH_UNDEFINED ? undefined : result;
   }
-  return hasOwnProperty$1.call(data, key) ? data[key] : undefined;
+  return hasOwnProperty.call(data, key) ? data[key] : undefined;
 }
 
 /**
@@ -67562,9 +67786,9 @@ function hashGet$1(key) {
  * @param {string} key The key of the entry to check.
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
-function hashHas$1(key) {
+function hashHas(key) {
   var data = this.__data__;
-  return nativeCreate$1 ? data[key] !== undefined : hasOwnProperty$1.call(data, key);
+  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
 }
 
 /**
@@ -67577,18 +67801,18 @@ function hashHas$1(key) {
  * @param {*} value The value to set.
  * @returns {Object} Returns the hash instance.
  */
-function hashSet$1(key, value) {
+function hashSet(key, value) {
   var data = this.__data__;
-  data[key] = (nativeCreate$1 && value === undefined) ? HASH_UNDEFINED$1 : value;
+  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
   return this;
 }
 
 // Add methods to `Hash`.
-Hash$1.prototype.clear = hashClear$1;
-Hash$1.prototype['delete'] = hashDelete$1;
-Hash$1.prototype.get = hashGet$1;
-Hash$1.prototype.has = hashHas$1;
-Hash$1.prototype.set = hashSet$1;
+Hash.prototype.clear = hashClear;
+Hash.prototype['delete'] = hashDelete;
+Hash.prototype.get = hashGet;
+Hash.prototype.has = hashHas;
+Hash.prototype.set = hashSet;
 
 /**
  * Creates an list cache object.
@@ -67597,7 +67821,7 @@ Hash$1.prototype.set = hashSet$1;
  * @constructor
  * @param {Array} [entries] The key-value pairs to cache.
  */
-function ListCache$1(entries) {
+function ListCache(entries) {
   var index = -1,
       length = entries ? entries.length : 0;
 
@@ -67615,7 +67839,7 @@ function ListCache$1(entries) {
  * @name clear
  * @memberOf ListCache
  */
-function listCacheClear$1() {
+function listCacheClear() {
   this.__data__ = [];
 }
 
@@ -67628,9 +67852,9 @@ function listCacheClear$1() {
  * @param {string} key The key of the value to remove.
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
-function listCacheDelete$1(key) {
+function listCacheDelete(key) {
   var data = this.__data__,
-      index = assocIndexOf$1(data, key);
+      index = assocIndexOf(data, key);
 
   if (index < 0) {
     return false;
@@ -67639,7 +67863,7 @@ function listCacheDelete$1(key) {
   if (index == lastIndex) {
     data.pop();
   } else {
-    splice$1.call(data, index, 1);
+    splice.call(data, index, 1);
   }
   return true;
 }
@@ -67653,9 +67877,9 @@ function listCacheDelete$1(key) {
  * @param {string} key The key of the value to get.
  * @returns {*} Returns the entry value.
  */
-function listCacheGet$1(key) {
+function listCacheGet(key) {
   var data = this.__data__,
-      index = assocIndexOf$1(data, key);
+      index = assocIndexOf(data, key);
 
   return index < 0 ? undefined : data[index][1];
 }
@@ -67669,8 +67893,8 @@ function listCacheGet$1(key) {
  * @param {string} key The key of the entry to check.
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
-function listCacheHas$1(key) {
-  return assocIndexOf$1(this.__data__, key) > -1;
+function listCacheHas(key) {
+  return assocIndexOf(this.__data__, key) > -1;
 }
 
 /**
@@ -67683,9 +67907,9 @@ function listCacheHas$1(key) {
  * @param {*} value The value to set.
  * @returns {Object} Returns the list cache instance.
  */
-function listCacheSet$1(key, value) {
+function listCacheSet(key, value) {
   var data = this.__data__,
-      index = assocIndexOf$1(data, key);
+      index = assocIndexOf(data, key);
 
   if (index < 0) {
     data.push([key, value]);
@@ -67696,11 +67920,11 @@ function listCacheSet$1(key, value) {
 }
 
 // Add methods to `ListCache`.
-ListCache$1.prototype.clear = listCacheClear$1;
-ListCache$1.prototype['delete'] = listCacheDelete$1;
-ListCache$1.prototype.get = listCacheGet$1;
-ListCache$1.prototype.has = listCacheHas$1;
-ListCache$1.prototype.set = listCacheSet$1;
+ListCache.prototype.clear = listCacheClear;
+ListCache.prototype['delete'] = listCacheDelete;
+ListCache.prototype.get = listCacheGet;
+ListCache.prototype.has = listCacheHas;
+ListCache.prototype.set = listCacheSet;
 
 /**
  * Creates a map cache object to store key-value pairs.
@@ -67709,7 +67933,7 @@ ListCache$1.prototype.set = listCacheSet$1;
  * @constructor
  * @param {Array} [entries] The key-value pairs to cache.
  */
-function MapCache$1(entries) {
+function MapCache(entries) {
   var index = -1,
       length = entries ? entries.length : 0;
 
@@ -67727,11 +67951,11 @@ function MapCache$1(entries) {
  * @name clear
  * @memberOf MapCache
  */
-function mapCacheClear$1() {
+function mapCacheClear() {
   this.__data__ = {
-    'hash': new Hash$1,
-    'map': new (Map$2 || ListCache$1),
-    'string': new Hash$1
+    'hash': new Hash,
+    'map': new (Map$1 || ListCache),
+    'string': new Hash
   };
 }
 
@@ -67744,8 +67968,8 @@ function mapCacheClear$1() {
  * @param {string} key The key of the value to remove.
  * @returns {boolean} Returns `true` if the entry was removed, else `false`.
  */
-function mapCacheDelete$1(key) {
-  return getMapData$1(this, key)['delete'](key);
+function mapCacheDelete(key) {
+  return getMapData(this, key)['delete'](key);
 }
 
 /**
@@ -67757,8 +67981,8 @@ function mapCacheDelete$1(key) {
  * @param {string} key The key of the value to get.
  * @returns {*} Returns the entry value.
  */
-function mapCacheGet$1(key) {
-  return getMapData$1(this, key).get(key);
+function mapCacheGet(key) {
+  return getMapData(this, key).get(key);
 }
 
 /**
@@ -67770,8 +67994,8 @@ function mapCacheGet$1(key) {
  * @param {string} key The key of the entry to check.
  * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
  */
-function mapCacheHas$1(key) {
-  return getMapData$1(this, key).has(key);
+function mapCacheHas(key) {
+  return getMapData(this, key).has(key);
 }
 
 /**
@@ -67784,17 +68008,17 @@ function mapCacheHas$1(key) {
  * @param {*} value The value to set.
  * @returns {Object} Returns the map cache instance.
  */
-function mapCacheSet$1(key, value) {
-  getMapData$1(this, key).set(key, value);
+function mapCacheSet(key, value) {
+  getMapData(this, key).set(key, value);
   return this;
 }
 
 // Add methods to `MapCache`.
-MapCache$1.prototype.clear = mapCacheClear$1;
-MapCache$1.prototype['delete'] = mapCacheDelete$1;
-MapCache$1.prototype.get = mapCacheGet$1;
-MapCache$1.prototype.has = mapCacheHas$1;
-MapCache$1.prototype.set = mapCacheSet$1;
+MapCache.prototype.clear = mapCacheClear;
+MapCache.prototype['delete'] = mapCacheDelete;
+MapCache.prototype.get = mapCacheGet;
+MapCache.prototype.has = mapCacheHas;
+MapCache.prototype.set = mapCacheSet;
 
 /**
  *
@@ -67804,11 +68028,11 @@ MapCache$1.prototype.set = mapCacheSet$1;
  * @constructor
  * @param {Array} [values] The values to cache.
  */
-function SetCache$1(values) {
+function SetCache(values) {
   var index = -1,
       length = values ? values.length : 0;
 
-  this.__data__ = new MapCache$1;
+  this.__data__ = new MapCache;
   while (++index < length) {
     this.add(values[index]);
   }
@@ -67824,8 +68048,8 @@ function SetCache$1(values) {
  * @param {*} value The value to cache.
  * @returns {Object} Returns the cache instance.
  */
-function setCacheAdd$1(value) {
-  this.__data__.set(value, HASH_UNDEFINED$1);
+function setCacheAdd(value) {
+  this.__data__.set(value, HASH_UNDEFINED);
   return this;
 }
 
@@ -67838,13 +68062,13 @@ function setCacheAdd$1(value) {
  * @param {*} value The value to search for.
  * @returns {number} Returns `true` if `value` is found, else `false`.
  */
-function setCacheHas$1(value) {
+function setCacheHas(value) {
   return this.__data__.has(value);
 }
 
 // Add methods to `SetCache`.
-SetCache$1.prototype.add = SetCache$1.prototype.push = setCacheAdd$1;
-SetCache$1.prototype.has = setCacheHas$1;
+SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
+SetCache.prototype.has = setCacheHas;
 
 /**
  * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -67854,10 +68078,10 @@ SetCache$1.prototype.has = setCacheHas$1;
  * @param {*} key The key to search for.
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
-function assocIndexOf$1(array, key) {
+function assocIndexOf(array, key) {
   var length = array.length;
   while (length--) {
-    if (eq$1(array[length][0], key)) {
+    if (eq(array[length][0], key)) {
       return length;
     }
   }
@@ -67875,9 +68099,9 @@ function assocIndexOf$1(array, key) {
  * @param {Function} [comparator] The comparator invoked per element.
  * @returns {Array} Returns the new array of filtered values.
  */
-function baseDifference$1(array, values, iteratee, comparator) {
+function baseDifference(array, values, iteratee, comparator) {
   var index = -1,
-      includes = arrayIncludes$1,
+      includes = arrayIncludes,
       isCommon = true,
       length = array.length,
       result = [],
@@ -67887,16 +68111,16 @@ function baseDifference$1(array, values, iteratee, comparator) {
     return result;
   }
   if (iteratee) {
-    values = arrayMap$1(values, baseUnary$1(iteratee));
+    values = arrayMap(values, baseUnary(iteratee));
   }
   if (comparator) {
-    includes = arrayIncludesWith$1;
+    includes = arrayIncludesWith;
     isCommon = false;
   }
-  else if (values.length >= LARGE_ARRAY_SIZE$1) {
-    includes = cacheHas$1;
+  else if (values.length >= LARGE_ARRAY_SIZE) {
+    includes = cacheHas;
     isCommon = false;
-    values = new SetCache$1(values);
+    values = new SetCache(values);
   }
   outer:
   while (++index < length) {
@@ -67931,11 +68155,11 @@ function baseDifference$1(array, values, iteratee, comparator) {
  * @param {Array} [result=[]] The initial result value.
  * @returns {Array} Returns the new flattened array.
  */
-function baseFlatten$1(array, depth, predicate, isStrict, result) {
+function baseFlatten(array, depth, predicate, isStrict, result) {
   var index = -1,
       length = array.length;
 
-  predicate || (predicate = isFlattenable$1);
+  predicate || (predicate = isFlattenable);
   result || (result = []);
 
   while (++index < length) {
@@ -67943,9 +68167,9 @@ function baseFlatten$1(array, depth, predicate, isStrict, result) {
     if (depth > 0 && predicate(value)) {
       if (depth > 1) {
         // Recursively flatten arrays (susceptible to call stack limits).
-        baseFlatten$1(value, depth - 1, predicate, isStrict, result);
+        baseFlatten(value, depth - 1, predicate, isStrict, result);
       } else {
-        arrayPush$1(result, value);
+        arrayPush(result, value);
       }
     } else if (!isStrict) {
       result[result.length] = value;
@@ -67962,12 +68186,12 @@ function baseFlatten$1(array, depth, predicate, isStrict, result) {
  * @returns {boolean} Returns `true` if `value` is a native function,
  *  else `false`.
  */
-function baseIsNative$1(value) {
-  if (!isObject$1(value) || isMasked$1(value)) {
+function baseIsNative(value) {
+  if (!isObject(value) || isMasked(value)) {
     return false;
   }
-  var pattern = (isFunction$1(value) || isHostObject$1(value)) ? reIsNative$1 : reIsHostCtor$1;
-  return pattern.test(toSource$1(value));
+  var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
+  return pattern.test(toSource(value));
 }
 
 /**
@@ -67978,12 +68202,12 @@ function baseIsNative$1(value) {
  * @param {number} [start=func.length-1] The start position of the rest parameter.
  * @returns {Function} Returns the new function.
  */
-function baseRest$1(func, start) {
-  start = nativeMax$1(start === undefined ? (func.length - 1) : start, 0);
+function baseRest(func, start) {
+  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
   return function() {
     var args = arguments,
         index = -1,
-        length = nativeMax$1(args.length - start, 0),
+        length = nativeMax(args.length - start, 0),
         array = Array(length);
 
     while (++index < length) {
@@ -67995,7 +68219,7 @@ function baseRest$1(func, start) {
       otherArgs[index] = args[index];
     }
     otherArgs[start] = array;
-    return apply$1(func, this, otherArgs);
+    return apply(func, this, otherArgs);
   };
 }
 
@@ -68007,9 +68231,9 @@ function baseRest$1(func, start) {
  * @param {string} key The reference key.
  * @returns {*} Returns the map data.
  */
-function getMapData$1(map, key) {
+function getMapData(map, key) {
   var data = map.__data__;
-  return isKeyable$1(key)
+  return isKeyable(key)
     ? data[typeof key == 'string' ? 'string' : 'hash']
     : data.map;
 }
@@ -68022,9 +68246,9 @@ function getMapData$1(map, key) {
  * @param {string} key The key of the method to get.
  * @returns {*} Returns the function if it's native, else `undefined`.
  */
-function getNative$1(object, key) {
-  var value = getValue$1(object, key);
-  return baseIsNative$1(value) ? value : undefined;
+function getNative(object, key) {
+  var value = getValue(object, key);
+  return baseIsNative(value) ? value : undefined;
 }
 
 /**
@@ -68034,9 +68258,9 @@ function getNative$1(object, key) {
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
  */
-function isFlattenable$1(value) {
-  return isArray$1(value) || isArguments$1(value) ||
-    !!(spreadableSymbol$1 && value && value[spreadableSymbol$1]);
+function isFlattenable(value) {
+  return isArray(value) || isArguments(value) ||
+    !!(spreadableSymbol && value && value[spreadableSymbol]);
 }
 
 /**
@@ -68046,7 +68270,7 @@ function isFlattenable$1(value) {
  * @param {*} value The value to check.
  * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
  */
-function isKeyable$1(value) {
+function isKeyable(value) {
   var type = typeof value;
   return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
     ? (value !== '__proto__')
@@ -68060,8 +68284,8 @@ function isKeyable$1(value) {
  * @param {Function} func The function to check.
  * @returns {boolean} Returns `true` if `func` is masked, else `false`.
  */
-function isMasked$1(func) {
-  return !!maskSrcKey$1 && (maskSrcKey$1 in func);
+function isMasked(func) {
+  return !!maskSrcKey && (maskSrcKey in func);
 }
 
 /**
@@ -68071,10 +68295,10 @@ function isMasked$1(func) {
  * @param {Function} func The function to process.
  * @returns {string} Returns the source code.
  */
-function toSource$1(func) {
+function toSource(func) {
   if (func != null) {
     try {
-      return funcToString$1.call(func);
+      return funcToString.call(func);
     } catch (e) {}
     try {
       return (func + '');
@@ -68106,13 +68330,13 @@ function toSource$1(func) {
  * _.differenceWith(objects, [{ 'x': 1, 'y': 2 }], _.isEqual);
  * // => [{ 'x': 2, 'y': 1 }]
  */
-var differenceWith = baseRest$1(function(array, values) {
+var differenceWith = baseRest(function(array, values) {
   var comparator = last(values);
-  if (isArrayLikeObject$1(comparator)) {
+  if (isArrayLikeObject(comparator)) {
     comparator = undefined;
   }
-  return isArrayLikeObject$1(array)
-    ? baseDifference$1(array, baseFlatten$1(values, 1, isArrayLikeObject$1, true), undefined, comparator)
+  return isArrayLikeObject(array)
+    ? baseDifference(array, baseFlatten(values, 1, isArrayLikeObject, true), undefined, comparator)
     : [];
 });
 
@@ -68167,7 +68391,7 @@ function last(array) {
  * _.eq(NaN, NaN);
  * // => true
  */
-function eq$1(value, other) {
+function eq(value, other) {
   return value === other || (value !== value && other !== other);
 }
 
@@ -68189,10 +68413,10 @@ function eq$1(value, other) {
  * _.isArguments([1, 2, 3]);
  * // => false
  */
-function isArguments$1(value) {
+function isArguments(value) {
   // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  return isArrayLikeObject$1(value) && hasOwnProperty$1.call(value, 'callee') &&
-    (!propertyIsEnumerable$1.call(value, 'callee') || objectToString$1.call(value) == argsTag$1);
+  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
+    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
 }
 
 /**
@@ -68218,7 +68442,7 @@ function isArguments$1(value) {
  * _.isArray(_.noop);
  * // => false
  */
-var isArray$1 = Array.isArray;
+var isArray = Array.isArray;
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -68245,8 +68469,8 @@ var isArray$1 = Array.isArray;
  * _.isArrayLike(_.noop);
  * // => false
  */
-function isArrayLike$1(value) {
-  return value != null && isLength$1(value.length) && !isFunction$1(value);
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
 }
 
 /**
@@ -68274,8 +68498,8 @@ function isArrayLike$1(value) {
  * _.isArrayLikeObject(_.noop);
  * // => false
  */
-function isArrayLikeObject$1(value) {
-  return isObjectLike$1(value) && isArrayLike$1(value);
+function isArrayLikeObject(value) {
+  return isObjectLike(value) && isArrayLike(value);
 }
 
 /**
@@ -68295,11 +68519,11 @@ function isArrayLikeObject$1(value) {
  * _.isFunction(/abc/);
  * // => false
  */
-function isFunction$1(value) {
+function isFunction(value) {
   // The use of `Object#toString` avoids issues with the `typeof` operator
   // in Safari 8-9 which returns 'object' for typed array and other constructors.
-  var tag = isObject$1(value) ? objectToString$1.call(value) : '';
-  return tag == funcTag$1 || tag == genTag$1;
+  var tag = isObject(value) ? objectToString.call(value) : '';
+  return tag == funcTag || tag == genTag;
 }
 
 /**
@@ -68328,9 +68552,9 @@ function isFunction$1(value) {
  * _.isLength('3');
  * // => false
  */
-function isLength$1(value) {
+function isLength(value) {
   return typeof value == 'number' &&
-    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER$1;
+    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
 }
 
 /**
@@ -68358,7 +68582,7 @@ function isLength$1(value) {
  * _.isObject(null);
  * // => false
  */
-function isObject$1(value) {
+function isObject(value) {
   var type = typeof value;
   return !!value && (type == 'object' || type == 'function');
 }
@@ -68387,7 +68611,7 @@ function isObject$1(value) {
  * _.isObjectLike(null);
  * // => false
  */
-function isObjectLike$1(value) {
+function isObjectLike(value) {
   return !!value && typeof value == 'object';
 }
 
@@ -70939,7 +71163,7 @@ var _excluded$r = ["acceptedMimeTypes", "description", "disabled", "hint", "isRe
 
 function ownKeys$y(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$y(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$y(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$y(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$y(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$y(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$y(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var UploaderState = {
   Initial: 'initial',
   Dragging: 'dragging',
@@ -71199,10 +71423,10 @@ var FileUploader = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.f
    * @param {number} index
    */
   function (file, index) {
-    return isFunction$2(renderFile) ? renderFile(file, index) : /*#__PURE__*/React.createElement(FileCard, {
+    return isFunction$1(renderFile) ? renderFile(file, index) : /*#__PURE__*/React.createElement(FileCard, {
       key: "".concat(file.name, "-").concat(index),
       name: file.name,
-      onRemove: isFunction$2(onRemove) ? function () {
+      onRemove: isFunction$1(onRemove) ? function () {
         return onRemove(file);
       } : undefined,
       sizeInBytes: file.size,
@@ -71353,11 +71577,11 @@ var MenuItem$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.for
   var iconColor = intent === 'none' ? 'default' : intent;
 
   if (disabled) {
-    iconColor = 'muted';
+    iconColor = 'disabled';
   }
 
-  var textColor = disabled ? 'muted' : intent;
-  var secondaryTextColor = 'muted';
+  var textColor = disabled ? 'disabled' : intent;
+  var secondaryTextColor = disabled ? textColor : 'muted';
   var disabledProps = react.exports.useMemo(function () {
     return disabled ? {
       backgroundColor: 'tint1',
@@ -71384,7 +71608,7 @@ var MenuItem$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.for
     onKeyDown: onKeyDown
   }), /*#__PURE__*/React.createElement(IconWrapper, {
     icon: icon,
-    color: iconColor,
+    color: disabled ? 'disabled' : iconColor,
     marginLeft: 16,
     marginRight: -4,
     size: 16,
@@ -71708,7 +71932,7 @@ var animationDuration = '1.8s';
 var pulsarAnimationClassName = css_1({
   animation: "".concat(pulseAnimation, " ").concat(animationDuration, " ").concat(animationTiming, " both infinite")
 }).toString();
-var POSITION_KEYS = (_POSITION_KEYS = {}, _defineProperty$y(_POSITION_KEYS, Position.TOP_LEFT, ['top', 'left']), _defineProperty$y(_POSITION_KEYS, Position.TOP_RIGHT, ['top', 'right']), _defineProperty$y(_POSITION_KEYS, Position.BOTTOM_LEFT, ['bottom', 'left']), _defineProperty$y(_POSITION_KEYS, Position.BOTTOM_RIGHT, ['bottom', 'right']), _POSITION_KEYS);
+var POSITION_KEYS = (_POSITION_KEYS = {}, _defineProperty$1(_POSITION_KEYS, Position.TOP_LEFT, ['top', 'left']), _defineProperty$1(_POSITION_KEYS, Position.TOP_RIGHT, ['top', 'right']), _defineProperty$1(_POSITION_KEYS, Position.BOTTOM_LEFT, ['bottom', 'left']), _defineProperty$1(_POSITION_KEYS, Position.BOTTOM_RIGHT, ['bottom', 'right']), _POSITION_KEYS);
 
 var getPositionProps = function getPositionProps(_ref) {
   var position = _ref.position,
@@ -71826,7 +72050,7 @@ var _excluded$o = ["fill", "size"],
 
 function ownKeys$x(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$x(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$x(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$x(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$x(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$x(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$x(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var CircleIcon = /*#__PURE__*/react.exports.memo(function CircleIcon(_ref) {
   var _ref$fill = _ref.fill,
       fill = _ref$fill === void 0 ? 'currentColor' : _ref$fill,
@@ -71863,7 +72087,7 @@ var pseudoSelectors$6 = {
   _checkedDisabled: '&[disabled]:checked + div, &[type=checkbox][disabled]:indeterminate + div'
 };
 
-var internalStyles$5 = _defineProperty$y({
+var internalStyles$5 = _defineProperty$1({
   border: '0',
   clip: 'rect(1px, 1px, 1px, 1px)',
   height: '1px',
@@ -72013,7 +72237,7 @@ var _excluded$n = ["size", "label", "defaultValue", "value", "options", "onChang
 
 function ownKeys$w(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$w(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$w(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$w(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$w(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$w(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$w(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var noop$8 = function noop() {};
 
@@ -72101,7 +72325,7 @@ var _excluded$m = ["appearance", "disabled", "height"];
 
 function ownKeys$v(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$v(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$v(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$v(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$v(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$v(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$v(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var getIconSizeForInput = function getIconSizeForInput(height) {
   if (height <= 28) return 12;
@@ -72157,7 +72381,7 @@ var _excluded$l = ["defaultValue", "disabled", "height", "name", "onChange", "op
 
 function ownKeys$u(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$u(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$u(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$u(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$u(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$u(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$u(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function isControlled(value) {
   return typeof value !== 'undefined' && value !== null;
@@ -72266,12 +72490,12 @@ SegmentedControl.propTypes = _objectSpread$u(_objectSpread$u(_objectSpread$u(_ob
   disabled: propTypes$2.exports.bool
 });
 
-var _excluded$k = ["appearance", "aria-describedby", "autoFocus", "children", "defaultValue", "disabled", "height", "id", "isInvalid", "name", "onChange", "required", "value"],
+var _excluded$k = ["appearance", "autoFocus", "children", "defaultValue", "disabled", "height", "id", "isInvalid", "name", "onChange", "required", "value"],
     _excluded2$7 = ["className"];
 
 function ownKeys$t(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$t(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$t(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$t(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$t(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$t(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$t(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var internalStyles$4 = {
   textTransform: 'default',
   WebkitAppearance: 'none',
@@ -72309,7 +72533,6 @@ var getIconSizeForSelect = function getIconSizeForSelect(height) {
 var Select$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Select(props, ref) {
   var _props$appearance = props.appearance,
       appearance = _props$appearance === void 0 ? 'default' : _props$appearance,
-      ariaDescribedby = props['aria-describedby'],
       autoFocus = props.autoFocus,
       children = props.children,
       defaultValue = props.defaultValue,
@@ -72357,8 +72580,7 @@ var Select$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwa
     paddingLeft: Math.round(height / 3.2),
     paddingRight: iconMargin * 2 + iconSize
   }, boxProps, {
-    height: "100%",
-    "aria-describedby": ariaDescribedby
+    height: "100%"
   }), children), /*#__PURE__*/React.createElement(CaretDownIcon, {
     color: "default",
     size: iconSize,
@@ -72425,7 +72647,7 @@ var _excluded$j = ["appearance", "description", "disabled", "hint", "id", "input
 
 function ownKeys$s(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$s(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$s(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$s(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$s(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$s(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$s(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var SelectField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function SelectField(props, ref) {
   var id = useId('SelectField', props.id);
 
@@ -72468,12 +72690,7 @@ var SelectField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.fo
     required: required,
     isInvalid: isInvalid,
     appearance: appearance,
-    ref: ref,
-    "aria-describedby": generateAriaDescribedBy(id, {
-      description: description,
-      hint: hint,
-      validationMessage: validationMessage
-    })
+    ref: ref
   }, remainingProps)));
 }));
 SelectField.propTypes = _objectSpread$s(_objectSpread$s(_objectSpread$s({}, Select$1.propTypes), FormField.propTypes), {}, {
@@ -72530,7 +72747,7 @@ var OptionShapePropType = propTypes$2.exports.shape({
 
 function ownKeys$r(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$r(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$r(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$r(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$r(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$r(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$r(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TableHeaderCell = /*#__PURE__*/react.exports.memo(function TableHeaderCell(props) {
   return /*#__PURE__*/React.createElement(TableCell$1, _extends$3({
     overflow: "visible",
@@ -72543,7 +72760,7 @@ var _excluded$i = ["value", "children", "onChange", "autoFocus", "spellCheck", "
 
 function ownKeys$q(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$q(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$q(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$q(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$q(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$q(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$q(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var invisibleInputClass = css_1({
   border: 'none',
   backgroundColor: 'transparent',
@@ -72695,7 +72912,7 @@ var _excluded$h = ["accountForScrollbar", "children", "className"],
 
 function ownKeys$p(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$p(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$p(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$p(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$p(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$p(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$p(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject$1 = {};
 var pseudoSelectors$4 = {
   _firstOfType: '&:first-of-type'
@@ -73348,7 +73565,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function ownKeys$o(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$o(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$o(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$o(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$o(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$o(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$o(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var animationEasing$2 = {
   deceleration: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
   acceleration: 'cubic-bezier(0.4, 0.0, 1, 1)'
@@ -73380,7 +73597,7 @@ var withAnimations$1 = function withAnimations(animateIn, animateOut) {
   };
 };
 
-var sheetCloseStyles = (_sheetCloseStyles = {}, _defineProperty$y(_sheetCloseStyles, Position.RIGHT, _objectSpread$o({
+var sheetCloseStyles = (_sheetCloseStyles = {}, _defineProperty$1(_sheetCloseStyles, Position.RIGHT, _objectSpread$o({
   left: 0,
   marginLeft: -12,
   marginTop: 12,
@@ -73399,7 +73616,7 @@ var sheetCloseStyles = (_sheetCloseStyles = {}, _defineProperty$y(_sheetCloseSty
   to: {
     transform: 'translateX(100%) rotate(360deg)'
   }
-})))), _defineProperty$y(_sheetCloseStyles, Position.LEFT, _objectSpread$o({
+})))), _defineProperty$1(_sheetCloseStyles, Position.LEFT, _objectSpread$o({
   marginRight: -12,
   right: 0,
   marginTop: 12,
@@ -73418,7 +73635,7 @@ var sheetCloseStyles = (_sheetCloseStyles = {}, _defineProperty$y(_sheetCloseSty
   to: {
     transform: 'translateX(-100%), rotate(360deg)'
   }
-})))), _defineProperty$y(_sheetCloseStyles, Position.TOP, _objectSpread$o({
+})))), _defineProperty$1(_sheetCloseStyles, Position.TOP, _objectSpread$o({
   right: 0,
   marginRight: 12,
   top: '100%',
@@ -73438,7 +73655,7 @@ var sheetCloseStyles = (_sheetCloseStyles = {}, _defineProperty$y(_sheetCloseSty
   to: {
     transform: 'translateY(-200%), rotate(360deg)'
   }
-})))), _defineProperty$y(_sheetCloseStyles, Position.BOTTOM, _objectSpread$o({
+})))), _defineProperty$1(_sheetCloseStyles, Position.BOTTOM, _objectSpread$o({
   right: 0,
   marginRight: 12,
   bottom: '100%',
@@ -73506,7 +73723,7 @@ var SheetClose = /*#__PURE__*/function (_PureComponent) {
 
 SheetClose.displayName = "SheetClose";
 
-_defineProperty$y(SheetClose, "propTypes", _objectSpread$o(_objectSpread$o({}, _default.propTypes), {}, {
+_defineProperty$1(SheetClose, "propTypes", _objectSpread$o(_objectSpread$o({}, _default.propTypes), {}, {
   isClosing: propTypes$2.exports.bool,
   position: propTypes$2.exports.oneOf([Position.LEFT, Position.RIGHT, Position.TOP, Position.BOTTOM]).isRequired
 }));
@@ -73515,39 +73732,39 @@ var _paneProps, _subpaneProps, _animationStylesClass;
 
 function ownKeys$n(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$n(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$n(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$n(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-var paneProps = (_paneProps = {}, _defineProperty$y(_paneProps, Position.LEFT, {
+function _objectSpread$n(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$n(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$n(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+var paneProps = (_paneProps = {}, _defineProperty$1(_paneProps, Position.LEFT, {
   height: '100vh',
   maxWidth: '100vw',
   position: 'absolute',
   left: 0,
   right: 'auto'
-}), _defineProperty$y(_paneProps, Position.RIGHT, {
+}), _defineProperty$1(_paneProps, Position.RIGHT, {
   height: '100vh',
   maxWidth: '100vw',
   position: 'absolute',
   right: 0,
   left: 'auto'
-}), _defineProperty$y(_paneProps, Position.TOP, {
+}), _defineProperty$1(_paneProps, Position.TOP, {
   width: '100vw',
   position: 'absolute',
   maxHeight: '100vh',
   top: 0,
   bottom: 'auto'
-}), _defineProperty$y(_paneProps, Position.BOTTOM, {
+}), _defineProperty$1(_paneProps, Position.BOTTOM, {
   width: '100vw',
   maxHeight: '100vh',
   position: 'absolute',
   bottom: 0,
   top: 'auto'
 }), _paneProps);
-var subpaneProps = (_subpaneProps = {}, _defineProperty$y(_subpaneProps, Position.LEFT, {
+var subpaneProps = (_subpaneProps = {}, _defineProperty$1(_subpaneProps, Position.LEFT, {
   height: '100vh'
-}), _defineProperty$y(_subpaneProps, Position.RIGHT, {
+}), _defineProperty$1(_subpaneProps, Position.RIGHT, {
   height: '100vh'
-}), _defineProperty$y(_subpaneProps, Position.TOP, {
+}), _defineProperty$1(_subpaneProps, Position.TOP, {
   width: '100vw'
-}), _defineProperty$y(_subpaneProps, Position.BOTTOM, {
+}), _defineProperty$1(_subpaneProps, Position.BOTTOM, {
   width: '100vw'
 }), _subpaneProps);
 var animationEasing$1 = {
@@ -73567,7 +73784,7 @@ var withAnimations = function withAnimations(animateIn, animateOut) {
   };
 };
 
-var animationStylesClass = (_animationStylesClass = {}, _defineProperty$y(_animationStylesClass, Position.LEFT, _objectSpread$n({
+var animationStylesClass = (_animationStylesClass = {}, _defineProperty$1(_animationStylesClass, Position.LEFT, _objectSpread$n({
   transform: 'translateX(-100%)'
 }, withAnimations(css_1.keyframes('anchoredLeftSlideInAnimation', {
   from: {
@@ -73583,7 +73800,7 @@ var animationStylesClass = (_animationStylesClass = {}, _defineProperty$y(_anima
   to: {
     transform: 'translateX(-100%)'
   }
-})))), _defineProperty$y(_animationStylesClass, Position.RIGHT, _objectSpread$n({
+})))), _defineProperty$1(_animationStylesClass, Position.RIGHT, _objectSpread$n({
   transform: 'translateX(100%)'
 }, withAnimations(css_1.keyframes('anchoredRightSlideInAnimation', {
   from: {
@@ -73599,7 +73816,7 @@ var animationStylesClass = (_animationStylesClass = {}, _defineProperty$y(_anima
   to: {
     transform: 'translateX(100%)'
   }
-})))), _defineProperty$y(_animationStylesClass, Position.TOP, _objectSpread$n({
+})))), _defineProperty$1(_animationStylesClass, Position.TOP, _objectSpread$n({
   transform: 'translateY(-100%)'
 }, withAnimations(css_1.keyframes('anchoredTopSlideInAnimation', {
   from: {
@@ -73615,7 +73832,7 @@ var animationStylesClass = (_animationStylesClass = {}, _defineProperty$y(_anima
   to: {
     transform: 'translateY(-100%)'
   }
-})))), _defineProperty$y(_animationStylesClass, Position.BOTTOM, _objectSpread$n({
+})))), _defineProperty$1(_animationStylesClass, Position.BOTTOM, _objectSpread$n({
   transform: 'translateY(100%)'
 }, withAnimations(css_1.keyframes('anchoredBottomSlideInAnimation', {
   from: {
@@ -73749,7 +73966,7 @@ var _excluded$d = ["children", "color", "disabled", "dotSize"];
 
 function ownKeys$m(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$m(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$m(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$m(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$m(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$m(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$m(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var StatusIndicator = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function StatusIndicator(props, ref) {
   var children = props.children,
       _props$color = props.color,
@@ -73793,7 +74010,7 @@ var _excluded$c = ["fill", "size"],
 
 function ownKeys$l(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$l(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$l(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$l(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$l(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$l(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$l(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var animationEasing = {
   spring: 'cubic-bezier(0.175, 0.885, 0.320, 1.175)'
 };
@@ -73863,7 +74080,7 @@ var pseudoSelectors$3 = {
   _checkedDisabled: '&[disabled]:checked + div'
 };
 
-var internalStyles$2 = _defineProperty$y({
+var internalStyles$2 = _defineProperty$1({
   border: '0',
   clip: 'rect(1px, 1px, 1px, 1px)',
   height: '1px',
@@ -74012,7 +74229,7 @@ var _excluded$b = ["className", "disabled", "fontFamily", "grammarly", "height",
 
 function ownKeys$k(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$k(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$k(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$k(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$k(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var pseudoSelectors$2 = {
   _focus: '&:focus',
   _disabled: '&:disabled',
@@ -74130,7 +74347,7 @@ var _excluded$a = ["appearance", "description", "disabled", "hint", "id", "input
 
 function ownKeys$j(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$j(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$j(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$j(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TextareaField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function TextareaField(props, ref) {
   var id = useId('TextareaField', props.id);
 
@@ -74179,12 +74396,7 @@ var TextareaField = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.
     appearance: appearance,
     placeholder: placeholder,
     spellCheck: spellCheck,
-    resize: resize,
-    "aria-describedby": generateAriaDescribedBy(id, {
-      description: description,
-      hint: hint,
-      validationMessage: validationMessage
-    })
+    resize: resize
   }, remainingProps)));
 }));
 TextareaField.propTypes = _objectSpread$j(_objectSpread$j(_objectSpread$j({}, Textarea.propTypes), FormField.propTypes), {}, {
@@ -74438,7 +74650,7 @@ var _excluded$9 = ["children", "size", "disabled", "placeholder", "isSelectable"
 
 function ownKeys$i(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$i(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$i(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$i(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyProps$2 = {};
 var EditableCell = /*#__PURE__*/react.exports.memo(function EditableCell(props) {
   var children = props.children,
@@ -74593,7 +74805,7 @@ var _excluded$8 = ["children", "size", "selectMenuProps", "disabled", "placehold
 
 function ownKeys$h(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$h(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$h(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$h(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var MIN_SELECT_MENU_WIDTH = 240;
 var emptyProps$1 = {};
 var SelectMenuCell = /*#__PURE__*/react.exports.memo(function SelectMenuCell(props) {
@@ -74761,7 +74973,7 @@ var _excluded$7 = ["children"];
 
 function ownKeys$g(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$g(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$g(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$g(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TableBody = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function TableBody(props, ref) {
   var children = props.children,
       rest = _objectWithoutProperties(props, _excluded$7);
@@ -74779,7 +74991,7 @@ var _excluded$6 = ["allowAutoHeight", "children", "defaultHeight", "estimatedIte
 
 function ownKeys$f(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$f(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$f(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$f(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TableVirtualBody = /*#__PURE__*/react.exports.memo(function TableVirtualBody(props) {
   var _props$allowAutoHeigh = props.allowAutoHeight,
       allowAutoHeight = _props$allowAutoHeigh === void 0 ? false : _props$allowAutoHeigh,
@@ -75070,7 +75282,7 @@ var _excluded$5 = ["children", "isSortable", "sortOrder", "textProps"];
 
 function ownKeys$e(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$e(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$e(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$e(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var TextTableHeaderCell = /*#__PURE__*/react.exports.memo(function TextTableHeaderCell(props) {
   var children = props.children;
       props.isSortable;
@@ -75094,7 +75306,7 @@ var _excluded$4 = ["children"],
 
 function ownKeys$d(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$d(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$d(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$d(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var emptyObject = {};
 var Table$1 = /*#__PURE__*/react.exports.memo(function Table(props) {
   var children = props.children,
@@ -75126,7 +75338,7 @@ var _excluded$3 = ["appearance", "direction", "disabled", "is", "isSelected", "o
 
 function ownKeys$c(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$c(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$c(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$c(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var noop$1 = function noop() {};
 
@@ -75288,1495 +75500,6 @@ var TabNavigation = /*#__PURE__*/react.exports.forwardRef(function TabNavigation
 });
 TabNavigation.propTypes = _default.propTypes;
 
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the size to enable large array optimizations. */
-var LARGE_ARRAY_SIZE = 200;
-
-/** Used to stand-in for `undefined` hash values. */
-var HASH_UNDEFINED = '__lodash_hash_undefined__';
-
-/** Used as references for various `Number` constants. */
-var INFINITY = 1 / 0,
-    MAX_SAFE_INTEGER = 9007199254740991;
-
-/** `Object#toString` result references. */
-var argsTag = '[object Arguments]',
-    funcTag = '[object Function]',
-    genTag = '[object GeneratorFunction]',
-    symbolTag = '[object Symbol]';
-
-/**
- * Used to match `RegExp`
- * [syntax characters](http://ecma-international.org/ecma-262/7.0/#sec-patterns).
- */
-var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-
-/** Used to detect host constructors (Safari). */
-var reIsHostCtor = /^\[object .+?Constructor\]$/;
-
-/** Used to detect unsigned integer values. */
-var reIsUint = /^(?:0|[1-9]\d*)$/;
-
-/** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof commonjsGlobal == 'object' && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
-
-/** Detect free variable `self`. */
-var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || Function('return this')();
-
-/**
- * A faster alternative to `Function#apply`, this function invokes `func`
- * with the `this` binding of `thisArg` and the arguments of `args`.
- *
- * @private
- * @param {Function} func The function to invoke.
- * @param {*} thisArg The `this` binding of `func`.
- * @param {Array} args The arguments to invoke `func` with.
- * @returns {*} Returns the result of `func`.
- */
-function apply(func, thisArg, args) {
-  switch (args.length) {
-    case 0: return func.call(thisArg);
-    case 1: return func.call(thisArg, args[0]);
-    case 2: return func.call(thisArg, args[0], args[1]);
-    case 3: return func.call(thisArg, args[0], args[1], args[2]);
-  }
-  return func.apply(thisArg, args);
-}
-
-/**
- * A specialized version of `_.includes` for arrays without support for
- * specifying an index to search from.
- *
- * @private
- * @param {Array} [array] The array to inspect.
- * @param {*} target The value to search for.
- * @returns {boolean} Returns `true` if `target` is found, else `false`.
- */
-function arrayIncludes(array, value) {
-  var length = array ? array.length : 0;
-  return !!length && baseIndexOf(array, value, 0) > -1;
-}
-
-/**
- * This function is like `arrayIncludes` except that it accepts a comparator.
- *
- * @private
- * @param {Array} [array] The array to inspect.
- * @param {*} target The value to search for.
- * @param {Function} comparator The comparator invoked per element.
- * @returns {boolean} Returns `true` if `target` is found, else `false`.
- */
-function arrayIncludesWith(array, value, comparator) {
-  var index = -1,
-      length = array ? array.length : 0;
-
-  while (++index < length) {
-    if (comparator(value, array[index])) {
-      return true;
-    }
-  }
-  return false;
-}
-
-/**
- * A specialized version of `_.map` for arrays without support for iteratee
- * shorthands.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the new mapped array.
- */
-function arrayMap(array, iteratee) {
-  var index = -1,
-      length = array ? array.length : 0,
-      result = Array(length);
-
-  while (++index < length) {
-    result[index] = iteratee(array[index], index, array);
-  }
-  return result;
-}
-
-/**
- * Appends the elements of `values` to `array`.
- *
- * @private
- * @param {Array} array The array to modify.
- * @param {Array} values The values to append.
- * @returns {Array} Returns `array`.
- */
-function arrayPush(array, values) {
-  var index = -1,
-      length = values.length,
-      offset = array.length;
-
-  while (++index < length) {
-    array[offset + index] = values[index];
-  }
-  return array;
-}
-
-/**
- * The base implementation of `_.findIndex` and `_.findLastIndex` without
- * support for iteratee shorthands.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {Function} predicate The function invoked per iteration.
- * @param {number} fromIndex The index to search from.
- * @param {boolean} [fromRight] Specify iterating from right to left.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function baseFindIndex(array, predicate, fromIndex, fromRight) {
-  var length = array.length,
-      index = fromIndex + (fromRight ? 1 : -1);
-
-  while ((fromRight ? index-- : ++index < length)) {
-    if (predicate(array[index], index, array)) {
-      return index;
-    }
-  }
-  return -1;
-}
-
-/**
- * The base implementation of `_.indexOf` without `fromIndex` bounds checks.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {*} value The value to search for.
- * @param {number} fromIndex The index to search from.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function baseIndexOf(array, value, fromIndex) {
-  if (value !== value) {
-    return baseFindIndex(array, baseIsNaN, fromIndex);
-  }
-  var index = fromIndex - 1,
-      length = array.length;
-
-  while (++index < length) {
-    if (array[index] === value) {
-      return index;
-    }
-  }
-  return -1;
-}
-
-/**
- * The base implementation of `_.isNaN` without support for number objects.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is `NaN`, else `false`.
- */
-function baseIsNaN(value) {
-  return value !== value;
-}
-
-/**
- * The base implementation of `_.times` without support for iteratee shorthands
- * or max array length checks.
- *
- * @private
- * @param {number} n The number of times to invoke `iteratee`.
- * @param {Function} iteratee The function invoked per iteration.
- * @returns {Array} Returns the array of results.
- */
-function baseTimes(n, iteratee) {
-  var index = -1,
-      result = Array(n);
-
-  while (++index < n) {
-    result[index] = iteratee(index);
-  }
-  return result;
-}
-
-/**
- * The base implementation of `_.unary` without support for storing metadata.
- *
- * @private
- * @param {Function} func The function to cap arguments for.
- * @returns {Function} Returns the new capped function.
- */
-function baseUnary(func) {
-  return function(value) {
-    return func(value);
-  };
-}
-
-/**
- * Checks if a cache value for `key` exists.
- *
- * @private
- * @param {Object} cache The cache to query.
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function cacheHas(cache, key) {
-  return cache.has(key);
-}
-
-/**
- * Gets the value at `key` of `object`.
- *
- * @private
- * @param {Object} [object] The object to query.
- * @param {string} key The key of the property to get.
- * @returns {*} Returns the property value.
- */
-function getValue(object, key) {
-  return object == null ? undefined : object[key];
-}
-
-/**
- * Checks if `value` is a host object in IE < 9.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
- */
-function isHostObject(value) {
-  // Many host objects are `Object` objects that can coerce to strings
-  // despite having improperly defined `toString` methods.
-  var result = false;
-  if (value != null && typeof value.toString != 'function') {
-    try {
-      result = !!(value + '');
-    } catch (e) {}
-  }
-  return result;
-}
-
-/**
- * Creates a unary function that invokes `func` with its argument transformed.
- *
- * @private
- * @param {Function} func The function to wrap.
- * @param {Function} transform The argument transform.
- * @returns {Function} Returns the new function.
- */
-function overArg(func, transform) {
-  return function(arg) {
-    return func(transform(arg));
-  };
-}
-
-/** Used for built-in method references. */
-var arrayProto = Array.prototype,
-    funcProto = Function.prototype,
-    objectProto = Object.prototype;
-
-/** Used to detect overreaching core-js shims. */
-var coreJsData = root['__core-js_shared__'];
-
-/** Used to detect methods masquerading as native. */
-var maskSrcKey = (function() {
-  var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || '');
-  return uid ? ('Symbol(src)_1.' + uid) : '';
-}());
-
-/** Used to resolve the decompiled source of functions. */
-var funcToString = funcProto.toString;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objectToString = objectProto.toString;
-
-/** Used to detect if a method is native. */
-var reIsNative = RegExp('^' +
-  funcToString.call(hasOwnProperty).replace(reRegExpChar, '\\$&')
-  .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
-);
-
-/** Built-in value references. */
-var Symbol$1 = root.Symbol,
-    getPrototype = overArg(Object.getPrototypeOf, Object),
-    propertyIsEnumerable = objectProto.propertyIsEnumerable,
-    splice = arrayProto.splice,
-    spreadableSymbol = Symbol$1 ? Symbol$1.isConcatSpreadable : undefined;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeGetSymbols = Object.getOwnPropertySymbols,
-    nativeMax = Math.max;
-
-/* Built-in method references that are verified to be native. */
-var Map$1 = getNative(root, 'Map'),
-    nativeCreate = getNative(Object, 'create');
-
-/**
- * Creates a hash object.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function Hash(entries) {
-  var index = -1,
-      length = entries ? entries.length : 0;
-
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-
-/**
- * Removes all key-value entries from the hash.
- *
- * @private
- * @name clear
- * @memberOf Hash
- */
-function hashClear() {
-  this.__data__ = nativeCreate ? nativeCreate(null) : {};
-}
-
-/**
- * Removes `key` and its value from the hash.
- *
- * @private
- * @name delete
- * @memberOf Hash
- * @param {Object} hash The hash to modify.
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function hashDelete(key) {
-  return this.has(key) && delete this.__data__[key];
-}
-
-/**
- * Gets the hash value for `key`.
- *
- * @private
- * @name get
- * @memberOf Hash
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function hashGet(key) {
-  var data = this.__data__;
-  if (nativeCreate) {
-    var result = data[key];
-    return result === HASH_UNDEFINED ? undefined : result;
-  }
-  return hasOwnProperty.call(data, key) ? data[key] : undefined;
-}
-
-/**
- * Checks if a hash value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf Hash
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function hashHas(key) {
-  var data = this.__data__;
-  return nativeCreate ? data[key] !== undefined : hasOwnProperty.call(data, key);
-}
-
-/**
- * Sets the hash `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf Hash
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the hash instance.
- */
-function hashSet(key, value) {
-  var data = this.__data__;
-  data[key] = (nativeCreate && value === undefined) ? HASH_UNDEFINED : value;
-  return this;
-}
-
-// Add methods to `Hash`.
-Hash.prototype.clear = hashClear;
-Hash.prototype['delete'] = hashDelete;
-Hash.prototype.get = hashGet;
-Hash.prototype.has = hashHas;
-Hash.prototype.set = hashSet;
-
-/**
- * Creates an list cache object.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function ListCache(entries) {
-  var index = -1,
-      length = entries ? entries.length : 0;
-
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-
-/**
- * Removes all key-value entries from the list cache.
- *
- * @private
- * @name clear
- * @memberOf ListCache
- */
-function listCacheClear() {
-  this.__data__ = [];
-}
-
-/**
- * Removes `key` and its value from the list cache.
- *
- * @private
- * @name delete
- * @memberOf ListCache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function listCacheDelete(key) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  if (index < 0) {
-    return false;
-  }
-  var lastIndex = data.length - 1;
-  if (index == lastIndex) {
-    data.pop();
-  } else {
-    splice.call(data, index, 1);
-  }
-  return true;
-}
-
-/**
- * Gets the list cache value for `key`.
- *
- * @private
- * @name get
- * @memberOf ListCache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function listCacheGet(key) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  return index < 0 ? undefined : data[index][1];
-}
-
-/**
- * Checks if a list cache value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf ListCache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function listCacheHas(key) {
-  return assocIndexOf(this.__data__, key) > -1;
-}
-
-/**
- * Sets the list cache `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf ListCache
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the list cache instance.
- */
-function listCacheSet(key, value) {
-  var data = this.__data__,
-      index = assocIndexOf(data, key);
-
-  if (index < 0) {
-    data.push([key, value]);
-  } else {
-    data[index][1] = value;
-  }
-  return this;
-}
-
-// Add methods to `ListCache`.
-ListCache.prototype.clear = listCacheClear;
-ListCache.prototype['delete'] = listCacheDelete;
-ListCache.prototype.get = listCacheGet;
-ListCache.prototype.has = listCacheHas;
-ListCache.prototype.set = listCacheSet;
-
-/**
- * Creates a map cache object to store key-value pairs.
- *
- * @private
- * @constructor
- * @param {Array} [entries] The key-value pairs to cache.
- */
-function MapCache(entries) {
-  var index = -1,
-      length = entries ? entries.length : 0;
-
-  this.clear();
-  while (++index < length) {
-    var entry = entries[index];
-    this.set(entry[0], entry[1]);
-  }
-}
-
-/**
- * Removes all key-value entries from the map.
- *
- * @private
- * @name clear
- * @memberOf MapCache
- */
-function mapCacheClear() {
-  this.__data__ = {
-    'hash': new Hash,
-    'map': new (Map$1 || ListCache),
-    'string': new Hash
-  };
-}
-
-/**
- * Removes `key` and its value from the map.
- *
- * @private
- * @name delete
- * @memberOf MapCache
- * @param {string} key The key of the value to remove.
- * @returns {boolean} Returns `true` if the entry was removed, else `false`.
- */
-function mapCacheDelete(key) {
-  return getMapData(this, key)['delete'](key);
-}
-
-/**
- * Gets the map value for `key`.
- *
- * @private
- * @name get
- * @memberOf MapCache
- * @param {string} key The key of the value to get.
- * @returns {*} Returns the entry value.
- */
-function mapCacheGet(key) {
-  return getMapData(this, key).get(key);
-}
-
-/**
- * Checks if a map value for `key` exists.
- *
- * @private
- * @name has
- * @memberOf MapCache
- * @param {string} key The key of the entry to check.
- * @returns {boolean} Returns `true` if an entry for `key` exists, else `false`.
- */
-function mapCacheHas(key) {
-  return getMapData(this, key).has(key);
-}
-
-/**
- * Sets the map `key` to `value`.
- *
- * @private
- * @name set
- * @memberOf MapCache
- * @param {string} key The key of the value to set.
- * @param {*} value The value to set.
- * @returns {Object} Returns the map cache instance.
- */
-function mapCacheSet(key, value) {
-  getMapData(this, key).set(key, value);
-  return this;
-}
-
-// Add methods to `MapCache`.
-MapCache.prototype.clear = mapCacheClear;
-MapCache.prototype['delete'] = mapCacheDelete;
-MapCache.prototype.get = mapCacheGet;
-MapCache.prototype.has = mapCacheHas;
-MapCache.prototype.set = mapCacheSet;
-
-/**
- *
- * Creates an array cache object to store unique values.
- *
- * @private
- * @constructor
- * @param {Array} [values] The values to cache.
- */
-function SetCache(values) {
-  var index = -1,
-      length = values ? values.length : 0;
-
-  this.__data__ = new MapCache;
-  while (++index < length) {
-    this.add(values[index]);
-  }
-}
-
-/**
- * Adds `value` to the array cache.
- *
- * @private
- * @name add
- * @memberOf SetCache
- * @alias push
- * @param {*} value The value to cache.
- * @returns {Object} Returns the cache instance.
- */
-function setCacheAdd(value) {
-  this.__data__.set(value, HASH_UNDEFINED);
-  return this;
-}
-
-/**
- * Checks if `value` is in the array cache.
- *
- * @private
- * @name has
- * @memberOf SetCache
- * @param {*} value The value to search for.
- * @returns {number} Returns `true` if `value` is found, else `false`.
- */
-function setCacheHas(value) {
-  return this.__data__.has(value);
-}
-
-// Add methods to `SetCache`.
-SetCache.prototype.add = SetCache.prototype.push = setCacheAdd;
-SetCache.prototype.has = setCacheHas;
-
-/**
- * Creates an array of the enumerable property names of the array-like `value`.
- *
- * @private
- * @param {*} value The value to query.
- * @param {boolean} inherited Specify returning inherited property names.
- * @returns {Array} Returns the array of property names.
- */
-function arrayLikeKeys(value, inherited) {
-  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  // Safari 9 makes `arguments.length` enumerable in strict mode.
-  var result = (isArray(value) || isArguments(value))
-    ? baseTimes(value.length, String)
-    : [];
-
-  var length = result.length,
-      skipIndexes = !!length;
-
-  for (var key in value) {
-    if ((inherited || hasOwnProperty.call(value, key)) &&
-        !(skipIndexes && (key == 'length' || isIndex(key, length)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-/**
- * Gets the index at which the `key` is found in `array` of key-value pairs.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {*} key The key to search for.
- * @returns {number} Returns the index of the matched value, else `-1`.
- */
-function assocIndexOf(array, key) {
-  var length = array.length;
-  while (length--) {
-    if (eq(array[length][0], key)) {
-      return length;
-    }
-  }
-  return -1;
-}
-
-/**
- * The base implementation of methods like `_.difference` without support
- * for excluding multiple arrays or iteratee shorthands.
- *
- * @private
- * @param {Array} array The array to inspect.
- * @param {Array} values The values to exclude.
- * @param {Function} [iteratee] The iteratee invoked per element.
- * @param {Function} [comparator] The comparator invoked per element.
- * @returns {Array} Returns the new array of filtered values.
- */
-function baseDifference(array, values, iteratee, comparator) {
-  var index = -1,
-      includes = arrayIncludes,
-      isCommon = true,
-      length = array.length,
-      result = [],
-      valuesLength = values.length;
-
-  if (!length) {
-    return result;
-  }
-  if (iteratee) {
-    values = arrayMap(values, baseUnary(iteratee));
-  }
-  if (comparator) {
-    includes = arrayIncludesWith;
-    isCommon = false;
-  }
-  else if (values.length >= LARGE_ARRAY_SIZE) {
-    includes = cacheHas;
-    isCommon = false;
-    values = new SetCache(values);
-  }
-  outer:
-  while (++index < length) {
-    var value = array[index],
-        computed = iteratee ? iteratee(value) : value;
-
-    value = (comparator || value !== 0) ? value : 0;
-    if (isCommon && computed === computed) {
-      var valuesIndex = valuesLength;
-      while (valuesIndex--) {
-        if (values[valuesIndex] === computed) {
-          continue outer;
-        }
-      }
-      result.push(value);
-    }
-    else if (!includes(values, computed, comparator)) {
-      result.push(value);
-    }
-  }
-  return result;
-}
-
-/**
- * The base implementation of `_.flatten` with support for restricting flattening.
- *
- * @private
- * @param {Array} array The array to flatten.
- * @param {number} depth The maximum recursion depth.
- * @param {boolean} [predicate=isFlattenable] The function invoked per iteration.
- * @param {boolean} [isStrict] Restrict to values that pass `predicate` checks.
- * @param {Array} [result=[]] The initial result value.
- * @returns {Array} Returns the new flattened array.
- */
-function baseFlatten(array, depth, predicate, isStrict, result) {
-  var index = -1,
-      length = array.length;
-
-  predicate || (predicate = isFlattenable);
-  result || (result = []);
-
-  while (++index < length) {
-    var value = array[index];
-    if (depth > 0 && predicate(value)) {
-      if (depth > 1) {
-        // Recursively flatten arrays (susceptible to call stack limits).
-        baseFlatten(value, depth - 1, predicate, isStrict, result);
-      } else {
-        arrayPush(result, value);
-      }
-    } else if (!isStrict) {
-      result[result.length] = value;
-    }
-  }
-  return result;
-}
-
-/**
- * The base implementation of `getAllKeys` and `getAllKeysIn` which uses
- * `keysFunc` and `symbolsFunc` to get the enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Function} keysFunc The function to get the keys of `object`.
- * @param {Function} symbolsFunc The function to get the symbols of `object`.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-  var result = keysFunc(object);
-  return isArray(object) ? result : arrayPush(result, symbolsFunc(object));
-}
-
-/**
- * The base implementation of `_.isNative` without bad shim checks.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a native function,
- *  else `false`.
- */
-function baseIsNative(value) {
-  if (!isObject(value) || isMasked(value)) {
-    return false;
-  }
-  var pattern = (isFunction(value) || isHostObject(value)) ? reIsNative : reIsHostCtor;
-  return pattern.test(toSource(value));
-}
-
-/**
- * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function baseKeysIn(object) {
-  if (!isObject(object)) {
-    return nativeKeysIn(object);
-  }
-  var isProto = isPrototype(object),
-      result = [];
-
-  for (var key in object) {
-    if (!(key == 'constructor' && (isProto || !hasOwnProperty.call(object, key)))) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-/**
- * The base implementation of `_.pick` without support for individual
- * property identifiers.
- *
- * @private
- * @param {Object} object The source object.
- * @param {string[]} props The property identifiers to pick.
- * @returns {Object} Returns the new object.
- */
-function basePick(object, props) {
-  object = Object(object);
-  return basePickBy(object, props, function(value, key) {
-    return key in object;
-  });
-}
-
-/**
- * The base implementation of  `_.pickBy` without support for iteratee shorthands.
- *
- * @private
- * @param {Object} object The source object.
- * @param {string[]} props The property identifiers to pick from.
- * @param {Function} predicate The function invoked per property.
- * @returns {Object} Returns the new object.
- */
-function basePickBy(object, props, predicate) {
-  var index = -1,
-      length = props.length,
-      result = {};
-
-  while (++index < length) {
-    var key = props[index],
-        value = object[key];
-
-    if (predicate(value, key)) {
-      result[key] = value;
-    }
-  }
-  return result;
-}
-
-/**
- * The base implementation of `_.rest` which doesn't validate or coerce arguments.
- *
- * @private
- * @param {Function} func The function to apply a rest parameter to.
- * @param {number} [start=func.length-1] The start position of the rest parameter.
- * @returns {Function} Returns the new function.
- */
-function baseRest(func, start) {
-  start = nativeMax(start === undefined ? (func.length - 1) : start, 0);
-  return function() {
-    var args = arguments,
-        index = -1,
-        length = nativeMax(args.length - start, 0),
-        array = Array(length);
-
-    while (++index < length) {
-      array[index] = args[start + index];
-    }
-    index = -1;
-    var otherArgs = Array(start + 1);
-    while (++index < start) {
-      otherArgs[index] = args[index];
-    }
-    otherArgs[start] = array;
-    return apply(func, this, otherArgs);
-  };
-}
-
-/**
- * Creates an array of own and inherited enumerable property names and
- * symbols of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names and symbols.
- */
-function getAllKeysIn(object) {
-  return baseGetAllKeys(object, keysIn, getSymbolsIn);
-}
-
-/**
- * Gets the data for `map`.
- *
- * @private
- * @param {Object} map The map to query.
- * @param {string} key The reference key.
- * @returns {*} Returns the map data.
- */
-function getMapData(map, key) {
-  var data = map.__data__;
-  return isKeyable(key)
-    ? data[typeof key == 'string' ? 'string' : 'hash']
-    : data.map;
-}
-
-/**
- * Gets the native function at `key` of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @param {string} key The key of the method to get.
- * @returns {*} Returns the function if it's native, else `undefined`.
- */
-function getNative(object, key) {
-  var value = getValue(object, key);
-  return baseIsNative(value) ? value : undefined;
-}
-
-/**
- * Creates an array of the own enumerable symbol properties of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */
-var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
-
-/**
- * Creates an array of the own and inherited enumerable symbol properties
- * of `object`.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of symbols.
- */
-var getSymbolsIn = !nativeGetSymbols ? stubArray : function(object) {
-  var result = [];
-  while (object) {
-    arrayPush(result, getSymbols(object));
-    object = getPrototype(object);
-  }
-  return result;
-};
-
-/**
- * Checks if `value` is a flattenable `arguments` object or array.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is flattenable, else `false`.
- */
-function isFlattenable(value) {
-  return isArray(value) || isArguments(value) ||
-    !!(spreadableSymbol && value && value[spreadableSymbol]);
-}
-
-/**
- * Checks if `value` is a valid array-like index.
- *
- * @private
- * @param {*} value The value to check.
- * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
- * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
- */
-function isIndex(value, length) {
-  length = length == null ? MAX_SAFE_INTEGER : length;
-  return !!length &&
-    (typeof value == 'number' || reIsUint.test(value)) &&
-    (value > -1 && value % 1 == 0 && value < length);
-}
-
-/**
- * Checks if `value` is suitable for use as unique object key.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is suitable, else `false`.
- */
-function isKeyable(value) {
-  var type = typeof value;
-  return (type == 'string' || type == 'number' || type == 'symbol' || type == 'boolean')
-    ? (value !== '__proto__')
-    : (value === null);
-}
-
-/**
- * Checks if `func` has its source masked.
- *
- * @private
- * @param {Function} func The function to check.
- * @returns {boolean} Returns `true` if `func` is masked, else `false`.
- */
-function isMasked(func) {
-  return !!maskSrcKey && (maskSrcKey in func);
-}
-
-/**
- * Checks if `value` is likely a prototype object.
- *
- * @private
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
- */
-function isPrototype(value) {
-  var Ctor = value && value.constructor,
-      proto = (typeof Ctor == 'function' && Ctor.prototype) || objectProto;
-
-  return value === proto;
-}
-
-/**
- * This function is like
- * [`Object.keys`](http://ecma-international.org/ecma-262/7.0/#sec-object.keys)
- * except that it includes inherited enumerable properties.
- *
- * @private
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- */
-function nativeKeysIn(object) {
-  var result = [];
-  if (object != null) {
-    for (var key in Object(object)) {
-      result.push(key);
-    }
-  }
-  return result;
-}
-
-/**
- * Converts `value` to a string key if it's not a string or symbol.
- *
- * @private
- * @param {*} value The value to inspect.
- * @returns {string|symbol} Returns the key.
- */
-function toKey(value) {
-  if (typeof value == 'string' || isSymbol(value)) {
-    return value;
-  }
-  var result = (value + '');
-  return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
-}
-
-/**
- * Converts `func` to its source code.
- *
- * @private
- * @param {Function} func The function to process.
- * @returns {string} Returns the source code.
- */
-function toSource(func) {
-  if (func != null) {
-    try {
-      return funcToString.call(func);
-    } catch (e) {}
-    try {
-      return (func + '');
-    } catch (e) {}
-  }
-  return '';
-}
-
-/**
- * Performs a
- * [`SameValueZero`](http://ecma-international.org/ecma-262/7.0/#sec-samevaluezero)
- * comparison between two values to determine if they are equivalent.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to compare.
- * @param {*} other The other value to compare.
- * @returns {boolean} Returns `true` if the values are equivalent, else `false`.
- * @example
- *
- * var object = { 'a': 1 };
- * var other = { 'a': 1 };
- *
- * _.eq(object, object);
- * // => true
- *
- * _.eq(object, other);
- * // => false
- *
- * _.eq('a', 'a');
- * // => true
- *
- * _.eq('a', Object('a'));
- * // => false
- *
- * _.eq(NaN, NaN);
- * // => true
- */
-function eq(value, other) {
-  return value === other || (value !== value && other !== other);
-}
-
-/**
- * Checks if `value` is likely an `arguments` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an `arguments` object,
- *  else `false`.
- * @example
- *
- * _.isArguments(function() { return arguments; }());
- * // => true
- *
- * _.isArguments([1, 2, 3]);
- * // => false
- */
-function isArguments(value) {
-  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
-  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
-    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
-}
-
-/**
- * Checks if `value` is classified as an `Array` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array, else `false`.
- * @example
- *
- * _.isArray([1, 2, 3]);
- * // => true
- *
- * _.isArray(document.body.children);
- * // => false
- *
- * _.isArray('abc');
- * // => false
- *
- * _.isArray(_.noop);
- * // => false
- */
-var isArray = Array.isArray;
-
-/**
- * Checks if `value` is array-like. A value is considered array-like if it's
- * not a function and has a `value.length` that's an integer greater than or
- * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
- * @example
- *
- * _.isArrayLike([1, 2, 3]);
- * // => true
- *
- * _.isArrayLike(document.body.children);
- * // => true
- *
- * _.isArrayLike('abc');
- * // => true
- *
- * _.isArrayLike(_.noop);
- * // => false
- */
-function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
-}
-
-/**
- * This method is like `_.isArrayLike` except that it also checks if `value`
- * is an object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array-like object,
- *  else `false`.
- * @example
- *
- * _.isArrayLikeObject([1, 2, 3]);
- * // => true
- *
- * _.isArrayLikeObject(document.body.children);
- * // => true
- *
- * _.isArrayLikeObject('abc');
- * // => false
- *
- * _.isArrayLikeObject(_.noop);
- * // => false
- */
-function isArrayLikeObject(value) {
-  return isObjectLike(value) && isArrayLike(value);
-}
-
-/**
- * Checks if `value` is classified as a `Function` object.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
- * @example
- *
- * _.isFunction(_);
- * // => true
- *
- * _.isFunction(/abc/);
- * // => false
- */
-function isFunction(value) {
-  // The use of `Object#toString` avoids issues with the `typeof` operator
-  // in Safari 8-9 which returns 'object' for typed array and other constructors.
-  var tag = isObject(value) ? objectToString.call(value) : '';
-  return tag == funcTag || tag == genTag;
-}
-
-/**
- * Checks if `value` is a valid array-like length.
- *
- * **Note:** This method is loosely based on
- * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
- * @example
- *
- * _.isLength(3);
- * // => true
- *
- * _.isLength(Number.MIN_VALUE);
- * // => false
- *
- * _.isLength(Infinity);
- * // => false
- *
- * _.isLength('3');
- * // => false
- */
-function isLength(value) {
-  return typeof value == 'number' &&
-    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-}
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject(value) {
-  var type = typeof value;
-  return !!value && (type == 'object' || type == 'function');
-}
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return !!value && typeof value == 'object';
-}
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-  return typeof value == 'symbol' ||
-    (isObjectLike(value) && objectToString.call(value) == symbolTag);
-}
-
-/**
- * Creates an array of the own and inherited enumerable property names of `object`.
- *
- * **Note:** Non-object values are coerced to objects.
- *
- * @static
- * @memberOf _
- * @since 3.0.0
- * @category Object
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property names.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * _.keysIn(new Foo);
- * // => ['a', 'b', 'c'] (iteration order is not guaranteed)
- */
-function keysIn(object) {
-  return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
-}
-
-/**
- * The opposite of `_.pick`; this method creates an object composed of the
- * own and inherited enumerable string keyed properties of `object` that are
- * not omitted.
- *
- * @static
- * @since 0.1.0
- * @memberOf _
- * @category Object
- * @param {Object} object The source object.
- * @param {...(string|string[])} [props] The property identifiers to omit.
- * @returns {Object} Returns the new object.
- * @example
- *
- * var object = { 'a': 1, 'b': '2', 'c': 3 };
- *
- * _.omit(object, ['a', 'c']);
- * // => { 'b': '2' }
- */
-var omit = baseRest(function(object, props) {
-  if (object == null) {
-    return {};
-  }
-  props = arrayMap(baseFlatten(props, 1), toKey);
-  return basePick(object, baseDifference(getAllKeysIn(object), props));
-});
-
-/**
- * This method returns a new empty array.
- *
- * @static
- * @memberOf _
- * @since 4.13.0
- * @category Util
- * @returns {Array} Returns the new empty array.
- * @example
- *
- * var arrays = _.times(2, _.stubArray);
- *
- * console.log(arrays);
- * // => [[], []]
- *
- * console.log(arrays[0] === arrays[1]);
- * // => false
- */
-function stubArray() {
-  return [];
-}
-
-var lodash_omit = omit;
-
 var _excluded$2 = ["children", "isRemovable", "onRemove"];
 var Tag = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.forwardRef(function Tag(props, ref) {
   var children = props.children,
@@ -76883,7 +75606,6 @@ var TagInput$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.for
       setIsFocused = _useState4[1];
 
   var id = useId('TagInput');
-  var autocompleteId = "TagInputAutocomplete-".concat(values.length);
   var inputId = inputProps && inputProps.id ? inputProps.id : id;
   var hasAutocomplete = Array.isArray(autocompleteItems) && autocompleteItems.length > 0;
 
@@ -77001,7 +75723,7 @@ var TagInput$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.for
     onBlur: handleBlur
   }, boxProps, rest, {
     paddingRight: hasAutocomplete ? majorScale(3) : undefined
-  }), /*#__PURE__*/React.createElement(_default, {
+  }), values.map(maybeRenderTag), /*#__PURE__*/React.createElement(_default, {
     flexGrow: "1",
     display: "inline-block"
   }, /*#__PURE__*/React.createElement(Autocomplete, {
@@ -77010,7 +75732,7 @@ var TagInput$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.for
       setInputValue('');
     },
     items: hasAutocomplete ? autocompleteItems : [],
-    id: autocompleteId,
+    id: inputId,
     selectedItem: "",
     inputValue: inputValue
   }, function (autocompleteProps) {
@@ -77043,23 +75765,18 @@ var TagInput$1 = /*#__PURE__*/react.exports.memo( /*#__PURE__*/react.exports.for
       }
     };
 
-    return /*#__PURE__*/React.createElement(_default, {
-      display: "flex",
-      ref: function ref(boxInputRef) {
-        autocompleteGetRef(boxInputRef);
-      },
-      flexWrap: "wrap",
-      width: inputProps.width
-    }, values.map(maybeRenderTag), /*#__PURE__*/React.createElement(TextInput, _extends$3({
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(TextInput, _extends$3({
       appearance: "none",
       disabled: disabled,
       height: height - 4,
-      flexGrow: "1",
+      width: "100%",
       type: "text"
-    }, lodash_omit(inputProps, ['width']), autocompleteRestProps, {
+    }, inputProps, autocompleteRestProps, {
       value: inputValue,
       id: inputId,
       ref: function ref(textInputRef) {
+        autocompleteGetRef(textInputRef);
+
         if (inputRef instanceof Function) {
           inputRef(textInputRef);
         } else if (inputRef) {
@@ -77380,7 +76097,7 @@ var Alert = {
 
 function ownKeys$b(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$b(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$b(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$b(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function getColors(theme, _ref) {
   var color = _ref.color,
@@ -77759,7 +76476,7 @@ var defaultControlStyles = {
 
 function ownKeys$a(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$a(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$a(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$a(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var baseStyle$u = {
   fontFamily: 'fontFamilies.ui',
   borderRadius: 'radii.1',
@@ -78413,7 +77130,7 @@ var Option = {
 
 function ownKeys$9(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$9(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$9(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$9(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function borderProperty(theme, _ref) {
   var border = _ref.border,
@@ -78506,7 +77223,7 @@ var Pane = {
 
 function ownKeys$8(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$8(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$8(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$8(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var baseStyle$c = {
   marginTop: 0,
@@ -78554,7 +77271,7 @@ var Paragraph = {
 
 function ownKeys$7(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$7(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$7(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$7(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var baseStyle$b = {
   fontFamily: 'fontFamilies.ui',
   border: 'none',
@@ -78866,7 +77583,7 @@ var TagInput = {
 
 function ownKeys$6(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$6(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$6(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$6(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var baseStyle$2 = {};
 var appearances$2 = {};
@@ -79087,7 +77804,7 @@ fills$1.options = Object.keys(fills$1.solid);
 
 function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$5(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 var colorTokens = {
   // Grays / neutrals
   gray900: '#101840',
@@ -79279,7 +77996,7 @@ var ogTokens = {
 
 function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$4(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 /**
  * Neutrals and Blue are special.
@@ -79575,7 +78292,7 @@ var zIndices = {
 
 function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 var tokens = _objectSpread$3(_objectSpread$3({
   colors: colors$2,
@@ -79589,7 +78306,7 @@ var tokens = _objectSpread$3(_objectSpread$3({
 
 function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 _objectSpread$2(_objectSpread$2({
   /* DEPRECATED */
   palette: palette$1,
@@ -79675,7 +78392,7 @@ var text = {
 
 function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty$y(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(Object(source), true).forEach(function (key) { _defineProperty$1(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 /**
  * Text styles for paragraphs (multi line text).
  * This is used in the Paragraph.
@@ -79698,6 +78415,36 @@ function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { 
 
 autoHydrate();
 /* End generated icons */
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = ".App {\n  text-align: center;\n}\n\n.App-logo {\n  height: 40vmin;\n  pointer-events: none;\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  .App-logo {\n    animation: App-logo-spin infinite 20s linear;\n  }\n}\n\n.App-header {\n  background-color: #282c34;\n  min-height: 100vh;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  font-size: calc(10px + 2vmin);\n  color: white;\n}\n\n.App-link {\n  color: #61dafb;\n}\n\n@keyframes App-logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n";
+styleInject(css_248z);
 
 var StateContext = /*#__PURE__*/react.exports.createContext();
 var StateProvider = function StateProvider(_ref) {
@@ -80217,7 +78964,6 @@ var config = {
     }
   }
 };
-var Config = config;
 
 var orbitdb = undefined;
 var programs = undefined;
@@ -80232,7 +78978,7 @@ var debug$1 = function debug(maxCount, id) {
     args[_key - 2] = arguments[_key];
   }
 
-  logs.assert(maxCount, url, id, args);
+  _assert.assert(maxCount, url, id, args);
 };
 
 var initIPFS = /*#__PURE__*/function () {
@@ -80245,7 +78991,7 @@ var initIPFS = /*#__PURE__*/function () {
             IPFS = props.IPFS;
             debug$1(-4, '--------------👀[(database)initIPFS]');
             _context.next = 4;
-            return IPFS.create(Config.ipfs);
+            return IPFS.create(config.ipfs);
 
           case 4:
             return _context.abrupt("return", _context.sent);
@@ -80517,7 +79263,7 @@ function ConnectToWalletButton(props) {
               setLoading(true);
               (_window$ethereum5 = window.ethereum) === null || _window$ethereum5 === void 0 ? void 0 : _window$ethereum5.request({
                 method: 'eth_requestAccounts'
-              })["catch"](console.error)["finally"](function () {
+              }).catch(console.error).finally(function () {
                 return setLoading(false);
               });
 
@@ -80556,7 +79302,7 @@ function Systems(props) {
       args[_key - 1] = arguments[_key];
     }
 
-    logs.assert(-4, url, id, args);
+    _assert.assert(-4, url, id, args);
   };
 
   React.useEffect(function () {
@@ -80656,27 +79402,13 @@ function Systems(props) {
     color: "warning"
   }, "IPFS"), appState.orbitdbStatus === 'Started' ? /*#__PURE__*/React.createElement(StatusIndicator, {
     color: "success"
-  }, "OrbitDB") : /*#__PURE__*/React.createElement(StatusIndicator, {
+  }, "DB") : /*#__PURE__*/React.createElement(StatusIndicator, {
     color: "warning"
-  }, "OrbitDB"), /*#__PURE__*/React.createElement(ConnectToWalletButton, {
+  }, "DB"), /*#__PURE__*/React.createElement(ConnectToWalletButton, {
     style: {
       marginLeft: 'auto'
     }
   }))));
-}
-
-function toInteger(dirtyNumber) {
-  if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
-    return NaN;
-  }
-
-  var number = Number(dirtyNumber);
-
-  if (isNaN(number)) {
-    return number;
-  }
-
-  return number < 0 ? Math.ceil(number) : Math.floor(number);
 }
 
 function requiredArgs(required, args) {
@@ -80728,18 +79460,13 @@ function toDate(argument) {
   } else {
     if ((typeof argument === 'string' || argStr === '[object String]') && typeof console !== 'undefined') {
       // eslint-disable-next-line no-console
-      console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#string-arguments"); // eslint-disable-next-line no-console
+      console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as date arguments. Please use `parseISO` to parse strings. See: https://git.io/fjule"); // eslint-disable-next-line no-console
 
       console.warn(new Error().stack);
     }
 
     return new Date(NaN);
   }
-}
-
-var defaultOptions = {};
-function getDefaultOptions() {
-  return defaultOptions;
 }
 
 /**
@@ -80767,6 +79494,10 @@ function getTimezoneOffsetInMilliseconds(date) {
  * @description
  * Compare the two dates and return 1 if the first date is after the second,
  * -1 if the first date is before the second or 0 if dates are equal.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} dateLeft - the first date to compare
  * @param {Date|Number} dateRight - the second date to compare
@@ -80808,51 +79539,16 @@ function compareAsc(dirtyDateLeft, dirtyDateRight) {
 }
 
 /**
- * Days in 1 week.
- *
- * @name daysInWeek
- * @constant
- * @type {number}
- * @default
- */
-/**
- * Milliseconds in 1 minute
- *
- * @name millisecondsInMinute
- * @constant
- * @type {number}
- * @default
- */
-
-var millisecondsInMinute = 60000;
-/**
- * Milliseconds in 1 hour
- *
- * @name millisecondsInHour
- * @constant
- * @type {number}
- * @default
- */
-
-var millisecondsInHour = 3600000;
-/**
- * Milliseconds in 1 second
- *
- * @name millisecondsInSecond
- * @constant
- * @type {number}
- * @default
- */
-
-var millisecondsInSecond = 1000;
-
-/**
  * @name differenceInCalendarMonths
  * @category Month Helpers
  * @summary Get the number of calendar months between the given dates.
  *
  * @description
  * Get the number of calendar months between the given dates.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} dateLeft - the later date
  * @param {Date|Number} dateRight - the earlier date
@@ -80861,7 +79557,7 @@ var millisecondsInSecond = 1000;
  *
  * @example
  * // How many calendar months are between 31 January 2014 and 1 September 2014?
- * const result = differenceInCalendarMonths(
+ * var result = differenceInCalendarMonths(
  *   new Date(2014, 8, 1),
  *   new Date(2014, 0, 31)
  * )
@@ -80884,6 +79580,10 @@ function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
  *
  * @description
  * Get the number of milliseconds between the given dates.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} dateLeft - the later date
  * @param {Date|Number} dateRight - the earlier date
@@ -80928,6 +79628,10 @@ function getRoundingMethod(method) {
  * Return the end of a day for the given date.
  * The result will be in the local timezone.
  *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
  * @param {Date|Number} date - the original date
  * @returns {Date} the end of a day
  * @throws {TypeError} 1 argument required
@@ -80953,6 +79657,10 @@ function endOfDay(dirtyDate) {
  * @description
  * Return the end of a month for the given date.
  * The result will be in the local timezone.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} date - the original date
  * @returns {Date} the end of a month
@@ -80981,13 +79689,17 @@ function endOfMonth(dirtyDate) {
  * @description
  * Is the given date the last day of a month?
  *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
  * @param {Date|Number} date - the date to check
  * @returns {Boolean} the date is the last day of a month
  * @throws {TypeError} 1 argument required
  *
  * @example
  * // Is 28 February 2014 the last day of a month?
- * const result = isLastDayOfMonth(new Date(2014, 1, 28))
+ * var result = isLastDayOfMonth(new Date(2014, 1, 28))
  * //=> true
  */
 
@@ -81004,6 +79716,10 @@ function isLastDayOfMonth(dirtyDate) {
  *
  * @description
  * Get the number of full months between the given dates using trunc as a default rounding method.
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} dateLeft - the later date
  * @param {Date|Number} dateRight - the earlier date
@@ -81057,6 +79773,10 @@ function differenceInMonths(dirtyDateLeft, dirtyDateRight) {
  * @description
  * Get the number of seconds between the given dates.
  *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
  * @param {Date|Number} dateLeft - the later date
  * @param {Date|Number} dateRight - the earlier date
  * @param {Object} [options] - an object with options.
@@ -81078,135 +79798,6 @@ function differenceInSeconds(dateLeft, dateRight, options) {
   requiredArgs(2, arguments);
   var diff = differenceInMilliseconds(dateLeft, dateRight) / 1000;
   return getRoundingMethod(options === null || options === void 0 ? void 0 : options.roundingMethod)(diff);
-}
-
-function startOfUTCISOWeek(dirtyDate) {
-  requiredArgs(1, arguments);
-  var weekStartsOn = 1;
-  var date = toDate(dirtyDate);
-  var day = date.getUTCDay();
-  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  date.setUTCDate(date.getUTCDate() - diff);
-  date.setUTCHours(0, 0, 0, 0);
-  return date;
-}
-
-function getUTCISOWeekYear(dirtyDate) {
-  requiredArgs(1, arguments);
-  var date = toDate(dirtyDate);
-  var year = date.getUTCFullYear();
-  var fourthOfJanuaryOfNextYear = new Date(0);
-  fourthOfJanuaryOfNextYear.setUTCFullYear(year + 1, 0, 4);
-  fourthOfJanuaryOfNextYear.setUTCHours(0, 0, 0, 0);
-  var startOfNextYear = startOfUTCISOWeek(fourthOfJanuaryOfNextYear);
-  var fourthOfJanuaryOfThisYear = new Date(0);
-  fourthOfJanuaryOfThisYear.setUTCFullYear(year, 0, 4);
-  fourthOfJanuaryOfThisYear.setUTCHours(0, 0, 0, 0);
-  var startOfThisYear = startOfUTCISOWeek(fourthOfJanuaryOfThisYear);
-
-  if (date.getTime() >= startOfNextYear.getTime()) {
-    return year + 1;
-  } else if (date.getTime() >= startOfThisYear.getTime()) {
-    return year;
-  } else {
-    return year - 1;
-  }
-}
-
-function startOfUTCISOWeekYear(dirtyDate) {
-  requiredArgs(1, arguments);
-  var year = getUTCISOWeekYear(dirtyDate);
-  var fourthOfJanuary = new Date(0);
-  fourthOfJanuary.setUTCFullYear(year, 0, 4);
-  fourthOfJanuary.setUTCHours(0, 0, 0, 0);
-  var date = startOfUTCISOWeek(fourthOfJanuary);
-  return date;
-}
-
-var MILLISECONDS_IN_WEEK$1 = 604800000;
-function getUTCISOWeek(dirtyDate) {
-  requiredArgs(1, arguments);
-  var date = toDate(dirtyDate);
-  var diff = startOfUTCISOWeek(date).getTime() - startOfUTCISOWeekYear(date).getTime(); // Round the number of days to the nearest integer
-  // because the number of milliseconds in a week is not constant
-  // (e.g. it's different in the week of the daylight saving time clock shift)
-
-  return Math.round(diff / MILLISECONDS_IN_WEEK$1) + 1;
-}
-
-function startOfUTCWeek(dirtyDate, options) {
-  var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
-  requiredArgs(1, arguments);
-  var defaultOptions = getDefaultOptions();
-  var weekStartsOn = toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
-
-  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
-  }
-
-  var date = toDate(dirtyDate);
-  var day = date.getUTCDay();
-  var diff = (day < weekStartsOn ? 7 : 0) + day - weekStartsOn;
-  date.setUTCDate(date.getUTCDate() - diff);
-  date.setUTCHours(0, 0, 0, 0);
-  return date;
-}
-
-function getUTCWeekYear(dirtyDate, options) {
-  var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
-  requiredArgs(1, arguments);
-  var date = toDate(dirtyDate);
-  var year = date.getUTCFullYear();
-  var defaultOptions = getDefaultOptions();
-  var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1); // Test if weekStartsOn is between 1 and 7 _and_ is not NaN
-
-  if (!(firstWeekContainsDate >= 1 && firstWeekContainsDate <= 7)) {
-    throw new RangeError('firstWeekContainsDate must be between 1 and 7 inclusively');
-  }
-
-  var firstWeekOfNextYear = new Date(0);
-  firstWeekOfNextYear.setUTCFullYear(year + 1, 0, firstWeekContainsDate);
-  firstWeekOfNextYear.setUTCHours(0, 0, 0, 0);
-  var startOfNextYear = startOfUTCWeek(firstWeekOfNextYear, options);
-  var firstWeekOfThisYear = new Date(0);
-  firstWeekOfThisYear.setUTCFullYear(year, 0, firstWeekContainsDate);
-  firstWeekOfThisYear.setUTCHours(0, 0, 0, 0);
-  var startOfThisYear = startOfUTCWeek(firstWeekOfThisYear, options);
-
-  if (date.getTime() >= startOfNextYear.getTime()) {
-    return year + 1;
-  } else if (date.getTime() >= startOfThisYear.getTime()) {
-    return year;
-  } else {
-    return year - 1;
-  }
-}
-
-function startOfUTCWeekYear(dirtyDate, options) {
-  var _ref, _ref2, _ref3, _options$firstWeekCon, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
-  requiredArgs(1, arguments);
-  var defaultOptions = getDefaultOptions();
-  var firstWeekContainsDate = toInteger((_ref = (_ref2 = (_ref3 = (_options$firstWeekCon = options === null || options === void 0 ? void 0 : options.firstWeekContainsDate) !== null && _options$firstWeekCon !== void 0 ? _options$firstWeekCon : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.firstWeekContainsDate) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.firstWeekContainsDate) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.firstWeekContainsDate) !== null && _ref !== void 0 ? _ref : 1);
-  var year = getUTCWeekYear(dirtyDate, options);
-  var firstWeek = new Date(0);
-  firstWeek.setUTCFullYear(year, 0, firstWeekContainsDate);
-  firstWeek.setUTCHours(0, 0, 0, 0);
-  var date = startOfUTCWeek(firstWeek, options);
-  return date;
-}
-
-var MILLISECONDS_IN_WEEK = 604800000;
-function getUTCWeek(dirtyDate, options) {
-  requiredArgs(1, arguments);
-  var date = toDate(dirtyDate);
-  var diff = startOfUTCWeek(date, options).getTime() - startOfUTCWeekYear(date, options).getTime(); // Round the number of days to the nearest integer
-  // because the number of milliseconds in a week is not constant
-  // (e.g. it's different in the week of the daylight saving time clock shift)
-
-  return Math.round(diff / MILLISECONDS_IN_WEEK) + 1;
 }
 
 var formatDistanceLocale = {
@@ -81353,18 +79944,19 @@ var formatRelative = function (token, _date, _baseDate, _options) {
 };
 
 function buildLocalizeFn(args) {
-  return function (dirtyIndex, options) {
-    var context = options !== null && options !== void 0 && options.context ? String(options.context) : 'standalone';
+  return function (dirtyIndex, dirtyOptions) {
+    var options = dirtyOptions || {};
+    var context = options.context ? String(options.context) : 'standalone';
     var valuesArray;
 
     if (context === 'formatting' && args.formattingValues) {
       var defaultWidth = args.defaultFormattingWidth || args.defaultWidth;
-      var width = options !== null && options !== void 0 && options.width ? String(options.width) : defaultWidth;
+      var width = options.width ? String(options.width) : defaultWidth;
       valuesArray = args.formattingValues[width] || args.formattingValues[defaultWidth];
     } else {
       var _defaultWidth = args.defaultWidth;
 
-      var _width = options !== null && options !== void 0 && options.width ? String(options.width) : args.defaultWidth;
+      var _width = options.width ? String(options.width) : args.defaultWidth;
 
       valuesArray = args.values[_width] || args.values[_defaultWidth];
     }
@@ -81707,22 +80299,24 @@ var locale = {
   }
 };
 
-function assign(target, object) {
+function assign(target, dirtyObject) {
   if (target == null) {
     throw new TypeError('assign requires that input parameter not be null or undefined');
   }
 
-  for (var property in object) {
-    if (Object.prototype.hasOwnProperty.call(object, property)) {
-      target[property] = object[property];
+  dirtyObject = dirtyObject || {};
+
+  for (var property in dirtyObject) {
+    if (Object.prototype.hasOwnProperty.call(dirtyObject, property)) {
+      target[property] = dirtyObject[property];
     }
   }
 
   return target;
 }
 
-function cloneObject(object) {
-  return assign({}, object);
+function cloneObject(dirtyObject) {
+  return assign({}, dirtyObject);
 }
 
 var MINUTES_IN_DAY = 1440;
@@ -81765,6 +80359,34 @@ var MINUTES_IN_TWO_MONTHS = 86400;
  * | 20 secs ... 40 secs    | half a minute        |
  * | 40 secs ... 60 secs    | less than a minute   |
  * | 60 secs ... 90 secs    | 1 minute             |
+ *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * - The function was renamed from `distanceInWords ` to `formatDistance`
+ *   to make its name consistent with `format` and `formatRelative`.
+ *
+ * - The order of arguments is swapped to make the function
+ *   consistent with `differenceIn...` functions.
+ *
+ *   ```javascript
+ *   // Before v2.0.0
+ *
+ *   distanceInWords(
+ *     new Date(1986, 3, 4, 10, 32, 0),
+ *     new Date(1986, 3, 4, 11, 32, 0),
+ *     { addSuffix: true }
+ *   ) //=> 'in about 1 hour'
+ *
+ *   // v2.0.0 onward
+ *
+ *   formatDistance(
+ *     new Date(1986, 3, 4, 11, 32, 0),
+ *     new Date(1986, 3, 4, 10, 32, 0),
+ *     { addSuffix: true }
+ *   ) //=> 'in about 1 hour'
+ *   ```
  *
  * @param {Date|Number} date - the date
  * @param {Date|Number} baseDate - the date to compare with
@@ -81810,12 +80432,10 @@ var MINUTES_IN_TWO_MONTHS = 86400;
  * //=> 'pli ol 1 jaro'
  */
 
-function formatDistance(dirtyDate, dirtyBaseDate, options) {
-  var _ref, _options$locale;
-
+function formatDistance(dirtyDate, dirtyBaseDate) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   requiredArgs(2, arguments);
-  var defaultOptions = getDefaultOptions();
-  var locale$1 = (_ref = (_options$locale = options === null || options === void 0 ? void 0 : options.locale) !== null && _options$locale !== void 0 ? _options$locale : defaultOptions.locale) !== null && _ref !== void 0 ? _ref : locale;
+  var locale$1 = options.locale || locale;
 
   if (!locale$1.formatDistance) {
     throw new RangeError('locale must contain formatDistance property');
@@ -81827,10 +80447,9 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
     throw new RangeError('Invalid time value');
   }
 
-  var localizeOptions = assign(cloneObject(options), {
-    addSuffix: Boolean(options === null || options === void 0 ? void 0 : options.addSuffix),
-    comparison: comparison
-  });
+  var localizeOptions = cloneObject(options);
+  localizeOptions.addSuffix = Boolean(options.addSuffix);
+  localizeOptions.comparison = comparison;
   var dateLeft;
   var dateRight;
 
@@ -81848,7 +80467,7 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
   var months; // 0 up to 2 mins
 
   if (minutes < 2) {
-    if (options !== null && options !== void 0 && options.includeSeconds) {
+    if (options.includeSeconds) {
       if (seconds < 5) {
         return locale$1.formatDistance('lessThanXSeconds', 5, localizeOptions);
       } else if (seconds < 10) {
@@ -81856,7 +80475,7 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
       } else if (seconds < 20) {
         return locale$1.formatDistance('lessThanXSeconds', 20, localizeOptions);
       } else if (seconds < 40) {
-        return locale$1.formatDistance('halfAMinute', 0, localizeOptions);
+        return locale$1.formatDistance('halfAMinute', null, localizeOptions);
       } else if (seconds < 60) {
         return locale$1.formatDistance('lessThanXMinutes', 1, localizeOptions);
       } else {
@@ -81947,6 +80566,25 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
  * > ⚠️ Please note that this function is not present in the FP submodule as
  * > it uses `Date.now()` internally hence impure and can't be safely curried.
  *
+ * ### v2.0.0 breaking changes:
+ *
+ * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
+ *
+ * - The function was renamed from `distanceInWordsToNow ` to `formatDistanceToNow`
+ *   to make its name consistent with `format` and `formatRelative`.
+ *
+ *   ```javascript
+ *   // Before v2.0.0
+ *
+ *   distanceInWordsToNow(new Date(2014, 6, 2), { addSuffix: true })
+ *   //=> 'in 6 months'
+ *
+ *   // v2.0.0 onward
+ *
+ *   formatDistanceToNow(new Date(2014, 6, 2), { addSuffix: true })
+ *   //=> 'in 6 months'
+ *   ```
+ *
  * @param {Date|Number} date - the given date
  * @param {Object} [options] - the object with options
  * @param {Boolean} [options.includeSeconds=false] - distances less than a minute are more detailed
@@ -81959,7 +80597,7 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
  *
  * @example
  * // If today is 1 January 2015, what is the distance to 2 July 2014?
- * const result = formatDistanceToNow(
+ * var result = formatDistanceToNow(
  *   new Date(2014, 6, 2)
  * )
  * //=> '6 months'
@@ -81967,7 +80605,7 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
  * @example
  * // If now is 1 January 2015 00:00:00,
  * // what is the distance to 1 January 2015 00:00:15, including seconds?
- * const result = formatDistanceToNow(
+ * var result = formatDistanceToNow(
  *   new Date(2015, 0, 1, 0, 0, 15),
  *   {includeSeconds: true}
  * )
@@ -81976,7 +80614,7 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
  * @example
  * // If today is 1 January 2015,
  * // what is the distance to 1 January 2016, with a suffix?
- * const result = formatDistanceToNow(
+ * var result = formatDistanceToNow(
  *   new Date(2016, 0, 1),
  *   {addSuffix: true}
  * )
@@ -81985,1961 +80623,18 @@ function formatDistance(dirtyDate, dirtyBaseDate, options) {
  * @example
  * // If today is 1 January 2015,
  * // what is the distance to 1 August 2016 in Esperanto?
- * const eoLocale = require('date-fns/locale/eo')
- * const result = formatDistanceToNow(
+ * var eoLocale = require('date-fns/locale/eo')
+ * var result = formatDistanceToNow(
  *   new Date(2016, 7, 1),
  *   {locale: eoLocale}
  * )
  * //=> 'pli ol 1 jaro'
  */
-function formatDistanceToNow(dirtyDate, options) {
+
+function formatDistanceToNow(dirtyDate, dirtyOptions) {
   requiredArgs(1, arguments);
-  return formatDistance(dirtyDate, Date.now(), options);
+  return formatDistance(dirtyDate, Date.now(), dirtyOptions);
 }
-
-function _defineProperty$w(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class Setter {
-  constructor() {
-    _defineProperty$w(this, "priority", void 0);
-
-    _defineProperty$w(this, "subPriority", 0);
-  }
-
-  validate(_utcDate, _options) {
-    return true;
-  }
-
-}
-class ValueSetter extends Setter {
-  constructor(value, validateValue, setValue, priority, subPriority) {
-    super();
-    this.value = value;
-    this.validateValue = validateValue;
-    this.setValue = setValue;
-    this.priority = priority;
-
-    if (subPriority) {
-      this.subPriority = subPriority;
-    }
-  }
-
-  validate(utcDate, options) {
-    return this.validateValue(utcDate, this.value, options);
-  }
-
-  set(utcDate, flags, options) {
-    return this.setValue(utcDate, flags, this.value, options);
-  }
-
-}
-
-function _defineProperty$v(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class Parser {
-  constructor() {
-    _defineProperty$v(this, "incompatibleTokens", void 0);
-
-    _defineProperty$v(this, "priority", void 0);
-
-    _defineProperty$v(this, "subPriority", void 0);
-  }
-
-  run(dateString, token, match, options) {
-    var result = this.parse(dateString, token, match, options);
-
-    if (!result) {
-      return null;
-    }
-
-    return {
-      setter: new ValueSetter(result.value, this.validate, this.set, this.priority, this.subPriority),
-      rest: result.rest
-    };
-  }
-
-  validate(_utcDate, _value, _options) {
-    return true;
-  }
-
-}
-
-function _defineProperty$u(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class EraParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$u(this, "priority", 140);
-
-    _defineProperty$u(this, "incompatibleTokens", ['R', 'u', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      // AD, BC
-      case 'G':
-      case 'GG':
-      case 'GGG':
-        return match.era(dateString, {
-          width: 'abbreviated'
-        }) || match.era(dateString, {
-          width: 'narrow'
-        });
-      // A, B
-
-      case 'GGGGG':
-        return match.era(dateString, {
-          width: 'narrow'
-        });
-      // Anno Domini, Before Christ
-
-      case 'GGGG':
-      default:
-        return match.era(dateString, {
-          width: 'wide'
-        }) || match.era(dateString, {
-          width: 'abbreviated'
-        }) || match.era(dateString, {
-          width: 'narrow'
-        });
-    }
-  }
-
-  set(date, flags, value) {
-    flags.era = value;
-    date.setUTCFullYear(value, 0, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-var numericPatterns = {
-  month: /^(1[0-2]|0?\d)/,
-  // 0 to 12
-  date: /^(3[0-1]|[0-2]?\d)/,
-  // 0 to 31
-  dayOfYear: /^(36[0-6]|3[0-5]\d|[0-2]?\d?\d)/,
-  // 0 to 366
-  week: /^(5[0-3]|[0-4]?\d)/,
-  // 0 to 53
-  hour23h: /^(2[0-3]|[0-1]?\d)/,
-  // 0 to 23
-  hour24h: /^(2[0-4]|[0-1]?\d)/,
-  // 0 to 24
-  hour11h: /^(1[0-1]|0?\d)/,
-  // 0 to 11
-  hour12h: /^(1[0-2]|0?\d)/,
-  // 0 to 12
-  minute: /^[0-5]?\d/,
-  // 0 to 59
-  second: /^[0-5]?\d/,
-  // 0 to 59
-  singleDigit: /^\d/,
-  // 0 to 9
-  twoDigits: /^\d{1,2}/,
-  // 0 to 99
-  threeDigits: /^\d{1,3}/,
-  // 0 to 999
-  fourDigits: /^\d{1,4}/,
-  // 0 to 9999
-  anyDigitsSigned: /^-?\d+/,
-  singleDigitSigned: /^-?\d/,
-  // 0 to 9, -0 to -9
-  twoDigitsSigned: /^-?\d{1,2}/,
-  // 0 to 99, -0 to -99
-  threeDigitsSigned: /^-?\d{1,3}/,
-  // 0 to 999, -0 to -999
-  fourDigitsSigned: /^-?\d{1,4}/ // 0 to 9999, -0 to -9999
-
-};
-var timezonePatterns = {
-  basicOptionalMinutes: /^([+-])(\d{2})(\d{2})?|Z/,
-  basic: /^([+-])(\d{2})(\d{2})|Z/,
-  basicOptionalSeconds: /^([+-])(\d{2})(\d{2})((\d{2}))?|Z/,
-  extended: /^([+-])(\d{2}):(\d{2})|Z/,
-  extendedOptionalSeconds: /^([+-])(\d{2}):(\d{2})(:(\d{2}))?|Z/
-};
-
-function mapValue(parseFnResult, mapFn) {
-  if (!parseFnResult) {
-    return parseFnResult;
-  }
-
-  return {
-    value: mapFn(parseFnResult.value),
-    rest: parseFnResult.rest
-  };
-}
-function parseNumericPattern(pattern, dateString) {
-  var matchResult = dateString.match(pattern);
-
-  if (!matchResult) {
-    return null;
-  }
-
-  return {
-    value: parseInt(matchResult[0], 10),
-    rest: dateString.slice(matchResult[0].length)
-  };
-}
-function parseTimezonePattern(pattern, dateString) {
-  var matchResult = dateString.match(pattern);
-
-  if (!matchResult) {
-    return null;
-  } // Input is 'Z'
-
-
-  if (matchResult[0] === 'Z') {
-    return {
-      value: 0,
-      rest: dateString.slice(1)
-    };
-  }
-
-  var sign = matchResult[1] === '+' ? 1 : -1;
-  var hours = matchResult[2] ? parseInt(matchResult[2], 10) : 0;
-  var minutes = matchResult[3] ? parseInt(matchResult[3], 10) : 0;
-  var seconds = matchResult[5] ? parseInt(matchResult[5], 10) : 0;
-  return {
-    value: sign * (hours * millisecondsInHour + minutes * millisecondsInMinute + seconds * millisecondsInSecond),
-    rest: dateString.slice(matchResult[0].length)
-  };
-}
-function parseAnyDigitsSigned(dateString) {
-  return parseNumericPattern(numericPatterns.anyDigitsSigned, dateString);
-}
-function parseNDigits(n, dateString) {
-  switch (n) {
-    case 1:
-      return parseNumericPattern(numericPatterns.singleDigit, dateString);
-
-    case 2:
-      return parseNumericPattern(numericPatterns.twoDigits, dateString);
-
-    case 3:
-      return parseNumericPattern(numericPatterns.threeDigits, dateString);
-
-    case 4:
-      return parseNumericPattern(numericPatterns.fourDigits, dateString);
-
-    default:
-      return parseNumericPattern(new RegExp('^\\d{1,' + n + '}'), dateString);
-  }
-}
-function parseNDigitsSigned(n, dateString) {
-  switch (n) {
-    case 1:
-      return parseNumericPattern(numericPatterns.singleDigitSigned, dateString);
-
-    case 2:
-      return parseNumericPattern(numericPatterns.twoDigitsSigned, dateString);
-
-    case 3:
-      return parseNumericPattern(numericPatterns.threeDigitsSigned, dateString);
-
-    case 4:
-      return parseNumericPattern(numericPatterns.fourDigitsSigned, dateString);
-
-    default:
-      return parseNumericPattern(new RegExp('^-?\\d{1,' + n + '}'), dateString);
-  }
-}
-function dayPeriodEnumToHours(dayPeriod) {
-  switch (dayPeriod) {
-    case 'morning':
-      return 4;
-
-    case 'evening':
-      return 17;
-
-    case 'pm':
-    case 'noon':
-    case 'afternoon':
-      return 12;
-
-    case 'am':
-    case 'midnight':
-    case 'night':
-    default:
-      return 0;
-  }
-}
-function normalizeTwoDigitYear(twoDigitYear, currentYear) {
-  var isCommonEra = currentYear > 0; // Absolute number of the current year:
-  // 1 -> 1 AC
-  // 0 -> 1 BC
-  // -1 -> 2 BC
-
-  var absCurrentYear = isCommonEra ? currentYear : 1 - currentYear;
-  var result;
-
-  if (absCurrentYear <= 50) {
-    result = twoDigitYear || 100;
-  } else {
-    var rangeEnd = absCurrentYear + 50;
-    var rangeEndCentury = Math.floor(rangeEnd / 100) * 100;
-    var isPreviousCentury = twoDigitYear >= rangeEnd % 100;
-    result = twoDigitYear + rangeEndCentury - (isPreviousCentury ? 100 : 0);
-  }
-
-  return isCommonEra ? result : 1 - result;
-}
-function isLeapYearIndex(year) {
-  return year % 400 === 0 || year % 4 === 0 && year % 100 !== 0;
-}
-
-function _defineProperty$t(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-// From http://www.unicode.org/reports/tr35/tr35-31/tr35-dates.html#Date_Format_Patterns
-// | Year     |     y | yy |   yyy |  yyyy | yyyyy |
-// |----------|-------|----|-------|-------|-------|
-// | AD 1     |     1 | 01 |   001 |  0001 | 00001 |
-// | AD 12    |    12 | 12 |   012 |  0012 | 00012 |
-// | AD 123   |   123 | 23 |   123 |  0123 | 00123 |
-// | AD 1234  |  1234 | 34 |  1234 |  1234 | 01234 |
-// | AD 12345 | 12345 | 45 | 12345 | 12345 | 12345 |
-class YearParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$t(this, "priority", 130);
-
-    _defineProperty$t(this, "incompatibleTokens", ['Y', 'R', 'u', 'w', 'I', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    var valueCallback = function (year) {
-      return {
-        year: year,
-        isTwoDigitYear: token === 'yy'
-      };
-    };
-
-    switch (token) {
-      case 'y':
-        return mapValue(parseNDigits(4, dateString), valueCallback);
-
-      case 'yo':
-        return mapValue(match.ordinalNumber(dateString, {
-          unit: 'year'
-        }), valueCallback);
-
-      default:
-        return mapValue(parseNDigits(token.length, dateString), valueCallback);
-    }
-  }
-
-  validate(_date, value) {
-    return value.isTwoDigitYear || value.year > 0;
-  }
-
-  set(date, flags, value) {
-    var currentYear = date.getUTCFullYear();
-
-    if (value.isTwoDigitYear) {
-      var normalizedTwoDigitYear = normalizeTwoDigitYear(value.year, currentYear);
-      date.setUTCFullYear(normalizedTwoDigitYear, 0, 1);
-      date.setUTCHours(0, 0, 0, 0);
-      return date;
-    }
-
-    var year = !('era' in flags) || flags.era === 1 ? value.year : 1 - value.year;
-    date.setUTCFullYear(year, 0, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$s(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-// Local week-numbering year
-class LocalWeekYearParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$s(this, "priority", 130);
-
-    _defineProperty$s(this, "incompatibleTokens", ['y', 'R', 'u', 'Q', 'q', 'M', 'L', 'I', 'd', 'D', 'i', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    var valueCallback = function (year) {
-      return {
-        year: year,
-        isTwoDigitYear: token === 'YY'
-      };
-    };
-
-    switch (token) {
-      case 'Y':
-        return mapValue(parseNDigits(4, dateString), valueCallback);
-
-      case 'Yo':
-        return mapValue(match.ordinalNumber(dateString, {
-          unit: 'year'
-        }), valueCallback);
-
-      default:
-        return mapValue(parseNDigits(token.length, dateString), valueCallback);
-    }
-  }
-
-  validate(_date, value) {
-    return value.isTwoDigitYear || value.year > 0;
-  }
-
-  set(date, flags, value, options) {
-    var currentYear = getUTCWeekYear(date, options);
-
-    if (value.isTwoDigitYear) {
-      var normalizedTwoDigitYear = normalizeTwoDigitYear(value.year, currentYear);
-      date.setUTCFullYear(normalizedTwoDigitYear, 0, options.firstWeekContainsDate);
-      date.setUTCHours(0, 0, 0, 0);
-      return startOfUTCWeek(date, options);
-    }
-
-    var year = !('era' in flags) || flags.era === 1 ? value.year : 1 - value.year;
-    date.setUTCFullYear(year, 0, options.firstWeekContainsDate);
-    date.setUTCHours(0, 0, 0, 0);
-    return startOfUTCWeek(date, options);
-  }
-
-}
-
-function _defineProperty$r(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class ISOWeekYearParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$r(this, "priority", 130);
-
-    _defineProperty$r(this, "incompatibleTokens", ['G', 'y', 'Y', 'u', 'Q', 'q', 'M', 'L', 'w', 'd', 'D', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token) {
-    if (token === 'R') {
-      return parseNDigitsSigned(4, dateString);
-    }
-
-    return parseNDigitsSigned(token.length, dateString);
-  }
-
-  set(_date, _flags, value) {
-    var firstWeekOfYear = new Date(0);
-    firstWeekOfYear.setUTCFullYear(value, 0, 4);
-    firstWeekOfYear.setUTCHours(0, 0, 0, 0);
-    return startOfUTCISOWeek(firstWeekOfYear);
-  }
-
-}
-
-function _defineProperty$q(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class ExtendedYearParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$q(this, "priority", 130);
-
-    _defineProperty$q(this, "incompatibleTokens", ['G', 'y', 'Y', 'R', 'w', 'I', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token) {
-    if (token === 'u') {
-      return parseNDigitsSigned(4, dateString);
-    }
-
-    return parseNDigitsSigned(token.length, dateString);
-  }
-
-  set(date, _flags, value) {
-    date.setUTCFullYear(value, 0, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$p(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class QuarterParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$p(this, "priority", 120);
-
-    _defineProperty$p(this, "incompatibleTokens", ['Y', 'R', 'q', 'M', 'L', 'w', 'I', 'd', 'D', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      // 1, 2, 3, 4
-      case 'Q':
-      case 'QQ':
-        // 01, 02, 03, 04
-        return parseNDigits(token.length, dateString);
-      // 1st, 2nd, 3rd, 4th
-
-      case 'Qo':
-        return match.ordinalNumber(dateString, {
-          unit: 'quarter'
-        });
-      // Q1, Q2, Q3, Q4
-
-      case 'QQQ':
-        return match.quarter(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.quarter(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // 1, 2, 3, 4 (narrow quarter; could be not numerical)
-
-      case 'QQQQQ':
-        return match.quarter(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // 1st quarter, 2nd quarter, ...
-
-      case 'QQQQ':
-      default:
-        return match.quarter(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.quarter(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.quarter(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 4;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMonth((value - 1) * 3, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$o(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class StandAloneQuarterParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$o(this, "priority", 120);
-
-    _defineProperty$o(this, "incompatibleTokens", ['Y', 'R', 'Q', 'M', 'L', 'w', 'I', 'd', 'D', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      // 1, 2, 3, 4
-      case 'q':
-      case 'qq':
-        // 01, 02, 03, 04
-        return parseNDigits(token.length, dateString);
-      // 1st, 2nd, 3rd, 4th
-
-      case 'qo':
-        return match.ordinalNumber(dateString, {
-          unit: 'quarter'
-        });
-      // Q1, Q2, Q3, Q4
-
-      case 'qqq':
-        return match.quarter(dateString, {
-          width: 'abbreviated',
-          context: 'standalone'
-        }) || match.quarter(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // 1, 2, 3, 4 (narrow quarter; could be not numerical)
-
-      case 'qqqqq':
-        return match.quarter(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // 1st quarter, 2nd quarter, ...
-
-      case 'qqqq':
-      default:
-        return match.quarter(dateString, {
-          width: 'wide',
-          context: 'standalone'
-        }) || match.quarter(dateString, {
-          width: 'abbreviated',
-          context: 'standalone'
-        }) || match.quarter(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 4;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMonth((value - 1) * 3, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$n(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class MonthParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$n(this, "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'L', 'w', 'I', 'D', 'i', 'e', 'c', 't', 'T']);
-
-    _defineProperty$n(this, "priority", 110);
-  }
-
-  parse(dateString, token, match) {
-    var valueCallback = function (value) {
-      return value - 1;
-    };
-
-    switch (token) {
-      // 1, 2, ..., 12
-      case 'M':
-        return mapValue(parseNumericPattern(numericPatterns.month, dateString), valueCallback);
-      // 01, 02, ..., 12
-
-      case 'MM':
-        return mapValue(parseNDigits(2, dateString), valueCallback);
-      // 1st, 2nd, ..., 12th
-
-      case 'Mo':
-        return mapValue(match.ordinalNumber(dateString, {
-          unit: 'month'
-        }), valueCallback);
-      // Jan, Feb, ..., Dec
-
-      case 'MMM':
-        return match.month(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.month(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // J, F, ..., D
-
-      case 'MMMMM':
-        return match.month(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // January, February, ..., December
-
-      case 'MMMM':
-      default:
-        return match.month(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.month(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.month(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 11;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMonth(value, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$m(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class StandAloneMonthParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$m(this, "priority", 110);
-
-    _defineProperty$m(this, "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'M', 'w', 'I', 'D', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    var valueCallback = function (value) {
-      return value - 1;
-    };
-
-    switch (token) {
-      // 1, 2, ..., 12
-      case 'L':
-        return mapValue(parseNumericPattern(numericPatterns.month, dateString), valueCallback);
-      // 01, 02, ..., 12
-
-      case 'LL':
-        return mapValue(parseNDigits(2, dateString), valueCallback);
-      // 1st, 2nd, ..., 12th
-
-      case 'Lo':
-        return mapValue(match.ordinalNumber(dateString, {
-          unit: 'month'
-        }), valueCallback);
-      // Jan, Feb, ..., Dec
-
-      case 'LLL':
-        return match.month(dateString, {
-          width: 'abbreviated',
-          context: 'standalone'
-        }) || match.month(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // J, F, ..., D
-
-      case 'LLLLL':
-        return match.month(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // January, February, ..., December
-
-      case 'LLLL':
-      default:
-        return match.month(dateString, {
-          width: 'wide',
-          context: 'standalone'
-        }) || match.month(dateString, {
-          width: 'abbreviated',
-          context: 'standalone'
-        }) || match.month(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 11;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMonth(value, 1);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function setUTCWeek(dirtyDate, dirtyWeek, options) {
-  requiredArgs(2, arguments);
-  var date = toDate(dirtyDate);
-  var week = toInteger(dirtyWeek);
-  var diff = getUTCWeek(date, options) - week;
-  date.setUTCDate(date.getUTCDate() - diff * 7);
-  return date;
-}
-
-function _defineProperty$l(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class LocalWeekParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$l(this, "priority", 100);
-
-    _defineProperty$l(this, "incompatibleTokens", ['y', 'R', 'u', 'q', 'Q', 'M', 'L', 'I', 'd', 'D', 'i', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'w':
-        return parseNumericPattern(numericPatterns.week, dateString);
-
-      case 'wo':
-        return match.ordinalNumber(dateString, {
-          unit: 'week'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 53;
-  }
-
-  set(date, _flags, value, options) {
-    return startOfUTCWeek(setUTCWeek(date, value, options), options);
-  }
-
-}
-
-function setUTCISOWeek(dirtyDate, dirtyISOWeek) {
-  requiredArgs(2, arguments);
-  var date = toDate(dirtyDate);
-  var isoWeek = toInteger(dirtyISOWeek);
-  var diff = getUTCISOWeek(date) - isoWeek;
-  date.setUTCDate(date.getUTCDate() - diff * 7);
-  return date;
-}
-
-function _defineProperty$k(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class ISOWeekParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$k(this, "priority", 100);
-
-    _defineProperty$k(this, "incompatibleTokens", ['y', 'Y', 'u', 'q', 'Q', 'M', 'L', 'w', 'd', 'D', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'I':
-        return parseNumericPattern(numericPatterns.week, dateString);
-
-      case 'Io':
-        return match.ordinalNumber(dateString, {
-          unit: 'week'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 53;
-  }
-
-  set(date, _flags, value) {
-    return startOfUTCISOWeek(setUTCISOWeek(date, value));
-  }
-
-}
-
-function _defineProperty$j(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-var DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-var DAYS_IN_MONTH_LEAP_YEAR = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // Day of the month
-
-class DateParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$j(this, "priority", 90);
-
-    _defineProperty$j(this, "subPriority", 1);
-
-    _defineProperty$j(this, "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'w', 'I', 'D', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'd':
-        return parseNumericPattern(numericPatterns.date, dateString);
-
-      case 'do':
-        return match.ordinalNumber(dateString, {
-          unit: 'date'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(date, value) {
-    var year = date.getUTCFullYear();
-    var isLeapYear = isLeapYearIndex(year);
-    var month = date.getUTCMonth();
-
-    if (isLeapYear) {
-      return value >= 1 && value <= DAYS_IN_MONTH_LEAP_YEAR[month];
-    } else {
-      return value >= 1 && value <= DAYS_IN_MONTH[month];
-    }
-  }
-
-  set(date, _flags, value) {
-    date.setUTCDate(value);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$i(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class DayOfYearParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$i(this, "priority", 90);
-
-    _defineProperty$i(this, "subpriority", 1);
-
-    _defineProperty$i(this, "incompatibleTokens", ['Y', 'R', 'q', 'Q', 'M', 'L', 'w', 'I', 'd', 'E', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'D':
-      case 'DD':
-        return parseNumericPattern(numericPatterns.dayOfYear, dateString);
-
-      case 'Do':
-        return match.ordinalNumber(dateString, {
-          unit: 'date'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(date, value) {
-    var year = date.getUTCFullYear();
-    var isLeapYear = isLeapYearIndex(year);
-
-    if (isLeapYear) {
-      return value >= 1 && value <= 366;
-    } else {
-      return value >= 1 && value <= 365;
-    }
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMonth(0, value);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function setUTCDay(dirtyDate, dirtyDay, options) {
-  var _ref, _ref2, _ref3, _options$weekStartsOn, _options$locale, _options$locale$optio, _defaultOptions$local, _defaultOptions$local2;
-
-  requiredArgs(2, arguments);
-  var defaultOptions = getDefaultOptions();
-  var weekStartsOn = toInteger((_ref = (_ref2 = (_ref3 = (_options$weekStartsOn = options === null || options === void 0 ? void 0 : options.weekStartsOn) !== null && _options$weekStartsOn !== void 0 ? _options$weekStartsOn : options === null || options === void 0 ? void 0 : (_options$locale = options.locale) === null || _options$locale === void 0 ? void 0 : (_options$locale$optio = _options$locale.options) === null || _options$locale$optio === void 0 ? void 0 : _options$locale$optio.weekStartsOn) !== null && _ref3 !== void 0 ? _ref3 : defaultOptions.weekStartsOn) !== null && _ref2 !== void 0 ? _ref2 : (_defaultOptions$local = defaultOptions.locale) === null || _defaultOptions$local === void 0 ? void 0 : (_defaultOptions$local2 = _defaultOptions$local.options) === null || _defaultOptions$local2 === void 0 ? void 0 : _defaultOptions$local2.weekStartsOn) !== null && _ref !== void 0 ? _ref : 0); // Test if weekStartsOn is between 0 and 6 _and_ is not NaN
-
-  if (!(weekStartsOn >= 0 && weekStartsOn <= 6)) {
-    throw new RangeError('weekStartsOn must be between 0 and 6 inclusively');
-  }
-
-  var date = toDate(dirtyDate);
-  var day = toInteger(dirtyDay);
-  var currentDay = date.getUTCDay();
-  var remainder = day % 7;
-  var dayIndex = (remainder + 7) % 7;
-  var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
-  date.setUTCDate(date.getUTCDate() + diff);
-  return date;
-}
-
-function _defineProperty$h(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class DayParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$h(this, "priority", 90);
-
-    _defineProperty$h(this, "incompatibleTokens", ['D', 'i', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      // Tue
-      case 'E':
-      case 'EE':
-      case 'EEE':
-        return match.day(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // T
-
-      case 'EEEEE':
-        return match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // Tu
-
-      case 'EEEEEE':
-        return match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // Tuesday
-
-      case 'EEEE':
-      default:
-        return match.day(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 6;
-  }
-
-  set(date, _flags, value, options) {
-    date = setUTCDay(date, value, options);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$g(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class LocalDayParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$g(this, "priority", 90);
-
-    _defineProperty$g(this, "incompatibleTokens", ['y', 'R', 'u', 'q', 'Q', 'M', 'L', 'I', 'd', 'D', 'E', 'i', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match, options) {
-    var valueCallback = function (value) {
-      var wholeWeekDays = Math.floor((value - 1) / 7) * 7;
-      return (value + options.weekStartsOn + 6) % 7 + wholeWeekDays;
-    };
-
-    switch (token) {
-      // 3
-      case 'e':
-      case 'ee':
-        // 03
-        return mapValue(parseNDigits(token.length, dateString), valueCallback);
-      // 3rd
-
-      case 'eo':
-        return mapValue(match.ordinalNumber(dateString, {
-          unit: 'day'
-        }), valueCallback);
-      // Tue
-
-      case 'eee':
-        return match.day(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // T
-
-      case 'eeeee':
-        return match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // Tu
-
-      case 'eeeeee':
-        return match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-      // Tuesday
-
-      case 'eeee':
-      default:
-        return match.day(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 6;
-  }
-
-  set(date, _flags, value, options) {
-    date = setUTCDay(date, value, options);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$f(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class StandAloneLocalDayParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$f(this, "priority", 90);
-
-    _defineProperty$f(this, "incompatibleTokens", ['y', 'R', 'u', 'q', 'Q', 'M', 'L', 'I', 'd', 'D', 'E', 'i', 'e', 't', 'T']);
-  }
-
-  parse(dateString, token, match, options) {
-    var valueCallback = function (value) {
-      var wholeWeekDays = Math.floor((value - 1) / 7) * 7;
-      return (value + options.weekStartsOn + 6) % 7 + wholeWeekDays;
-    };
-
-    switch (token) {
-      // 3
-      case 'c':
-      case 'cc':
-        // 03
-        return mapValue(parseNDigits(token.length, dateString), valueCallback);
-      // 3rd
-
-      case 'co':
-        return mapValue(match.ordinalNumber(dateString, {
-          unit: 'day'
-        }), valueCallback);
-      // Tue
-
-      case 'ccc':
-        return match.day(dateString, {
-          width: 'abbreviated',
-          context: 'standalone'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'standalone'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // T
-
-      case 'ccccc':
-        return match.day(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // Tu
-
-      case 'cccccc':
-        return match.day(dateString, {
-          width: 'short',
-          context: 'standalone'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-      // Tuesday
-
-      case 'cccc':
-      default:
-        return match.day(dateString, {
-          width: 'wide',
-          context: 'standalone'
-        }) || match.day(dateString, {
-          width: 'abbreviated',
-          context: 'standalone'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'standalone'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'standalone'
-        });
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 6;
-  }
-
-  set(date, _flags, value, options) {
-    date = setUTCDay(date, value, options);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function setUTCISODay(dirtyDate, dirtyDay) {
-  requiredArgs(2, arguments);
-  var day = toInteger(dirtyDay);
-
-  if (day % 7 === 0) {
-    day = day - 7;
-  }
-
-  var weekStartsOn = 1;
-  var date = toDate(dirtyDate);
-  var currentDay = date.getUTCDay();
-  var remainder = day % 7;
-  var dayIndex = (remainder + 7) % 7;
-  var diff = (dayIndex < weekStartsOn ? 7 : 0) + day - currentDay;
-  date.setUTCDate(date.getUTCDate() + diff);
-  return date;
-}
-
-function _defineProperty$e(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class ISODayParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$e(this, "priority", 90);
-
-    _defineProperty$e(this, "incompatibleTokens", ['y', 'Y', 'u', 'q', 'Q', 'M', 'L', 'w', 'd', 'D', 'E', 'e', 'c', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    var valueCallback = function (value) {
-      if (value === 0) {
-        return 7;
-      }
-
-      return value;
-    };
-
-    switch (token) {
-      // 2
-      case 'i':
-      case 'ii':
-        // 02
-        return parseNDigits(token.length, dateString);
-      // 2nd
-
-      case 'io':
-        return match.ordinalNumber(dateString, {
-          unit: 'day'
-        });
-      // Tue
-
-      case 'iii':
-        return mapValue(match.day(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        }), valueCallback);
-      // T
-
-      case 'iiiii':
-        return mapValue(match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        }), valueCallback);
-      // Tu
-
-      case 'iiiiii':
-        return mapValue(match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        }), valueCallback);
-      // Tuesday
-
-      case 'iiii':
-      default:
-        return mapValue(match.day(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'short',
-          context: 'formatting'
-        }) || match.day(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        }), valueCallback);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 7;
-  }
-
-  set(date, _flags, value) {
-    date = setUTCISODay(date, value);
-    date.setUTCHours(0, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$d(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class AMPMParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$d(this, "priority", 80);
-
-    _defineProperty$d(this, "incompatibleTokens", ['b', 'B', 'H', 'k', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'a':
-      case 'aa':
-      case 'aaa':
-        return match.dayPeriod(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-
-      case 'aaaaa':
-        return match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-
-      case 'aaaa':
-      default:
-        return match.dayPeriod(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  set(date, _flags, value) {
-    date.setUTCHours(dayPeriodEnumToHours(value), 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$c(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class AMPMMidnightParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$c(this, "priority", 80);
-
-    _defineProperty$c(this, "incompatibleTokens", ['a', 'B', 'H', 'k', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'b':
-      case 'bb':
-      case 'bbb':
-        return match.dayPeriod(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-
-      case 'bbbbb':
-        return match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-
-      case 'bbbb':
-      default:
-        return match.dayPeriod(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  set(date, _flags, value) {
-    date.setUTCHours(dayPeriodEnumToHours(value), 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$b(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class DayPeriodParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$b(this, "priority", 80);
-
-    _defineProperty$b(this, "incompatibleTokens", ['a', 'b', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'B':
-      case 'BB':
-      case 'BBB':
-        return match.dayPeriod(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-
-      case 'BBBBB':
-        return match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-
-      case 'BBBB':
-      default:
-        return match.dayPeriod(dateString, {
-          width: 'wide',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'abbreviated',
-          context: 'formatting'
-        }) || match.dayPeriod(dateString, {
-          width: 'narrow',
-          context: 'formatting'
-        });
-    }
-  }
-
-  set(date, _flags, value) {
-    date.setUTCHours(dayPeriodEnumToHours(value), 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$a(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class Hour1to12Parser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$a(this, "priority", 70);
-
-    _defineProperty$a(this, "incompatibleTokens", ['H', 'K', 'k', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'h':
-        return parseNumericPattern(numericPatterns.hour12h, dateString);
-
-      case 'ho':
-        return match.ordinalNumber(dateString, {
-          unit: 'hour'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 12;
-  }
-
-  set(date, _flags, value) {
-    var isPM = date.getUTCHours() >= 12;
-
-    if (isPM && value < 12) {
-      date.setUTCHours(value + 12, 0, 0, 0);
-    } else if (!isPM && value === 12) {
-      date.setUTCHours(0, 0, 0, 0);
-    } else {
-      date.setUTCHours(value, 0, 0, 0);
-    }
-
-    return date;
-  }
-
-}
-
-function _defineProperty$9(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class Hour0to23Parser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$9(this, "priority", 70);
-
-    _defineProperty$9(this, "incompatibleTokens", ['a', 'b', 'h', 'K', 'k', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'H':
-        return parseNumericPattern(numericPatterns.hour23h, dateString);
-
-      case 'Ho':
-        return match.ordinalNumber(dateString, {
-          unit: 'hour'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 23;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCHours(value, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$8(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class Hour0To11Parser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$8(this, "priority", 70);
-
-    _defineProperty$8(this, "incompatibleTokens", ['h', 'H', 'k', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'K':
-        return parseNumericPattern(numericPatterns.hour11h, dateString);
-
-      case 'Ko':
-        return match.ordinalNumber(dateString, {
-          unit: 'hour'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 11;
-  }
-
-  set(date, _flags, value) {
-    var isPM = date.getUTCHours() >= 12;
-
-    if (isPM && value < 12) {
-      date.setUTCHours(value + 12, 0, 0, 0);
-    } else {
-      date.setUTCHours(value, 0, 0, 0);
-    }
-
-    return date;
-  }
-
-}
-
-function _defineProperty$7(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class Hour1To24Parser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$7(this, "priority", 70);
-
-    _defineProperty$7(this, "incompatibleTokens", ['a', 'b', 'h', 'H', 'K', 't', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'k':
-        return parseNumericPattern(numericPatterns.hour24h, dateString);
-
-      case 'ko':
-        return match.ordinalNumber(dateString, {
-          unit: 'hour'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 1 && value <= 24;
-  }
-
-  set(date, _flags, value) {
-    var hours = value <= 24 ? value % 24 : value;
-    date.setUTCHours(hours, 0, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$6(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class MinuteParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$6(this, "priority", 60);
-
-    _defineProperty$6(this, "incompatibleTokens", ['t', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 'm':
-        return parseNumericPattern(numericPatterns.minute, dateString);
-
-      case 'mo':
-        return match.ordinalNumber(dateString, {
-          unit: 'minute'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 59;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMinutes(value, 0, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$5(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class SecondParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$5(this, "priority", 50);
-
-    _defineProperty$5(this, "incompatibleTokens", ['t', 'T']);
-  }
-
-  parse(dateString, token, match) {
-    switch (token) {
-      case 's':
-        return parseNumericPattern(numericPatterns.second, dateString);
-
-      case 'so':
-        return match.ordinalNumber(dateString, {
-          unit: 'second'
-        });
-
-      default:
-        return parseNDigits(token.length, dateString);
-    }
-  }
-
-  validate(_date, value) {
-    return value >= 0 && value <= 59;
-  }
-
-  set(date, _flags, value) {
-    date.setUTCSeconds(value, 0);
-    return date;
-  }
-
-}
-
-function _defineProperty$4(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class FractionOfSecondParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$4(this, "priority", 30);
-
-    _defineProperty$4(this, "incompatibleTokens", ['t', 'T']);
-  }
-
-  parse(dateString, token) {
-    var valueCallback = function (value) {
-      return Math.floor(value * Math.pow(10, -token.length + 3));
-    };
-
-    return mapValue(parseNDigits(token.length, dateString), valueCallback);
-  }
-
-  set(date, _flags, value) {
-    date.setUTCMilliseconds(value);
-    return date;
-  }
-
-}
-
-function _defineProperty$3(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class ISOTimezoneWithZParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$3(this, "priority", 10);
-
-    _defineProperty$3(this, "incompatibleTokens", ['t', 'T', 'x']);
-  }
-
-  parse(dateString, token) {
-    switch (token) {
-      case 'X':
-        return parseTimezonePattern(timezonePatterns.basicOptionalMinutes, dateString);
-
-      case 'XX':
-        return parseTimezonePattern(timezonePatterns.basic, dateString);
-
-      case 'XXXX':
-        return parseTimezonePattern(timezonePatterns.basicOptionalSeconds, dateString);
-
-      case 'XXXXX':
-        return parseTimezonePattern(timezonePatterns.extendedOptionalSeconds, dateString);
-
-      case 'XXX':
-      default:
-        return parseTimezonePattern(timezonePatterns.extended, dateString);
-    }
-  }
-
-  set(date, flags, value) {
-    if (flags.timestampIsSet) {
-      return date;
-    }
-
-    return new Date(date.getTime() - value);
-  }
-
-}
-
-function _defineProperty$2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class ISOTimezoneParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$2(this, "priority", 10);
-
-    _defineProperty$2(this, "incompatibleTokens", ['t', 'T', 'X']);
-  }
-
-  parse(dateString, token) {
-    switch (token) {
-      case 'x':
-        return parseTimezonePattern(timezonePatterns.basicOptionalMinutes, dateString);
-
-      case 'xx':
-        return parseTimezonePattern(timezonePatterns.basic, dateString);
-
-      case 'xxxx':
-        return parseTimezonePattern(timezonePatterns.basicOptionalSeconds, dateString);
-
-      case 'xxxxx':
-        return parseTimezonePattern(timezonePatterns.extendedOptionalSeconds, dateString);
-
-      case 'xxx':
-      default:
-        return parseTimezonePattern(timezonePatterns.extended, dateString);
-    }
-  }
-
-  set(date, flags, value) {
-    if (flags.timestampIsSet) {
-      return date;
-    }
-
-    return new Date(date.getTime() - value);
-  }
-
-}
-
-function _defineProperty$1(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class TimestampSecondsParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty$1(this, "priority", 40);
-
-    _defineProperty$1(this, "incompatibleTokens", '*');
-  }
-
-  parse(dateString) {
-    return parseAnyDigitsSigned(dateString);
-  }
-
-  set(_date, _flags, value) {
-    return [new Date(value * 1000), {
-      timestampIsSet: true
-    }];
-  }
-
-}
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-class TimestampMillisecondsParser extends Parser {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty(this, "priority", 20);
-
-    _defineProperty(this, "incompatibleTokens", '*');
-  }
-
-  parse(dateString) {
-    return parseAnyDigitsSigned(dateString);
-  }
-
-  set(_date, _flags, value) {
-    return [new Date(value), {
-      timestampIsSet: true
-    }];
-  }
-
-}
-
-/*
- * |     | Unit                           |     | Unit                           |
- * |-----|--------------------------------|-----|--------------------------------|
- * |  a  | AM, PM                         |  A* | Milliseconds in day            |
- * |  b  | AM, PM, noon, midnight         |  B  | Flexible day period            |
- * |  c  | Stand-alone local day of week  |  C* | Localized hour w/ day period   |
- * |  d  | Day of month                   |  D  | Day of year                    |
- * |  e  | Local day of week              |  E  | Day of week                    |
- * |  f  |                                |  F* | Day of week in month           |
- * |  g* | Modified Julian day            |  G  | Era                            |
- * |  h  | Hour [1-12]                    |  H  | Hour [0-23]                    |
- * |  i! | ISO day of week                |  I! | ISO week of year               |
- * |  j* | Localized hour w/ day period   |  J* | Localized hour w/o day period  |
- * |  k  | Hour [1-24]                    |  K  | Hour [0-11]                    |
- * |  l* | (deprecated)                   |  L  | Stand-alone month              |
- * |  m  | Minute                         |  M  | Month                          |
- * |  n  |                                |  N  |                                |
- * |  o! | Ordinal number modifier        |  O* | Timezone (GMT)                 |
- * |  p  |                                |  P  |                                |
- * |  q  | Stand-alone quarter            |  Q  | Quarter                        |
- * |  r* | Related Gregorian year         |  R! | ISO week-numbering year        |
- * |  s  | Second                         |  S  | Fraction of second             |
- * |  t! | Seconds timestamp              |  T! | Milliseconds timestamp         |
- * |  u  | Extended year                  |  U* | Cyclic year                    |
- * |  v* | Timezone (generic non-locat.)  |  V* | Timezone (location)            |
- * |  w  | Local week of year             |  W* | Week of month                  |
- * |  x  | Timezone (ISO-8601 w/o Z)      |  X  | Timezone (ISO-8601)            |
- * |  y  | Year (abs)                     |  Y  | Local week-numbering year      |
- * |  z* | Timezone (specific non-locat.) |  Z* | Timezone (aliases)             |
- *
- * Letters marked by * are not implemented but reserved by Unicode standard.
- *
- * Letters marked by ! are non-standard, but implemented by date-fns:
- * - `o` modifies the previous token to turn it into an ordinal (see `parse` docs)
- * - `i` is ISO day of week. For `i` and `ii` is returns numeric ISO week days,
- *   i.e. 7 for Sunday, 1 for Monday, etc.
- * - `I` is ISO week of year, as opposed to `w` which is local week of year.
- * - `R` is ISO week-numbering year, as opposed to `Y` which is local week-numbering year.
- *   `R` is supposed to be used in conjunction with `I` and `i`
- *   for universal ISO week-numbering date, whereas
- *   `Y` is supposed to be used in conjunction with `w` and `e`
- *   for week-numbering date specific to the locale.
- */
-
-({
-  G: new EraParser(),
-  y: new YearParser(),
-  Y: new LocalWeekYearParser(),
-  R: new ISOWeekYearParser(),
-  u: new ExtendedYearParser(),
-  Q: new QuarterParser(),
-  q: new StandAloneQuarterParser(),
-  M: new MonthParser(),
-  L: new StandAloneMonthParser(),
-  w: new LocalWeekParser(),
-  I: new ISOWeekParser(),
-  d: new DateParser(),
-  D: new DayOfYearParser(),
-  E: new DayParser(),
-  e: new LocalDayParser(),
-  c: new StandAloneLocalDayParser(),
-  i: new ISODayParser(),
-  a: new AMPMParser(),
-  b: new AMPMMidnightParser(),
-  B: new DayPeriodParser(),
-  h: new Hour1to12Parser(),
-  H: new Hour0to23Parser(),
-  K: new Hour0To11Parser(),
-  k: new Hour1To24Parser(),
-  m: new MinuteParser(),
-  s: new SecondParser(),
-  S: new FractionOfSecondParser(),
-  X: new ISOTimezoneWithZParser(),
-  x: new ISOTimezoneParser(),
-  t: new TimestampSecondsParser(),
-  T: new TimestampMillisecondsParser()
-});
 
 var colors$1 = {
   eventlog: '#47B881',
@@ -84341,8 +81036,6 @@ function DatabasesView() {
   };
 
   var createDB = function createDB(args) {
-    console.log("Create database...", args);
-    console.assert(false);
     createDatabase(args.name, args.type, args.permissions).then(function (hash) {
       console.log("Created", hash);
       fetchDatabases().then(function (data) {
@@ -85165,7 +81858,7 @@ function ProgramView() {
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty$y(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty$1(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
 
 var debug = function debug(maxCount, id) {
   var path = 'App';
@@ -85177,7 +81870,7 @@ var debug = function debug(maxCount, id) {
     args[_key - 2] = arguments[_key];
   }
 
-  logs.assert(maxCount, url, id, args);
+  _assert.assert(maxCount, url, id, args);
 };
 
 function App(props) {
@@ -85275,13 +81968,13 @@ function App(props) {
     background: "tint1",
     height: "100%"
   }, /*#__PURE__*/React.createElement(Header, null), /*#__PURE__*/React.createElement(Systems, null), /*#__PURE__*/React.createElement(Routes, null, /*#__PURE__*/React.createElement(Route, {
-    path: "/search",
+    path: "".concat(location.pathname, "search"),
     element: /*#__PURE__*/React.createElement(SearchResultsView, null)
   }), /*#__PURE__*/React.createElement(Route, {
-    path: "/orbitdb/:programName/:dbName",
+    path: "".concat(location.pathname, "orbitdb/:programName/:dbName"),
     element: /*#__PURE__*/React.createElement(ProgramView, null)
   }), /*#__PURE__*/React.createElement(Route, {
-    path: "/",
+    path: "".concat(location.pathname),
     element: /*#__PURE__*/React.createElement(DatabasesView, null)
   }))));
 }

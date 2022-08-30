@@ -106,7 +106,7 @@ const service = async (self) => {
                 get: {
                     all: {
                         files: async (dir, call) => {
-                            call(await idbfs.port.get.all.files(dir))
+                           await idbfs.port.get.all.files(dir, Comlink.proxy(call))
                         }
                     },
                     dir: idbfs.port.get.dir,

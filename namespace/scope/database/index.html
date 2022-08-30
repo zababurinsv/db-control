@@ -10,15 +10,20 @@
 <div id="root"></div>
 <script type="module">
     //TODO подключение тестов
-    import { test } from '/modules/tests/frontend/src/index.mjs'
+    import OrbitDB from './assets/js/database/orbit-db/dist/index.js'
+    import IPFS from './assets/js/database/ipfs/dist/index.js'
+    import node from '/modules/controlCenter/index.mjs'
+    node({IPFS, OrbitDB})
 
-    (async () => {
-        try {
-           await test('/tests/database/index.tests.js', false)
-        } catch (e) {
-            console.log('ERROR', e)
-        }
-    })()
+    // import { test } from '/modules/tests/frontend/src/index.mjs'
+    //
+    // (async () => {
+    //     try {
+    //        await test('/tests/database/index.tests.js', false)
+    //     } catch (e) {
+    //         console.log('ERROR', e)
+    //     }
+    // })()
 
     //TODO подключение базы данных и ipfs
     // import OrbitDB from '/modules/orbit-db/dist/index.js'

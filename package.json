@@ -2,25 +2,9 @@
   "name": "react-rollup-test",
   "version": "1.0.0",
   "description": "",
-  "main": "./modules/index.js",
-  "module": "./modules/index.mjs",
   "author": "Zababurin Sergey",
   "license": "GPL-3.0-only",
-  "sideEffects": false,
-  "targets": {
-    "main": false,
-    "module": {
-      "includeNodeModules": true,
-      "optimize": false,
-      "isLibrary": true,
-      "sourceMap": true,
-      "source": "./src/index.js",
-      "distDir": "./modules",
-      "outputFormat": "esmodule",
-      "publicUrl": "/",
-      "scopeHoist": true
-    }
-  },
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "config": {
     "port": 4548,
     "gulp": {
@@ -37,8 +21,9 @@
     }
   },
   "scripts": {
-    "parcel:io:build":"parcel  build ./namespace/scope/io/index.html --dist-dir namespace/scope/io/docs",
-    "parcel:fileSystem:build":"parcel build ./namespace/scope/fileSystem/index.html",
+    "parcel:io:build":" parcel  build namespace/scope/io/index.html --dist-dir namespace/scope/io/docs --public-url /control",
+    "parcel:database:build":" parcel  build namespace/scope/database/index.html --dist-dir namespace/scope/database/docs --public-url /database",
+    "parcel:filesystem:build":"parcel build namespace/scope/fileSystem/index.html  --dist-dir namespace/scope/fileSystem/docs --public-url /filesystem",
     "rollup:service:ReactNode:ControlCenter:build": "rollup -c rollup-esm.config.js --watch",
     "nodemon:namespace:start": "nodemon ./namespace/index.mjs",
     "nodemon:node:soundcheckbox:start": "yarn --cwd node/soundcheckbox dev",
@@ -293,7 +278,8 @@
     "readable-stream/passthrough": "gulp passthrough",
     "readable-stream/writable": "gulp readable-stream/writable",
     "readable-stream/duplex": "gulp readable-stream/duplex",
-    "quill": "gulp quill"
+    "quill": "gulp quill",
+    "orbit-db-test-utils": "gulp orbit-db-test-utils"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.3",

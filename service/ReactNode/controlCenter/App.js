@@ -113,9 +113,9 @@ function App(props) {
                 <Header />
                 <Systems/>
                 <Routes>
-                    <Route path='/search' element={<SearchResultsView/>} />
-                    <Route path='/orbitdb/:programName/:dbName' element={<DatabaseView/>}/>
-                    <Route path='/' element={<DatabasesView/>}/>
+                    <Route path={`${location.pathname}search`} element={<SearchResultsView/>} />
+                    <Route path={`${location.pathname}orbitdb/:programName/:dbName`} element={<DatabaseView/>}/>
+                    <Route path={`${location.pathname}`} element={<DatabasesView/>}/>
                 </Routes>
             </Pane>
         </StateProvider>

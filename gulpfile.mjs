@@ -3714,6 +3714,20 @@ gulp.task('sync--quill-module', async () => {
     });
 });
 
+gulp.task('sync--orbit-db-test-utils-module', async () => {
+    const bundle = await rollup.rollup({
+        input: './tests/database/orbit-db-test-utils/index.js',
+        plugins: [
+            json(),
+            commonjs(),
+        ],
+    });
+    return await bundle.write({
+        sourcemap: false,
+        format: 'es',
+        file: './tests/database/orbit-db-test-utils/dist/index.mjs',
+    });
+});
 
 
 gulp.task('libp2p-crypto', gulp.series('sync--libp2p-crypto--build-module'))
@@ -3966,3 +3980,6 @@ gulp.task('readable-stream/writable', gulp.series('sync--readable-stream/writabl
 gulp.task('readable-stream/duplex', gulp.series('sync--readable-stream/duplex-module'))
 
 gulp.task('quill', gulp.series('sync--quill-module'))
+
+gulp.task('orbit-db-test-utils', gulp.series('sync--orbit-db-test-utils-module'))
+

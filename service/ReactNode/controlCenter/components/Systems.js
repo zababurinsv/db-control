@@ -69,8 +69,8 @@ function Systems (props) {
           }
           {
             appState.orbitdbStatus === 'Started'
-              ? <StatusIndicator color='success'>OrbitDB</StatusIndicator>
-              : <StatusIndicator color='warning'>OrbitDB</StatusIndicator>
+              ? <StatusIndicator color='success'>DB</StatusIndicator>
+              : <StatusIndicator color='warning'>DB</StatusIndicator>
           }
           <ConnectToWalletButton style={{ marginLeft: 'auto' }} />
         </Pane>

@@ -1,5 +1,5 @@
-import wasm from './wasm.mjs'
-import { IDBFS } from './api/index.mjs'
+import wasm from './wasm.mjs';
+import { IDBFS } from './api/index.mjs';
 
 const CONFIG_DEFAULTS = {
     // Folder to use for mounting the shared filesystem

@@ -84,7 +84,6 @@ export let IDBFS = (object) => {
                     return new Promise(async (resolve, reject) => {
                         try {
                             const readdir = await object.fs.idbfs.readdir(dir)
-                            // console.log('------------ dir ------------', readdir)
                             resolve(readdir)
                         } catch (e) {
                             console.error('dir error:',e)
@@ -141,10 +140,9 @@ export let IDBFS = (object) => {
                 }
             },
             file: {
-                rename: (oldName, newName) => {
+                rename: (oldName, newName, path = `${object.dirShared}${object.dirData}`) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let path = `${object.dirShared}${object.dirData}`
                         let rename = (await idbfs.is.file(oldName))
                                 ? (await object.fs.idbfs.rename(`${path}/${oldName}`, `${path}/${newName}`), true)
                                 : false
