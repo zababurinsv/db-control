@@ -164,5 +164,5 @@ debug('[(self)a]', global.PROCESS_NAME)
     };
 
     global.CDBBase = CDBBase;
-    return global
+
 }

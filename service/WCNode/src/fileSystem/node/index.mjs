@@ -6,15 +6,16 @@ const service = async (self) => {
         const { render, useEffect, useState, useRef } = hooks;
         const [health, setHealth] = useState(0);
         const [idbfs, setIdbfs] = useState(false);
-        const [isFs, setFs] = useState(false);
+        const [fs, setFs] = useState(false);
+        const [isFs, setIsFs] = useState(false);
         const [error, setError] = useState(false);
         // const [document, setDocument] = useState(self);
         // const memoryLog = useRef('memory');
 
         const memory = () => {
             return new Promise(async resolve  => {
-                const url = new URL('/worker/worker.idbfs.mjs', import.meta.url)
-                console.log('=== url worker ===', url)
+                const url = new URL('/worker/worker.fs.mjs', import.meta.url)
+                console.log('=== url worker ===', url.pathname)
                 let worker = {};
                 worker.self = new Worker(url, {
                     type: "module",
@@ -34,22 +35,22 @@ const service = async (self) => {
                         console.log('🌷 🎫')
                         const mainMemoryChannel = new MessageChannel();
                         worker.self.postMessage({
-                            type: 'idbfs',
+                            type: 'fs',
                             from: mainMemoryChannel.port1
                         }, [mainMemoryChannel.port1]);
                         worker.port = Comlink.wrap(mainMemoryChannel.port2)
                     } else if(event.data.active) {
                         console.log('🌷 🎫 🎫 🌷')
-                        resolve(worker)
+                        resolve(worker.port)
                     } else {
                         setError({
                             message: 'неизвестное событие',
                             data: event.data
-                        })
+                        });
                     }
-                }
-            })
-        }
+                };
+            });
+        };
 
         await useEffect(async () => {
             console.log('==== init module ====');
@@ -60,11 +61,17 @@ const service = async (self) => {
         }, [health]);
 
         await useEffect(async () => {
-            console.log('==== idbfs ====')
+            console.log('==== FS ====', idbfs)
             if(idbfs) {
-                setFs(true)
+                setIsFs(true)
             }
         }, [idbfs])
+
+        await useEffect(async () => {
+            if(fs) {
+                setIsFs(true)
+            }
+        }, [fs])
 
         await useEffect(async () => {
             console.log('==== api set ====', isFs)
@@ -73,7 +80,7 @@ const service = async (self) => {
         await useEffect(async () => {
             console.log('==== error ====', error)
         }, [error])
-        console.log('========', isFs)
+
         return {
             async health() {
               setHealth(health + 1)
@@ -88,63 +95,126 @@ const service = async (self) => {
                    return await render(service)
                 }
             },
+            async init() {
+                try {
+                    setFs(await memory())
+                    return await render(service)
+                } catch (e) {
+                    setError(e)
+                    return await render(service)
+                }
+            },
             async terminate() {
                 //TODO надо сделать правильное уничтожение web worker - а
                 console.log('======== terminate service==========')
                 setIdbfs(null)
-                setFs(false)
+                setIsFs(false)
                 return await render(service)
             },
             api: isFs ? {
-                create: {
-                    dir: idbfs.port.create.dir
-                },
-                is: {
-                    file: idbfs.port.is.file,
-                    dir: idbfs.port.is.dir
-                },
-                get: {
-                    all: {
-                        files: async (dir, call) => {
-                           await idbfs.port.get.all.files(dir, Comlink.proxy(call))
-                        }
+                idbfs: {
+                    create: {
+                        dir: fs.idbfs.create.dir
                     },
-                    dir: idbfs.port.get.dir,
-                    file: idbfs.port.get.file
+                    is: {
+                        file: fs.idbfs.is.file,
+                        dir: fs.idbfs.is.dir
+                    },
+                    get: {
+                        all: {
+                            files: async (dir, call) => {
+                                await fs.idbfs.get.all.files(dir, Comlink.proxy(call))
+                            }
+                        },
+                        dir: fs.idbfs.get.dir,
+                        file: fs.idbfs.get.file
+                    },
+                    set: {
+                        file: fs.idbfs.set.file,
+                        data: fs.idbfs.set.data
+                    },
+                    file: {
+                        rename: fs.idbfs.file.rename
+                    },
+                    load: fs.idbfs.load,
+                    save: fs.idbfs.save,
                 },
-                set: {
-                    file: idbfs.port.set.file,
-                    data: idbfs.port.set.data
+                worker: {
+                    writeFile: fs.worker.writeFile,
+                    readFileSync: fs.worker.readFileSync,
+                    ftruncateSync: fs.worker.ftruncateSync,
+                    statSync: fs.worker.statSync,
+                    openSync: fs.worker.openSync,
+                    closeSync: fs.worker.closeSync,
+                    close: fs.worker.close,
+                    mount: fs.worker.mount,
+                    mkdirSync: fs.worker.mkdirSync,
+                    writeSync: fs.worker.writeSync,
+                    writeFileSync: fs.worker.writeFileSync,
+                    readSync: fs.worker.readSync,
+                    readdirSync: fs.worker.readdirSync,
+                    existsSync: fs.worker.existsSync,
+                    is: {
+                        file: fs.worker.is.file,
+                        dir: fs.worker.is.dir,
+                    },
+                    symlink: fs.worker.symlink,
+                    unlink: fs.worker.unlink,
+                    read: fs.worker.read,
+                    stat: fs.worker.stat,
+                    readdir: fs.worker.readdir
                 },
-                file: {
-                    rename: idbfs.port.file.rename
-                },
-                load: idbfs.port.load,
-                save: idbfs.port.save,
                 info: () => {
-                    console.log(JSON.stringify({
-                        create: {
-                            dir: '() => {}'
-                        },
-                        is: {
-                            file: '() => {}',
-                            dir: '() => {}'
-                        },
-                        get: {
-                            all: {
-                                files: '() => {}'
+                    return {
+                        idbfs: {
+                            create: {
+                                dir: '() => {}'
                             },
-                            dir: '() => {}',
-                            file: '() => {}'
+                            is: {
+                                file: '() => {}',
+                                dir: '() => {}'
+                            },
+                            get: {
+                                all: {
+                                    files: '() => {}'
+                                },
+                                dir: '() => {}',
+                                file: '() => {}'
+                            },
+                            set: {
+                                file: '( file, contents, path ) => {}',
+                                data: '() => {}'
+                            },
+                            file: {
+                                rename: '() => {}'
+                            }
                         },
-                        set: {
-                            file: '( file, contents, path ) => {}',
-                            data: '() => {}'
-                        },
-                        file: {
-                            rename: '() => {}'
+                        worker: {
+                            writeFile: '() => {}',
+                            readFileSync:  '() => {}',
+                            ftruncateSync: '() => {}',
+                            statSync: '() => {}',
+                            openSync: '() => {}',
+                            closeSync: '() => {}',
+                            close: '() => {}',
+                            mount: '() => {}',
+                            mkdirSync: '() => {}',
+                            writeSync: '() => {}',
+                            writeFileSync: '() => {}',
+                            readSync: '() => {}',
+                            readdirSync: '() => {}',
+                            existsSync: '() => {}',
+                            is: {
+                                file: '() => {}',
+                                dir: '() => {}',
+                            },
+                            symlink: '() => {}',
+                            unlink: '() => {}',
+                            read: '() => {}',
+                            stat: '() => {}',
+                            readdir: '() => {}'
                         }
-                    }, null, 4))
+                    }
                 }
             } : undefined,
             async update() {

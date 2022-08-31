@@ -94,3 +94,6 @@
 [submodule "node/ob"]
 	path = node/ob
 	url = https://github.com/zababurinsv/workspace-ob.git
+[submodule "namespace/scope/auction"]
+	path = namespace/scope/auction
+	url = https://github.com/soundcheckbox/auction.git

@@ -1,1 +1,0 @@
-export default()=>new Promise(async(e,t)=>{let n={};try{n.data={_:"button",type:"default",items:["trade-leftp-money","trade-rightp-money"],event:["onkeydown","onfocus","onchange"],actions:["tradeMoneyOnKeyDown","tradeMoneyOnFocus","tradeMoneyOnChange"]},n.template={button:{"{{#each items}}":{_:"button",type:"{{this}}"}}},e(n)}catch(e){t({_:"type",error:e})}});

@@ -1,1 +1,0 @@
-export default async e=>new Promise((t,a)=>{bundle.default(e,"export",async function(a,s){let l={count:0};l.template=document.createElement("div"),l.template.id="right",l.template.className="sidebar",l.class=class{constructor(t){this.webComponents=e.name,this.template=this.template.bind(this)}self(){return l}template(){return l.template}},t(l)})});

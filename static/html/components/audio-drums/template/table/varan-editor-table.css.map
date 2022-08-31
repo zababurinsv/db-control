@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,KAAM;EACJ,WAAW,EAAE,iBAAiB;EAC9B,eAAe,EAAE,QAAQ;EACzB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;;AAGd,MAAO;EACL,MAAM,EAAE,iBAAiB;EACzB,UAAU,EAAE,IAAI;EAChB,OAAO,EAAE,GAAG;EACZ,SAAS,EAAE,KAAK;;AAGlB,kBAAmB;EACjB,gBAAgB,EAAE,OAAO",
-"sources": ["varan-editor-table.scss"],
-"names": [],
-"file": "varan-editor-table.css"
-}

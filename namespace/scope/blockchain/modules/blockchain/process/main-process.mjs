@@ -21,7 +21,7 @@ import system from "../system/index.mjs"
 import childsRun from "./childs-run.mjs"
 import wallet from "../core/wallet.mjs"
 import updateDb from "../core/update-db.mjs"
-// import webProcess from './web-process.mjs'
+import webProcess from './web-process.mjs'
 import logs from '../../debug/index.mjs'
 
 let debug = (maxCount, id, props, data, ...args) => {
@@ -70,15 +70,13 @@ export default async (global) => {
     const os = global.os
     const crypto = global.crypto
     const cluster = global.cluster
-
     if(global.IS_NODE_JS) {
-        if (cluster.isWorker)
-        {
-            // await webProcess(global)
+        if (cluster.isWorker) {
+            await webProcess(global)
             return;
         }
     } else {
-        console.warn('надо добавить в браузер main-process.mjs')
+        console.log('надо добавить в браузер web-process.mjs')
     }
     constant(global)
 

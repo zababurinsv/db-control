@@ -12,7 +12,7 @@ export const service = async (self) => {
         const memoryLog = useRef('memory')
         const memory = () => {
             return new Promise(async resolve  => {
-                const url = new URL('./modules/fs/worker.idbfs.mjs', import.meta.url)
+                const url = new URL('./modules/fs/worker.fs.mjs', import.meta.url)
                 let worker = {};
                 worker.self = new Worker(url, {
                     type: "module",

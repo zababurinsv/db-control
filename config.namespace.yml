@@ -33,10 +33,10 @@
     type: MVP
     scope:
     - /
-#  - namespace: group
-#    type: MVP
-#    scope:
-#    - /
+  - namespace: auction
+    type: MVP
+    scope:
+    - /
 #  - namespace: img
 #    type: MVP
 #    scope:

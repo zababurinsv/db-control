@@ -736,6 +736,4 @@ debug('[(self)a]', global.PROCESS_NAME)
     global.ChildName = ChildName;
     global.IsLocalIP = IsLocalIP;
     global.inet_pton = inet_pton;
-
-    return global
 }

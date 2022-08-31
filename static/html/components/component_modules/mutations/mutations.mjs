@@ -1,1 +1,0 @@
-export default(t,e)=>new Promise(async function(i,n){let r=e;new MutationObserver(function(t){t.forEach(function(t){switch(t.type){case"childList":-1!==t.target.innerText.indexOf("@import")||t.target.innerText}})}).observe(r,{attributes:!0,childList:!0,characterData:!0}),i(t)});

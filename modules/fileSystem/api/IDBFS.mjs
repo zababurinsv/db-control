@@ -4,8 +4,8 @@ export let IDBFS = (object) => {
             is: {
                 file: async (file) => {
                     try {
-                        let isFile = (object.fs.idbfs.analyzePath(file).exists)
-                            ? await object.fs.idbfs.isFile(object.fs.idbfs.analyzePath(file).object.mode)
+                        let isFile = (object.fs.self.analyzePath(file).exists)
+                            ? await object.fs.self.isFile(object.fs.self.analyzePath(file).object.mode)
                             : false
                         console.log(`${file} file ${isFile}`)
                         resolve(isFile)
@@ -20,8 +20,8 @@ export let IDBFS = (object) => {
                 dir: (dir = '/') => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let isDir = (object.fs.idbfs.analyzePath(dir).exists)
-                                ? await object.fs.idbfs.isDir(object.fs.idbfs.analyzePath(dir).object.mode)
+                            let isDir = (object.fs.self.analyzePath(dir).exists)
+                                ? await object.fs.self.isDir(object.fs.self.analyzePath(dir).object.mode)
                                 : false
                             console.log(`${dir} dir ${isDir}`)
                             resolve(isDir)
@@ -41,8 +41,8 @@ export let IDBFS = (object) => {
                         try {
                             console.log('file is write',`${path}/${file}`)
                             let writeFile = (typeof contents !== "string")
-                              ? await object.fs.idbfs.writeFile(`${path}/${file}`, JSON.stringify(contents))
-                              : await object.fs.idbfs.writeFile(`${path}/${file}`, contents)
+                              ? await object.fs.self.writeFile(`${path}/${file}`, JSON.stringify(contents))
+                              : await object.fs.self.writeFile(`${path}/${file}`, contents)
                             resolve(writeFile)
                         } catch (e) {
                             console.error('error',e)
@@ -56,7 +56,7 @@ export let IDBFS = (object) => {
                 data: (folder, file, contents, readable = true, writable = true ) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let createDataFile = await object.fs.idbfs.createDataFile(folder, file, contents, readable, writable)
+                            let createDataFile = await object.fs.self.createDataFile(folder, file, contents, readable, writable)
                             resolve(createDataFile)
                         }catch (e) {
                             resolve({
@@ -74,7 +74,7 @@ export let IDBFS = (object) => {
                         let files = []
                         for(let i =0; i < dir.length; i++) {
                             if(dir[i] !== '.' && dir[i] !== '..') {
-                                files.push(JSON.parse(object.fs.idbfs.readFile(`${path}/${dir[i]}`, { encoding: "utf8" })))
+                                files.push(JSON.parse(object.fs.self.readFile(`${path}/${dir[i]}`, { encoding: "utf8" })))
                             }
                         }
                         return files
@@ -83,7 +83,7 @@ export let IDBFS = (object) => {
                 dir: (dir) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            const readdir = await object.fs.idbfs.readdir(dir)
+                            const readdir = await object.fs.self.readdir(dir)
                             resolve(readdir)
                         } catch (e) {
                             console.error('dir error:',e)
@@ -97,7 +97,7 @@ export let IDBFS = (object) => {
                 file: (file, path = `${object.dirShared}${object.dirData}`, encoding = "utf8") => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let readFile = await object.fs.idbfs.readFile(`${path}/${file}`, { encoding: encoding })
+                            let readFile = await object.fs.self.readFile(`${path}/${file}`, { encoding: encoding })
                             console.log('=== get file =========', readFile)
                             resolve(readFile)
                         } catch (e) {
@@ -114,7 +114,7 @@ export let IDBFS = (object) => {
                 file: (file) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let unlink = await object.fs.idbfs.unlink(file)
+                            let unlink = await object.fs.self.unlink(file)
                             console.log('remove')
                             resolve(unlink)
                         } catch (e) {
@@ -128,7 +128,7 @@ export let IDBFS = (object) => {
                 dir: (path) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let rmdir = await object.fs.idbfs.rmdir(path)
+                            let rmdir = await object.fs.self.rmdir(path)
                             resolve(rmdir)
                         } catch (e) {
                             resolve({
@@ -144,7 +144,7 @@ export let IDBFS = (object) => {
                     return new Promise(async (resolve, reject) => {
                         try {
                         let rename = (await idbfs.is.file(oldName))
-                                ? (await object.fs.idbfs.rename(`${path}/${oldName}`, `${path}/${newName}`), true)
+                                ? (await object.fs.self.rename(`${path}/${oldName}`, `${path}/${newName}`), true)
                                 : false
                             resolve(rename)
                         } catch (e) {
@@ -161,7 +161,7 @@ export let IDBFS = (object) => {
                 dir: (path) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let mkdir = await object.fs.idbfs.mkdir(path)
+                            let mkdir = await object.fs.self.mkdir(path)
                             resolve(true)
                         } catch (e) {
                             resolve({
@@ -174,7 +174,7 @@ export let IDBFS = (object) => {
             },
             symlink: async (oldPath, newPath) => {
                 try {
-                    let symlink = await object.fs.idbfs.symlink(oldPath, newPath);
+                    let symlink = await object.fs.self.symlink(oldPath, newPath);
                     resolve(symlink)
                 } catch (e) {
                     resolve({
@@ -185,7 +185,7 @@ export let IDBFS = (object) => {
             },
             mount: async (type = {}, dir = '/newKind', params = {}) => {
                 try {
-                    let mount = await object.fs.idbfs.mount(type, params, dir)
+                    let mount = await object.fs.self.mount(type, params, dir)
                     resolve(mount)
                 } catch (e) {
                     resolve({
@@ -196,7 +196,7 @@ export let IDBFS = (object) => {
             },
             unmount: async (mountPoint = '/newKind') => {
                 try {
-                    let unmount = await object.fs.idbfs.unmount(mountPoint)
+                    let unmount = await object.fs.self.unmount(mountPoint)
                     resolve(unmount)
                 } catch (e) {
                     resolve({
@@ -208,7 +208,7 @@ export let IDBFS = (object) => {
             cwd: (path) => {
                 return new Promise(async (resolve, reject) => {
                     try {
-                        let cwd = await object.fs.idbfs.cwd()
+                        let cwd = await object.fs.self.cwd()
                         resolve(cwd)
                     } catch (e) {
                         resolve({
@@ -220,7 +220,7 @@ export let IDBFS = (object) => {
             },
             load: () => {
                 return new Promise(async (resolve, reject) => {
-                    object.fs.idbfs.syncfs(true,  (e) => {
+                    object.fs.self.syncfs(true,  (e) => {
                         if(e) {
                             console.error('error',e)
                             resolve(false)
@@ -233,7 +233,7 @@ export let IDBFS = (object) => {
             },
             save: () => {
                 return new Promise(async (resolve, reject) => {
-                    object.fs.idbfs.syncfs(false , (err) => {
+                    object.fs.self.syncfs(false , (err) => {
                         if(err) {
                             resolve({
                                 status: "false",

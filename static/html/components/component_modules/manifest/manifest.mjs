@@ -1,1 +1,0 @@
-export default async(e,n,...t)=>{bundle.default(e,null,async function(e,r){return new Promise(async function(e,r){let u=e=>{console.log("~~~ err router ~~~",e),r(e)};switch(n){case"request":(async(e,n,t,r)=>{})(0,t[0],t[1],t[2],t[3]);break;default:u(`новая функция ${n}`)}})})};

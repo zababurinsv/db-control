@@ -6,11 +6,15 @@ export default async (self = document) => {
   return {
     health: async () => (state = (await state.health()).state),
     idbfs: async () => {
-      state = (await state.idbfs()).state
-      return state.api
+      state = (await state.idbfs()).state;
+      return state.api;
+    },
+    init: async () => {
+      state = (await state.init()).state;
+      return state.api;
     },
     terminate: async () => {
-      state = (await state.terminate()).state
+      state = (await state.terminate()).state;
       return true
     }
   }

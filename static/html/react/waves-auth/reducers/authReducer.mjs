@@ -1,1 +1,0 @@
-import isEmpty from"../validation/is-empty";import{SET_CURRENT_USER}from"../actions/types";const initialState={isAuthenticated:!1,user:{}};export default function(t=initialState,i){switch(i.type){case SET_CURRENT_USER:return{...t,isAuthenticated:!isEmpty(i.payload),user:i.payload};default:return t}}

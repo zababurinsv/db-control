@@ -1,1 +1,0 @@
-import action from"/static/html/components/component_modules/action/action.mjs";(async()=>{bundle.default({input:"object"},null,async function(t,n){action({input:"varan-crop",this:n.store["varan-crop"][0].this,type:"store"},"set","type")})})();

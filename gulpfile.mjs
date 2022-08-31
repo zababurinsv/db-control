@@ -37,6 +37,19 @@ gulp.task('watch',  () => {
 
 gulp.task('watch:namespace:scss', gulp.series('scss', 'watch'))
 
+
+
+gulp.task('static:scss', function () {
+    return gulp.src([`/home/sergey/Desktop/newkind/db-control/static/html/components/crypto-dex/**/*.scss`])
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+        .pipe(autoprefixer({
+            cascade: false
+        }))
+        .pipe(gulp.dest(`/home/sergey/Desktop/newkind/db-control/static/html/components/crypto-dex/`));
+});
+
+gulp.task('gulp:static', gulp.series('static:scss'))
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 gulp.task('build', (cb) => {

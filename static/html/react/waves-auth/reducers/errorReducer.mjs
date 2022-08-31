@@ -1,1 +1,0 @@
-import{GET_ERRORS,CLEAR_ERRORS}from"../actions/types";const initialState={};export default function(t=initialState,R){switch(R.type){case GET_ERRORS:return R.payload;case CLEAR_ERRORS:return{};default:return t}}

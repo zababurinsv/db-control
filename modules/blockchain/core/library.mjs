@@ -361,13 +361,15 @@ export default async (global) => {
         return Arr;
     }
 
-    global.CopyObjKeys = (dest,src) => {
+    function CopyObjKeys(dest,src) {
         for(let key in src)
         {
             dest[key] = src[key];
         }
         return dest;
     }
+
+    global.CopyObjKeys = CopyObjKeys;
 
     function PrepareToJSON(Data,MaxLevel,MaxChilds,JobMap)
     {
@@ -677,5 +679,5 @@ export default async (global) => {
 
 
     WathConstFile();
-    return global
+    return true
 }

@@ -13,7 +13,7 @@
   "watch": [
     "io/",
     "./server.mjs",
-    "./config.io.yml",
+    "./config.namespace.yml",
     "./config.node.yml",
     "./namespace/scope/index.mjs",
     "./namespace/server.mjs",

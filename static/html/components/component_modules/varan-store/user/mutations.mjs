@@ -1,1 +1,0 @@
-const statusChange=(e,t)=>{console.log("status Change",t),e.user=t},setKey=(e,t)=>{e.key=t},setObj=(e,t)=>{localStorage.setItem(`${t.component}-${t.id}`,JSON.stringify(t)),e.component=t},setLoading=(e,t)=>{e.loading=t};export default{statusChange:statusChange,setKey:setKey,setObj:setObj,setLoading:setLoading};
