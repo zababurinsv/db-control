@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-Frame-Options" value="sameorigin">
+    <title>DAPP Loading...</title>
+    <link rel="shortcut icon" href="./tera.ico" type="image/vnd.microsoft.icon">
+
+
+    <script type="text/javascript" src="./JS/sha3.js"></script>
+    <script type="text/javascript" src="./JS/crypto-client.js"></script>
+    <script type="text/javascript" src="./JS/coinlib.js"></script>
+    <script type="text/javascript" src="./JS/client.js"></script>
+    <script type="text/javascript" src="./JS/client-promise.js"></script>
+    <script type="text/javascript" src="./JS/client-tokens.js"></script>
+    <script type="text/javascript" src="./JS/client-tx.js"></script>
+    <script type="text/javascript" src="./JS/terahashlib.js"></script>
+    <script type="text/javascript" src="./JS/dapp-outer.js"></script>
+    <script type="text/javascript" src="./JS/terabuf.js"></script>
+    <script type="text/javascript" src="./JS/dapp-frame.js"></script>
+
+
+
+    <script>
+        InitWalletKeyName();
+        var TranslateArr=[];
+        window.Storage=window.localStorage;
+        var CONFIG_DATA={};
+
+        DapNumber="#template-number#";
+        glSmart=parseInt(DapNumber);
+        var glProgramSetHash;
+    </script>
+
+
+    <style>
+        :root
+        {
+            --colorMenu0: white;
+            --colorMenu01: rgba(0,0,0,0.5);
+            --colorMenu1: rgba(3,3,3,1);
+            --colorMenu2: #343434;
+        }
+
+        body
+        {
+            padding: 0;
+            margin: 0;
+        }
+        .top
+        {
+            z-index:20;
+            position:fixed;
+            top: 0;
+            height:25px;
+            margin: 0;
+            text-align: center;
+        }
+        #idStatus
+        {
+            left: 5px;
+            width: 80%;
+            min-width: 80%;
+            height:25px;
+            padding: 5px 0 0 0;
+            border2: 1px solid #5a6c74;
+            overflow: hidden;
+        }
+
+        #idRestart
+        {
+            z-index:30;
+            right: 152px;
+            height:30px;
+            color: var(--colorMenu0);
+            background-color: var(--colorMenu01);
+            cursor: pointer;
+            padding: 5px 0 0 0;
+        }
+        #idRestart:hover
+        {
+            color: #ecb84e;
+            background-color: var(--colorMenu2);
+        }
+
+        #idMenu
+        {
+            z-index:30;
+            right: 2px;
+            min-width: 70px;
+            max-width: 150px;
+            color: var(--colorMenu0);
+            background-color: var(--colorMenu01);
+            cursor: pointer;
+            padding: 5px 0 0 0;
+        }
+        #idMenuList
+        {
+            top: 30px;
+            margin-right: 2px;
+        }
+
+        #idMenu.open
+        {
+            width: 100px;
+            min-width: 150px;
+        }
+
+        .open
+        {
+            z-index:30;
+            right: 0;
+            width: 100px;
+            min-width: 150px;
+            cursor: pointer;
+        }
+        .close
+        {
+            width: 10%;
+            min-width: 50px;
+        }
+
+        .item
+        {
+            width: 100px;
+            color: var(--colorMenu0);
+            background-color: var(--colorMenu1);
+            cursor: pointer;
+            padding: 4px;
+            margin: 0;
+            margin-left: 5px;
+            min-height: 24px;
+            border: 1px solid #5a6c74;
+            vertical-align: middle;
+
+            min-width: 130px;
+            max-width: 130px;
+
+        }
+        .item:hover
+        {
+            color: #ecb84e;
+            background-color: var(--colorMenu2);
+        }
+
+        #idMenu.close #idMenuList
+        {
+            display: none;
+        }
+
+        #idFrame /*не работает скроллинг в мобильном режиме*/
+        {
+            z-index:10;
+            /*position:fixed;*/
+            position:absolute;
+            left:0;
+            top: 30px;
+            width: 100%;
+            height: calc(100vh - 30px);
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+        #idFrame2
+        {
+            position:absolute;
+            left:0;
+            top: 20px;
+            width: 100%;
+            height: 97vh;
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+
+
+        .btcreate
+        {
+            height:22px;
+            background-color: #347867;
+            color: white;
+            cursor: pointer;
+            border-radius: 3px;
+            padding: 2px;
+            text-decoration: none;
+            border: 1px solid gray;
+        }
+
+        #idMenu.close
+        {
+            background-image: url('./PIC/down.png');
+            background-repeat: no-repeat;
+            background-size: 16px;
+            background-position: right;
+        }
+        #idMenu.open
+        {
+            background-image: url('./PIC/up.png');
+            background-repeat: no-repeat;
+            background-size: 16px;
+            background-position: right;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+<div id="idTranslate" style="display: none;">
+    <DIV id="idCanTranslate">Translation completed.</DIV>
+</div>
+
+<DIV id="idStatus" class="top" style="display: none"></DIV>
+<button id="idRestart" class="top" onclick="ReloadDapp();" style="display: none">RELOAD</button>
+<DIV id="idMenu" class="top close" onclick="OnClickMenu()" style="display: none">Options
+    <div id="idMenuList" class="top open">
+        <div class="item" onclick="OpenWalletPage();">Open wallet page</div>
+        <div class="item" onclick="OpenSmartSrc();">Smart src code</div>
+        <div class="item" onclick="RunDappFromFile();" id="idRunItem">Dapp from file...</div>
+        <div class="item" onclick="window.location.reload();">Reset dapp</div>
+        <div class="item" onclick="InstallApp();" id="idCreateItem">Create account with Dapp NNN</div>
+        <div class="item" onclick="CloseDapp()">Exit</div>
+        <div id="idMobile" class="item" onclick="DoMobile(1);">View logs</div>
+    </div>
+</DIV>
+<input type="file" id="idFile" style="display: none">
+
+
+<!--modal support for dapp-->
+<style id="idModalCSS">
+    /*modal support*/
+    #idOverlay
+    {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left:0;
+        display: none;
+        background: rgba(68, 83, 104, 0.65);
+    }
+    .ModalDlg
+    {
+        z-index: 1000;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #727473;
+        box-shadow: 0px 8px 10px rgba(68, 83, 104, 0.15);
+        color: #000;
+        position: fixed;
+        padding: 20px;
+        margin: 0 auto;
+        width: 90%;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 250px;
+    }
+    .bt-confirm
+    {
+        border-radius: 4px;
+        min-height: 14px;
+        margin: 5px;
+        width: 100px;
+        height: 36px;
+
+        color:white;
+        background-color: #53687e;
+        border-color: #445368;
+    }
+
+    .bt-confirm:hover
+    {
+        color: #cb763a;
+        cursor: pointer;
+    }
+</style>
+
+
+<style>
+    *
+    {
+        line-height: 1.5;
+    }
+
+    .ModalTr
+    {
+        z-index: 2000;
+        position: fixed;
+        top: 2px;
+        left2: 4px;
+        padding: 0;
+        margin: 0 auto;
+        width: 320px;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #727473;
+        box-shadow: 0 0 5px rgb(0 0 0);
+        color: #000;
+    }
+
+
+    .bt-small
+    {
+        width: 80px;
+    }
+    .bt-white
+    {
+        color:#445368;
+        background-color: white;
+        border-color: #53687e;
+    }
+
+    .header
+    {
+        display: flex;
+        z-index: 2000;
+        height: 35px;
+        margin: 0;
+        width: 100%;
+        background: linear-gradient(270deg, #3D4C61 0%, #445368 100%);
+        color: #fff;
+    }
+    .main-logo
+    {
+        padding: 2px;
+        height: 30px;
+    }
+    .curwallet
+    {
+        margin: 5px;
+    }
+
+
+    #idAmount
+    {
+        color: #cc7e00;
+        font-weight: bold;
+    }
+    #idToken
+    {
+        color: #7f4d00;
+        font-weight: bold;
+        margin-left: 5px;
+    }
+
+
+    .row
+    {
+        display: flex;
+        margin: 0px 5px 0px 20px;
+        padding:0;
+        line-height: 24px;
+    }
+    .title
+    {
+        width:80px;
+    }
+    .value
+    {
+        width:220px;
+        overflow: auto;
+        border2: 1px solid black;
+    }
+    #idMethod
+    {
+        display: flex;
+        font-weight: bold;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .red
+    {
+        color: red;
+    }
+
+</style>
+
+
+<section id="idTransfer" class="ModalTr" style="display: none;">
+    <div style="height: 100%; width: 100%;">
+        <div class="header">
+            <img class="main-logo" src="./PIC/TeraLogo.svg" alt="TERA Foundation">
+            <div class="curwallet"><span>Wallet </span><b id="idAccess1" class=""></b></div>
+        </div>
+        <DIV align='center' class="page">
+            <h2>Sending</h2>
+
+            <DIV align='left' class="transfer_info">
+
+                <DIV class="row" id="idRowCall">
+                    <DIV class="title">Method:</DIV>
+                    <div class="value" id="idMethod">
+                        Swap
+                    </div>
+                </DIV>
+                <DIV class="row">
+                    <DIV class="title">From:</DIV>
+                    <div class="value accs_rows">
+                        <DIV id="idFrom"></DIV>
+                    </div>
+                </DIV>
+                <DIV class="row">
+                    <DIV class="title"></DIV>
+                    <b>↓</b>
+                </DIV>
+                <DIV class="row">
+                    <DIV class="title">To:</DIV>
+                    <div class="value accs_rows">
+                        <DIV id="idTo">107</DIV>
+                    </div>
+                </DIV>
+                <DIV class="row" id="idRowID">
+                    <DIV class="title">Token ID:</DIV>
+                    <div class="value"  id="idID">
+                        10000000001
+                    </div>
+                </DIV>
+                <DIV class="row">
+                    <DIV class="title">Amount:</DIV>
+                    <div class="value">
+                        <div>
+                        <span id="idAmount">100000000.0000000001</span><span id="idToken">TERA</span>
+                        </div>
+                    </div>
+                </DIV>
+            </DIV>
+
+            <h3 style="color: orangered">A you sure?</h3>
+            <button class="bt-confirm bt-small"  onclick="OnOKTr()">OK</button>
+<!--            <button class="bt-confirm bt-small bt-white"  onclick="OnHideTr()">Hide</button>-->
+            <button class="bt-confirm bt-small bt-white"  onclick="OnCancelTr()">Cancel</button>
+        </DIV>
+    </div>
+</section>
+
+
+<div id="idOverlay" onclick="closeModal()" style="display: none;"></div>
+<section id="idConfirm" class="Modal ModalDlg" style="display: none;">
+    <DIV align='center'>
+        <h2 id="idConfirmTitle">Confirm</h2>
+        <p id="idConfirmText">A you sure?</p>
+        <button class="bt-confirm"  onclick="OnConfirmOK()">OK</button>
+        <button class="bt-confirm"  onclick="closeModal()">Cancel</button>
+    </DIV>
+</section>
+
+
+
+
+</body>
+</html>
+

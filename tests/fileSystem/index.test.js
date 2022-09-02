@@ -1,11 +1,10 @@
 'use strict'
 import service from '/service/WCNode/src/fileSystem/index.mjs';
 import buffer from '/service/ReactNode/controlCenter/database/modules/safe-buffer/dist/index.js'
-
 const assert = window['@newkind/tests'].assert;
 const Buffer = buffer.Buffer;
 
-describe('File System IDBFS api', async function() {
+describe('File System', async function() {
   this.timeout(100000);
   let api = {
     idbfs: undefined,
@@ -16,6 +15,7 @@ describe('File System IDBFS api', async function() {
   before(async () => {
       console.log('BEFORE');
       api = await (await service()).init();
+      api.idbfs.load();
       console.log('api', api.info());
   });
 
@@ -23,7 +23,7 @@ describe('File System IDBFS api', async function() {
     // api.terminate();
   });
 
-  describe('Positive', function() {
+  describe('IDBFS api', function() {
     it('create dir', async () => {
       api.idbfs.create.dir('testDir');
       api.idbfs.save();
@@ -31,7 +31,6 @@ describe('File System IDBFS api', async function() {
 
     it('is dir', async () => {
       await api.idbfs.is.dir('testDir');
-
     });
 
     it('set file', async () => {
@@ -51,16 +50,33 @@ describe('File System IDBFS api', async function() {
     });
 
     it('get dir', async () => {
-      console.log('GET DIR', await api.idbfs.get.dir('/testDir'))
+      await api.idbfs.get.dir('/testDir')
     });
 
     it('get file', async () => {
-      console.log('GET FILE', await api.idbfs.get.file('test'))
+      await api.idbfs.get.file('test');
     });
 
     it('file rename', async () => {
-      console.log('RENAME FILE', await api.idbfs.file.rename('test', 'test222'))
-      api.idbfs.save();
+      await api.idbfs.file.rename('test', 'test222');
+      await api.idbfs.save();
+    });
+  });
+
+  describe('WORKERFS api', function() {
+    it('Create dir', async () => {
+      await api.worker.existsSync('/DATA-BROWSER');
+    });
+
+    it('Write file', async () => {
+      await api.worker.writeFileSync('/DATA-BROWSER/log.log', "28.12.2021 02:36:33.134 : CheckStartedBlocks at 0\r\n")
+      await api.worker.writeFileSync('/DATA-BROWSER/log.log', "28.12.2021 02:36:34.134 : CheckStartedBlocks at 0\r\n")
+      await api.worker.writeFileSync('/DATA-BROWSER/log.log', "28.12.2021 02:36:35.134 : CheckStartedBlocks at 0\r\n")
+      await api.worker.writeFileSync('/DATA-BROWSER/log.log', "28.12.2021 02:36:36.134 : CheckStartedBlocks at 0\r\n")
+    });
+
+    it('Read file', async () => {
+      await api.worker.readFileSync('/DATA-BROWSER/log.log', 'utf8');
     });
   });
 });

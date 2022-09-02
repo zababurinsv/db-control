@@ -1,0 +1,122 @@
+/*NFT*/
+grid_nft
+{
+    display: grid;
+    width: 100%;
+    min-width: 360px;
+    max-height: 70vh;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    grid-gap: 5px;
+
+    overflow2:auto;
+
+    resize: both;
+    padding: 5px;
+}
+
+
+
+item_nft
+{
+    text-align: center;
+    padding: 2px;
+    margin: 5px auto;
+    width: 120px;
+    height: 120px;
+
+    font-size: 10px;
+    line-height: 12px;
+
+    color: black;
+    background-color: #f2f3f5;
+    box-shadow: 0 0 5px rgb(0 0 0);
+    border-radius: 5px;
+}
+
+@media (max-width: 445px)
+{
+    grid_nft
+    {
+        max-height: 260px;
+        min-width: 300px;
+        resize: none;
+    }
+}
+
+
+item_nft:hover
+{
+    color: #cb763a;
+    cursor: pointer;
+}
+.selected
+{
+    border: 2px orange solid;
+}
+item_nft img
+{
+    width: 76px;
+    height: 76px;
+    margin-top: 0px;
+}
+
+
+item_nft b
+{
+    font-size: 12px;
+}
+item_nft .tokenname
+{
+    font-size: 12px;
+}
+
+
+.grid_nft_send
+{
+    resize: none;
+    width: 100%;
+
+}
+
+#idTokenNFT
+{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    height: 170px;
+    max-height: 200px;
+    overflow:auto;
+    margin-top: 5px;
+}
+
+#idListShow
+{
+    overflow:auto;
+}
+
+.token_row
+{
+    display: flex;
+    width: 295px;
+}
+.token_name
+{
+    width: 120px;
+    text-align: left;
+}
+.token_value
+{
+    width: 150px;
+    text-align: right;
+    margin: 0 10px;
+    line-height: 18px;
+    font-weight: bold;
+
+}
+.token_img
+{
+    width: 18px;
+    height: 18px;
+    margin-left: 5px;
+}

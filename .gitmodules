@@ -39,7 +39,7 @@
 	url = https://github.com/zababurinsv/server-signal.git
 [submodule "node/radio"]
 	path = node/radio
-	url = https://github.com/zababurinsv/server-radio.git
+	url = https://github.com/soundcheckbox/server-radio.git
 [submodule "node/webdav"]
 	path = node/webdav
 	url = https://github.com/zababurinsv/server-webdav.git
@@ -97,3 +97,15 @@
 [submodule "namespace/scope/auction"]
 	path = namespace/scope/auction
 	url = https://github.com/soundcheckbox/auction.git
+[submodule "namespace/scope/radio"]
+	path = namespace/scope/radio
+	url = https://github.com/soundcheckbox/radio.git
+[submodule "namespace/scope/audio-player"]
+	path = namespace/scope/audio-player
+	url = https://github.com/soundcheckbox/audio-player.git
+[submodule "namespace/scope/warehouse"]
+	path = namespace/scope/warehouse
+	url = https://github.com/soundcheckbox/warehouse.git
+[submodule "namespace/scope/booking"]
+	path = namespace/scope/booking
+	url = https://github.com/soundcheckbox/booking.git

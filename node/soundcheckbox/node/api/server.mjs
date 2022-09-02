@@ -15,8 +15,8 @@ import menu_presets_tags from './routes/api/menu_presets_tags.mjs';
 import menu_categories from './routes/api/menu_categories.mjs'
 const app = express();
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 connectDB();
 
@@ -31,6 +31,7 @@ app.use('/api/auth', auth);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 app.use('/api/riders', riders);
+app.use('/api/riders:id', riders);
 app.use('/api/equipment', equipment);
 app.use('/api/models', models);
 app.use('/api/presets', menu_presets);

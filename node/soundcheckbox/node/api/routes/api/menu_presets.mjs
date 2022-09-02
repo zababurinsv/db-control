@@ -51,14 +51,15 @@ router.get('/', async (req, res) => {
         const menu_tags = await Menu_tags.find();
         for(let Preset of menu_presets) {
             const preset = Preset
-
             let tags = []
-            const presets_categories = menu_presets_categories.find(item => item.preset_id === preset.id)
-            const categories = menu_categories.find(item => item.id === presets_categories.category_id)
-            const presets_tags = menu_presets_tags.filter(item => preset.id === item.preset_id);
+            const presets_categories = menu_presets_categories.find(item => {
+                return item.preset_id.toString() === preset._id.toString()
+            })
+            const categories = menu_categories.find(item => item._id.toString() === presets_categories.category_id.toString())
+            const presets_tags = menu_presets_tags.filter(item => preset._id.toString() === item.preset_id.toString());
 
             for(let item of presets_tags) {
-                let tag = menu_tags.find(tag => tag.id === item.tag_id)
+                let tag = menu_tags.find(tag => tag._id.toString() === item.tag_id.toString())
                 tags.push(tag.name)
             }
 
@@ -75,7 +76,6 @@ router.get('/', async (req, res) => {
         }
         res.json(result);
     } catch (err) {
-        console.error(err.message);
         res.status(500).send({status: false, message: 'Server Error'});
     }
 });

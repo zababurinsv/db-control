@@ -41,7 +41,7 @@ const DataTypes = {
 
 const riders = new mongoose.Schema({
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypesMongoose.ObjectId,
     unique: true,
     index: true,
     required: true,

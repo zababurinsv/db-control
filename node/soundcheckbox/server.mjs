@@ -18,20 +18,19 @@ app.use((req, res, next) => {
     next();
 });
 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(proxy(node.api, {
     limit: '1mb',
-    filter: function(req) {
-        return pathNode.api.some(path => path === req.path)
-    }
+    filter: (req) => pathNode.api.some(path => req.path.includes(path, 0))
 }));
 
 app.use(proxy(node.dev, {
     limit: '1mb',
     filter: function(req) {
-        return pathNode.dev.some(path => path === req.path)
+        return pathNode.dev.some(path => req.path.includes(path))
     }
 }));
 

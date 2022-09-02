@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DAPP IDE</title>
+    <link rel="shortcut icon" href="./PIC/smart.png" type="image/png">
+
+    <link rel="stylesheet" type="text/css" href="./CSS/style.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/buttons.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/dapp-edit-main.css">
+</head>
+
+<script type="text/javascript" src="./JS/dapp-outer.js"></script>
+<script type="text/javascript" src="./JS/coinlib.js"></script>
+<script type="text/javascript" src="./JS/client.js"></script>
+<script type="text/javascript" src="./JS/client-promise.js"></script>
+<script type="text/javascript" src="./JS/client-tokens.js"></script>
+<script type="text/javascript" src="./JS/client-tx.js"></script>
+<script type="text/javascript" src="./JS/sha3.js"></script>
+<script type="text/javascript" src="./JS/crypto-client.js"></script>
+<script type="text/javascript" src="./JS/terahashlib.js"></script>
+<script type="text/javascript" src="./JS/terabuf.js"></script>
+
+
+
+<script>
+    module={};
+    global={};
+</script>
+
+<script src="./JS/sign-lib-min.js"></script>
+<script src="./JS/lexer.js"></script>
+<script src="./JS/smart-vm.js"></script>
+
+
+
+<script src="./Ace/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="./Ace/ext-settings_menu.js"></script>
+<script src="./Ace/ext-language_tools.js"></script>
+
+<script src="./JS/dapp-edit-main.js"></script>
+<script src="./JS/dapp-edit-project.js"></script>
+<script src="./JS/dapp-edit-ace.js"></script>
+<script src="./JS/dapp-edit-template.js"></script>
+<script src="./JS/dapp-edit-db.js"></script>
+
+
+<script src="./JS/dapp-edit-accounts.js"></script>
+<script src="./JS/dapp-edit-play.js"></script>
+<script src="./JS/dapp-edit-play-dapp.js"></script>
+
+
+
+
+
+
+
+
+
+
+<DIV id="idFormatStorage" style="display: none;">
+    The format of fields when writing or reading the status is determined by the string field State storage format, which is set when creating a smart contract. It should contain a string of JSON type with description of “key:type”fields. The following designations are allowed as a type:<BR>
+    <BR><DIV style="font-family: Monospaced">
+    {} - object<BR>
+    [] - array<BR>
+    uint - 6-byte unsigned integer<BR>
+    uint32 - unsigned integer 4 bytes long<BR>
+    uint16 - unsigned integer 2 bytes long<BR>
+    byte - unsigned integer 1 bytes long<BR>
+    double - double precision number (8 bytes long)<BR>
+    str - the variable-length string<BR>
+    strxx - string with fixed length of xx long<BR>
+    arrxx - byte array with fixed-length of xx long<BR>
+    <BR>
+    Example:<BR>
+    {Name:str10, Value:uint, PubKey:arr33}<BR>
+    {Type:byte,Account:uint,SumCOIN:uint,SumCENT:uint32, arr:[uint]}<BR>
+    <BR>
+    </DIV>
+</DIV>
+
+
+<section id="idSyntaxDlg" class="Modal ModalDlg" style="display: none; max-width: 700px; text-align: left">
+    <DIV align='center'>
+        <div id="idSyntaxText" align="left">---</div>
+        <button class="bt-confirm"  onclick="closeModal()">Understand</button>
+    </DIV>
+</section>
+
+
+
+
+<!--TEMPLATES  TEMPLATES  TEMPLATES-->
+
+<DIV id="idDappTemplate" style="display: none">
+
+
+<DIV align='center' id="idMain" style="display:none">
+    <div class="row_acc">
+        <p>Account:</p>
+        <select size="1" id="idAddrTera" onchange="">
+            <option value="0">Loading...</option>
+        </select>
+        <button class="btn_acc" onclick="CreateAccount()">
+            <svg viewBox="0 0 16 16" style="height:16px"><path d="M0 7h16v2H0V7z"></path><path d="M9 0v16H7V0h2z"></path></svg>
+        </button>
+    </div>
+
+
+    <menu>
+        <item data-ref="m1" id="idPage1">
+            Send
+        </item>
+
+        <item data-ref="m2" id="idPage2">
+            Test
+        </item>
+
+    </menu>
+
+
+
+    <content data-ref="m1">
+
+        <br>
+        <button onclick="SendTest()">SendTest</button>
+
+    </content>
+
+    <content data-ref="m2">
+
+        Test Test Test
+
+    </content>
+
+</DIV>
+
+
+</DIV>
+
+
+<DIV id="idDappTemplate1" style="display: none">
+<BR>
+<button onclick="SendKey()">Send name</button>
+<button onclick="GotKeyValue()">Get name</button>
+<button onclick="SendDel()">Del name</button>
+</DIV>
+
+
+<DIV id="idSiteTemplate1" style="display: none">
+Uncomment script in real project <!--<script type="text/javascript" src="https://terawallet.org/JS/web3-tera.js"></script>-->
+
+</DIV>
+
+<DIV id="idSiteTemplate2" style="display: none">
+<BR>
+<button onclick="web3.tera.Login(11111)">Connect...</button>
+<button onclick="SendTx()">Send money</button>
+<span id="idBlockSend" style="display: none">
+<button onclick="SendMethod()">Method</button>
+<button onclick="Create()">Create account</button>
+</span>
+<button onclick="StaticCall()">Static method</button>
+
+<button onclick="web3.tera.Logout()">Logout</button>
+<BR>RESULT:<BR>
+<textarea id="idResult" cols="80" rows="5"></textarea>
+<BR>EVENTS:<BR>
+<textarea id="idEvents" cols="80" rows="10"></textarea>
+<BR>INFO:<BR>
+<textarea id="idInfo" cols="80" rows="20"></textarea>
+</body>
+
+</DIV>
+<!--TEMPLATES  TEMPLATES  TEMPLATES-->
+
+
+
+<body>
+    <span id="MTabProjects" onclick="SelectTab('TabProjects')" class="tab1">Projects</span>
+    <span id="MTabFile" onclick="SelectTab('TabFile')" class="tab1">Files</span>
+    <span id="MTabText" onclick="SelectTab('TabText')" class="tab1">Text</span>
+    <span id="MTabConfig" onclick="SelectTab('TabConfig')" class="tab1">Config</span>
+
+
+    <DIV id="idStatus"></DIV>
+
+    <DIV style="padding: 0px; border2: 1px solid #979b9a; width:100%;min-width: 960px; float: left">
+
+        <!--PROJECTS-->
+
+        <DIV id="TabProjects" style="display: none">
+
+            <!--Dapps list toolss-->
+            <div class="row">
+                <DIV style="width: 15%;min-width:140px; float:left;" class="resizable">
+                    <INPUT type="button" onclick="NewProject()" class="bt btool" value="New">
+                    <INPUT type="button" onclick="DelProject()" class="bt btool" value="Del">
+                    <INPUT type="button" onclick="SaveValues(1)" class="bt btool" value="Save">
+
+
+
+                    <div style="padding-left: 2px; ">PROJECTS:</div>
+                    <DIV class="move_control">
+                    <DIV class="move_holder">
+                        <button onclick="MoveProject(0)" class="move_bt">Top</button>
+                        <button onclick="MoveProject(-1)" class="move_bt">↑</button>
+                        <button onclick="MoveProject(1)" class="move_bt">↓</button>
+                    </DIV>
+                    <select size="2" id="idProjectList" style="width:100%;height:calc(50vh - 67px - 10px)"  onchange="SetCurrentProject(1)" onclick="SetCurrentProject(2)">
+                    </select>
+                    </DIV>
+
+                    <div style="padding-left: 2px; ">BLOCKCHAIN:</div>
+                    <table>
+                        <tr>
+                            <td style="width: 90%">
+                                <INPUT type="number" id="idSmartStart" style="width:100%;margin-top: -1px;" onchange="FillSmart()" value="8">
+                            </td>
+                            <td style="width: 10%;">
+                                <button onclick="FillSmart()" style="margin-left: 5px" id="idRefresh"></button>
+                            </td>
+                        </tr>
+                    </table>
+                    <select size="2" id="idSmartList" style="width:100%;height:calc(50vh - 67px - 10px)"  onchange="SetCurrentSmart()" onclick="SetCurrentSmart(2)">
+                    </select>
+                </DIV>
+
+                <!--Dapp properties-->
+                <DIV class="page_property">
+                    <DIV style="padding: 5px">
+                        <B>Name:</B> <INPUT type="string" id="idName" onchange="SaveValues(1)" class="radius" style="height:20px;width: 60%;padding-left:5px;font-weight: bold" value="">
+                        ICON:
+                        <INPUT type="string" id="idIcon" class="radius" style="width: 13%;margin-right: 5px" onchange="SetSampleByName()" value=""><button id="idBtIcon" onclick="SelectBlockchainFile('idIcon','idIconSample')">...</button>
+                        <span style="display: inline-block">
+                            <img src="/" id="idIconSample" style="max-width: 32px; margin-bottom: -12px;">
+                        </span>
+                    </DIV>
+                    <table id="TabHeader2" class="tabheader2">
+                        <tr>
+                            <th><DIV id="MTabMain" onclick="SelectTab('TabMain')" class="tab2">Main properties</DIV></th>
+                            <th><DIV id="MTabSmart" onclick="SelectTab('TabSmart')" class="tab2">Smart-code</DIV></th>
+                            <th><DIV id="MTabHTML" onclick="SelectTab('TabHTML')" class="tab2">HTML-code</DIV></th>
+                            <th><DIV id="MTabPlay" onclick="SelectTab('TabPlay')" class="tab2">Sandbox</DIV></th>
+                            <th><DIV id="MTabUpload" onclick="SelectTab('TabUpload')" class="tab2">Upload to blockchain</DIV></th>
+                        </tr>
+                    </table>
+                    <!--Main properties-->
+                    <DIV id="TabMain" style="display: none;" class="layer layer2">
+                        <input type="hidden" id="idSmartNum">
+                        <input type="hidden" id="idSmartOwner">
+                        <input type="hidden" id="idSmartAccount">
+                        <input type="hidden" id="idSmartHTMLMode">
+<!--                        <BR>Number of accounts (1-50):<INPUT type="number" id="idAccountLength" min=1 max=50 style="text-align:center;width: 100px;" class="radius" value="1">-->
+
+                        <BR>
+                        <DIV>
+                            <div style="float: left;margin-right: 30px;"><DIV>CATEGORY1:</DIV>
+                                <select size="1" id="idCategory1" class="radius tmain-holder" style="height: 30px">
+                                </select>
+                            </div>
+
+                            <div style="float: left;margin-right: 30px;"><DIV>CATEGORY2:</DIV>
+                                <select size="1" id="idCategory2" class="radius tmain-holder" style="height: 30px;">
+                                </select>
+                            </div>
+
+                            <div style="float: none;"><DIV>CATEGORY3:</DIV>
+                                <select size="1" id="idCategory3" class="radius tmain-holder" style="height: 30px">
+                                </select>
+                            </div>
+                        </DIV>
+
+                        DESCRIPTION:
+                        <textarea id="idDescription"  class="radius" style="width: 99.5%;min-height:40px;height: calc(30vh - 112px)" rows="2" cols="98">
+                        </textarea>
+    <!--                    Cross Msg confirms:-->
+    <!--                    <INPUT type="string" id="idCrossMsgConfirms" class="radius" value="">-->
+    <!--                    <BR>-->
+
+                        <BR>
+                        <DIV style="background-color: var(--color2); padding: 5px;">
+<!--                            <input type="checkbox" class="" id="idTokenGenerate" onchange = "SetPrice();SetVisibleTokenMode()"/>Token generate smart-contract-->
+
+                            <table id="idTokenMode">
+                                <tr><td>
+                                    Token name:
+                                </td>
+                                    <td>
+                                    <INPUT type="string" id="idShortName" maxlength="12" class="radius" value="" oninput="CheckShortName()">
+                                    </td>
+                                    <td id="idCheckShortName">The name must start with the <B>big characters</B> A-Z and can have the characters: 0-9, "_", "-"</td>
+                                </tr>
+                                <tr><td>
+                                    Cent name:
+                                </td>
+                                <td>
+                                    <INPUT type="string" id="idCentName" maxlength="12" class="radius" value="" oninput="CheckShortName()">
+                                </td>
+                                <td id="idCheckCentName">The name must start with the <B>small characters</B> a-z and can have the characters: 0-9, "_", "-"</td>
+                                </tr>
+
+                                <tr><td>
+                                    Precision:
+                                </td>
+                                    <td>
+                                        <INPUT type="number" id="idFixed" style="width: 50px" maxlength="1" class="radius" value="">
+                                    </td>
+                                </tr>
+
+                                <tr><td>
+                                    ISIN:
+                                </td><td>
+                                    <INPUT type="string" id="idISIN" class="radius" value="">
+                                </td></tr>
+
+<!--                                <tr><td>-->
+<!--                                    The initial amount of coins:-->
+<!--                                </td><td>-->
+<!--                                    <INPUT type="number" id="idStartValue" class="radius" value="">-->
+<!--                                </td></tr>-->
+                            </table>
+
+                        </DIV>
+
+<!--                        <BR><BR>-->
+
+<!--                        State storage format:<DIV class="link info-syntax" onclick="ShowSyntax('idFormatStorage')">syntax helper</DIV>-->
+<!--                        <textarea id="idStateFormat"  style="width: 99.5%;height: 70px;" rows="2" cols="99" autofocus>-->
+<!--                        </textarea>-->
+
+                        <BR>
+                        PubKey copied from owner:
+                        <input type="checkbox" class="" id="idOwnerPubKey" onchange = ""/>
+
+                    </DIV>
+
+                    <!--Smart code-->
+
+                    <DIV id="TabSmart" style="display: none" class="layer">
+                        <textarea id="idCode1"  class="ace" rows="19" cols="98" autofocus>
+                        </textarea>
+                        <div id="idCode2" class="ace"></div>
+                    </DIV>
+
+                    <!--HTML code-->
+
+                    <DIV id="TabHTML" style="display: none" class="layer">
+                        <DIV id="idRefHTML" style="z-index: 10;position: absolute;right: 50px;margin-bottom: -20px;">----</DIV>
+                        <textarea rows="15" cols="98"  id="idHTML1" class="ace">
+                        </textarea>
+                        <div id="idHTML2" autofocus class="ace"></div>
+                    </DIV>
+
+                    <!--Preview - Play tab-->
+
+                    <DIV id="TabPlay" style="display: none;" class="layer layer2" align2='center'>
+                        <div style="float: left">
+                            SCREEN DEFINITION:<BR>
+
+                            <select size="1" id="idScreenStyle" onkeyup="SelectScreenStyle();" onchange="SelectScreenStyle()" class="radius t-holder" style="height: 40px;">
+                                <option value="size320x568">320 * 568</option>
+                                <!--<option value="size330x568">330 * 568</option>-->
+                                <option value="size360x640">360 * 640</option>
+                                <option value="size375x812">375 * 812</option>
+                                <option value="size768x1024">768 * 1024</option>
+                                <option value="size1024x800">1024 * 800</option>
+                            </select>
+
+                            <BR><INPUT type="button" onclick="DoPlay(1)" class="bt radius t-holder" style="height: 40px;" value="RECREATE">
+                            <BR><INPUT type="button" onclick="DoPlay()" class="bt radius t-holder marginbottom0" style="height: 40px;" value="PLAY HTML">
+                            <DIV class="t-holder"><input type="checkbox" class="" id="idAutoPlay"/>Automatic play</DIV>
+                            <DIV class="t-holder"><input type="checkbox" class="" id="idDebugLog"/>Log debug</DIV>
+                            <DIV class="t-holder"><input type="checkbox" class="" id="idDebugTiks"/>Log tiks</DIV>
+
+                            Wallet test sending:<BR>
+                            <DIV class="t-holder t-holder2">
+                                <DIV class="row row-send">
+                                    From:<INPUT  id="idSendFrom" value="100" class="dsmall">
+                                    To<INPUT id="idSendTo" value="107" class="dsmall">
+                                    Sum:<INPUT id="idSendSum" value="1000" class="dsmall dsmall2" autocomplete="off">
+                                </DIV>
+                                <DIV class="row row-send">
+                                    Currency:<INPUT id="idCurrency" value="0" autocomplete="off" class="dsmall">
+                                    ID:<INPUT id="idTokenID">
+                                </DIV>
+
+                                <textarea id="idSendDesc"  rows="5" cols="21"></textarea>
+                                <INPUT type="button" onclick="DoPlaySend()" class="bt bsend radius" style="height: 40px;" value="Send">
+                                <span style="margin-left: 5px">Accounts:</span>
+                                <select size="1" id="idPlayAccount" style="width: 220px;height: 26px; margin: 5px">
+                                    <option value="0">Loading...</option>
+                                </select>
+
+                            </DIV>
+                        </div>
+                        <DIV style="padding-left:260px;">
+                            <DIV id="idPreview"></DIV>
+                        </DIV>
+                    </DIV>
+
+                    <!--Send smart to blockchain-->
+
+                    <DIV id="TabUpload" style="display: none" class="layer layer2">
+                        <BR>
+                        Smart owner:<BR>
+                        <select size="1" id="idUser" class="radius t-holder" style="height: 40px;" onchange="SaveValues()">
+                            <option value="">loading</option>
+                        </select>
+                        Price: <b id="idPrice">0</b> TERA
+                        <a onclick="OpenWalletPage()" class="bt btdoit radius" style="padding: 3px;">OPEN WALLET</a>
+                        <BR><BR>
+                        <input type="checkbox" class="" id="idTrimCode"/>Automatic trim code
+                        <BR>
+                        <input type="checkbox" class="" id="idNoSendHTML"/>Not send HTML
+                        <BR>
+                        <INPUT type="button" onclick="SendToBlockchain()" class="bt radius t-holder" style="height: 40px;" id="idBtSendSmart" value="SEND TO BLOCKCHAIN">
+                        <BR>
+                        Utilites:
+                        <HR>
+                        <BR>
+                        <INPUT type="button" onclick="SendHTMLToBlockchain()" class="bt radius t-holder" style="height: 40px;" id="idBtSendHTML" value="SEND HTML FILE">
+                        <INPUT type="button" onclick="DebugHTMLInBlockchain()" class="bt radius t-holder" style="height: 40px;" id="idBtSendHTML" value="DEBUG HTML">
+                        <INPUT type="button" onclick="ClearDebugHTMLInBlockchain()" class="bt radius t-holder" style="height: 40px;" id="idBtSendHTML" value="CLEAR DEBUG">
+                        <BR>
+                        <INPUT type="button" onclick="SendJSToBlockchain()" class="bt radius t-holder" style="height: 40px;" id="idBtSendJS" value="SEND JS FILE">
+
+
+
+                        <BR>
+                        <INPUT type="button" onclick="SendStateHTML()" class="bt radius t-holder" style="height: 40px;" id="idStateHTML2" value="SEND UNVISIBLE">
+                        <BR>
+                        <INPUT type="button" onclick="SendStateHTML('idNewStateFile')" class="bt radius t-holder" style="height: 40px;" id="idStateHTML1" value="SEND VISIBLE FILE">
+                        <INPUT type="string" id="idNewStateFile" style="width: 140px;" class="radius t-holder" value="">
+
+
+
+                    </DIV>
+
+                </DIV>
+            </div>
+        </DIV>
+
+        <!--Upload file-->
+
+        <DIV id="TabFile" style="display: none">
+            <H2 align="center">Upload file to blockchain</H2>
+            <BR>
+            <input type="file" id="idFile" style="width: 50%;">
+            <INPUT type="button" onclick="SendFile()" class="bt btdoit" style="width: 130px;" id="idBtSendFile" value="SEND FILE">
+            <BR>
+
+            <table>
+                <tr>
+                    <td style="width: 50px">
+                        <select size="10" id="idSendFileList"  onclick="ViewBlockchainFile()" onkeyup="ViewBlockchainFile()">
+                        </select>
+                    </td>
+                    <td style="width: 50px;vertical-align: top;text-align: center;align-content: center">
+                        <DIV id="idImgInfo"></DIV>
+                        <img src="" id="idImg" style="max-width: 200px">
+                    </td>
+                </tr>
+            </table>
+            <button onclick="ClearListFile()">Clear list file</button>
+            <BR>
+        </DIV>
+
+        <!--Upload text-->
+
+
+        <DIV id="TabText" style="display: none">
+            Send as type:
+            <select size="1" id="idType" style="width:100px;">
+                <option value="text/html">html</option>
+                <option value="application/javascript">javascript</option>
+                <option value="text/css">css</option>
+                <option value="text/plain">text</option>
+                <option value="application/json">json</option>
+                <!--<option value="image/svg+xml">image/svg+xml</option>-->
+            </select>
+
+            <button class="bt btdoit" onclick="TrimRows('idText');CalclTextLength()">TRIM ROWS</button>
+            <INPUT type="button" onclick="SendText()" class="bt btdoit" style="width: 130px;" id="idBtSendText" value="SEND">
+            <B align="center">UPLOAD TEXT TO BLOCKCHAIN</B>
+
+            <textarea id="idText"  style="width: 99%;height: 45vh;" rows="24" cols="98" onkeyup="CalclTextLength()" onchange="CalclTextLength()">
+            </textarea>
+
+        </DIV>
+
+        <!--Config-->
+
+        <DIV id="TabConfig" style="display: none">
+<!--            <BR><input type="checkbox" checked id="idUseTemplate"/>Create new projects from template-->
+            <BR>Font size:<input id="idFontSize" value="10" onchange="SelectEditorsParams();SaveValues()">
+            <BR><BR><span style="padding-left: 5px">Style:</span>
+            <select size="1" id="idSelStyle" onkeyup="SelectStyle();SaveValues()" onchange="SelectStyle();SaveValues()">
+                <option value="styleLight">Light</option>
+                <option value="styleDark">Dark</option>
+            </select>
+            <BR><BR>
+            <button onclick="SaveAllProjects();" class="bt btfile" id="idSave"> Save to file</button>
+            <label for="load-key" class="bt btfile" onchange="LoadWebDataFromFile('load-key',DoLoadingConfig)" id="idLoad">
+                <input class="hidden" id="load-key" type="file">
+                <span>Load from file</span>
+            </label>
+        </DIV>
+
+        <DIV id="idServerBlock" style="max-height: 300px;">
+            <HR>
+            Log from node:
+            <textarea rows="12" cols="200"  id="idServerLog" class="focusnowrite" readonly>
+            </textarea>
+<!--            <DIV id="idServerLog"></DIV><BR>-->
+        </DIV>
+    </DIV>
+
+</DIV>
+
+
+</body>
+
+<!--modal support for dapp-->
+<style id="idModalCSS">
+    /*modal support*/
+    #idOverlay
+    {
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left:0;
+        display: none;
+        background: rgba(68, 83, 104, 0.65);
+    }
+    .ModalDlg
+    {
+        z-index: 1000;
+        background: #fff;
+        border-radius: 5px;
+        border: 1px solid #727473;
+        box-shadow: 0px 8px 10px rgba(68, 83, 104, 0.15);
+        color: #000;
+        position: fixed;
+        padding: 20px;
+        margin: 0 auto;
+        width: 90%;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 250px;
+    }
+    .MenuDlg
+    {
+        transform: translate(-50%, -40%);
+    }
+
+    .bt-confirm
+    {
+        border-radius: 4px;
+        min-height: 14px;
+        margin: 5px;
+        width: 100px;
+        height: 36px;
+
+        color:white;
+        background-color: #53687e;
+        border-color: #445368;
+    }
+
+    .bt-confirm:hover
+    {
+        color: #cb763a;
+        cursor: pointer;
+    }
+    .bt-white
+    {
+        background-color: transparent;
+        color:black;
+    }
+</style>
+
+<div id="idOverlay" onclick="closeModal()" style="display: none;"></div>
+<section id="idConfirm" class="Modal ModalDlg" style="display: none;">
+    <DIV align='center'>
+        <h2 id="idConfirmTitle">Confirm</h2>
+        <p id="idConfirmText">A you sure?</p>
+        <button class="bt-confirm"  onclick="OnConfirmOK()">OK</button>
+        <button class="bt-confirm bt-white"  onclick="closeModal()">Cancel</button>
+    </DIV>
+</section>
+
+<section class="Modal ModalDlg" id="idSending" style="display: none; width: 200px;">
+    <div align='center' style="width: 200px;">
+        <h2>Sending Tx</h2>
+        <BR>
+        <p>Wait a few seconds, pls...</p>
+
+        <p id="idSendingContent"></p>
+    </div>
+</section>
+
+
+<section id="idNewSmart" class="Modal ModalDlg MenuDlg" style="display: none;">
+    <DIV align='center'>
+        <h3>New smart contract</h3>
+        <button class="smart-menu" onclick="NewDapp('Blank','','')">Blank</button><BR>
+        <button class="smart-menu" onclick="NewDapp('Proxy',TemplateProxy,TemplateProxyHTML)">Proxy</button><BR>
+        <button class="smart-menu" onclick="NewDapp('Token',TemplateSmartToken,TemplateSmartTokenHTML)">Smart Token</button><BR>
+        <BR>Example code with:<BR>
+        <button class="smart-menu" onclick="NewDapp('Smart',TemplateAllEvent,'')">Smart: All events</button><BR>
+        <button class="smart-menu" onclick="NewDapp('Dapp',CodeTemplateDapp,DappTemplate,'idDappTemplate')">Dapp: Tabbed menu</button><BR>
+        <button class="smart-menu" onclick="NewDapp('Storage',SmartTemplate1,DappTemplate1,'idDappTemplate1')">Dapp: Key storage</button><BR>
+        <button class="smart-menu" onclick="NewDapp('Web',SiteTemplateSmart,SiteTemplateHTML,'idSiteTemplate2','idSiteTemplate1')">WWW-page</button><BR>
+
+        <button class="smart-menu smart-load" onclick="LoadFromDapp()">Load from Dapp:</button><input style="width: 80px" id="idLoadDapp"><BR>
+        <button class="smart-menu bt-white"  onclick="closeModal()">Cancel</button>
+    </DIV>
+</section>
+
+</html>

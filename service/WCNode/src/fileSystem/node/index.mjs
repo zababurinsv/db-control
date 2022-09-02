@@ -1,13 +1,15 @@
 import { hooks } from '/service/WCNode/hooks/index.mjs';
 import * as Comlink from "/modules/comlink/dist/esm/comlink.mjs";
+import isEmpty from '/modules/isEmpty/isEmpty.mjs';
 
 const service = async (self) => {
     try {
         const { render, useEffect, useState, useRef } = hooks;
         const [health, setHealth] = useState(0);
-        const [idbfs, setIdbfs] = useState(false);
         const [fs, setFs] = useState(false);
         const [isFs, setIsFs] = useState(false);
+        const [isServiceWorker, setIsServiceWorker] = useState(false);
+        const [serviceWorker, setServiceWorker] = useState(false);
         const [error, setError] = useState(false);
         // const [document, setDocument] = useState(self);
         // const memoryLog = useRef('memory');
@@ -52,6 +54,101 @@ const service = async (self) => {
             });
         };
 
+        let serviceListener = () => {
+            let workerContainerInstance = navigator.serviceWorker;
+            workerContainerInstance.oncontrollerchange = async (event) => {
+                console.log('🌼 service worker oncontrollerchange');
+                if( event.currentTarget.controller.state === 'activate') {
+                    console.log('🌼 activate', event)
+                } else {
+                    event.currentTarget.controller.addEventListener('statechange', (event) => {
+                        console.log('🌼 statechange',  event.currentTarget.state)
+                        if(event.currentTarget.state === 'activated') {
+                            console.log('🌼 activate', event)
+                        }
+                    });
+                }
+            };
+        }
+
+        const proxy = (config = {scope:'/'}) => {
+            return new Promise(async resolve  => {
+
+                const state = (registration) => {
+                    let serviceWorker;
+                    if (registration.installing) {
+                        serviceWorker = registration.installing;
+                    } else if (registration.waiting) {
+                        serviceWorker = registration.waiting;
+                    } else if (registration.active) {
+                        serviceWorker = registration.active;
+                    }
+                    return serviceWorker
+                }
+
+                let init = () => {
+                    return new Promise(resolve => {
+                        try {
+                            let url = new URL('./service.worker.mjs', location.href)
+                            navigator.serviceWorker.register(url, { type: "module", scope: location.pathname})
+                                .then(registration => {
+                                    console.log('💚 Registration succeeded. Scope is ' + registration.scope);
+                                    registration.addEventListener('updatefound', function() {
+                                        console.log('🎈 A new service worker is being installed:');
+                                        navigator.serviceWorker.ready.then(async reg => {
+                                            resolve(true)
+                                        }).catch(e => { console.log('🔼 error', e) })
+                                    })
+                                    resolve(true)
+                                }).catch(e => { console.log('🔼 error', e) })
+                        } catch (e) {
+                            console.log('🔼 error', e)
+                        }
+                    })
+                }
+
+                if(navigator.serviceWorker.controller) {
+                    console.log('🎈 controller true')
+                    init()
+                        .then(()=> {
+                            resolve(true)
+                        })
+                        .catch(e => { console.log('🔼 error', e) })
+                } else {
+                    console.log('🎈 controller false')
+                    navigator.serviceWorker.getRegistrations()
+                        .then(async Registrations => {
+                            if(isEmpty(Registrations[0])) {
+                                console.log('🎈 Registration false')
+                                init()
+                                    .then(()=> {
+                                        resolve(true)
+                                    })
+                                    .catch(e => { console.log('🔼 error', e) })
+                            } else {
+                                console.log('🎈 Registration true')
+                                let serviceWorker = state(Registrations[0])
+                                if(isEmpty(serviceWorker)) {
+                                    console.log('🎈 неизвестная ошибка', serviceWorker, navigator.serviceWorker)
+                                    resolve(false)
+                                } else {
+                                    console.log('🎈 serviceWorker', serviceWorker)
+                                    await navigator.serviceWorker.register(serviceWorker.scriptURL)
+                                    navigator.serviceWorker.ready
+                                        .then(async serviceWorkerRegistration => {
+                                            console.log('🎈 ready true')
+                                            let serviceWorker = state(serviceWorkerRegistration)
+                                            await navigator.serviceWorker.register(serviceWorker.scriptURL)
+                                            resolve(true)
+                                        })
+                                        .catch((e) => { console.log('🔼 error', e) })
+                                }
+                            }
+                        }).catch(e => { console.log('🔼 error', e) })
+                }
+            })
+        }
+
         await useEffect(async () => {
             console.log('==== init module ====');
         }, []);
@@ -61,21 +158,20 @@ const service = async (self) => {
         }, [health]);
 
         await useEffect(async () => {
-            console.log('==== FS ====', idbfs)
-            if(idbfs) {
-                setIsFs(true)
-            }
-        }, [idbfs])
-
-        await useEffect(async () => {
             if(fs) {
-                setIsFs(true)
+                setIsFs(true);
+                setServiceWorker(await proxy())
             }
-        }, [fs])
+        }, [fs]);
 
         await useEffect(async () => {
             console.log('==== api set ====', isFs)
         }, [isFs])
+
+        await useEffect(async () => {
+            console.log('🌞 init Service Worker', serviceWorker)
+            serviceListener()
+        }, [serviceWorker]);
 
         await useEffect(async () => {
             console.log('==== error ====', error)
@@ -85,15 +181,6 @@ const service = async (self) => {
             async health() {
               setHealth(health + 1)
               return  await render(service)
-            },
-            async idbfs() {
-                try {
-                   setIdbfs(await memory())
-                   return await render(service)
-                } catch (e) {
-                   setError(e)
-                   return await render(service)
-                }
             },
             async init() {
                 try {
@@ -107,7 +194,7 @@ const service = async (self) => {
             async terminate() {
                 //TODO надо сделать правильное уничтожение web worker - а
                 console.log('======== terminate service==========')
-                setIdbfs(null)
+                setFs(null)
                 setIsFs(false)
                 return await render(service)
             },
@@ -153,7 +240,7 @@ const service = async (self) => {
                     writeFileSync: fs.worker.writeFileSync,
                     readSync: fs.worker.readSync,
                     readdirSync: fs.worker.readdirSync,
-                    existsSync: fs.worker.existsSync,
+                    existsSync: (path) => fs.worker.existsSync(path),
                     is: {
                         file: fs.worker.is.file,
                         dir: fs.worker.is.dir,

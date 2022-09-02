@@ -162,7 +162,7 @@ export let IDBFS = (object) => {
                     return new Promise(async (resolve, reject) => {
                         try {
                             let mkdir = await object.fs.self.mkdir(path)
-                            resolve(true)
+                            resolve(mkdir)
                         } catch (e) {
                             resolve({
                                 status: true,

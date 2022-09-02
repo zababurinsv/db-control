@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-Frame-Options" value="deny">
+    <title>WALLET</title>
+    <link rel="shortcut icon" href="/HTML/PIC/wallet.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./CSS/mobile-wallet.css">
+    <link rel="stylesheet" href="./CSS/wallet-common.css">
+    <link rel="stylesheet" href="./CSS/wallet-grid.css">
+    <link rel="stylesheet" href="./CSS/wallet-new.css">
+    <link rel="stylesheet" href="./CSS/wallet-normalize.css">
+    <link rel="stylesheet" href="./CSS/wallet-multicoin.css">
+
+
+
+    <script type="text/javascript" src="/HTML/JS/coinlib.js"></script>
+    <script type="text/javascript" src="/HTML/JS/client.js"></script>
+    <script type="text/javascript" src="/HTML/JS/client-promise.js"></script>
+    <script type="text/javascript" src="/HTML/JS/client-tokens.js"></script>
+    <script type="text/javascript" src="/HTML/JS/client-tx.js"></script>
+    <script type="text/javascript" src="/HTML/JS/sha3.js"></script>
+    <script type="text/javascript" src="/HTML/JS/sign-lib-min.js"></script>
+    <script type="text/javascript" src="/HTML/JS/crypto-client.js"></script>
+
+    <script type="text/javascript" src="/HTML/JS/wallet-lib.js"></script>
+    <script type="text/javascript" src="/HTML/JS/wallet-node.js"></script>
+    <script type="text/javascript" src="/HTML/JS/terabuf.js"></script>
+    <script type="text/javascript" src="/HTML/JS/terahashlib.js"></script>
+
+    <script type="text/javascript" src="/HTML/JS/wallet-hash-info.js"></script>
+
+    <script type="text/javascript" src="/HTML/JS/wallet-full.js"></script>
+    <script type="text/javascript" src="/HTML/JS/wallet-full-new.js"></script>
+    <script type="text/javascript" src="/HTML/JS/wallet-multicoin.js"></script>
+
+
+
+    <script>
+        //run
+        window.onload=function()
+        {
+            InitFullMain();
+
+            FillCategory("idCategory");
+
+            LoadValues();
+            InitPasItems();
+
+            SelectStyle();
+            // SelectTypeKey();
+            window.onkeydown = CheckCtrlEnterAndESC;
+            SetVisibleTab();
+
+            localStorage["BIGWALLET"]=1;
+
+            window.OnInitWallet();
+
+            window.addEventListener("popstate", function(event)
+            {
+                var Name=window.location.hash.substr(1);
+                SelectTab(Name,1);
+            }, false);
+
+            //DoConfirm("Confirm Enter","Pls confirm Enter to wallet");
+
+            setTimeout(function ()
+            {
+                GotSertificateDate();
+            },5*1000)
+        };
+    </script>
+
+</head>
+<body>
+<dev class="header-background header_base"></dev>
+<header class="header header_base">
+    <div class="header__group wrapper">
+        <div class="logo">
+            <img src="./img/logo.svg">
+        </div>
+        <nav class="header__menu">
+            <ul class="menu">
+                <li class="menu__item">
+                    <span id="MTabAccounts" onclick="SelectTab('TabAccounts')" class="menu__link active">
+                      config
+                    </span>
+                </li>
+                <li id="MTabSend" onclick="SelectTab('TabSend')" class="menu__link">
+                    <span  class="menu__link">
+                      send
+                    </span>
+                </li>
+                <li id="MTabDapps" onclick="SelectTab('TabDapps')" class="menu__link">
+                    <span  class="menu__link">
+                      dapps
+                    </span>
+                </li>
+                <li id="MTabSharding" onclick="SelectTab('TabSharding')" class="menu__link">
+                    <span  class="menu__link">
+                      sharding
+                    </span>
+                </li>
+                <li id="MTabExplorer" onclick="SelectTab('TabExplorer')" class="menu__link">
+                    <span  class="menu__link">
+                      explorer
+                    </span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="header_base"></div>
+
+<INPUT id="idOpenWallet" style="display: none" type="button" onclick="OnClickOpenCloseWallet()" value="---">
+<section class="wrapper" style="height: 30px; padding: 0; margin-top:10px;">
+    <DIV id="idStatus" class="">&nbsp;</DIV>
+</section>
+<BR>
+
+
+<DIV id="TabAccounts" style="display: block">
+    <section class="config wrapper">
+        <div class="config__desc">
+            <div class="config__group">
+                <h4 class="h4">Block</h4>
+                <p id="idCurBlockNum" class="config__number">000000</p>
+            </div>
+            <div class="config__group">
+                <h4 class="h4">DB delta</h4>
+                <p id="idDeltaDB" class="config__number">-</p>
+            </div>
+            <div class="config__group">
+                <h4 class="h4">TX delta</h4>
+                <p id="idDeltaTX" class="config__number">-</p>
+            </div>
+            <div class="config__group">
+                <h4 class="h4">Time delta</h4>
+                <p id="idDeltaTime" class="config__number">-</p>
+            </div>
+            <div class="config__group">
+                <h4 class="h4">Wallet ver</h4>
+                <p id="idWalletVersion" class="config__number">-</p>
+            </div>
+            <div class="config__group">
+                <h4 class="h4">max</h4>
+                <p id="idSpeedSignLib" class="config__number"></p>
+            </div>
+            <div class="config__group" id="idSertifGroup" style="display:none;">
+                <h4 class="h4">https</h4>
+                <p id="idSertifDays" class="config__number"></p>
+            </div>
+        </div>
+        <div class="config__parameters">
+            <div class="config__parameter">
+                <p class="config__name">Wallet data path:</p>
+                <p id="idDataPath" class="config__value">-</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="wallet wrapper">
+        <div class="tabs">
+            <div class="tab active">
+                Accounts
+            </div>
+            <div class="tab">
+                System
+            </div>
+            <div class="tab">
+                Mining
+            </div>
+            <div class="tab">
+                Network
+            </div>
+            <div class="tab">
+                Remote
+            </div>
+            <div class="tab">
+                View
+            </div>
+            <div class="tab" id="idDevelopService" style="display: none">
+                Dev.service
+            </div>
+        </div>
+
+        <!--Accounts-->
+        <div class="tab-content active">
+            <div class="wallet__settings">
+                <div class="wallet__buttons" id="wallet_config_tab">
+                    <div class="wallet__btn-group">
+                        <a  onclick="FindMyAccounts();" class="btn btn_margin btn__transparent" style="width: 150px">
+                            <img src="./img/reload.svg" class="btn__img">
+                            refresh
+                        </a>
+                        <a onclick="openModal('idBlockAddAccount','idBtCreateAccount')" class="btn btn_margin">
+                            add account
+                        </a>
+                        <a onclick="EditPrivateKey()" class="btn btn_margin">
+                            edit wallet
+                        </a>
+                        <a onclick="openModal('idBlockPasswordSet','idBtnSetPassword')" class="btn btn_margin" id="idBtBlockPasswordSet">
+                            password wallet
+                        </a>
+                        <p id="infoWALLET_DESCRIPTION"></p>
+                    </div>
+                </div>
+
+
+                <div class="wallet__group">
+
+                    <table id="grid_accounts" class="grid">
+                        <tr>
+                            <th id="(RetHistoryAccount(Item))" class="id">ID</th>
+                            <th id="(RetEditAccount(Item))" data-name="Account name" class="name ">Name</th>
+                            <th id="SUM_TO_STRING(Item.Value)" class="sum bold">Amount</th>
+                            <th id="ACurrencyNameItem(Item)" data-name="Currency" class="cur">Cur</th>
+                            <th id="(RetCountERC(Item))" class="">ERC</th>
+                            <th id="Item.Adviser" data-name="Adviser" class="">Adv</th>
+
+                            <th id="(RetChangeSmart(Item))" data-name="Smart contract (DApp)" class="">Smart</th>
+                            <th id="Item.WN" class="num" style="width: 30px;"></th>
+                            <th id="GetStateItem(Item)" class="code">State</th>
+<!--                            <th id="Item.Value.OperationID" data-name="Operation ID" class="snum ">OP</th>-->
+                        </tr>
+                    </table>
+                    <BR>
+                    <DIV id="idMyTotalSum"></DIV>
+                </div>
+
+            </div>
+        </div>
+
+        <!--System-->
+        <div class="tab-content">
+            <BR>
+            <div class="row">
+                <div class="switches-left">
+                    <div class="switch">
+                        <p class="switch-text">Use autoupdate </p>
+                        <label for="idAutoUpdate">
+                            <input type="checkbox" class="checkbox" id="idAutoUpdate" onchange = "UseAutoUpdate()">
+                            <label for="idAutoUpdate"></label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <h3 class="h3">Blockchain hashrate</h3>
+            <canvas  width='800' height='60' id='idBlockInfo'></canvas>
+
+            <div class="division division_light"></div>
+
+            <div class="statistics__buttons">
+                <button class="btn btn_explorer btn_utils" onclick="RestartNode()" >Restart node</button>
+                <button class="btn btn_explorer btn_utils" onclick="ViewConstant()">Edit all constants</button>
+            </div>
+
+
+        </div>
+
+
+        <!--Mining-->
+        <div class="tab-content">
+            <div class="wallet__mining mining">
+                <DIV id="idStatusMining"></DIV>
+
+                <div class="switches">
+                    <div class="switches-left">
+                        <div class="switch">
+                            <p class="switch-text">Use mining </p>
+                            <label for="idUseMining">
+                                <input type="checkbox" class="checkbox" id="idUseMining" onchange = "UseMining()">
+                                <label for="idUseMining"></label>
+                            </label>
+                        </div>
+                        <DIV style="width: 600px;">
+                            <div class="row">
+                                <div class="switch" >
+                                    <p>Mining account:</p>
+                                    <input type="number" class="input input_mining" id="idMiningAccount" min=0 max=1000000000000 value="0" onchange="SaveMiningSet()">
+                                </div>
+                                <div class="switch">
+                                    <p>CPU use:</p>
+                                    <input class="input input_mining" type="number" min=0 max=100 id="idPercentMining" onchange="SetPercentMining()"/>
+                                    <p>%</p>
+                                </div>
+                            </div>
+                        </DIV>
+                    </div>
+                </div>
+                <div class="row">
+                <div class="connection">
+                    <p class="connection__text">count mining cpu:</p>
+                    <input type="number" class="input  input_big node-const" min=0 max=200 id="COUNT_MINING_CPU" maxlength="5" value="" onchange="SaveNetParams()">
+                </div>
+                    <div class="connection">
+                        <p class="connection__text">size mining memory (bytes):</p>
+                        <input type="number" class="input  input_big node-const" id="SIZE_MINING_MEMORY" maxlength="20" value="" onchange="SaveNetParams()">
+                    </div>
+                </div>
+            </div>
+         </div>
+
+
+        <!--Network-->
+        <div class="tab-content">
+            <h3 class="h3">Network connection</h3>
+            <div class="row">
+                <div class="connection__switch ">
+                    <div class="switch">
+                        <p class="switch-text">Autodetect IP </p>
+                        <label for="idAutoDetectIP">
+                            <input type="checkbox" class="checkbox" id="idAutoDetectIP" onchange="SaveNetParams()">
+                            <label for="idAutoDetectIP"></label>
+                        </label>
+                    </div>
+                </div>
+                <div class="connection__switch ">
+                    <div class="switch">
+                        <p class="switch-text">Client mode only</p>
+                        <label for="CLIENT_MODE">
+                            <input type="checkbox" class="checkbox  node-const" id="CLIENT_MODE" onchange="SaveNetParams()">
+                            <label for="CLIENT_MODE"></label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="connection">
+                    <p class="connection__text">IP VERSION:</p>
+                    <input type="number" class="input  input_small node-const" id="IP_VERSION" maxlength="40" value="" placeholder="4 or 6" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">ip</p>
+                    <input type="text" maxlength="40" class="input input_middle2" value="-" id="idIP" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">Port</p>
+                    <input type="number"  maxlength="9" class="input input_middle" value="0" id="idPort" onchange="SaveNetParams()">
+                </div>
+            </div>
+
+            <h3 class="h3">Cluster set</h3>
+
+            <div class="myrow">
+                <div class="connection">
+                    <p class="connection__text">Common key:</p>
+                    <input type="text" class="input  input_big node-const" id="COMMON_KEY" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">Unique node name:</p>
+                    <input type="text" class="input  input_middle node-const" id="NODES_NAME" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+            </div>
+            <div class="connection__switch ">
+                <div class="switch" style="width: 400px">
+                    <p class="switch-text">Correct time from cluster node (linux):</p>
+                    <label for="CLUSTER_TIME_CORRECT">
+                        <input type="checkbox" class="checkbox node-const" id="CLUSTER_TIME_CORRECT" onchange="SaveNetParams()">
+                        <label for="CLUSTER_TIME_CORRECT"></label>
+                    </label>
+                </div>
+            </div>
+
+            <div class="division"></div>
+
+            <div class="statistics__buttons">
+                <button class="btn btn_explorer btn_utils" onclick="RestartNode()" >Restart node</button>
+                <button class="btn btn_explorer" onclick="window.Open('./HTML/network.html','network',1200)">
+                    <div class="df">
+                        <img src="./img/network.svg" class="btn__img">
+                        <p class="btn__arrow-text">Network</p>
+                    </div>
+                    <img src="./img/arrow_right.svg">
+                </button>
+
+            </div>
+        </div>
+
+        <!--Remote-->
+        <div class="tab-content">
+            <h3 class="h3">Remote full-node access</h3>
+            <div class="row">
+                <div class="connection">
+                    <p class="connection__text">HTTP port:</p>
+                    <input type="number" class="input  input_middle" id="idHTTPPort" maxlength="9" value="8000"  onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">Password on HTTP: </p>
+                    <input type="password" class="input  input_middle" id="idHTTPPassword" placeholder="" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">Remote IP filter:</p>
+                    <input type="text" class="input  input_middle node-const" id="HTTP_IP_CONNECT" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+            </div>
+
+            <div class="division"></div>
+
+
+
+            <h3 class="h3">RPC: Web-wallet/API-1/API-2</h3>
+            <div class="row">
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 225px">
+                        <p class="switch-text">Web-wallet:</p>
+                        <label for="USE_API_WALLET">
+                            <input type="checkbox" class="checkbox node-const" id="USE_API_WALLET" onchange="SaveNetParams()">
+                            <label for="USE_API_WALLET"></label>
+                        </label>
+                    </div>
+                </div>
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 225px">
+                        <p class="switch-text">API v1:</p>
+                        <label for="USE_API_V1">
+                            <input type="checkbox" class="checkbox node-const" id="USE_API_V1" onchange="SaveNetParams()">
+                            <label for="USE_API_V1"></label>
+                        </label>
+                    </div>
+                </div>
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 225px">
+                        <p class="switch-text">API mining:</p>
+                        <label for="USE_API_MINING">
+                            <input type="checkbox" class="checkbox node-const" id="USE_API_MINING" onchange="SaveNetParams()">
+                            <label for="USE_API_MINING"></label>
+                        </label>
+                    </div>
+                </div>
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 225px">
+                        <p class="switch-text">API v2:</p>
+                        <label for="USE_HARD_API_V2">
+                            <input type="checkbox" class="checkbox node-const" id="USE_HARD_API_V2" onchange="SaveNetParams()">
+                            <label for="USE_HARD_API_V2"></label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="myrow">
+                <div class="connection">
+                    <p class="connection__text">Port:</p>
+                    <input type="number" class="input  input_middle node-const" id="HTTP_HOSTING_PORT" placeholder="80 or 443" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">HTTPS Domain:</p>
+                    <input type="text" class="input  input_middle node-const" id="HTTPS_HOSTING_DOMAIN" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">Sertificate Email:</p>
+                    <input type="text" class="input  input_middle node-const" id="HTTPS_HOSTING_EMAIL" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <button onclick="GotNewSertificate()" class="btn connection__btn">Got new sertificate</button>
+                </div>
+            </div>
+            <div class="connection">
+                <p class="connection__text">START WEB-PAGE:</p>
+                <input type="text" class="input  input_middle node-const" id="HTTP_START_PAGE" maxlength="40" value="" onchange="SaveNetParams()">
+            </div>
+            <div class="connection">
+                <p class="connection__text">MAX COUNT ALLOWED ROWS:</p>
+                <input type="number" class="input  input_middle node-const" id="HTTP_MAX_COUNT_ROWS" maxlength="40" value="" onchange="SaveNetParams()">
+            </div>
+            <div class="connection">
+                <p class="connection__text">MAX TX FROM WEB:</p>
+                <input type="number" class="input  input_middle node-const" id="MAX_TX_FROM_WEB_IP" maxlength="40" value="" onchange="SaveNetParams()">
+            </div>
+            <div class="connection__switch ">
+                <div class="switch" style="width: 195px">
+                    <p class="switch-text">Web log:</p>
+                    <label for="WEB_LOG">
+                        <input type="checkbox" class="checkbox node-const" id="WEB_LOG" onchange="SaveNetParams()">
+                        <label for="WEB_LOG"></label>
+                    </label>
+                </div>
+            </div>
+
+            <div class="division"></div>
+            <button class="btn btn_explorer btn_utils" onclick="RestartNode()" >Restart node</button>
+
+        </div>
+
+        <!--View-->
+        <div class="tab-content">
+            <div class="row">
+                <div class="connection__switch ">
+                    <div class="switch">
+                        <p class="switch-text">Color theme:</p>
+                        <select size="1" id="idSelStyle"  onkeyup="SelectStyle();SaveValues()" onchange="SelectStyle();SaveValues()">
+                            <option value="styleDark">Dark</option>
+                            <option value="styleLight">Light</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="division"></div>
+            <h3 class="h3">Wallet view set</h3>
+
+            <div class="row">
+                <div class="connection">
+                    <p class="connection__text">Window name:</p>
+                    <input type="text" class="input  input_middle node-const" id="WALLET_NAME" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+                <div class="connection">
+                    <p class="connection__text">Description:</p>
+                    <input type="text" class="input  input_middle node-const" id="WALLET_DESCRIPTION" maxlength="40" value="" onchange="SaveNetParams()">
+                </div>
+                <a  onclick="FindMyAccounts();" class="btn btn_margin btn__transparent" style="width: 150px">
+                    <img src="./img/reload.svg" class="btn__img">
+                    refresh
+                </a>
+            </div>
+            <BR>
+            <div class="myrowl">
+                <p class="text input_middle">Coin sum precision:</p>
+                <input type="number" class="input  input_small node-const" id="SUM_PRECISION" maxlength="40" value="" onchange="SaveNetParams()">
+            </div>
+            <BR>
+            <div class="myrowl">
+                <p class="text input_middle">Max count view table rows:</p>
+                <input type="number" class="input  input_small node-const" id="COUNT_VIEW_ROWS" maxlength="40" value="" onchange="SaveNetParams()">
+            </div>
+            <BR>
+            <div class="myrowl">
+                <p class="text input_middle">Account history start from:</p>
+                <input type="number" class="input  input_small node-const" id="START_HISTORY" maxlength="40" value="" onchange="SaveNetParams()">
+                <p class="text input_middle">(Note:need rewrite tx)</p>
+            </div>
+
+            <div class="row">
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 400px">
+                        <p class="switch-text">View all table rows:</p>
+                        <label for="ALL_VIEW_ROWS">
+                            <input type="checkbox" class="checkbox node-const" id="ALL_VIEW_ROWS" onchange="SaveNetParams()">
+                            <label for="ALL_VIEW_ROWS"></label>
+                        </label>
+                    </div>
+                </div>
+
+
+<!--                <div class="connection__switch ">-->
+<!--                    <div class="switch" style="width: 400px">-->
+<!--                        <p class="switch-text">Debug dapps state (need reload page)</p>-->
+<!--                        <label for="DEBUG_WALLET">-->
+<!--                            <input type="checkbox" class="checkbox node-const" id="DEBUG_WALLET" onchange="SaveNetParams()">-->
+<!--                            <label for="DEBUG_WALLET"></label>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <div class="row">
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 400px">
+                        <p class="switch-text">Edit accounts (beta version)</p>
+                        <label for="USE_EDIT_ACCOUNT">
+                            <input type="checkbox" class="checkbox node-const" id="USE_EDIT_ACCOUNT" onchange="SaveNetParams()">
+                            <label for="USE_EDIT_ACCOUNT"></label>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="connection__switch ">
+                    <div class="switch" style="width: 400px">
+                        <p class="switch-text">Block form when sending Tx</p>
+                        <label for="USE_BLOCK_SEND_TX">
+                            <input type="checkbox" class="checkbox node-const" id="USE_BLOCK_SEND_TX" onchange="SaveNetParams()">
+                            <label for="USE_BLOCK_SEND_TX"></label>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <!--Developer service-->
+        <div class="tab-content" >
+            <BR>
+            <div class="row df_space">
+                <div class="row">
+                <button class="btn btn_margin" onclick="SetCodeVersionJSON()">CODE VERS</button>
+                <button class="btn btn_margin" onclick="SetNetConstJSON()">NET CONSTS</button>
+                <button class="btn btn_margin" onclick="SetSysCoreJSON()">SYS CORE</button>
+<!--                <button class="btn" onclick="ConnectToAll()">All connect</button>-->
+                </div>
+                <button class="btn" onclick="RunDevelopService()">SEND</button>
+            </div>
+            <TEXTAREA id="idDevService" rows="12" cols="70" class="log editdevservice"> </TEXTAREA><BR>
+
+        </div>
+
+
+
+
+        <div class="division"></div>
+    </section>
+
+
+    <div class="Modal ModalDlg" id="idBlockEditAccount">
+        <div class="modal__container">
+            <div class="btn-close doclose">
+                <img src="./img/Close.svg">
+            </div>
+            <div class="form">
+                <h3 class="h3 h3_form">
+                    Edit account
+                </h3>
+                <div class="division division_form"></div>
+
+                <div class="form__group">
+                    <p class="connection__text">ID</p>
+                    <input type="text" class="input input_modal" disabled value="" id="idAccountNumEdit">
+                </div>
+                <div class="form__group">
+                    <p class="connection__text">Public name</p>
+                    <input type="text" class="input input_modal" value="" id="idAccountNameEdit">
+                </div>
+                <div class="form__group">
+                    <p class="connection__text">Public key</p>
+                    <input type="text" class="input input_modal" value="" id="idPublicKeyEdit">
+                </div>
+
+                <BR>
+                <BR>
+                <BR>
+                <div class="form__buttons">
+                    <button class="btn btn__transparent cancel btn_margin btn_middle doclose">Cancel</button>
+                    <button class="btn btn_middle btn_margin doclose" id="isSaveBtEditAccount" onclick="SaveEditAccount()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Modal ModalDlg" id="idBlockAddAccount">
+        <div class="modal__container">
+            <div class="btn-close doclose">
+                <img src="./img/Close.svg">
+            </div>
+            <div class="form">
+                <h3 class="h3 h3_form">
+                    Adding a new account
+                </h3>
+                <div class="division division_form"></div>
+                <div class="form__group">
+                    <p class="connection__text">Public name</p>
+                    <input type="text" class="input input_modal" value="" id="idAccountName">
+                </div>
+
+                <DIV class="myrow form__group">
+                    <div>
+                        <p class="connection__text">Currency</p>
+                        <input type="search" list="idCurrencyList" id="idCurrency" class="select__item input inputacc" onchange="ValidateCurrency(this)"/>
+                        <datalist id="idCurrencyList">
+                            <option value="Loading"></option>
+                        </datalist>
+                    </div>
+
+                    <div>
+                        <p class="connection__text">Smart:</p>
+                        <INPUT type="number" class="select__item input inputacc" id="idSmart" min=0 max=100000000 value="0">
+                    </div>
+
+                    <div>
+                        <p class="connection__text">Advanced miner ID:</p>
+                        <INPUT type="number" class="select__item input inputacc"  id="idAMinerID" min=1000000000 max=9999999999 value="0">
+                    </div>
+                    <div id="idRowWN" style="display: none;">
+                        <p class="connection__text">WN:</p>
+                        <INPUT type="number" class="select__item input inputacc"  id="idWN" min=0 max=100 value="0">
+                    </div>
+                 </DIV>
+
+                <BR>
+                <BR>
+                <BR>
+                <div class="form__buttons">
+                    <button class="btn btn__transparent cancel btn_margin btn_middle doclose">Cancel</button>
+                    <button class="btn btn_middle btn_margin doclose" id="idBtCreateAccount" onclick="CreateAccount(0)">Create</button>
+                    <button class="btn btn_middle doclose" onclick="CreateAccount(1)">to Pay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Modal ModalDlg modal_wallet" id="idBlockEditWallet">
+        <div class="modal__container">
+            <div class="btn-close doclose">
+                <img src="./img/Close.svg">
+            </div>
+            <div class="form">
+                <h3 class="h3 h3_form">
+                    Edit wallet info
+                </h3>
+                <div class="division division_form"></div>
+                <div class="form__group">
+                    <p class="connection__text">Private key</p>
+                    <input type="text" class="input input_modal" id="idKeyNew" value="-">
+                </div>
+                <div class="form__group">
+                    <p class="connection__text">Public key</p>
+                    <input type="text" class="input input_modal" id="idPubKey" value="-" readonly>
+                </div>
+                <div class="form__links">
+                    <button class="btn btn__transparent" onclick="NewPrivateKey()">Generate new key</button>
+                </div>
+                <div class="form__buttons">
+                    <button class="btn btn__transparent cancel btn_margin btn_middle doclose">Cancel</button>
+                    <button class="btn btn_middle doclose" id="idBtnSaveKey" onclick="SavePrivateKey()">confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Modal ModalDlg" id="idBlockConstSet">
+        <div class="modal__container">
+            <div class="btn-close doclose">
+                <img src="./img/Close.svg">
+            </div>
+            <div class="form">
+                <h3 class="h3 h3_form">Edit all constants</h3>
+                <textarea name="form-const" id="idConstant" class="log log_form editconstants"></textarea>
+                <div class="form__buttons">
+                    <button class="btn btn__transparent cancel btn_margin btn_middle doclose">Cancel</button>
+                    <button class="btn btn__transparent btn_margin btn_middle doclose" id="idBtnConstSave" onclick="SaveConstant(0)">Save</button>
+                    <button class="btn btn_middle doclose" onclick="SaveConstant(1)">save and restart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Modal ModalDlg Modal450" id="idBlockPasswordSet">
+        <div class="modal__container">
+            <div class="btn-close doclose">
+                <img src="./img/Close.svg">
+            </div>
+            <div class="form">
+
+                <h3 class="h3 h3_form">
+                    Wallet password
+                </h3>
+                <div class="division division_form"></div>
+
+                <div class="form__group">
+                    <p class="connection__text">password</p>
+                    <input type="password" class="input  input_big" placeholder="Enter password" id="idPassword1">
+                </div>
+                <div class="form__group">
+                    <p class="connection__text">repeat password </p>
+                    <input type="password" class="input  input_big" placeholder="Repeat password" id="idPassword2">
+                </div>
+                <DIV class="form__group"><BR></DIV>
+                <div class="form__buttons">
+                    <button class="btn btn__transparent cancel btn_margin btn_middle doclose">Cancel</button>
+                    <button class="btn btn_middle" id="idBtnSetPassword" onclick="SetPassword(); closeModal()">confirm</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</DIV>
+
+
+<DIV id="TabSend" style="display: none">
+    <BR>
+    <h3 class="h3_form" style="margin-bottom: 0">
+        Sending coins
+    </h3>
+
+    <section class="tokens wrapper">
+
+        <DIV class="row" id="idSendList"> </DIV>
+        <div class="input-group">
+            <div class="input-group__row">
+            <p class="input-group__text">From:</p>
+            <p class="input-group__text bt-paste" onclick="PasteRow()">Paste</p>
+            </div>
+            <div class="select row">
+                <select class="select__item input_send" size="1" id="idAccount" oninput="OnSelectAccountFrom()">
+                </select>
+            </div>
+        </div>
+
+
+        <div class="row" id="idTokenNFT">
+            <div style="padding-left: 10px" class="t_choos_coin">CHOOSE A COIN:</div>
+            <grid_nft id="idListNFT">
+                <item_nft>Loading...</item_nft>
+            </grid_nft>
+        </div>
+
+
+        <div class="input-group">
+            <div class="input-group__row">
+                <p class="input-group__text">Pay to:</p>
+                <div class="input-group__right" id="idNameTo">
+                </div>
+            </div>
+
+            <INPUT list="idToList" class="input select__item input_send" type="search" maxlength="40" id="idTo" value="" onkeyup="OnEditIdTo()" onchange="OnEditIdTo()" autocomplete="off" placeholder="Enter ID..." >
+            <datalist id="idToList">
+                <option value="Loading"></option>
+            </datalist>
+
+        </div>
+        <div class="input-group">
+            <div class="input-group__row flex_left">
+                <p class="input-group__text">Amount <span id="idCoinName"></span></p>
+                <button class="bt_set" onclick="SetAllSum()">max</button>
+            </div>
+            <input type="number" class="input input_send coral" placeholder="Input amount..." id="idSumSend" value="" step=0 min=0 max=1000000000 onkeyup="OnEditTransactionFields()" onchange="OnEditTransactionFields()">
+        </div>
+        <div class="input-group">
+            <div class="input-group__row">
+                <p class="input-group__text">Description:</p>
+            </div>
+            <textarea id="idDescription" rows="4" class="input input_send" onkeyup="CheckLengthAccDesription('idDescription',200);OnEditTransactionFields()" onchange="OnEditTransactionFields()"></textarea>
+        </div>
+        <DIV id="idAttach"> </DIV>
+
+
+        <div class="wallet__buttons">
+<!--            <a onclick="EditJSONTransaction()" class="btn btn__transparent btn_wide" id="json">-->
+<!--                <img src="./img/edit.svg" class="btn__img">-->
+<!--                <p>Edit json</p>-->
+<!--            </a>-->
+            <div class="wallet__btn-group">
+                <button class="btn btn__transparent btn_wide btn_margin" onclick="ClearTransaction()">Clear</button>
+                <button class="btn btn_wide" id="idSendButton" onclick="SendMoneyBefore();PasueBt(this)">SEND</button>
+            </div>
+        </div>
+        <div class="division"></div>
+
+    </section>
+
+    <div class="Modal ModalDlg" id="idBlockEditJson">
+        <div class="modal__container">
+            <div class="btn-close doclose">
+                <img src="./img/Close.svg">
+            </div>
+            <div class="form">
+                <h3 class="h3 h3_form">
+                    Edit JSON
+                </h3>
+                <div class="division division_form"></div>
+                <textarea class="log log_form" id="idTransaction" rows="20"></textarea>
+                <div class="form__buttons">
+                    <button class="btn btn__transparent btn_middle cancel btn_margin doclose">Cancel</button>
+                    <button class="btn btn__transparent btn_middle btn_margin" id="idSignJSON"  onclick="SignJSON()">Sign json</button>
+                    <button class="btn btn_middle doclose" id="idBtnSendJSON" onclick="SendMoneyJSON()">send from json</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</DIV>
+
+
+<DIV id="TabDapps" style="display: none">
+    <section class="dapps wrapper">
+        <BR>
+        <h3 class="h3_form">
+            Decentralized applications (dApps)
+        </h3>
+
+        <button class="btn btn_arrow " style="float: right; margin-top: 11px;" onclick="window.Open('./HTML/dapp-edit.html','smart',1240)">
+            <p class="btn__arrow-text">dapps editor</p>
+            <img src="./img/arrow_right.svg">
+        </button>
+
+
+
+        <div class="myrow">
+            <p class="connection__text">Search:</p>
+            <INPUT type="search" id="idViewDappsFilter" class="input" value="" onchange="CheckNewSearch(DefDapps); ViewCurrent(DefDapps)">
+
+            <p class="connection__text">Category:</p>
+            <select size="1" id="idCategory" class="select__item" onchange="ViewCurrent(DefDapps)"></select>
+        </div>
+
+
+
+        <div class="navigation df_space">
+            <button onclick="ViewBegin(DefDapps)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+            <button onclick="ViewPrev(DefDapps)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+            <input class="pages input" type="number" id="idViewDappNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefDapps)">
+
+            <button onclick="ViewNext(DefDapps,CONFIG_DATA.MaxDappsID)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+            <button onclick="ViewEnd(DefDapps,CONFIG_DATA.MaxDappsID)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+        </div>
+
+
+        <div class="wallet__group" id="idPaginationDapps">
+            <table id="grid_dapps_all" class="grid">
+                <tr>
+                    <th id="(RetNumDapp(Item))" class="id">ID</th>
+                    <th id="(RetOpenDapps(Item,0,0))" class="">Name</th>
+                    <th id="(RetDescription(Item))" class="">Description</th>
+                    <th id="(RetCategory(Item))" class="">Category</th>
+
+                    <th id="(RetBaseAccount(Item))" class="snum">Base</th>
+
+                    <th id="(RetHistoryAccount(Item,'Owner'))" class="snum">Owner</th>
+                    <th id="Item.KeyValueSize" class="snum">Storage</th>
+
+
+<!--                    <th id="RetBool(Item.TokenGenerate)" class="bool">Token</th>-->
+                    <th id="Item.Version" class="">Version</th>
+
+                    <th id="(RetOpenBlock(Item.BlockNum,1))" class="block">Block</th>
+
+
+                </tr>
+
+            </table>
+
+        </div>
+
+
+
+
+        <div class="division"></div>
+    </section>
+</DIV>
+
+<DIV id="TabSharding" style="display: none">
+    <BR>
+    <h3 class="h3_form">
+        Sharding support
+    </h3>
+
+    <section class="config wrapper">
+
+
+        <div class="utilities__buttons df_space">
+            <DIV style="float: left;">
+                <input type="checkbox" class="checkbox" id="idUseMiningShards" onchange = "UseMiningShards()"/>
+                <label for="idUseMiningShards">Mining cross-tx</label>
+            </DIV>
+
+            <button class="btn drop_down active" onclick="ViewCurrent(DefShard,1,this)">
+                <p class="txt_dropdown">Shards</p>
+                <img src="./img/arrow_left.svg">
+            </button>
+
+            <button class="btn drop_down" onclick="ViewCurrent(DefCrossOut,1,this)">
+                <p class="txt_dropdown">Send</p>
+                <img src="./img/arrow_left.svg">
+            </button>
+            <button class="btn drop_down" onclick="ViewCurrent(DefCrossIn,1,this)">
+                <p class="txt_dropdown">Receive</p>
+                <img src="./img/arrow_left.svg">
+            </button>
+         </div>
+
+        <DIV style="margin-top: -40px">
+            <DIV id="idPaginationCrossSend" style="display: none">
+
+                <h3 class="h3_form">Send</h3>
+
+                <div class="navigation df_space">
+                    <button onclick="ViewBegin(DefCrossOut)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                    <button onclick="ViewPrev(DefCrossOut)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                    <input class="pages input" type="number" id="idViewCrossOutNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefCrossOut)">
+
+                    <button onclick="ViewNext(DefCrossOut,MaxCrossOutNum)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                    <button onclick="ViewEnd(DefCrossOut,MaxCrossOutNum)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                </div>
+
+
+
+
+                <table id="grid_cross_send" class="grid">
+                    <tr>
+                        <!--                            <th id="Item.Num" class="num">Num</th>-->
+                        <th id="Item.RowNum" class="num">Row</th>
+                        <!--                            <th id="Item.Position" class="num">Position</th>-->
+                        <th id="(RetOpenBlock(Item.BlockNum,1))" class="block">Block</th>
+                        <th id="(escapeHtml(DateFromBlock(Item.BlockNum,1)))" class="date">Date</th>
+
+                        <!--                            <th id="Item.Mode" class="num">Mode</th>-->
+                        <th id="Item.Msg.Iteration" class="num">Iter</th>
+                        <th id="Item.Msg.Confirms" class="num">C</th>
+                        <th id="Item.Msg.TxNumFrom" class="num">Tx</th>
+                        <th id="Item.Msg.ShardFrom+':'+Item.Msg.AccountFrom" class="channel">From</th>
+                        <th id="Item.Msg.ShardTo+':'+Item.Msg.AccountTo" class="channel">To</th>
+                        <th id="Item.Msg.MethodName" class="hash2">Method</th>
+                        <th id="Item.Msg.Params" class="code">Params</th>
+                        <th id="GetHexFromArr(Item.RowHash)" class="hash">RowHash</th>
+                        <!--                            <th id="Item.Confirms" class="num">confirms</th>-->
+
+                        <!--                            <th id="Item.Position" class="num">Position</th>-->
+                    </tr>
+                </table>
+
+            </DIV>
+
+            <DIV id="idPaginationCrossReceive" style="display: none">
+
+
+                <h3 class="h3_form">Receive</h3>
+
+                <div class="navigation df_space">
+                    <button onclick="ViewBegin(DefCrossIn)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                    <button onclick="ViewPrev(DefCrossIn)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                    <input class="pages input" type="number" id="idViewCrossInNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefCrossIn)">
+
+                    <button onclick="ViewNext(DefCrossIn,MaxCrossInNum)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                    <button onclick="ViewEnd(DefCrossIn,MaxCrossInNum)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                </div>
+
+
+
+                <table id="grid_cross_receive" class="grid">
+                    <tr>
+                        <!--                            <th id="Item.Num" class="num">Num</th>-->
+                        <th id="(RetOpenBlock(Item.BlockNumAdd,1,Item.RowNum))" class="block">Row</th>
+                        <th id="(escapeHtml(DateFromBlock(Item.BlockNum,1)))" class="date">Date</th>
+                        <th id="Item.Msg.Iteration" class="num">Iter</th>
+                        <th id="Item.Msg.TxNumFrom" class="num">Tx</th>
+                        <th id="Item.Msg.ShardFrom+':'+Item.Msg.AccountFrom" class="channel">From</th>
+                        <th id="Item.Msg.ShardTo+':'+Item.Msg.AccountTo" class="channel">To</th>
+                        <th id="Item.Msg.MethodName" class="hash2">Method</th>
+                        <th id="Item.Msg.Params" class="code">Params</th>
+
+                        <th id="Item.StatusStr" class="num">Status</th>
+                        <th id="(RetOpenBlock(Item.BlockNumVote,1,Item.ConfirmsStr))" class="block">C</th>
+                        <!--                            <th id="Item.Height" class="num">Height</th>-->
+                        <!--                            <th id="Item.HeightStart" class="num">HeightStart</th>-->
+                        <!--                            <th id="(RetOpenBlock(Item.BlockNumVote,1))" class="num">Last vote</th>-->
+
+                        <th id="(RetOpenBlock(Item.BlockNumRun,1))" class="block">Run</th>
+
+                        <!--                            <th id="Item.HeightStart" class="num">Start</th>-->
+                        <th id="Item.BlockNumRun?Item.BlockNumRun-Math.min(Item.BlockNum,Item.BlockNumAdd):''" class="num">Delta</th>
+
+                        <th id="GetHexFromArr(Item.RowHash)" class="hash">RowHash</th>
+                        <th id="Item.Receive" class="name">Receive</th>
+
+
+                        <!--                            <th id="GetHexFromArr(Item.DataHash)" class="hash">DHash</th>-->
+
+                        <!--                            <th id="Item.Position" class="num">Position</th>-->
+                    </tr>
+                </table>
+
+            </DIV>
+
+
+
+            <DIV id="idPaginationShard" style="display: none">
+
+                <h3 class="h3_form">Shards</h3>
+
+                <div class="navigation df_space">
+                    <button onclick="ViewBegin(DefShard)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                    <button onclick="ViewPrev(DefShard)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                    <input class="pages input" type="number" id="idViewShardNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefShard)">
+
+                    <button onclick="ViewNext(DefShard,MaxShardNum)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                    <button onclick="ViewEnd(DefShard,MaxShardNum)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                </div>
+
+                <table id="grid_shard" class="grid">
+                    <tr>
+                        <th id="Item.Num" class="num">Num</th>
+                        <th id="(RetOpenBlock(Item.BlockNum,1))" class="block">Block</th>
+                        <th id="Item.ShardName+'-'+Item.Confirms" class="name">Name-confirms</th>
+                        <th id="Item.Description" class="name">Description</th>
+
+                        <th id="(RetOpenBlock(Item.MaxVBlock.BlockNum,1,Item.MaxVBlock.Height))" class="block">MaxHeight</th>
+                        <th id="GetHexFromArr(Item.MaxVBlock.Hash)" class="hash">Hash</th>
+                        <!--                            <th id="Item.MaxVBlock.RowNum" class="num">MaxRow</th>-->
+                        <th id="GetHexFromArr(Item.MaxVBlock.RowHash)" class="hash">RowHash</th>
+                        <th id="formatDate(new Date(Item.CheckTime))" class="date">CheckTime</th>
+
+                        <!--                            <th id="Item.System" class="num">System</th>-->
+
+                        <!--                            <th id="GetHexFromArr(Item.LastHash)" class="hash">Hash</th>-->
+
+                        <!--                            <th id="Item.Pos" class="num">Pos</th>-->
+                    </tr>
+                </table>
+
+                <div class="division"></div>
+                <div class="myrowl">
+                    <p>New shard:</p><INPUT class="input" maxlength="6" id="idShardName" style="width: 80px;">
+                    <p>Confirms:</p><INPUT class="input" type="number" min=0 max=100000 id="idShardConfirms" value="10" style="width: 60px;">
+                    <p>Description:</p><INPUT class="input" maxlength="40" id="idShardDescription" style="width: 200px;">
+                    <BUTTON onclick="CreateNewShard()" class="btn">Send to pay</BUTTON>
+                </div>
+
+            </DIV>
+
+
+        </DIV>
+
+        <div class="division"></div>
+
+    </section>
+
+</DIV>
+
+<DIV id="TabExplorer" style="display: none">
+    <section class="explorer wrapper">
+        <div class="tabs">
+            <div class="tab active">
+                Common
+            </div>
+<!--            <div class="tab">-->
+<!--                Statistics-->
+<!--            </div>-->
+            <div class="tab">
+                Utilities
+            </div>
+        </div>
+
+        <!--Common-->
+        <div class="tab-content active">
+
+            <div class="myrow" style="margin-top: 20px;margin-bottom: 20px;">
+                <p class="connection__text">Find Tx:</p>
+                <INPUT type="search" class="input input_big" id="idFindTx" autocomplete="off" placeholder="Type TxID...">
+                <button class="btn" onclick="OnFindTx('idFindTx')">Find</button>
+            </div>
+
+            <div class="utilities__buttons df_space">
+                <button class="btn drop_down btn_common active" onclick="ViewCurrent(DefAccounts,1,this)">
+                    <p class="txt_dropdown">Accounts</p>
+                    <img src="./img/arrow_left.svg">
+                </button>
+
+                <button class="btn drop_down btn_common" onclick="ViewCurrent(DefBlock,1,this)">
+                    <p class="txt_dropdown">Blocks & Tx</p>
+                    <img src="./img/arrow_left.svg">
+                </button>
+                <button class="btn drop_down btn_common" onclick="ViewCurrent(DefJournal,1,this)">
+                    <p class="txt_dropdown">Journal</p>
+                    <img src="./img/arrow_left.svg">
+                </button>
+                <button class="btn drop_down btn_common" onclick="ViewCurrent(DefHash,1,this)">
+                    <p class="txt_dropdown">Checks</p>
+                    <img src="./img/arrow_left.svg">
+                </button>
+            </div>
+
+            <DIV style="margin-top: -40px">
+                <DIV id="idPaginationAccount" style="display: none">
+                    <h3 class="h3_form">Accounts</h3>
+
+                    <div class="navigation df_space">
+                        <p class="connection__text">Search:</p>
+                        <INPUT type="search" id="idViewAccountFilter" class="input" value="" autocomplete="on" onchange="CheckNewSearch(DefAccounts); ViewCurrent(DefAccounts)">
+
+                        <button onclick="ViewBegin(DefAccounts)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                        <button onclick="ViewPrev(DefAccounts)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                        <input class="pages input" type="number" id="idViewAccountNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefAccounts)">
+
+                        <button onclick="ViewNext(DefAccounts,MaxAccID)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                        <button onclick="ViewEnd(DefAccounts,MaxAccID)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                    </div>
+
+
+                    <table id="grid_accounts_all" class="grid">
+                        <tr>
+                            <th id="(RetHistoryAccount(Item))" class="id">ID</th>
+                            <th id="SUM_TO_STRING(Item.Value)" class="sum smallbold">Amount</th>
+                            <th id="ACurrencyNameItem(Item)" class="cur">Cur</th>
+                            <th id="Item.Name" class="name">Name</th>
+                            <th id="Item.PubKeyStr" class="pubkey">PubKey</th>
+                            <th id="Item.Value.OperationID" class="num">Operation</th>
+                            <th id="(RetCountERC(Item))" class="">ERC</th>
+                            <th id="Item.Adviser" class="num">Adv</th>
+                            <th id="Item.Value.Smart" class="num">Smart</th>
+                            <th id="(RetOpenBlock(Item.BlockNumCreate,1))" class="block">Block</th>
+                            <th id="GetStateItem((Item))" class="code">State</th>
+                        </tr>
+                    </table>
+                    <BR>
+                    <DIV id="idTotalSum"></DIV>
+                    <BR>
+                </DIV>
+
+                <DIV id="idPaginationBlock" style="display: none">
+
+                    <h3 class="h3_form">Blocks</h3>
+
+                    <div class="navigation df_space">
+                        <button onclick="ViewBegin(DefBlock)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                        <button onclick="ViewPrev(DefBlock)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                        <input class="pages input" type="number" id="idViewBlockNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefBlock)">
+
+                        <button onclick="ViewNext(DefBlock,ServerBlockNumDB)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                        <button onclick="ViewEnd(DefBlock,ServerBlockNumDB)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                    </div>
+
+
+
+                    <table id="grid_block_all" class="grid">
+                        <tr>
+
+                            <th id="(RetOpenBlock(Item.BlockNum,Item.TrDataLen))" class="block">Num</th>
+                            <th id="(DateFromBlock(Item.BlockNum,1))" class="date">Date</th>
+                            <th id="GetHexFromArr(Item.TreeHash)" class="hash">Tx Hash</th>
+                            <th id="GetHexFromArr(Item.PowHash)" class="hash">PowHash</th>
+                            <th id="GetHexFromArr(Item.Hash)" class="hash">Hash</th>
+
+<!--                            <th id="GetHexFromArr(Item.PrevHash)" class="hash">PrevHash</th>-->
+<!--                            <th id="GetHexFromArr(Item.Hash1)" class="hash">Hash1</th>-->
+<!--                            <th id="GetHexFromArr(Item.Hash2)" class="hash">Hash2</th>-->
+<!--                            <th id="GetHexFromArr(Item.SeqHash)" class="hash">SeqHash</th>-->
+<!--                            <th id="GetHexFromArr(Item.SumHash)" class="hash">SumHash</th>-->
+<!--                            <th id="GetHexFromArr(Item.AddrHash)" class="hash">AddrHash</th>-->
+<!--                            <th id="Item.SumPow" class="num">SumPow</th>-->
+
+                            <th id="Item.TrDataLen" class="num">Count</th>
+                            <th id="Item.Power" class="num">Pow</th>
+                            <th id="(RetHistoryAccount(Item,'Miner')+'<BR><b>'+(Item.MinerName?Item.MinerName:''))+'</b>'" class="num">Miner</th>
+
+
+
+                            <!--                            <th id="GetHexFromArr(Item.AddrHash)" class="hash">MinerHash</th>-->
+
+                            <!--<th id="ReadUintFromArr(Item.AddrHash,6)" class="hash">Nonce0</th>-->
+                            <!--<th id="ReadUintFromArr(Item.AddrHash,12)" class="hash">Nonce1</th>-->
+                            <!--<th id="ReadUintFromArr(Item.AddrHash,18)" class="hash">Nonce2</th>-->
+
+
+                            <!--<th id="GetPowPower(Item.Hash1)" class="num">Pow1</th>-->
+                            <!--<th id="GetPowPower(Item.Hash2)" class="num">Pow2</th>-->
+                        </tr>
+                    </table>
+
+                </DIV>
+
+
+                <DIV id="idPaginationJournal" style="display: none">
+
+                    <h3 class="h3_form">Journal rows</h3>
+
+                    <div class="navigation df_space">
+                        <p class="connection__text">Block:</p>
+                        <INPUT type="search" id="idViewJournalRunBlockNum" class="input" value="" onchange="SetRowByBlockNum(DefJournal);">
+
+                        <button onclick="ViewBegin(DefJournal)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                        <button onclick="ViewPrev(DefJournal)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                        <input class="pages input" type="number" id="idViewJournNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefJournal)">
+
+                        <button onclick="ViewNext(DefJournal,MaxJournalNum)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                        <button onclick="ViewEnd(DefJournal,MaxJournalNum)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                    </div>
+
+
+                    <table id="grid_journal" class="grid journal">
+                        <tr>
+                            <th id="Item.Num" class="num">Num</th>
+                            <th id="(RetOpenBlock(Item.BlockNum,1))" class="block">Block</th>
+                            <th id="GetHexFromArr(Item.AccHash)" class="hash">Acc Hash</th>
+<!--                            <th id="GetHexFromArr(Item.SmartHash)" class="hash">Smart Hash</th>-->
+<!--                            <th id="(RetVerify(Item.VerifyAccHash))" class="verify">A</th>-->
+                            <th id="GetHexFromArr(Item.SumHash)" class="hash">Sum Hash</th>
+                            <th id="(RetVerify(Item.VerifySumHash))" class="verify">S</th>
+                            <th id="Item.Tables" class="name">Tables</th>
+                            <!--                            <th id="Item.TableArr.length" class="num">Tables</th>-->
+                            <th id="Item.DataSize" class="num">Bytes</th>
+                        </tr>
+                    </table>
+
+                </DIV>
+
+
+                <DIV id="idPaginationHash" style="display: none">
+
+                    <h3 class="h3_form">Accounts hash</h3>
+
+                    <div class="navigation df_space">
+                        <p class="connection__text">Block:</p>
+                        <INPUT type="search" id="idViewAccHashBlockNum" class="input" value="" autocomplete="off"  onchange="SetNewAccHashSearch(DefHash);">
+
+                        <button onclick="ViewBegin(DefHash)" class="btn btn_nav"><img src="./img/arrow_first.svg"></button>
+                        <button onclick="ViewPrev(DefHash)" class="btn btn_nav"><img src="./img/arrow_left.svg"></button>
+
+                        <input class="pages input" type="number" id="idViewHashNum" style="text-align: center" value="0" min="0" max="1000000000" onchange="ViewCurrent(DefHash)">
+
+                        <button onclick="ViewNext(DefHash,CONFIG_DATA.MAX_ACCOUNT_HASH)" class="btn btn_nav"><img src="./img/arrow_left.svg" class="arrow-rotate"></button>
+                        <button onclick="ViewEnd(DefHash,CONFIG_DATA.MAX_ACCOUNT_HASH)" class="btn btn_nav"><img src="./img/arrow_first.svg" class="arrow-rotate"></button>
+                    </div>
+
+
+                    <table id="grid_hash_all" class="grid check_grid">
+                        <tr>
+                            <th id="Item.Num" class="num">Num</th>
+                            <th id="(RetOpenBlock(Item.BlockNum,3))" class="block">Block</th>
+                            <th id="GetHexFromArr(Item.AccHash)" class="hash">AccHash</th>
+                            <th id="GetHexFromArr(Item.SumHash)" class="hash">SumHash</th>
+                            <th id="Item.AccountMax" class="num">Account Max</th>
+    <!--                        <th id="Item.SmartCount" class="num">Smarts Count</th>-->
+    <!--                        <th id="GetHexFromArr(Item.SmartHash)" class="hash">SmartHash</th>-->
+                            <th id="(RetHistoryAccount(Item,'Miner'))+'</b>'" class="num">Miner</th>
+                            <th id="(Item.VerifyHTML)" class="verify">Verify</th>
+                        </tr>
+                    </table>
+                </DIV>
+            </DIV>
+
+
+        </div>
+
+<!--        &lt;!&ndash;Statistics&ndash;&gt;-->
+<!--        <div class="tab-content">-->
+<!--            <section class="statistics">-->
+<!--            </section>-->
+<!--        </div>-->
+
+        <!--Utilities-->
+        <div class="tab-content">
+            <section class="utilities">
+                <div class="statistics__buttons">
+                    <button class="btn btn_explorer" onclick="window.Open('./HTML/stat.html','counters',920)">
+                        <div class="df">
+                            <img src="./img/counters.svg" class="btn__img">
+                            <p class="btn__arrow-text">Counters</p>
+                        </div>
+                        <img src="./img/arrow_right.svg">
+                    </button>
+                    <button class="btn btn_explorer" onclick="window.Open('./HTML/monitor.html','monitor',1200)">
+                        <div class="df">
+                            <img src="./img/monitor.svg" class="btn__img">
+                            <p class="btn__arrow-text">Monitor</p>
+                        </div>
+                        <img src="./img/arrow_right.svg">
+                    </button>
+                    <button class="btn btn_explorer" onclick="window.Open('./HTML/console.html','console',1240)">
+                        <div class="df">
+                            <img src="./img/console.svg" class="btn__img">
+                            <p class="btn__arrow-text">console</p>
+                        </div>
+                        <img src="./img/arrow_right.svg">
+                    </button>
+
+                </div>
+
+                <div class="division division_light"></div>
+                <div class="utilities__group df_items-center">
+                    <p class="utilities__text ">Rewrite tx (blocks):</p>
+                    <input type="text" class="input input_small" value='0' id="idBlockCount">
+                    <button class="btn btn_explorer btn_utils" onclick="RewriteTransactions()" >Rewrite</button>
+                </div>
+
+                <div class="utilities__group df_items-center">
+                    <p class="utilities__text ">Truncate chain (blocks):</p>
+                    <input type="text" class="input input_small" value='0' id="idBlockCount2">
+                    <button class="btn btn_explorer btn_utils" onclick="TruncateBlockChain()">Truncate</button>
+                </div>
+                <div class="division division_light"></div>
+                <div class="utilities__buttons df_space">
+                    <button class="btn btn_explorer btn_utils" onclick="RestartNode()" >Restart node</button>
+                    <button class="btn btn_explorer btn_utils" onclick="StartLoadNewCode();InitArrInfo();">Update code</button>
+                    <button class="btn btn_explorer btn_utils" onclick="RewriteAllTransactions()">Rewrite all tx</button>
+                    <button class="btn btn_explorer btn_utils" onclick="ClearDataBase();InitArrInfo();">Clear DataBase</button>
+                </div>
+            </section>
+        </div>
+
+
+     </section>
+
+    <audio style="visibility: hidden;" controls="controls" id="sound_coin">
+        <source src="coin.mp3" type="audio/mpeg"/>
+    </audio>
+    <audio style="visibility: hidden;" controls="controls" id="sound_err">
+        <source src="click.mp3" type="audio/mpeg"/>
+    </audio>
+
+</DIV>
+
+
+<div class="Modal ModalDlg Modal450" id="idBlockPasswordGet">
+    <div class="modal__container">
+        <div class="btn-close doclose">
+            <img src="./img/Close.svg">
+        </div>
+        <div class="form">
+
+            <h3 class="h3 h3_form">
+                Enter your password:
+            </h3>
+            <div class="division division_form"></div>
+
+            <div class="form__group">
+                <p class="connection__text">password</p>
+                <input type="password" class="input  input_big" placeholder="Enter password" id="idPasswordGet">
+            </div>
+            <DIV class="form__group"><BR></DIV>
+            <div class="form__buttons">
+                <button class="btn btn_middle btn_margin doclose" id="idBtnEnterPassword" onclick="OpenWallet();">confirm</button>
+                <button class="btn btn__transparent cancel btn_margin btn_middle doclose" >Cancel</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<section class="wallet wrapper">
+    <h3 class="h3">Log from node:
+    </h3>
+    <div id="idServerLogHeader"> Log from node, detail level: <b id="idLogLevelText">-</b> <input type="range" min="0" max="3" id="idLogLevel" oninput="ChangeLog()" value="0"></div>
+    <textarea name="log" cols="30" rows="14" class="log focusnowrite" id="idServerLog"  readonly>-</textarea>
+</section>
+
+
+<div class="Modal ModalDlg Modal450" id="idBlockOnSend">
+    <div class="modal__container">
+        <div class="btn-close doclose">
+            <img src="./img/Close.svg">
+        </div>
+        <div class="form">
+
+            <h3 class="h3 h3_form">
+                Confirm sending
+            </h3>
+            <div class="division division_form" style="margin-bottom: 15px"></div>
+
+            <DIV align="center">
+                Send
+                <B id="idOnSendText"></B>
+                <B id="idOnSendSum" class="coral"></B> <span id="idOnSendCoinName"></span> <span id="idOnSendToName"></span>
+                <grid_nft class="grid_nft_send">
+                    <item_nft id="idTokenHolder"></item_nft>
+                </grid_nft>
+
+
+                <DIV id="idOnSendWarning" style='color: yellow;'>WARNING: You are about to send a very large amount!</DIV>
+
+<!--                <div class="switch" ID="idCheckOnSend" style="margin-top: 30px">-->
+<!--                    <p class="switch-text">Add to white list</p>-->
+<!--                    <label for="idWhiteOnSend">-->
+<!--                        <input type="checkbox" class="checkbox" id="idWhiteOnSend">-->
+<!--                        <label for="idWhiteOnSend"></label>-->
+<!--                    </label>-->
+<!--                </div>-->
+
+                <div class="form__buttons" style="margin-top: 30px">
+                    <button class="btn btn__transparent cancel btn_margin btn_middle doclose">Cancel</button>
+                    <button onclick="SendMoney()" id="idBtOnSend" class="btn btn_middle doclose">Confirm</button>
+                </div>
+
+            </DIV>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<INPUT type="hidden" id="idCurTabName" value="TabInfo" style="display: none">
+
+<!--modal support for dapp-->
+<style id="idModalCSS">
+    /*modal support*/
+    #idOverlay
+    {
+        z-index: 1;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left:0;
+        display: none;
+        background: rgba(68, 83, 104, 0.65);
+    }
+    .confirm__container
+    {
+        border-radius: 5px;
+        border: 1px solid #727473;
+        box-shadow: 0px 8px 10px rgba(68, 83, 104, 0.15);
+        min-width: 300px;
+        min-height: 200px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+
+    .bt-confirm
+    {
+        border-radius: 4px;
+        min-height: 14px;
+        margin: 5px;
+        width: 100px;
+        height: 36px;
+
+        color:white;
+        background-color: #53687e;
+        border-color: #445368;
+    }
+
+    .bt-confirm:hover
+    {
+        color: #cb763a;
+        cursor: pointer;
+    }
+</style>
+
+
+<div id="idOverlay" onclick="closeModal();" style="display: none;"></div>
+
+<div class="Modal ModalDlg Modal450" id="idConfirm" style="display: none;">
+    <div class="modal__container"  style="display: block">
+        <div class="btn-close doclose">
+            <img src="./img/Close.svg">
+        </div>
+        <DIV align='center'>
+            <h2 id="idConfirmTitle" style="margin-right: 30px">Confirm</h2>
+            <div class="division"></div>
+            <p id="idConfirmText">Are you sure?</p>
+            <BR>
+            <div class="row df_around">
+                <button class="btn btn_middle btn__transparent cancel doclose">Cancel</button>
+                <button class="btn btn_middle"  onclick="OnConfirmOK()">Confirm</button>
+            </div>
+        </DIV>
+    </div>
+</div>
+
+<div class="Modal modal" id="idShowPage" style="display: none; padding: 5px">
+
+    <div class="page__container"  style="display: block;">
+        <div id="idShowContent"></div>
+        <DIV align='center'>
+            <button id="idCloseShow" onclick="closeShowPage()" class="btn btn--white">Close</button>
+        </DIV>
+    </div>
+</div>
+
+
+
+<section class="Modal modal" id="idSending" style="display: none;">
+    <div class="page__container"  style="display: block">
+        <div align='center'>
+            <h2 style="margin-bottom: 50px">Sending Tx</h2>
+            <p class="">Wait a few seconds, pls...</p>
+            <p class="" id="idSendingContent"></p>
+        </div>
+    </div>
+</section>
+
+
+<DIV id="_idStableScroll" align='center'>
+    <A href="https://terafoundation.org/?utm_source=full_node&utm_medium=link&utm_campaign=wallet">Web-site</A>
+    <A href="https://bitcointalk.org/index.php?topic=4573801.0">ANN</A>
+    <A href="https://twitter.com/terafoundation">Twitter</A>
+    <A href="https://t.me/terafoundation">Telegram</A>
+    <A href="https://discord.gg/CvwrbeG">Discord</A>
+    <A href="https://jq.qq.com/?_wv=1027&k=5KpN5fw">QQ</A>
+    <A href="javascript:OpenOwnWebWallet()">Wallet</A>
+    <!--progr76@gmail.com-->
+</DIV>
+<input type="hidden" id="idCanSaveConst">
+</body>
+</html>
+

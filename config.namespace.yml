@@ -25,10 +25,10 @@
     type: MVP
     scope:
     - /
-#  - namespace: save
-#    type: MVP
-#    scope:
-#    - /
+  - namespace: radio
+    type: MVP
+    scope:
+    - /
   - namespace: fileSystem
     type: MVP
     scope:
@@ -37,14 +37,14 @@
     type: MVP
     scope:
     - /
-#  - namespace: img
-#    type: MVP
-#    scope:
-#    - /
-#  - namespace: soundStorage
-#    type: MVP
-#    scope:
-#    - /
+  - namespace: booking
+    type: spa
+    scope:
+    - /docs
+  - namespace: warehouse
+    type: MVP
+    scope:
+    - /docs
   - namespace: blockchain
     type: MVP
     scope:
