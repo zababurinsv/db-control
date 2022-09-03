@@ -22,25 +22,21 @@ const CONFIG_DEFAULTS = {
 };
 
 let create = async (object) => {
-    if(!object.fs.worker.is.dir('/DATA-BROWSER')) {
-        object.fs.worker.mkdirSync('/DATA-BROWSER');
+    console.log('dddddddddddddddddddddd', `${object.dirMounted}${object.dirShared}`)
+    if(!await object.fs.idbfs.is.dir(`${object.dirMounted}${object.dirShared}`)) {
+        await object.fs.idbfs.create.dir(`${object.dirMounted}${object.dirShared}`);
     }
 
-    if(!await object.fs.idbfs.is.dir(object.dirMounted)) {
-        await object.fs.idbfs.create.dir(object.dirMounted);
+    if(!await object.fs.idbfs.is.dir(`${object.dirMounted}${object.dirData}`)) {
+        await object.fs.idbfs.create.dir(`${object.dirMounted}${object.dirData}`);
     }
 
-    if(!await object.fs.idbfs.is.dir(object.dirShared)) {
-        await object.fs.idbfs.create.dir(object.dirShared);
+    if(!await object.fs.idbfs.is.dir(`${object.dirMounted}${object.dirShared}${object.dirData}`)) {
+        await object.fs.idbfs.create.dir(`${object.dirMounted}${object.dirShared}${object.dirData}`);
     }
 
-    if(!await object.fs.idbfs.is.dir(`${object.dirShared}${object.dirData}`)) {
-        await object.fs.idbfs.create.dir(`${object.dirShared}${object.dirData}`);
-    }
+    await object.fs.idbfs.save();
 
-    if(!await object.fs.idbfs.is.dir(`${object.dirShared}${object.dirMounted}`)) {
-        await object.fs.idbfs.create.dir(`${object.dirShared}${object.dirMounted}`);
-    }
     return object;
 };
 
@@ -53,10 +49,22 @@ export const indexFileSystem = (CONFIG = { }) => {
             object.fs.self = await Module.FS;
             object.fs.idbfs = await IDBFS(object);
             object.fs.worker = await WORKERFS(object);
-            object = await create(object);
-            const mount = `${object.dirShared}${object.dirData}`;
-            await object.fs.idbfs.mount(object.fs.self.filesystems.IDBFS,  mount, {})
+            const mount = `${object.dirMounted}`;
+
             await object.fs.idbfs.load();
+
+            if(!object.fs.worker.is.dir('/DATA-BROWSER')) {
+                object.fs.worker.mkdirSync('/DATA-BROWSER');
+            }
+
+            if(!await object.fs.idbfs.is.dir(mount)) {
+                await object.fs.idbfs.create.dir(mount);
+            }
+
+            await object.fs.idbfs.mount(object.fs.self.filesystems.IDBFS,  mount, {})
+
+            await object.fs.idbfs.load();
+
             resolve({
                 idbfs: object.fs.idbfs,
                 worker: object.fs.worker

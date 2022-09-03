@@ -2,19 +2,19 @@ export let IDBFS = (object) => {
     return new Promise(async (resolve, reject) => {
         const idbfs = {
             is: {
-                file: async (file) => {
+                file: async (file, path = '') => {
                     try {
-                        let isFile = (object.fs.self.analyzePath(file).exists)
-                            ? await object.fs.self.isFile(object.fs.self.analyzePath(file).object.mode)
+                        let isFile = (object.fs.self.analyzePath(`${object.dirMounted}/${path}${file}`).exists)
+                            ? await object.fs.self.isFile(object.fs.self.analyzePath(`${object.dirMounted}/${path}${file}`).object.mode)
                             : false
                         console.log(`${file} file ${isFile}`)
-                        resolve(isFile)
+                        return isFile
                     } catch (e) {
                         console.error('error', e)
-                        resolve({
-                            status: true,
+                        return {
+                            status: false,
                             message: e
-                        })
+                        }
                     }
                 },
                 dir: (dir = '/') => {
@@ -36,13 +36,13 @@ export let IDBFS = (object) => {
                 }
             },
             set: {
-                file: ( file, contents, path = `${object.dirShared}${object.dirData}`) => {
+                file: ( file, contents, path = ``) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            console.log('file is write',`${path}/${file}`)
+                            console.log('file is write',`${object.dirMounted}/${path}${file}`)
                             let writeFile = (typeof contents !== "string")
-                              ? await object.fs.self.writeFile(`${path}/${file}`, JSON.stringify(contents))
-                              : await object.fs.self.writeFile(`${path}/${file}`, contents)
+                              ? await object.fs.self.writeFile(`${object.dirMounted}/${path}${file}`, JSON.stringify(contents))
+                              : await object.fs.self.writeFile(`${object.dirMounted}/${path}${file}`, contents)
                             resolve(writeFile)
                         } catch (e) {
                             console.error('error',e)
@@ -94,10 +94,10 @@ export let IDBFS = (object) => {
                         }
                     })
                 },
-                file: (file, path = `${object.dirShared}${object.dirData}`, encoding = "utf8") => {
+                file: (file, path = ``, encoding = "utf8") => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                            let readFile = await object.fs.self.readFile(`${path}/${file}`, { encoding: encoding })
+                            let readFile = await object.fs.self.readFile(`${object.dirMounted}/${path}${file}`, { encoding: encoding })
                             console.log('=== get file =========', readFile)
                             resolve(readFile)
                         } catch (e) {
@@ -140,12 +140,13 @@ export let IDBFS = (object) => {
                 }
             },
             file: {
-                rename: (oldName, newName, path = `${object.dirShared}${object.dirData}`) => {
+                rename: (oldName, newName, path = ``) => {
                     return new Promise(async (resolve, reject) => {
                         try {
-                        let rename = (await idbfs.is.file(oldName))
-                                ? (await object.fs.self.rename(`${path}/${oldName}`, `${path}/${newName}`), true)
+                        let rename = (await idbfs.is.file(oldName, path))
+                                ? (await object.fs.self.rename(`${object.dirMounted}/${path}${oldName}`, `${object.dirMounted}/${path}${newName}`), true)
                                 : false
+
                             resolve(rename)
                         } catch (e) {
                             console.error('error',e)
@@ -161,6 +162,7 @@ export let IDBFS = (object) => {
                 dir: (path) => {
                     return new Promise(async (resolve, reject) => {
                         try {
+                            console.log('ssssssssssssssssssssssss')
                             let mkdir = await object.fs.self.mkdir(path)
                             resolve(mkdir)
                         } catch (e) {
