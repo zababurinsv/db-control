@@ -100,9 +100,6 @@
 [submodule "namespace/scope/radio"]
 	path = namespace/scope/radio
 	url = https://github.com/soundcheckbox/radio.git
-[submodule "namespace/scope/audio-player"]
-	path = namespace/scope/audio-player
-	url = https://github.com/soundcheckbox/audio-player.git
 [submodule "namespace/scope/warehouse"]
 	path = namespace/scope/warehouse
 	url = https://github.com/soundcheckbox/warehouse.git
