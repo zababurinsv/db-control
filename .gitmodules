@@ -109,3 +109,18 @@
 [submodule "namespace/scope/booking"]
 	path = namespace/scope/booking
 	url = https://github.com/soundcheckbox/booking.git
+[submodule "namespace/scope/raft"]
+	path = namespace/scope/raft
+	url = https://github.com/pgte/skiff.git
+[submodule "namespace/scope/monopoly/index"]
+	path = namespace/scope/monopoly/index
+	url = https://github.com/zababurinsv/monopoly.git
+[submodule "namespace/scope/monopoly/client"]
+	path = namespace/scope/monopoly/client
+	url = https://github.com/zababurinsv/monopoly-await.git
+[submodule "namespace/scope/monopoly/player"]
+	path = namespace/scope/monopoly/player
+	url = https://github.com/zababurinsv/monopoly-player.git
+[submodule "namespace/scope/dag"]
+	path = namespace/scope/dag
+	url = https://github.com/erikbrinkman/d3-dag.git

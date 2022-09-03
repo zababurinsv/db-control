@@ -162,7 +162,11 @@ debug('[(self)a]', global.PROCESS_NAME)
             return FI.buf;
         }
     };
-
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@', {
+        global: global,
+        CDBBase: CDBBase
+    })
     global.CDBBase = CDBBase;
 
+    return global
 }

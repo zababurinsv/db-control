@@ -160,7 +160,7 @@ const service = async (self) => {
         await useEffect(async () => {
             if(fs) {
                 setIsFs(true);
-                setServiceWorker(await proxy())
+                // setServiceWorker(await proxy())
             }
         }, [fs]);
 
@@ -170,7 +170,7 @@ const service = async (self) => {
 
         await useEffect(async () => {
             console.log('🌞 init Service Worker', serviceWorker)
-            serviceListener()
+            // serviceListener()
         }, [serviceWorker]);
 
         await useEffect(async () => {
@@ -201,7 +201,9 @@ const service = async (self) => {
             api: isFs ? {
                 idbfs: {
                     create: {
-                        dir: fs.idbfs.create.dir
+                        dir: () => {
+                           return fs.idbfs.create.dir()
+                        }
                     },
                     is: {
                         file: fs.idbfs.is.file,
@@ -217,7 +219,9 @@ const service = async (self) => {
                         file: fs.idbfs.get.file
                     },
                     set: {
-                        file: fs.idbfs.set.file,
+                        file: (fileName, data, path) => {
+                            fs.idbfs.set.file(fileName, data, path)
+                        },
                         data: fs.idbfs.set.data
                     },
                     file: {

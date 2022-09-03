@@ -15,25 +15,35 @@ router.post('/', async (req, res) => {
         //     return res.status(400).json({ errors: errors.array() });
         // }
         try {
+            console.log('============ req.body ============', req.body)
             // console.log('=== POST ====',Date.now(),  Riders)
         //     const user = await User.findById(req.user.id).select('-password');
         //
-        //     const newSchema = new Schema({
+        //     const Schema = new Menu_presets({
         //         id: new mongoose.Types.ObjectId,
-        //         name: 'Alice',
-        //         JSON: 'model_src',
-        //         image: 'images',
-        //         categories: 'name',
-        //         user_id: 23423,
-        //         tags: 'asdasd, sdfsdf, asdasd',
-        //         order: 4566,
+        //         name: req.body.name,
+        //         JSON: req.body.JSON,
+        //         image: req.body.image,
+        //         categories: req.body['categories[]'],
+        //         user_id: req.body.user_id,
+        //         tags: req.body['tags[]'],
+        //         order: req.body.order
         //     });
 
-            // const result = await newSchema.save();
+            const Schema = new Menu_presets({
+                id: 6668,
+                name: req.body.name,
+                JSON: req.body.JSON,
+                image: (typeof req.body.image === 'object') ? '': req.body.image,
+                user_id: req.body.user_id,
+                order: req.body.order
+            });
 
-            res.status(200).json({});
+            const result = await Schema.save();
+            console.log('=== result ===', result)
+            res.status(200).json({status:'ok', data:result});
         } catch (err) {
-            console.log('error',err.message);
+            console.log('error',err.message, err.message.includes('oundcheckbox.menu_presets index: id_1 dup key'));
             res.status(500).send({status:'false', error: err});
         }
 });
@@ -49,34 +59,39 @@ router.get('/', async (req, res) => {
         const menu_categories = await Menu_categories.find();
         const menu_presets_tags = await Menu_presets_tags.find();
         const menu_tags = await Menu_tags.find();
+
         for(let Preset of menu_presets) {
             const preset = Preset
             let tags = []
             const presets_categories = menu_presets_categories.find(item => {
                 return item.preset_id.toString() === preset._id.toString()
             })
-            const categories = menu_categories.find(item => item._id.toString() === presets_categories.category_id.toString())
-            const presets_tags = menu_presets_tags.filter(item => preset._id.toString() === item.preset_id.toString());
+            if(presets_categories !== undefined) {
+                console.log('<<< @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ >>>', presets_categories)
+                const categories = menu_categories.find(item => item._id.toString() === presets_categories.category_id.toString())
+                const presets_tags = menu_presets_tags.filter(item => preset._id.toString() === item.preset_id.toString());
 
-            for(let item of presets_tags) {
-                let tag = menu_tags.find(tag => tag._id.toString() === item.tag_id.toString())
-                tags.push(tag.name)
+                for(let item of presets_tags) {
+                    let tag = menu_tags.find(tag => tag._id.toString() === item.tag_id.toString())
+                    tags.push(tag.name)
+                }
+
+                result.push({
+                    JSON: preset.JSON,
+                    id: preset.id,
+                    image: preset.image,
+                    name: preset.name,
+                    order: preset.order,
+                    user_id: preset.user_id,
+                    categories: categories.name,
+                    tags: tags.join(',')
+                });
             }
-
-            result.push({
-                JSON: preset.JSON,
-                id: preset.id,
-                image: preset.image,
-                name: preset.name,
-                order: preset.order,
-                user_id: preset.user_id,
-                categories: categories.name,
-                tags: tags.join(',')
-            });
         }
         res.json(result);
     } catch (err) {
-        res.status(500).send({status: false, message: 'Server Error'});
+        console.log('ERROR', err)
+        res.status(500).send({status: false, message: err});
     }
 });
 

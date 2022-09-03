@@ -25,41 +25,41 @@ describe('File System', async function() {
 
   describe('IDBFS api', function() {
     it('create dir', async () => {
-      api.idbfs.create.dir('testDir');
+      api.idbfs.create.dir('/shared/data/test2');
       api.idbfs.save();
     });
 
     it('is dir', async () => {
-      await api.idbfs.is.dir('testDir');
+      await api.idbfs.is.dir('/shared/data/test2');
     });
 
     it('set file', async () => {
-      await api.idbfs.set.file('test', {test:'test2'}, '/testDir');
-      await api.idbfs.set.file('test', {test:'test2'});
-      api.idbfs.save();
+      // await api.idbfs.set.file('test', {test:'test2'}, '/shared/data/test2');
+      // await api.idbfs.set.file('test', {test:'test2'});
+      // api.idbfs.save();
     });
 
     it('is file', async () => {
-      await api.idbfs.is.file('/testDir/test');
+      // await api.idbfs.is.file('/shared/data/test2');
     });
 
     it('get all', async () => {
-      await api.idbfs.get.all.files('/testDir', (data) => {
-        console.log('GET ALL', data);
-      })
+      // await api.idbfs.get.all.files('/shared/data/test2', (data) => {
+      //   console.log('GET ALL', data);
+      // })
     });
 
     it('get dir', async () => {
-      await api.idbfs.get.dir('/testDir')
+      // await api.idbfs.get.dir('/shared/data/test2');
     });
 
     it('get file', async () => {
-      await api.idbfs.get.file('test');
+      // await api.idbfs.get.file('test');
     });
 
     it('file rename', async () => {
-      await api.idbfs.file.rename('test', 'test222');
-      await api.idbfs.save();
+      // await api.idbfs.file.rename('test', 'test222');
+      // await api.idbfs.save();
     });
   });
 

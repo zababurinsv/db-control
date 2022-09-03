@@ -679,5 +679,5 @@ export default async (global) => {
 
 
     WathConstFile();
-    return true
+    return global
 }

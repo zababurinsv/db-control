@@ -13,9 +13,9 @@ const DataTypes = {
 const menu_presets = new mongoose.Schema({
   id: {
     type: DataTypes.INTEGER,
-    unique: true,
+    unique: false,
     index: true,
-    required: true
+    required: false
   },
   name: {
     type: DataTypes.STRING,
