@@ -37,7 +37,7 @@ let debug = (maxCount, id, props, data, ...args) => {
 }
 export default (global) => {
 debug('[(self)a]', global.PROCESS_NAME)
-
+        debugger
     global.JINN_MODULES.push({ InitClass:InitClass, DoNode:DoNode, Name:"Block" });
 
     function DoNode(Engine) {
@@ -390,6 +390,8 @@ debug('[(self)a]', global.PROCESS_NAME)
 
             return Tx;
         };
+
+        return Engine
     }
 
     function NeedLoadBodyFromNet(Block)

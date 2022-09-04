@@ -63,7 +63,7 @@ export default async (global) => {
             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255];
 
     global.JINN_MODULES = [];
-
+    debugger
     if(!global.sha3) { sha3(global) }
     RBTree(global)
     if(!global.SerializeLib) { terabuf(global) }

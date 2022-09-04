@@ -30,7 +30,7 @@ describe('File System', async function() {
     });
 
     it('is dir', async () => {
-      // await api.idbfs.is.dir('/shared/data/test2');
+      await api.idbfs.is.dir('/mnt');
     });
 
     it('set file', async () => {

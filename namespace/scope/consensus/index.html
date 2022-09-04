@@ -17,6 +17,8 @@
     import library from '/modules/blockchain/core/library.mjs';
     import node from './assets/model-node.mjs';
     import jinnConnectAddr from '/modules/blockchain/jinn/src/jinn-connect-addr.mjs';
+
+
     (async () => {
         let global = {};
         global = await init(global)
@@ -24,6 +26,26 @@
         global = await jinnDbBase(global)
         global = await jinn(global)
         global = await node(global)
+        let modules = {}
+        modules.block = {}
+        modules.block.Engine = {}
+        console.log('global.JINN_MODULES====', global.JINN_MODULES)
+        modules.block.Block = (global.JINN_MODULES.filter(item => item.Name === 'Block'))[0]
+        modules.block.Mining = (global.JINN_MODULES.filter(item => item.Name === 'Mining'))[0]
+        modules.block.Tx = (global.JINN_MODULES.filter(item => item.Name === 'Tx'))[0]
+        modules.block.TxPriority = (global.JINN_MODULES.filter(item => item.Name === 'TxPriority'))[0]
+        modules.block.TxControl = (global.JINN_MODULES.filter(item => item.Name === 'TxControl'))[0]
+
+
+
+        modules.block.Engine.TickNum = 0
+        modules.block.class = modules.block.Block.InitClass(modules.block.Engine)
+        modules.block.class = modules.block.Mining.InitClass(modules.block.Engine)
+        modules.block.class = modules.block.Tx.InitClass(modules.block.Engine)
+        modules.block.class = modules.block.TxPriority.InitClass(modules.block.Engine)
+        modules.block.class = modules.block.TxControl.InitClass(modules.block.Engine)
+        let gen = modules.block.Engine.GetGenesisBlock(0)
+
         global = await environment(global)
         global = await jinnConnectAddr(global)
         let MODEL;
@@ -33,6 +55,7 @@
         InitNodes()
         MODEL.AddNode(5);
 
+
         let app = new AppClass({
             "section1": {
                 "extends": "dpow",
@@ -40,13 +63,14 @@
             "section2": {
                 "extends": "section1"
             },
-            "genesis": {
-                "id": 'genesis',
-                "prev": -1,
-                "bits": 1,
-                "time": 0,
-                "nonce": 0,
-            },
+            "genesis": gen,
+            // "genesis": {
+            //     "DataHash": 'genesis',
+            //     "PrevSumHash": -1, //"prev": -1,
+            //     "bits": 1,
+            //     "time": 0,
+            //     "nonce": 0,
+            // },
             "centralized": {
                 "mainNode": "0x0"
             },
@@ -81,8 +105,78 @@
             console.log("[" + new Date().toLocaleTimeString() + "]", "< " + data.level + " >", data.module, data.text);
         });
 
+        app.defineDataManagerClass(((app) => {
 
-        app.start('pos');
+            class DataManager2 extends app.DATAMANAGER {
+                constructor() {
+                 super()
+                    //methods:
+                    //getDataList() - get all blocks
+                    //_addDataToBlockChain(data) - add Data to blockchain without any checking (startup init from db)
+                    //addData(data) - add to blockchain with checks for data-valid (from network)
+                    //getData(id) - get data by id
+                    //getDataFromHeight(h) - get data from height
+                    //getDataHeight(dataId) - return height by id
+                    //getHeight() - get blockchain height
+                    //getDataSlice(a, b) - get slice of blockchain from a to b, if b is not exist - b = 0, top block on top in list[0]
+                    //replaceDataById(dataId, newData) - replace blocks with id with newData
+                    //replaceData(oldData, newData) - replace oldBlock to newBlock
+                    //getTopInfo() - get top block hash and height
+                    //isDataLinked(data) - check data for linking to blockchain (data.previd exist or genesis)
+                    //getGenesis() - return genesis section from config
+                }
+
+                addData(data) {
+                    if (data.isValid()) {
+                        return this._addDataToBlockChain(data, app.consensus.config.ignorePrevChilds);
+                    } else
+                        throw new Error('Invalid data');
+                }
+
+            }
+
+            return DataManager2;
+        })(app));
+
+        app.defineDataClass(((app) => {
+
+            class emperaData extends app.DATA {//must extends from app.DATA class, and redefine it here
+
+                isValid() {
+                    if (this.getId()) {
+                        return true;
+                    }
+                    return false;
+                }
+
+                getId() {
+                    let key = app.DATA.getIdFieldName()
+                    return this.data[app.DATA.getIdFieldName()];
+                }
+
+                getPrevId() {
+                    return this.data[app.DATA.getPrevIdFieldName()];
+                }
+
+                getGenesis() {
+
+                    return new app.DATA(app.config['genesis']);
+                }
+
+                static getPrevIdFieldName() {
+                    return 'PrevSumHash';
+                }
+
+                static getIdFieldName() {
+                    return 'SumHash';
+                }
+
+            }
+
+            return emperaData;
+        })(app));
+
+        app.start('pow');
         // let manager = { }
         // manager.peer = new  app.PEERMANAGER()
         // manager.data = new app.DATAMANAGER()
@@ -101,57 +195,54 @@
         // for (let node of MODEL.NetNodeArr) {
         //     app.peerManager.addPeer(node)
         // }
-        let {data: Genesis} = app.dataManager.getGenesis()
-
-        const block = new app.DATA({
-            id: 2,
-            version: 1,
-            previd: Genesis.id,
-            time: Date.now(),
-            nonce: 2,
-            bits: 123123123,
-
-        })
-        // console.log('block', block)
-        app.dataManager.addData(block)
-
-        const {id : prev} = app.dataManager.getTopInfo()
-        const block2 = new app.DATA({
-            id: 3,
-            version: 1,
-            previd: prev,
-            time: Date.now(),
-            nonce: 2,
-            bits: 123123123,
-        })
-
-        app.dataManager.addData(block2)
-
-        console.log('getHeight', app.dataManager.getHeight())
-        console.log('getTopInfo', app.dataManager.getTopInfo())
-        // app.dataManager.addData(data.data)
-        // console.log('== app ==', app.dataManager.getDataList())
-
-        console.log('== app ==', app)
-
-        // console.log('== service ==', )
-        // console.log('== service ==', )
-        // console.log('!!!!!!!!!!!!!!!!!!!! === manager === !!!!!!!!!!!!!!!!!!!!', {
-        //     manager: manager,
-        //     consensus: consensus,
-        //     peers: {
-        //         Alice: Alice,
-        //         Bob: Bob,
-        //         Cooper: Cooper
-        //     },
-        //     data: data
-        // })
-        // setTimeout(function run() {
         //
-        //     console.log('===== manager =====', manager)
-        //     setTimeout(run, 1000);
-        // }, 1000);
 
+        let {data: Genesis} = app.dataManager.getGenesis()
+        // console.log('genesis', Genesis)
+        // console.log('getHeight', app.dataManager.getHeight())
+        // console.log('getTopInfo', app.dataManager.getTopInfo())
+
+        const runtime = (app) => {
+            return new Promise((resolve,reject) => {
+                let count = 0
+                let block = {}
+                let timerId = setTimeout(function tick() {
+                    if(count === 0) {
+                        block = new app.DATA(Genesis)
+                        // block = new app.DATA(Genesis)
+                    } else {
+                        // const {DataHash : prev} = app.dataManager.getTopInfo()
+                        const newBlock = modules.block.Engine.GetNewBlock(block.data)
+                        block = new app.DATA(modules.block.Engine.GetNewBlock(block.data))
+
+                        // block = new app.DATA({
+                        //     DataHash: count, //id
+                        //     version: 1,
+                        //     PrevSumHash: prev,
+                        //     time: Date.now(),
+                        //     nonce: 2,
+                        //     bits: 123123123,
+                        // })
+                    };
+                    if(count < 10) {
+                        count = count + 1
+                        app.dataManager.addData(block)
+                        timerId = setTimeout(tick, 500)
+                    } else {
+                        clearInterval(timerId)
+                        resolve(app)
+                    }
+                    // (count < 10)
+                    //     ? (count = count + 1, app.dataManager.addData(block), timerId = setTimeout(tick, 500))
+                    //     : (clearInterval(timerId), resolve(app))
+                }, 500);
+            })
+        }
+
+        app = await runtime(app)
+
+        console.log('===',app)
+        debugger
     })()
 </script>
 </body>
