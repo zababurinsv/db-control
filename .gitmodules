@@ -106,9 +106,6 @@
 [submodule "namespace/scope/booking"]
 	path = namespace/scope/booking
 	url = https://github.com/soundcheckbox/booking.git
-[submodule "namespace/scope/raft"]
-	path = namespace/scope/raft
-	url = https://github.com/pgte/skiff.git
 [submodule "namespace/scope/monopoly/index"]
 	path = namespace/scope/monopoly/index
 	url = https://github.com/zababurinsv/monopoly.git

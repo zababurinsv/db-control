@@ -1,0 +1,3 @@
+[submodule "namespace/scope/raft"]
+	path = namespace/scope/raft
+	url = https://github.com/pgte/skiff.git
